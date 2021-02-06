@@ -55,7 +55,17 @@ public class ZhsqSbrzController extends BaseController
         List<ZhsqSbrz> list = zhsqSbrzService.selectZhsqSbrzList(zhsqSbrz);
         return getDataTable(list);
     }
-
+    /**
+     * 水表日志接口
+     */
+//    @RequiresPermissions("community:sbrz:get5DayData")
+    @GetMapping("/get5DayData")
+    public List<String[]> get5DayData()
+    {
+        List<String[]> list = zhsqSbrzService.get5DayData();
+        return list;
+//        return getDataTable(list);
+    }
     /**
      * 导出水表日志列表
      */

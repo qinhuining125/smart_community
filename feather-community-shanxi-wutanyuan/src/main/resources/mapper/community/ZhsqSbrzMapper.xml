@@ -125,5 +125,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{sbrzid}
         </foreach>
     </delete>
-    
+
+
+    <select id="get5DayData" parameterType="String" resultMap="ZhsqSbrzResult">
+        <include refid="selectZhsqSbrzVo"/>
+        where DEVICE_CLOCK LIKE CONCAT(#{current},'%')   ORDER BY UPDATE_TIME DESC
+    </select>
 </mapper>

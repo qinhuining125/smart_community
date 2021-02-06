@@ -58,4 +58,10 @@ public interface IZhsqSbrzService
      * @return 结果
      */
     public int deleteZhsqSbrzById(String sbrzid);
+    /**
+     * 获取过去一周内用水情况
+     *
+     * @return 结果
+     */
+    List<String[]> get5DayData();
 }
