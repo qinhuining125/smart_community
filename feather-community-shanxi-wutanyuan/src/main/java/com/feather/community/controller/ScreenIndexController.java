@@ -44,6 +44,8 @@ public class ScreenIndexController extends BaseController {
     IZhsqSxtService zhsqSxtService;
     @Autowired
     IScreenIndexService screenIndexServie;
+    @Autowired
+    private IZhsqSbrzService zhsqSbrzService;
 
     @GetMapping()
     public String index() {
@@ -366,5 +368,18 @@ public class ScreenIndexController extends BaseController {
         TableDataInfo tableDataInfo = screenIndexServie.searchLdList(zhsqLd);
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
         return myTableDataInfo;
+    }
+    /**
+     * 水表日志接口
+     */
+//    @RequiresPermissions("community:sbrz:get5DayData")
+    @GetMapping("/api/get5DayData")
+    @ClearPage
+    @ResponseBody
+    public List<String[]> get5DayData()
+    {
+        List<String[]> list = zhsqSbrzService.get5DayData();
+        return list;
+//        return getDataTable(list);
     }
 }
