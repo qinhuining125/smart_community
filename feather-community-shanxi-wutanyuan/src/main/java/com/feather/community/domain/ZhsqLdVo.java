@@ -17,7 +17,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZhsqLd extends BaseEntity {
+public class ZhsqLdVo {
     private static final long serialVersionUID = 1L;
 
     /** 楼栋id */
@@ -26,29 +26,14 @@ public class ZhsqLd extends BaseEntity {
     /** 楼栋名称 */
     private String ldmc;
 
-    /** 建筑物面积 */
-    private String jzwmj;
+    /**单元号*/
+    private String dyh;
 
-    /** 层数 */
-    private String cs;
+    /**单元id*/
+    private String dyid;
 
-    /** 小区id */
-    private String xqid;
+    /**房屋列表*/
+    private List<ZhsqFw> zhsqFws;
 
-    /** 社区id */
-    private String sqid;
-
-    /** 所属街道 */
-    private String ssjd;
-
-    private String x;
-
-    private String y;
-
-    private String z;
-
-    private List<ZhsqFw> zhsqFwList;
-
-    private List<ZhsqLdVo> zhsqFwListMap;
 
 }

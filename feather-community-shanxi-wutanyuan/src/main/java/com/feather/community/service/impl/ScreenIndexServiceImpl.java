@@ -1,5 +1,6 @@
 package com.feather.community.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -228,11 +229,20 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
         if (ldids != null && ldids.size() > 0) {
             List<ZhsqFw> zhsqFws = zhsqFwService.selectZhsqFwByLdids(ldids);
             Map<String, Map<String, List<ZhsqFw>>> zhsqFwMapList = zhsqFws.stream().collect(Collectors.groupingBy(ZhsqFw::getLdid, Collectors.groupingBy(ZhsqFw::getDy)));
+
             for (ZhsqLd zhsqLd1 : zhsqLds) {
                 String ldid = zhsqLd1.getLdid();
+                List<ZhsqLdVo> ls=new ArrayList<ZhsqLdVo>();
                 Map<String, List<ZhsqFw>> zhsqFwListMap = zhsqFwMapList.get(ldid);
+                for(String key : zhsqFwListMap.keySet()){
+                    ZhsqLdVo  zhsqLdVo=new ZhsqLdVo();
+                    zhsqLdVo.setDyh(key);
+                    zhsqLdVo.setLdid(ldid);
+                    zhsqLdVo.setZhsqFws(zhsqFwListMap.get(key));
+                    ls.add(zhsqLdVo);
+                }
                 if (zhsqFwListMap != null) {
-                    zhsqLd1.setZhsqFwListMap(zhsqFwListMap);
+                    zhsqLd1.setZhsqFwListMap(ls);
                 }
             }
         }
