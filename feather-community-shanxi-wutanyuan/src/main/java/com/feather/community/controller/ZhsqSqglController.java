@@ -35,12 +35,13 @@ public class ZhsqSqglController extends BaseController {
     @RequestMapping("/api/getCountJc")
     @ResponseBody
     public AjaxResult getCountJc(String sqid, String xqid) {
+        Integer countCl = iZhsqSqglService.getCountCl(sqid, xqid);
         List<Map> countLx = iZhsqSqglService.getCountLx(sqid, xqid);
         List<Map> countjc = iZhsqSqglService.getCountJc(sqid, xqid);
         Map map = new HashMap();
-
         map.put("lx", countLx);
         map.put("jc", countjc);
+        map.put("zs", countCl);
         return AjaxResult.success(map);
     }
 

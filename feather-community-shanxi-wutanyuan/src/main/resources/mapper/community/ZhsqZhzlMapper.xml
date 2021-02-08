@@ -16,49 +16,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         count(case when jc.SFDB='是' then 1 else null end) as dbry,
         count(case when jc.SFCJ='是' then 1 else null end) as cjlr
         FROM
-        (SELECT * FROM [dbo].[ZHSQ_JM]
-        <where>
-            <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
-        </where>
-        and (SFDJ like '%是%' or SFKC like '%是%' or SFXMSF like '%是%' or SFTYJR like '%是%' or SFDB like '%是%' or SFCJ like '%是%')) as jc
+        (SELECT * FROM ZHSQ_JM
+        where
+        (SFDJ like '%是%' or SFKC like '%是%' or SFXMSF like '%是%' or SFTYJR like '%是%' or SFDB like '%是%' or SFCJ like '%是%')
+
+        <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
+        <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
+
+        )  jc
     </select>
 
 
     <!--综合治理重点人员统计分布情况-->
     <select id="getZdryFb" parameterType="map" resultType="map">
         SELECT
-        TOP 5
         LDMC,
         count(LDID) as MUN
         FROM
-        (SELECT ld.LDID,ld.LDMC FROM [dbo].[ZHSQ_JM] jm join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
-        <where>
-            <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
-            <if test="sfdj != null  and sfdj != ''"> and jm.SFDJ = #{sfdj}</if>
-            <if test="sfkc != null  and sfkc != ''"> and jm.SFKC = #{sfkc}</if>
-            <if test="sfxmsf != null  and sfxmsf != ''"> and jm.SFXMSF = #{sfxmsf}</if>
-            <if test="sftyjr != null  and sftyjr != ''"> and jm.SFTYJR = #{sftyjr}</if>
-            <if test="sfdb != null  and sfdb != ''"> and jm.SFDB = #{sfdb}</if>
-            <if test="sfcj != null  and sfcj != ''"> and jm.SFCJ = #{sfcj}</if>
-        </where>
-        and (jm.[SFDJ] = N'是' OR jm.[SFKC] = N'是' OR jm.[SFXMSF] = N'是' OR jm.[SFTYJR] = N'是' OR jm.[SFDB] = N'是' OR jm.[SFCJ] = N'是')) as a
+        (SELECT ld.LDID,ld.LDMC FROM ZHSQ_JM jm join ZHSQ_LD ld on jm.LDID=ld.LDID
+        where (jm.SFDJ = '是' OR jm.SFKC = '是' OR jm.SFXMSF = '是' OR jm.SFTYJR = '是' OR jm.SFDB = '是' OR jm.SFCJ = '是')
+        <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
+        <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
+        <if test="sfdj != null  and sfdj != ''"> and jm.SFDJ = #{sfdj}</if>
+        <if test="sfkc != null  and sfkc != ''"> and jm.SFKC = #{sfkc}</if>
+        <if test="sfxmsf != null  and sfxmsf != ''"> and jm.SFXMSF = #{sfxmsf}</if>
+        <if test="sftyjr != null  and sftyjr != ''"> and jm.SFTYJR = #{sftyjr}</if>
+        <if test="sfdb != null  and sfdb != ''"> and jm.SFDB = #{sfdb}</if>
+        <if test="sfcj != null  and sfcj != ''"> and jm.SFCJ = #{sfcj}</if>
+        )  a
          GROUP BY LDMC ORDER BY MUN DESC
     </select>
 
     <!--综合治理重点人员年龄结构统计-->
     <select id="getZdNl" parameterType="map" resultType="map">
         SELECT
-        count(case when jc.[NL] <![CDATA[ < ]]> N'20' then 1 else null end) as a,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'20' and jc.[NL] <![CDATA[ <= ]]> N'30' then 1 else null end) as b,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'31' and jc.[NL] <![CDATA[ <= ]]> N'40' then 1 else null end) as c,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'41' and jc.[NL] <![CDATA[ <= ]]> N'50' then 1 else null end) as d,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'51' and jc.[NL] <![CDATA[ <= ]]> N'60' then 1 else null end) as e,
-        count(case when jc.[NL] <![CDATA[ > ]]> N'60' then 1 else null end) as f
+        count(case when jc.NL <![CDATA[ < ]]> '20' then 1 else null end) as a,
+        count(case when jc.NL <![CDATA[ >= ]]> '20' and jc.NL <![CDATA[ <= ]]> '30' then 1 else null end) as b,
+        count(case when jc.NL <![CDATA[ >= ]]> '31' and jc.NL <![CDATA[ <= ]]> '40' then 1 else null end) as c,
+        count(case when jc.NL <![CDATA[ >= ]]> '41' and jc.NL <![CDATA[ <= ]]> '50' then 1 else null end) as d,
+        count(case when jc.NL <![CDATA[ >= ]]> '51' and jc.NL <![CDATA[ <= ]]> '60' then 1 else null end) as e,
+        count(case when jc.NL <![CDATA[ > ]]> '60' then 1 else null end) as f
         FROM
-        (SELECT * FROM [dbo].[ZHSQ_JM]
-        <where>
+        (SELECT * FROM ZHSQ_JM
+        where (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
+
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="sfdj != null  and sfdj != ''"> and SFDJ = #{sfdj}</if>
@@ -67,15 +68,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sftyjr != null  and sftyjr != ''"> and SFTYJR = #{sftyjr}</if>
             <if test="sfdb != null  and sfdb != ''"> and SFDB = #{sfdb}</if>
             <if test="sfcj != null  and sfcj != ''"> and SFCJ = #{sfcj}</if>
-        </where>
-        and ([SFDJ] = N'是' OR [SFKC] = N'是' OR [SFXMSF] = N'是' OR [SFTYJR] = N'是' OR [SFDB] = N'是' OR [SFCJ] = N'是')) as jc
+
+       )  jc
     </select>
 
 
     <!--综合治理重点人员男女比例统计-->
     <select id="getZdNnBl" parameterType="map" resultType="map">
-        SELECT XB ,count(1) as MUN FROM [dbo].[ZHSQ_JM]
-        <where>
+        SELECT XB ,count(1) as MUN FROM ZHSQ_JM
+        where (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
+
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="sfdj != null  and sfdj != ''"> and SFDJ = #{sfdj}</if>
@@ -84,15 +86,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sftyjr != null  and sftyjr != ''"> and SFTYJR = #{sftyjr}</if>
             <if test="sfdb != null  and sfdb != ''"> and SFDB = #{sfdb}</if>
             <if test="sfcj != null  and sfcj != ''"> and SFCJ = #{sfcj}</if>
-        </where>
-        and ([SFDJ] = N'是' OR [SFKC] = N'是' OR [SFXMSF] = N'是' OR [SFTYJR] = N'是' OR [SFDB] = N'是' OR [SFCJ] = N'是')
         GROUP BY XB
     </select>
 
     <!--综合治理重点人员民族比例统计-->
     <select id="getZdMzBl" parameterType="map" resultType="map">
-        SELECT MZ,count(1) as MUN FROM [dbo].[ZHSQ_JM]
-        <where>
+        SELECT MZ,count(1) as MUN FROM ZHSQ_JM
+        where (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="sfdj != null  and sfdj != ''"> and SFDJ = #{sfdj}</if>
@@ -101,14 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sftyjr != null  and sftyjr != ''"> and SFTYJR = #{sftyjr}</if>
             <if test="sfdb != null  and sfdb != ''"> and SFDB = #{sfdb}</if>
             <if test="sfcj != null  and sfcj != ''"> and SFCJ = #{sfcj}</if>
-        </where>
-         and ([SFDJ] = N'是' OR [SFKC] = N'是' OR [SFXMSF] = N'是' OR [SFTYJR] = N'是' OR [SFDB] = N'是' OR [SFCJ] = N'是')
          GROUP BY MZ
     </select>
 
     <!--重点人员列表-->
     <select id="getZdRyList" parameterType="map" resultType="map">
-        SELECT * FROM [dbo].[ZHSQ_JM]
+        SELECT * FROM ZHSQ_JM
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -123,7 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <bind name="_zdry" value="'%'+ zdry +'%'"/>
                 and XM like #{_zdry}
             </if>
-            and ([SFDJ] = N'是' OR [SFKC] = N'是' OR [SFXMSF] = N'是' OR [SFTYJR] = N'是' OR [SFDB] = N'是' OR [SFCJ] = N'是')
+            and (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
         </where>
     </select>
 

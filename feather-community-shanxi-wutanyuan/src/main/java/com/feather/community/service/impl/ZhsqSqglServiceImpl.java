@@ -36,6 +36,10 @@ public class ZhsqSqglServiceImpl implements IZhsqSqglService {
     public List<Map> getCountLx(String sqid, String xqid) {
         return zhsqSqglMapper.getCountLx(sqid, xqid);
     }
+    @Override
+    public Integer getCountCl(String sqid, String xqid) {
+        return zhsqSqglMapper.getCountCl(sqid, xqid);
+    }
 
     /**
      * 左侧人员统计
@@ -57,8 +61,8 @@ public class ZhsqSqglServiceImpl implements IZhsqSqglService {
     @Override
     public Object[] getNlCount(Map<String, Object> maps) {
         Map<String, Object> nlCount = zhsqSqglMapper.getNlCount(maps);
-        Object[] s = { nlCount.get("a"), nlCount.get("b"), nlCount.get("c"), nlCount.get("d"), nlCount.get("e"),
-                nlCount.get("f") };
+        Object[] s = { nlCount.get("A"), nlCount.get("B"), nlCount.get("C"), nlCount.get("D"), nlCount.get("E"),
+                nlCount.get("F") };
         return s;
     }
 

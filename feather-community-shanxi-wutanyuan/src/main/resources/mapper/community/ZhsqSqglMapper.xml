@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.feather.community.mapper.ZhsqSqglMapper">
 
-    <!--车辆概况统计-->
+    <!--车辆概况统计，根据车型统计-->
     <select id="getCountGk" resultType="map">
         select count(*) as num,cx from ZHSQ_CL
         <where>
@@ -13,9 +13,17 @@
         </where>
         GROUP BY cx
     </select>
+    <!--车辆总数-->
+    <select id="getCountCl" resultType="java.lang.Integer">
+        select count(*) as num from ZHSQ_CL
+        <where>
+            <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
+        </where>
+    </select>
     <!--进出状态-->
     <select id="getCountJc" resultType="map">
-       select count(*)as num,jczt from ZHSQ_DGJC
+       select count(*)as num,jczt from ZHSQ_CLJC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -25,7 +33,7 @@
     </select>
     <!--车辆类型-->
     <select id="getCountLx" resultType="map">
-            select cllx,jczt,count(*)as num from ZHSQ_DGJC
+            select cllx,jczt,count(*)as num from ZHSQ_CLJC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -44,18 +52,18 @@
     <select id="selectRyxjCount" parameterType="map" resultType="map">
         SELECT
         count(1) as zrs,
-        (SELECT count(1) FROM [dbo].[ZHSQ_JM] jm left join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        (SELECT count(1) FROM ZHSQ_JM jm left join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
-        </where> and jm.SFCZ='常驻人口') as czrs,
-        (SELECT count(1) FROM [dbo].[ZHSQ_JM] jm left join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        </where> and jm.SFCZ='是') as czrs,
+        (SELECT count(1) FROM ZHSQ_JM jm left join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
-        </where> and jm.SFCZ='外来人口') as ldrs
+        </where> and jm.SFCZ='否') as ldrs
 
-        FROM [dbo].[ZHSQ_JM] jm left join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        FROM ZHSQ_JM jm left join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
@@ -66,24 +74,24 @@
     <!--年龄结构统计-->
     <select id="getNlCount" parameterType="map" resultType="map">
         SELECT
-        count(case when jc.[NL] <![CDATA[ < ]]> N'20' then 1 else null end) as a,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'20' and jc.[NL] <![CDATA[ <= ]]> N'30' then 1 else null end) as b,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'31' and jc.[NL] <![CDATA[ <= ]]> N'40' then 1 else null end) as c,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'41' and jc.[NL] <![CDATA[ <= ]]> N'50' then 1 else null end) as d,
-        count(case when jc.[NL] <![CDATA[ >= ]]> N'51' and jc.[NL] <![CDATA[ <= ]]> N'60' then 1 else null end) as e,
-        count(case when jc.[NL] <![CDATA[ > ]]> N'60' then 1 else null end) as f
+        count(case when jc.NL <![CDATA[ < ]]> '20' then 1 else null end) as a,
+        count(case when jc.NL <![CDATA[ >= ]]> '20' and jc.NL <![CDATA[ <= ]]> '30' then 1 else null end) as b,
+        count(case when jc.NL <![CDATA[ >= ]]> '31' and jc.NL <![CDATA[ <= ]]> '40' then 1 else null end) as c,
+        count(case when jc.NL <![CDATA[ >= ]]> '41' and jc.NL <![CDATA[ <= ]]> '50' then 1 else null end) as d,
+        count(case when jc.NL <![CDATA[ >= ]]> '51' and jc.NL <![CDATA[ <= ]]> '60' then 1 else null end) as e,
+        count(case when jc.NL <![CDATA[ > ]]> '60' then 1 else null end) as f
         FROM
-        (SELECT jm.* FROM [dbo].[ZHSQ_JM] jm join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        (SELECT jm.* FROM ZHSQ_JM jm join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
             <if test="sfcz != null  and sfcz != ''"> and jm.SFCZ = #{sfcz}</if>
-        </where>) as jc
+        </where>)  jc
     </select>
 
     <!--男女比例统计-->
     <select id="getNnBlCount" parameterType="map" resultType="map">
-        SELECT jm.XB ,count(1) as MUN FROM [dbo].[ZHSQ_JM] jm join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        SELECT jm.XB ,count(1) as MUN FROM ZHSQ_JM jm join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
@@ -94,7 +102,7 @@
 
     <!--民族比例统计-->
     <select id="getMzBlCount" parameterType="map" resultType="map">
-        SELECT jm.MZ,count(1) as MUN FROM [dbo].[ZHSQ_JM] jm join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        SELECT jm.MZ,count(1) as MUN FROM ZHSQ_JM jm join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>
@@ -105,7 +113,7 @@
 
     <!--人员列表-->
     <select id="getRyList" parameterType="map" resultType="map">
-        SELECT jm.* FROM [dbo].[ZHSQ_JM] jm join [dbo].[ZHSQ_LD] ld on jm.LDID=ld.LDID
+        SELECT jm.* FROM ZHSQ_JM jm join ZHSQ_LD ld on jm.LDID=ld.LDID
         <where>
             <if test="xqid != null  and xqid != ''"> and ld.XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and ld.SQID = #{sqid}</if>

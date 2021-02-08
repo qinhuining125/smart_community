@@ -51,7 +51,7 @@ public class ZhsqZhzlServiceImpl implements IZhsqZhzlService {
     @Override
     public Object[] getZdNl(Map<String, Object> maps) {
         Map<String, Object> zdNl = zhsqZhzlMapper.getZdNl(maps);
-        Object[] s = { zdNl.get("a"), zdNl.get("b"), zdNl.get("c"), zdNl.get("d"), zdNl.get("e"), zdNl.get("f") };
+        Object[] s = { zdNl.get("A"), zdNl.get("B"), zdNl.get("C"), zdNl.get("D"), zdNl.get("E"), zdNl.get("F") };
         return s;
     }
 
