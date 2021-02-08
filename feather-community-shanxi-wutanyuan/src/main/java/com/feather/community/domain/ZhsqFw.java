@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * 房屋对象 ZHSQ_FW
  *
@@ -63,4 +65,7 @@ public class ZhsqFw extends BaseEntity {
     /** 社区id */
     @Excel(name = "社区id")
     private String sqid;
+
+    /**添加居民列表*/
+    private List<ZhsqJm> zhsqJms;
 }

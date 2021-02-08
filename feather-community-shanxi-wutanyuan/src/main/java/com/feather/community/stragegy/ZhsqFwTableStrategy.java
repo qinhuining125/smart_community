@@ -2,8 +2,10 @@ package com.feather.community.stragegy;
 
 import com.feather.common.core.page.TableDataInfo;
 import com.feather.community.domain.ZhsqFw;
+import com.feather.community.domain.ZhsqJm;
 import com.feather.community.pojo.SearchEntity;
 import com.feather.community.service.IZhsqFwService;
+import com.feather.community.service.IZhsqJmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,9 @@ import java.util.List;
 public class ZhsqFwTableStrategy extends AbstraceTableStrategy {
     @Autowired
     IZhsqFwService zhsqFwService;
+    @Autowired
+    IZhsqJmService zhsqJmService;
+
 
     @Override
     public TableDataInfo tableQueryStrategy(SearchEntity searchEntity) {
@@ -28,6 +33,15 @@ public class ZhsqFwTableStrategy extends AbstraceTableStrategy {
         zhsqFw.setMph(searchEntity.getMph());
         zhsqFw.setFwrzqk(searchEntity.getFwrzqk());
         List<ZhsqFw> zhsqFws = zhsqFwService.selectZhsqFwList(zhsqFw);
+        //添加居民信息
+        for(int i=0;i<zhsqFws.size();i++){
+            ZhsqFw entity=zhsqFws.get(i);
+            ZhsqJm zhsqJm=new ZhsqJm();
+            zhsqJm.setFwid(entity.getFwid());
+            List<ZhsqJm> ls=zhsqJmService.selectZhsqJmList(zhsqJm);
+            entity.setZhsqJms(ls);
+            zhsqFws.set(i,entity);
+        }
         TableDataInfo tableDataInfo = getDataTable(zhsqFws);
         return tableDataInfo;
     }
