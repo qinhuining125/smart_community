@@ -32,6 +32,7 @@ public class ZhsqFwTableStrategy extends AbstraceTableStrategy {
         zhsqFw.setLdmc(searchEntity.getName());
         zhsqFw.setMph(searchEntity.getMph());
         zhsqFw.setFwrzqk(searchEntity.getFwrzqk());
+        zhsqFw.setDy(searchEntity.getDy());
         List<ZhsqFw> zhsqFws = zhsqFwService.selectZhsqFwList(zhsqFw);
         //添加居民信息
         for(int i=0;i<zhsqFws.size();i++){

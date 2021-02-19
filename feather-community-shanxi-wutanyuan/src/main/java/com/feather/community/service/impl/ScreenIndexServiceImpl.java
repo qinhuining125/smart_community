@@ -236,7 +236,7 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
                 Map<String, List<ZhsqFw>> zhsqFwListMap = zhsqFwMapList.get(ldid);
                 for(String key : zhsqFwListMap.keySet()){
                     ZhsqLdVo  zhsqLdVo=new ZhsqLdVo();
-                    zhsqLdVo.setDyh(key);
+                    zhsqLdVo.setDyh(key+"单元");
                     zhsqLdVo.setLdid(ldid);
                     zhsqLdVo.setZhsqFws(zhsqFwListMap.get(key));
                     ls.add(zhsqLdVo);
