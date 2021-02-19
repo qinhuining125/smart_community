@@ -99,7 +99,6 @@ public class ZhsqSbrzController extends BaseController
     @ResponseBody
     public AjaxResult addSave(ZhsqSbrz zhsqSbrz)
     {
-        System.out.println(zhsqSbrz);
         return toAjax(zhsqSbrzService.insertZhsqSbrz(zhsqSbrz), zhsqSbrz);
     }
 

@@ -1,9 +1,16 @@
 package com.feather.community.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.feather.common.config.UidWorker;
+import com.feather.community.domain.ZhsqYc;
 import com.feather.community.domain.ZhsqYg;
+import com.feather.community.mapper.ZhsqYcMapper;
+import com.feather.community.mapper.ZhsqYgMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.feather.community.mapper.ZhsqYgrzMapper;
@@ -24,6 +31,11 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
     private ZhsqYgrzMapper zhsqYgrzMapper;
     @Autowired
     private UidWorker uidWorker;
+    @Autowired
+    private ZhsqYcMapper zhsqYcMapper;
+    @Autowired
+    private ZhsqYgMapper zhsqYgMapper;
+
     /**
      * 查询烟感日志
      * 
@@ -59,6 +71,43 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
     {
         String ygrzid = "YGRZ" + uidWorker.getNextId();
         zhsqYgrz.setSbrzid(ygrzid);
+
+        long content = zhsqYgrz.getContent();
+        ZhsqYc zhsqYc=new ZhsqYc();
+        zhsqYc.setYcly("设备报警");
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        String sdate = sdf.format(calendar.getTime());
+        zhsqYc.setYcsj(sdate);
+        zhsqYc.setCzzt("未处置");
+        zhsqYc.setCzry("李磊");//处置人员
+        zhsqYc.setCzjg("");//处置时间
+        zhsqYc.setFj("无");
+        ZhsqYg zhsqYg= zhsqYgMapper.selectZhsqYgByIMSI(zhsqYgrz.getImsi());
+        zhsqYc.setX(zhsqYg.getX());
+        zhsqYc.setY(zhsqYg.getY());
+        zhsqYc.setZ(zhsqYg.getZ());
+        zhsqYc.setXqid(zhsqYg.getXqid());
+        zhsqYc.setSbid(zhsqYg.getYgid());
+        zhsqYc.setSqid(zhsqYg.getSqid());
+        zhsqYc.setSjlx("设备报警事件");
+        zhsqYc.setNoticeRead("0");
+        if (content==1){
+            zhsqYc.setYcjb("红");
+            zhsqYc.setYcnr("烟感设备发生烟感报警，请马上处理");
+            zhsqYcMapper.insertZhsqYc(zhsqYc);
+        }
+        if (content==2){
+            zhsqYc.setYcjb("黄");
+            zhsqYc.setYcnr("烟感设备发生烟感防拆报警，请马上处理");
+            zhsqYcMapper.insertZhsqYc(zhsqYc);
+        }
+        if (content==3){
+            zhsqYc.setYcjb("绿");
+            zhsqYc.setYcnr("烟感设备发生低电量报警，请前往处理");
+            zhsqYcMapper.insertZhsqYc(zhsqYc);
+        }
         return zhsqYgrzMapper.insertZhsqYgrz(zhsqYgrz);
     }
 

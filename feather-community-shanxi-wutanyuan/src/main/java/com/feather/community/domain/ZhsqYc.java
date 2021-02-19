@@ -55,7 +55,21 @@ public class ZhsqYc extends BaseEntity
     /** 高程 */
     @Excel(name = "高程")
     private String z;
-
+    /** 小区id */
+    @Excel(name = "小区id")
+    private String xqid;
+    /** 设备id */
+    @Excel(name = "设备id")
+    private String sbid;
+    /** 社区id */
+    @Excel(name = "社区id")
+    private String sqid;
+    /** 事件类型 */
+    @Excel(name = "事件类型")
+    private String sjlx;
+    /** 处置时间 */
+    @Excel(name = "处置时间")
+    private String czsj;
     /** 异常信息是否已读，0：表示未读，默认给0，1表示已读 */
     private String noticeRead;
 }

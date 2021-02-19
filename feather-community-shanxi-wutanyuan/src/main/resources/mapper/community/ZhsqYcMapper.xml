@@ -17,11 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="x"    column="X"    />
         <result property="y"    column="Y"    />
         <result property="z"    column="Z"    />
+        <result property="xqid"    column="XQID"    />
+        <result property="sbid"    column="SBID"    />
+        <result property="sqid"    column="SQID"    />
+        <result property="sjlx"    column="SJLX"    />
+        <result property="czsj"    column="CZSJ"    />
         <result property="noticeRead"    column="NOTICE_READ"    />
     </resultMap>
 
     <sql id="selectZhsqYcVo">
-        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z, NOTICE_READ from ZHSQ_YC
+        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z,XQID,SBID,SQID,SJLX,CZSJ, NOTICE_READ from ZHSQ_YC
     </sql>
 
     <select id="selectZhsqYcList" parameterType="ZhsqYc" resultMap="ZhsqYcResult">
@@ -65,6 +70,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="x != null  and x != ''">X,</if>
             <if test="y != null  and y != ''">Y,</if>
             <if test="z != null  and z != ''">Z,</if>
+            <if test="xqid != null  and xqid != ''">XQID,</if>
+            <if test="sbid != null  and sbid != ''">SBID,</if>
+            <if test="sqid != null  and sqid != ''">SQID,</if>
+            <if test="sjlx != null  and sjlx != ''">SJLX,</if>
+            <if test="czsj != null  and czsj != ''">CZSJ,</if>
             <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -80,6 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="x != null  and x != ''">#{x},</if>
             <if test="y != null  and y != ''">#{y},</if>
             <if test="z != null  and z != ''">#{z},</if>
+            <if test="xqid != null  and xqid != ''">#{xqid},</if>
+            <if test="sbid != null  and sbid != ''">#{sbid},</if>
+            <if test="sqid != null  and sqid != ''">#{sqid},</if>
+            <if test="sjlx != null  and sjlx != ''">#{sjlx},</if>
+            <if test="czsj != null  and czsj != ''">#{czsj},</if>
             <if test="noticeRead != null  and noticeRead != ''">#{noticeRead},</if>
          </trim>
     </insert>
@@ -98,6 +113,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="x != null  and x != ''">X = #{x},</if>
             <if test="y != null  and y != ''">Y = #{y},</if>
             <if test="z != null  and z != ''">Z = #{z},</if>
+            <if test="xqid != null  and xqid != ''">XQID = #{xqid},</if>
+            <if test="sbid != null  and sbid != ''">SBID = #{sbid},</if>
+            <if test="sqid != null  and sqid != ''">SQID = #{sqid},</if>
+            <if test="sjlx != null  and sjlx != ''">SJLX = #{sjlx},</if>
+            <if test="czsj != null  and czsj != ''">CZSJ = #{czsj},</if>
             <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ = #{noticeRead},</if>
         </trim>
         where YCID = #{ycid}

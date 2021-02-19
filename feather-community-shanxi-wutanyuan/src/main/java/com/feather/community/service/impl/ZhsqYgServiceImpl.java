@@ -1,6 +1,7 @@
 package com.feather.community.service.impl;
 
 
+import com.feather.common.config.UidWorker;
 import com.feather.common.core.text.Convert;
 import com.feather.community.domain.ZhsqYg;
 import com.feather.community.mapper.ZhsqYgMapper;
@@ -21,7 +22,8 @@ public class ZhsqYgServiceImpl implements IZhsqYgService
 {
     @Autowired
     private ZhsqYgMapper zhsqYgMapper;
-
+    @Autowired
+    private UidWorker uidWorker;
     /**
      * 查询烟感
      *
@@ -55,6 +57,8 @@ public class ZhsqYgServiceImpl implements IZhsqYgService
     @Override
     public int insertZhsqYg(ZhsqYg zhsqYg)
     {
+        String ygid = "YG" + uidWorker.getNextId();
+        zhsqYg.setYgid(ygid);
         return zhsqYgMapper.insertZhsqYg(zhsqYg);
     }
 

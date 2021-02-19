@@ -20,6 +20,13 @@ public interface ZhsqYgMapper
      * @return 烟感
      */
     public ZhsqYg selectZhsqYgById(String ygid);
+    /**
+     * 查询烟感
+     *
+     * @param IMSI 烟感IMSI
+     * @return 烟感
+     */
+    public ZhsqYg selectZhsqYgByIMSI(String IMSI);
 
     /**
      * 查询烟感列表

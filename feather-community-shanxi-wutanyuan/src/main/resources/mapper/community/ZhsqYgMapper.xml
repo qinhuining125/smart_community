@@ -6,6 +6,7 @@
 
     <resultMap type="ZhsqYg" id="ZhsqYgResult">
         <result property="ygid"    column="ygid"    />
+        <result property="IMSI"    column="IMSI"    />
         <result property="sblx"    column="sblx"    />
         <result property="sbmc"    column="sbmc"    />
         <result property="ppmc"    column="ppmc"    />
@@ -21,7 +22,7 @@
     </resultMap>
 
     <sql id="selectZhsqYgVo">
-        select ygid, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid from ZHSQ_YG
+        select ygid,IMSI, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid from ZHSQ_YG
     </sql>
 
     <select id="selectZhsqYgList" parameterType="ZhsqYg" resultMap="ZhsqYgResult">
@@ -50,11 +51,15 @@
         <include refid="selectZhsqYgVo"/>
         where ygid = #{ygid}
     </select>
-
+    <select id="selectZhsqYgByIMSI" parameterType="String" resultMap="ZhsqYgResult">
+        <include refid="selectZhsqYgVo"/>
+        where IMSI = #{IMSI}
+    </select>
     <insert id="insertZhsqYg" parameterType="ZhsqYg">
         insert into ZHSQ_YG
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ygid != null  and ygid != ''">ygid,</if>
+            <if test="IMSI != null  and IMSI != ''">IMSI,</if>
             <if test="sblx != null  and sblx != ''">sblx,</if>
             <if test="sbmc != null  and sbmc != ''">sbmc,</if>
             <if test="ppmc != null  and ppmc != ''">ppmc,</if>
@@ -70,6 +75,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ygid != null  and ygid != ''">#{ygid},</if>
+            <if test="IMSI != null  and IMSI != ''">#{IMSI},</if>
             <if test="sblx != null  and sblx != ''">#{sblx},</if>
             <if test="sbmc != null  and sbmc != ''">#{sbmc},</if>
             <if test="ppmc != null  and ppmc != ''">#{ppmc},</if>
