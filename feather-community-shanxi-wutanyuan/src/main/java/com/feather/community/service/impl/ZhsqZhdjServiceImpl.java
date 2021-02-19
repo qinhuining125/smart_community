@@ -123,8 +123,8 @@ public class ZhsqZhdjServiceImpl implements IZhsqZhdjService {
     @Override
     public Object[] getDyNl(Map<String, Object> maps) {
         Map<String, Object> dyNl = zhsqZhdjMapper.getDyNl(maps);
-        Object[] s = { dyNl.get("a"), dyNl.get("b"), dyNl.get("c"), dyNl.get("d"), dyNl.get("e"), dyNl.get("f"),
-                dyNl.get("g") };
+        Object[] s = { dyNl.get("A"),/* dyNl.get("B"),*/ dyNl.get("C"), dyNl.get("D"), dyNl.get("E"), dyNl.get("F"),
+                dyNl.get("G") };
         return s;
     }
 

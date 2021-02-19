@@ -83,13 +83,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--党员学历分布-->
     <select id="getDyxlFb" parameterType="map" resultType="map">
-        SELECT TOP 5 XL ,count(*) as MUN FROM [dbo].[ZHSQ_DY]
+      select XL,MUN from (
+        SELECT XL ,count(*) as MUN  FROM ZHSQ_DY
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="zyz != null  and zyz != ''"> and SFZYZ = #{zyz}</if>
         </where>
-         GROUP BY XL ORDER BY MUN DESC
+         GROUP BY XL ORDER BY MUN DESC) b where rownum <![CDATA[ <= ]]> 5
     </select>
 
     <!--党员年龄分布-->
@@ -110,25 +111,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--党员年龄分布-->
     <select id="getDyNl" parameterType="map" resultType="map">
         SELECT
-        count(case when jc.[DL] <![CDATA[ > ]]> N'0' and jc.[DL] <![CDATA[ <= ]]> N'10' then 1 else null end) as a,
-        count(case when jc.[DL] <![CDATA[ > ]]> N'10' and jc.[DL] <![CDATA[ <= ]]> N'20' then 1 else null end) as b,
-        count(case when jc.[DL] <![CDATA[ > ]]> N'20' and jc.[DL] <![CDATA[ <= ]]> N'30' then 1 else null end) as c,
-        count(case when jc.[DL] <![CDATA[ > ]]> N'30' and jc.[DL] <![CDATA[ <= ]]> N'40' then 1 else null end) as d,
-        count(case when jc.[DL] <![CDATA[ > ]]> N'40' and jc.[DL] <![CDATA[ <= ]]> N'50' then 1 else null end) as e,
-        count(case when jc.[DL] <![CDATA[ > ]]> N'50' and jc.[DL] <![CDATA[ <= ]]> N'60' then 1 else null end) as f,
-        count(case when jc.[DL] <![CDATA[ > ]]> N'60' and jc.[DL] <![CDATA[ <= ]]> N'70' then 1 else null end) as g
+        count(case when jc.DL <![CDATA[ > ]]> '0' and jc.DL <![CDATA[ < ]]> '20' then 1 else null end) as a,
+        /*count(case when jc.DL <![CDATA[ > ]]> '10' and jc.DL <![CDATA[ <= ]]> '20' then 1 else null end) as b,*/
+        count(case when jc.DL <![CDATA[ >= ]]> '20' and jc.DL <![CDATA[ < ]]> '30' then 1 else null end) as c,
+        count(case when jc.DL <![CDATA[ >= ]]> '30' and jc.DL <![CDATA[ < ]]> '40' then 1 else null end) as d,
+        count(case when jc.DL <![CDATA[ >= ]]> '40' and jc.DL <![CDATA[ < ]]> '50' then 1 else null end) as e,
+        count(case when jc.DL <![CDATA[ >= ]]> '50' and jc.DL <![CDATA[ < ]]> '60' then 1 else null end) as f,
+        count(case when jc.DL <![CDATA[ >= ]]> '60' and jc.DL <![CDATA[ < ]]> '70' then 1 else null end) as g
         FROM
-        (SELECT * FROM [dbo].[ZHSQ_DY]
+        (SELECT * FROM ZHSQ_DY
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="zyz != null  and zyz != ''"> and SFZYZ = #{zyz}</if>
-        </where>) as jc
+        </where>)  jc
     </select>
 
     <!--党员性别比例-->
     <select id="getDyXb" parameterType="map" resultType="map">
-        SELECT XB ,count(1) as MUN FROM [dbo].[ZHSQ_DY]
+        SELECT XB ,count(1) as MUN FROM ZHSQ_DY
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -139,7 +140,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--党员民族比例-->
     <select id="getDyMz" parameterType="map" resultType="map">
-        SELECT MZ,count(1) as MUN FROM [dbo].[ZHSQ_DY]
+        SELECT MZ,count(1) as MUN FROM ZHSQ_DY
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
