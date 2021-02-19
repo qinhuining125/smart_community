@@ -71,7 +71,13 @@ public class ZhsqSqglController extends BaseController {
         }
         lms.add(maps1);
         lms.add(maps2);
-        map.put("carLeftList", countCl);
+        List<Map>  cls=new ArrayList<>();
+        Map maps5=new HashMap();
+        maps5.put("name", "车辆总数");
+        maps5.put("value",countCl.get(0).get("VALUE"));
+        cls.add(maps5);
+
+        map.put("carLeftList", cls);
         map.put("carNumberState", lms);
         return AjaxResult.success(map);
     }
