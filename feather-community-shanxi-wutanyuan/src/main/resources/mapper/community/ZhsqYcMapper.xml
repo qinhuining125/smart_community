@@ -17,10 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="x"    column="X"    />
         <result property="y"    column="Y"    />
         <result property="z"    column="Z"    />
+        <result property="noticeRead"    column="NOTICE_READ"    />
     </resultMap>
 
     <sql id="selectZhsqYcVo">
-        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z from ZHSQ_YC
+        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z, NOTICE_READ from ZHSQ_YC
     </sql>
 
     <select id="selectZhsqYcList" parameterType="ZhsqYc" resultMap="ZhsqYcResult">
@@ -64,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="x != null  and x != ''">X,</if>
             <if test="y != null  and y != ''">Y,</if>
             <if test="z != null  and z != ''">Z,</if>
+            <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ycid != null  and ycid != ''">#{ycid},</if>
@@ -78,6 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="x != null  and x != ''">#{x},</if>
             <if test="y != null  and y != ''">#{y},</if>
             <if test="z != null  and z != ''">#{z},</if>
+            <if test="noticeRead != null  and noticeRead != ''">#{noticeRead},</if>
          </trim>
     </insert>
 
@@ -95,6 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="x != null  and x != ''">X = #{x},</if>
             <if test="y != null  and y != ''">Y = #{y},</if>
             <if test="z != null  and z != ''">Z = #{z},</if>
+            <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ = #{noticeRead},</if>
         </trim>
         where YCID = #{ycid}
     </update>

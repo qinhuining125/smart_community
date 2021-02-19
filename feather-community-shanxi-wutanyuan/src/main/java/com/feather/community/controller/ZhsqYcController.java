@@ -2,6 +2,8 @@ package com.feather.community.controller;
 
 import java.util.List;
 
+import com.feather.system.domain.SysNotice;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,4 +122,15 @@ public class ZhsqYcController extends BaseController {
         return toAjax(zhsqYcService.deleteZhsqYcByIds(ids));
     }
 
+    /**
+     * 前端页面：通知公告更新状态接口
+     * 1:通知。 2:公告
+     * */
+    @RequestMapping("/api/updateYc")
+    @ResponseBody
+    public AjaxResult updateYc(@Parameter String id) {
+        ZhsqYc yc = zhsqYcService.selectZhsqYcById(id);
+        yc.setNoticeRead("1");
+        return toAjax(zhsqYcService.updateZhsqYc(yc));
+    }
 }

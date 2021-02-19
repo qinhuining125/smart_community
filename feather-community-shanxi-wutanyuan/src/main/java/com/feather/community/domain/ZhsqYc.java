@@ -55,4 +55,7 @@ public class ZhsqYc extends BaseEntity
     /** 高程 */
     @Excel(name = "高程")
     private String z;
+
+    /** 异常信息是否已读，0：表示未读，默认给0，1表示已读 */
+    private String noticeRead;
 }

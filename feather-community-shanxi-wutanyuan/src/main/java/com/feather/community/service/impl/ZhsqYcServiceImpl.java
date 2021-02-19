@@ -55,6 +55,8 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
      */
     @Override
     public int insertZhsqYc(ZhsqYc zhsqYc) {
+        //新添加的默认这个状态值为0
+        zhsqYc.setNoticeRead("0");
         return zhsqYcMapper.insertZhsqYc(zhsqYc);
     }
 
