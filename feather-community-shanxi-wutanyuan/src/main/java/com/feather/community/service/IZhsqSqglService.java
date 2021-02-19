@@ -15,7 +15,7 @@ public interface IZhsqSqglService {
     public List<Map> getCountJc(String sqid, String xqid);
 
     public List<Map> getCountLx(String sqid, String xqid);
-    public Integer getCountCl(String sqid, String xqid);
+    public List<Map> getCountCl(String sqid, String xqid);
 
     /**
      * 左侧人员统计

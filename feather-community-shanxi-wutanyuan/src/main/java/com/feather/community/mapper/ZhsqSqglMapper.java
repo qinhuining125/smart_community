@@ -17,7 +17,7 @@ public interface ZhsqSqglMapper {
     public List<Map> getCountJc(@Param("sqid") String sqid, @Param("xqid") String xqid);
 
     public List<Map> getCountLx(@Param("sqid") String sqid, @Param("xqid") String xqid);
-    public Integer getCountCl(@Param("sqid") String sqid, @Param("xqid") String xqid);
+    public List<Map> getCountCl(@Param("sqid") String sqid, @Param("xqid") String xqid);
 
     /**
      * 左侧人员统计

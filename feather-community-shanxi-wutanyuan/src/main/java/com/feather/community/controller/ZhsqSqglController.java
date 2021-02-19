@@ -1,5 +1,6 @@
 package com.feather.community.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,13 +36,43 @@ public class ZhsqSqglController extends BaseController {
     @RequestMapping("/api/getCountJc")
     @ResponseBody
     public AjaxResult getCountJc(String sqid, String xqid) {
-        Integer countCl = iZhsqSqglService.getCountCl(sqid, xqid);
+        List<Map> countCl = iZhsqSqglService.getCountCl(sqid, xqid);
         List<Map> countLx = iZhsqSqglService.getCountLx(sqid, xqid);
-        List<Map> countjc = iZhsqSqglService.getCountJc(sqid, xqid);
+       /* List<Map> countjc = iZhsqSqglService.getCountJc(sqid, xqid);*/
         Map map = new HashMap();
-        map.put("lx", countLx);
-        map.put("jc", countjc);
-        map.put("zs", countCl);
+        //循环listmap然后重新放入数值
+        List<Map>  lms=new ArrayList<>();
+        Map maps1=new HashMap();
+        maps1.put("name", "外来车辆");
+        maps1.put("enterNumber",0);
+        maps1.put("outerNumber",0);
+        Map maps2=new HashMap();
+        maps2.put("name", "小区车辆");
+        maps2.put("enterNumber",0);
+        maps2.put("outerNumber",0);
+
+        for( int i = 0; i < countLx.size(); i++ ) {
+            if(countLx.get(i).get("CLLX").equals("外来车辆")){
+                if(countLx.get(i).get("JCZT").equals("进入")){
+                    maps1.put("enterNumber", countLx.get(i).get("NUM"));
+                }
+                if(countLx.get(i).get("JCZT").equals("外出")){
+                    maps1.put("outerNumber", countLx.get(i).get("NUM"));
+                }
+            }
+            if(countLx.get(i).get("CLLX").equals("小区车辆")){
+                if(countLx.get(i).get("JCZT").equals("进入")){
+                    maps2.put("enterNumber", countLx.get(i).get("NUM"));
+                }
+                if(countLx.get(i).get("JCZT").equals("外出")){
+                    maps2.put("outerNumber", countLx.get(i).get("NUM"));
+                }
+            }
+        }
+        lms.add(maps1);
+        lms.add(maps2);
+        map.put("carLeftList", countCl);
+        map.put("carNumberState", lms);
         return AjaxResult.success(map);
     }
 

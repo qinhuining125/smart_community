@@ -14,8 +14,8 @@
         GROUP BY cx
     </select>
     <!--车辆总数-->
-    <select id="getCountCl" resultType="java.lang.Integer">
-        select count(*) as num from ZHSQ_CL
+    <select id="getCountCl" resultType="map">
+        select '车辆总数' name,  count(distinct CPHM) value from ZHSQ_CLJC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>

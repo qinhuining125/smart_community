@@ -37,7 +37,7 @@ public class ZhsqSqglServiceImpl implements IZhsqSqglService {
         return zhsqSqglMapper.getCountLx(sqid, xqid);
     }
     @Override
-    public Integer getCountCl(String sqid, String xqid) {
+    public List<Map> getCountCl(String sqid, String xqid) {
         return zhsqSqglMapper.getCountCl(sqid, xqid);
     }
 
