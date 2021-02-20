@@ -56,4 +56,25 @@ public class ZhsqSh extends BaseEntity
     /** 姓名 */
     @Excel(name = "姓名")
     private String xm;
+    /** 经度 */
+    @Excel(name = "经度")
+    private String x;
+    /** 纬度 */
+    @Excel(name = "纬度")
+    private String y;
+    /** $column.columnComment */
+    @Excel(name = "高程")
+    private String z;
+    /** $column.columnComment */
+    @Excel(name = "位置")
+    private String wz;
+    /** $column.columnComment */
+    @Excel(name = "楼栋ID")
+    private String ldid;
+    /** $column.columnComment */
+    @Excel(name = "小区ID")
+    private String xqid;
+    /** $column.columnComment */
+    @Excel(name = "社区ID")
+    private String sqid;
 }

@@ -9,6 +9,38 @@
     <form class="form-horizontal m" id="form-sh-edit" th:object="${SH}">
         <input id="shid" name="shid" th:field="*{shid}" type="hidden">
         <div class="form-group">
+            <label class="col-sm-3 control-label">社区ID：</label>
+            <div class="col-sm-8">
+                <!--                    <input name="sqid" th:field="*{sqid}" class="form-control" type="text">-->
+                <select name="sqid" class="form-control m-b" th:with="type=${@wty.getSqType()}">
+                    <option th:each="dict:${type}" th:text="${dict.dictValue}" th:value="${dict.dictLabel}" th:field="*{sqid}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">小区ID：</label>
+            <div class="col-sm-8">
+                <select name="xqid" class="form-control m-b" th:with="type=${@wty.getXqType()}">
+                    <option th:each="dict:${type}" th:text="${dict.dictValue}" th:value="${dict.dictLabel}" th:field="*{sqid}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">楼栋ID：</label>
+            <div class="col-sm-8">
+                <!--                    <input name="ldid" th:field="*{ldid}" class="form-control" type="text">-->
+                <select name="ldid" class="form-control m-b" th:with="type=${@wty.getLdType()}">
+                    <option th:each="dict:${type}" th:text="${dict.dictValue}" th:value="${dict.dictLabel}" th:field="*{ldid}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">位置：</label>
+            <div class="col-sm-8">
+                <input name="wz" th:field="*{wz}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">设备类型：</label>
             <div class="col-sm-8">
                 <input name="sblx" th:field="*{sblx}" class="form-control" type="text">
@@ -50,6 +82,24 @@
                 <select name="jmid" class="form-control m-b" th:with="type=${@wty.getJmType()}">
                     <option th:each="dict:${type}" th:text="${dict.dictValue}" th:value="${dict.dictLabel}" th:field="*{jmid}"></option>
                 </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">高程：</label>
+            <div class="col-sm-8">
+                <input name="z" th:field="*{z}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">纬度：</label>
+            <div class="col-sm-8">
+                <input name="y" th:field="*{y}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">经度：</label>
+            <div class="col-sm-8">
+                <input name="x" th:field="*{x}" class="form-control" type="text">
             </div>
         </div>
         <div class="form-group">
