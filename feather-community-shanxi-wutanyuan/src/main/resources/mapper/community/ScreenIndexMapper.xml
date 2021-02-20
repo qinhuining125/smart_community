@@ -263,6 +263,16 @@ FROM
         else '60以上' end AS nl FROM  zhsq_dy) GROUP BY nl
     </select>
 
+    <!--党员年龄分布统计-->
+    <select id="getDydlfbTj" parameterType="map" resultType="map">
+        SELECT dl "keys", to_char(count(*)) "sl" FROM (SELECT case when to_number(dl) <![CDATA[ < ]]> 20 then '20以下'
+        when to_number(dl) <![CDATA[ >= ]]> 20 and to_number(dl) <![CDATA[ <= ]]> 30 then '20-30'
+        when to_number(dl) > 30 and to_number(dl) <![CDATA[ <= ]]> 40 then '31-40'
+        when to_number(dl) > 40 and to_number(dl) <![CDATA[ <= ]]> 50 then '41-50'
+        when to_number(dl) > 50 and to_number(dl) <![CDATA[ <= ]]> 60 then '51-60'
+        else '60以上' end AS dl FROM  zhsq_dy) GROUP BY dl
+    </select>
+
     <!--党员性别比例统计-->
     <select id="getDyxbblTj" parameterType="map" resultType="map">
          SELECT

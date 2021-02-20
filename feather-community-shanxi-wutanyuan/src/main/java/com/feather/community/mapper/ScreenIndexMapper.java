@@ -67,6 +67,13 @@ public interface ScreenIndexMapper {
     List<Map<String, String>> getDynlfbTj(Map<String, Object> params);
 
     /**
+     * 党员党龄分布统计
+     * @param params
+     * @return
+     */
+    List<Map<String, String>> getDydlfbTj(Map<String, Object> params);
+
+    /**
      * 党员性别比例统计
      * @param params
      * @return

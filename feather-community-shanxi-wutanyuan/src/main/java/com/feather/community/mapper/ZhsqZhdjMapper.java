@@ -73,7 +73,7 @@ public interface ZhsqZhdjMapper {
      * @param maps
      * @return
      */
-    public Map<String, Object> getDyNl(Map<String, Object> maps);
+    public List<Map<String, Object>> getDyNl(Map<String, Object> maps);
 
     /**
      * 党员性别比例

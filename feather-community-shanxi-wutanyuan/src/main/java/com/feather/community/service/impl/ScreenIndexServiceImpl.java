@@ -152,9 +152,10 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
 
             Map<String, String> map = new HashMap<>(8);
             map.put("xl", "getDyxlfbTj");
-            map.put("nl", "getDynlfbTj");
+            /*map.put("nl", "getDynlfbTj");
             map.put("xb", "getDyxbblTj");
-            map.put("mz", "getDymzblTj");
+            map.put("mz", "getDymzblTj");*/
+            map.put("dl", "getDydlfbTj");
             addTjResultToMapByDynamicMethod(params, map, result);
             return AjaxResult.success(result);
         } catch (Exception e) {
@@ -215,6 +216,9 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
                 break;
             case 10: //设备-烟感
                 tableStrategyContext.setTableStrategy(zhsqYgTableStrategy);
+                break;
+            case 11:
+                tableStrategyContext.setTableStrategy(zhsqClJcTableStrategy);
                 break;
             default:
                 tableStrategyContext.setTableStrategy(zhsqJmTableStrategy);

@@ -15,7 +15,7 @@
     </select>
     <!--车辆总数-->
     <select id="getCountCl" resultType="map">
-        select '车辆总数' name,  count(distinct CPHM) value from ZHSQ_CLJC
+        select '车辆总数' name,  count(*) as value from ZHSQ_CL
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>

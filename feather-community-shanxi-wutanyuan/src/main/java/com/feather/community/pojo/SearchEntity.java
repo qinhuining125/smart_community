@@ -41,6 +41,10 @@ public class SearchEntity {
      * type=4 即为车辆的参数
      */
     private String cx;
+
+    /**
+     * type=11 即为车辆的参数
+     */
     private String cllx;//车辆类型
 
 }

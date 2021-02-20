@@ -110,7 +110,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--党员年龄分布-->
     <select id="getDyNl" parameterType="map" resultType="map">
-        SELECT
+        SELECT nl "name", to_char(count(*)) "value" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 30 then '30岁以下'
+        when to_number(nl) <![CDATA[ >= ]]> 30 and to_number(nl) <![CDATA[ <= ]]> 50 then '30-50岁'
+        else '50岁以上' end AS nl FROM  zhsq_dy) GROUP BY nl
+        <!--SELECT
         count(case when jc.DL <![CDATA[ > ]]> '0' and jc.DL <![CDATA[ < ]]> '20' then 1 else null end) as a,
         /*count(case when jc.DL <![CDATA[ > ]]> '10' and jc.DL <![CDATA[ <= ]]> '20' then 1 else null end) as b,*/
         count(case when jc.DL <![CDATA[ >= ]]> '20' and jc.DL <![CDATA[ < ]]> '30' then 1 else null end) as c,
@@ -124,12 +127,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="zyz != null  and zyz != ''"> and SFZYZ = #{zyz}</if>
-        </where>)  jc
+        </where>)  jc-->
     </select>
 
     <!--党员性别比例-->
     <select id="getDyXb" parameterType="map" resultType="map">
-        SELECT XB ,count(1) as MUN FROM ZHSQ_DY
+        SELECT XB as "name" ,count(1) as "value" FROM ZHSQ_DY
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -140,7 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--党员民族比例-->
     <select id="getDyMz" parameterType="map" resultType="map">
-        SELECT MZ,count(1) as MUN FROM ZHSQ_DY
+        SELECT MZ as "name" ,count(1) as "value" FROM ZHSQ_DY
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>

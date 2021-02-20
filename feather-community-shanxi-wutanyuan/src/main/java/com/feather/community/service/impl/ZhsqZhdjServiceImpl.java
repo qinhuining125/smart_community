@@ -121,11 +121,10 @@ public class ZhsqZhdjServiceImpl implements IZhsqZhdjService {
      * @return
      */
     @Override
-    public Object[] getDyNl(Map<String, Object> maps) {
-        Map<String, Object> dyNl = zhsqZhdjMapper.getDyNl(maps);
-        Object[] s = { dyNl.get("A"),/* dyNl.get("B"),*/ dyNl.get("C"), dyNl.get("D"), dyNl.get("E"), dyNl.get("F"),
-                dyNl.get("G") };
-        return s;
+    public List<Map<String, Object>> getDyNl(Map<String, Object> maps) {
+        /*Object[] s = { dyNl.get("A"),*//* dyNl.get("B"),*//* dyNl.get("C"), dyNl.get("D"), dyNl.get("E"), dyNl.get("F"),
+                dyNl.get("G") };*/
+        return  zhsqZhdjMapper.getDyNl(maps);
     }
 
     /**

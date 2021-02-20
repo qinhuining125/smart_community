@@ -64,6 +64,8 @@ public abstract class AbstractScreenIndexService implements IScreenIndexService 
     @Autowired
     ZhsqClTableStrategy zhsqClTableStrategy;
     @Autowired
+    ZhsqClJcTableStrategy zhsqClJcTableStrategy;
+    @Autowired
     ZhsqDzzTableStrategy zhsqDzzTableStrategy;
     @Autowired
     ZhsqDyTableStrategy zhsqDyTableStrategy;
