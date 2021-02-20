@@ -36,4 +36,5 @@ public class ZhsqCl extends BaseEntity
     /** 车主id */
     @Excel(name = "车主id")
     private String jmid;
+
 }

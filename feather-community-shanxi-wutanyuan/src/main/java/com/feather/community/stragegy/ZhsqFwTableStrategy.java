@@ -9,6 +9,7 @@ import com.feather.community.service.IZhsqJmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,8 @@ public class ZhsqFwTableStrategy extends AbstraceTableStrategy {
         zhsqFw.setFwrzqk(searchEntity.getFwrzqk());
         zhsqFw.setDy(searchEntity.getDy());
         List<ZhsqFw> zhsqFws = zhsqFwService.selectZhsqFwList(zhsqFw);
-        //添加居民信息
+        List<ZhsqFw> cc=new ArrayList<ZhsqFw>();
+       //添加居民信息
         for(int i=0;i<zhsqFws.size();i++){
             ZhsqFw entity=zhsqFws.get(i);
             ZhsqJm zhsqJm=new ZhsqJm();

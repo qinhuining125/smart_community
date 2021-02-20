@@ -23,6 +23,7 @@ public class ZhsqClTableStrategy extends AbstraceTableStrategy {
 
     @Override
     public TableDataInfo tableQueryStrategy(SearchEntity searchEntity) {
+        //换张表进行查询
         ZhsqCl zhsqCl = new ZhsqCl();
         zhsqCl.setClhm(searchEntity.getName());
         zhsqCl.setCx(searchEntity.getCx());

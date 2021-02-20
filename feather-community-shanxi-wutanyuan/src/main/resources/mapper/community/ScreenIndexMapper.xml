@@ -5,12 +5,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.feather.community.mapper.ScreenIndexMapper">
 
     <select id="sqglSbTj" resultType="map">
-        SELECT to_char(sbzt)||','||to_char(sl) "sl" FROM (SELECT sbzt , to_char(count(*)) sl  FROM (SELECT case when sbzt = '在线' then 'sxtzx'
-                else 'sxtlx' end AS sbzt FROM  zhsq_sxt) GROUP BY sbzt) UNION
-        SELECT to_char(sbzt)||','||to_char(sl) "sl" FROM (SELECT sbzt , to_char(count(*)) sl  FROM (SELECT case when sbzt = '在线' then 'ygzx'
-                else 'yglx' end AS sbzt FROM  zhsq_yg) GROUP BY sbzt)	UNION
-        SELECT to_char(sbzt)||','||to_char(sl) "sl" FROM (SELECT sbzt , to_char(count(*)) sl  FROM (SELECT case when sbzt = '在线' then 'zjzx'
-                else 'zjlx' end AS sbzt FROM  zhsq_zj) GROUP BY sbzt)
+      SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'sxtzx' ELSE 'sxtlx' END AS sbzt FROM zhsq_sxt )
+	GROUP BY
+		sbzt
+	) UNION /*摄像头*/
+SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'sbzx' ELSE 'sblx' END AS sbzt FROM zhsq_sb )
+	GROUP BY
+		sbzt
+	) UNION /*水表*/
+SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'zjzx' ELSE 'zjlx' END AS sbzt FROM zhsq_zj )
+	GROUP BY
+	sbzt
+	) UNION /*闸机*/
+	SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'dgzx' ELSE 'dglx' END AS sbzt FROM zhsq_dg )
+	GROUP BY
+		sbzt
+	) UNION  /*车辆道杆*/
+SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'jgzx' ELSE 'jglx' END AS sbzt FROM zhsq_jg )
+	GROUP BY
+		sbzt
+	) UNION  /*井盖*/
+SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'shzx' ELSE 'shlx' END AS sbzt FROM zhsq_sh )
+	GROUP BY
+		sbzt
+	) UNION  /*老年手环*/
+SELECT
+	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+FROM
+	(
+	SELECT
+		sbzt,
+		to_char( count( * ) ) sl
+	FROM
+		( SELECT CASE WHEN sbzt = '在线' THEN 'ygzx' ELSE 'yglx' END AS sbzt FROM zhsq_yg )
+	GROUP BY
+		sbzt
+	)  /*烟感*/
     </select>
 
 

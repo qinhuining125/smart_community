@@ -129,6 +129,7 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
                         sbzx += mapValueInt;
                     }
                     sbzs += mapValueInt;
+
                 }
                 result.put("sbzs", String.valueOf(sbzs));
                 result.put("sbyc", String.valueOf(sbyc));
