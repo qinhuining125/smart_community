@@ -76,6 +76,8 @@ public class ZhsqShrzServiceImpl implements IZhsqShrzService
 
         String alarmState = zhsqShrz.getAlarmState();
         ZhsqYc zhsqYc=new ZhsqYc();
+        String ycid = "YC" + uidWorker.getNextId();
+        zhsqYc.setYcid(ycid);
         zhsqYc.setYcly("设备报警");
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());

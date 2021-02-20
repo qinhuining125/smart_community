@@ -74,6 +74,8 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
 
         long content = zhsqYgrz.getContent();
         ZhsqYc zhsqYc=new ZhsqYc();
+        String ycid = "YC" + uidWorker.getNextId();
+        zhsqYc.setYcid(ycid);
         zhsqYc.setYcly("设备报警");
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
