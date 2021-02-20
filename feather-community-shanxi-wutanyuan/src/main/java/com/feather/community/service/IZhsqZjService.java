@@ -58,4 +58,6 @@ public interface IZhsqZjService {
      * @return 结果
      */
     public int deleteZhsqZjById(String zjid);
+
+    public List<ZhsqZj> getZjList();
 }

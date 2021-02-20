@@ -58,4 +58,10 @@ public interface IZhsqDyService {
      * @return 结果
      */
     public int deleteZhsqDyById(String dyid);
+    /**
+     * 或获取党员总数
+     *
+     * @return 结果
+     */
+    public Integer getDySun();
 }

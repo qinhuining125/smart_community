@@ -58,4 +58,6 @@ public interface IZhsqSbService
      * @return 结果
      */
     public int deleteZhsqSbById(String deviceCode);
+
+    public List<ZhsqSb> getSbList();
 }

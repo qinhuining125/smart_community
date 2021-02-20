@@ -85,4 +85,14 @@ public class ZhsqDyServiceImpl implements IZhsqDyService {
     public int deleteZhsqDyById(String dyid) {
         return zhsqDyMapper.deleteZhsqDyById(dyid);
     }
+    /**
+     * 获取党员总数
+     *
+     * @return 结果
+     */
+    @Override
+    public Integer getDySun() {
+        return zhsqDyMapper.getDySun();
+    }
+
 }

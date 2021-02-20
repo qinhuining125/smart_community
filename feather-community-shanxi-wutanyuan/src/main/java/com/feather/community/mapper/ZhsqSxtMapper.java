@@ -2,6 +2,7 @@ package com.feather.community.mapper;
 
 
 import com.feather.community.domain.ZhsqSxt;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -71,4 +72,6 @@ public interface ZhsqSxtMapper {
      * @return
      */
     List<Map<String, String>> getSxtTj(Map<String, Object> params);
+    @Select(" select * from zhsq_sxt")
+    List<ZhsqSxt> getSxtList();
 }

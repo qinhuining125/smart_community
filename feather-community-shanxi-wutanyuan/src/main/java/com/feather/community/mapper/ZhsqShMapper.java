@@ -1,6 +1,7 @@
 package com.feather.community.mapper;
 
 import com.feather.community.domain.ZhsqSh;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -66,4 +67,6 @@ public interface ZhsqShMapper
      * @return 结果
      */
     int deleteZhsqShByIds(String[] shids);
+    @Select(" select * from zhsq_sh")
+    List<ZhsqSh> getShList();
 }

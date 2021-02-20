@@ -60,4 +60,6 @@ public interface IZhsqYgService
      * @return 结果
      */
     public int deleteZhsqYgById(String ygid);
+
+    List<ZhsqYg> getYgList();
 }

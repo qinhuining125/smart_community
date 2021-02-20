@@ -110,4 +110,9 @@ public class ZhsqSxtServiceImpl implements IZhsqSxtService {
             return AjaxResult.error(errInfo);
         }
     }
+
+    @Override
+    public List<ZhsqSxt> getSxtList() {
+        return zhsqSxtMapper.getSxtList();
+    }
 }

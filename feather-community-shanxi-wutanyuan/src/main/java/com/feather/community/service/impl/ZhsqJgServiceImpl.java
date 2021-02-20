@@ -92,4 +92,9 @@ public class ZhsqJgServiceImpl implements IZhsqJgService
     {
         return zhsqJgMapper.deleteZhsqJgById(jgid);
     }
+
+    @Override
+    public List<ZhsqJg> getJgList() {
+        return zhsqJgMapper.getJgList();
+    }
 }

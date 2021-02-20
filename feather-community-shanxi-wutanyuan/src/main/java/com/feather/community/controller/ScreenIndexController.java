@@ -46,7 +46,22 @@ public class ScreenIndexController extends BaseController {
     IScreenIndexService screenIndexServie;
     @Autowired
     private IZhsqSbrzService zhsqSbrzService;
-
+    @Autowired
+    private IZhsqDyService zhsqDyService;
+    @Autowired
+    private IZhsqDzzService zhsqDzzService;
+    @Autowired
+    private IZhsqSbService zhsqSbService;
+    @Autowired
+    private IZhsqZjService zhsqZjService;
+    @Autowired
+    private IZhsqJgService zhsqJgService;
+    @Autowired
+    private IZhsqShService zhsqShService;
+    @Autowired
+    private IZhsqYgService zhsqYgService;
+    @Autowired
+    private IZhsqMjService zhsqMjService;
     @GetMapping()
     public String index() {
         return "redirect:/bus/community/index.html";
@@ -381,5 +396,104 @@ public class ScreenIndexController extends BaseController {
         List<String[]> list = zhsqSbrzService.get5DayData();
         return list;
 //        return getDataTable(list);
+    }
+    /**
+     * 党员总数
+     */
+    @GetMapping("/api/getDySun")
+    @ClearPage
+    @ResponseBody
+    public Integer getDySun()
+    {
+        Integer sum = zhsqDyService.getDySun();
+        return sum;
+    }
+    /**
+     * 党组织总数
+     */
+    @GetMapping("/api/getDzzSun")
+    @ClearPage
+    @ResponseBody
+    public Integer getDzzSun()
+    {
+        Integer sum = zhsqDzzService.getDzzSun();
+        return sum;
+    }
+    /**
+     * 设备列表（水表）
+     */
+    @GetMapping("/api/getSbList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqSb> getSbList()
+    {
+        List<ZhsqSb> List = zhsqSbService.getSbList();
+        return List;
+    }
+    /**
+     * 设备列表（摄像头）
+     */
+    @GetMapping("/api/getSxtList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqSxt> getSxtList()
+    {
+        List<ZhsqSxt> List = zhsqSxtService.getSxtList();
+        return List;
+    }
+    /**
+     * 设备列表（闸机）
+     */
+    @GetMapping("/api/getZjList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqZj> getZjList()
+    {
+        List<ZhsqZj> List = zhsqZjService.getZjList();
+        return List;
+    }
+    /**
+     * 设备列表（井盖）
+     */
+    @GetMapping("/api/getJgList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqJg> getJgList()
+    {
+        List<ZhsqJg> List = zhsqJgService.getJgList();
+        return List;
+    }
+    /**
+     * 设备列表（井盖）
+     */
+    @GetMapping("/api/getShList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqSh> getShList()
+    {
+        List<ZhsqSh> List = zhsqShService.getShList();
+        return List;
+    }
+    /**
+     * 设备列表（井盖）
+     */
+    @GetMapping("/api/getYgList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqYg> getYgList()
+    {
+        List<ZhsqYg> List = zhsqYgService.getYgList();
+        return List;
+    }
+    /**
+     * 设备列表（井盖）
+     */
+    @GetMapping("/api/getMjList")
+    @ClearPage
+    @ResponseBody
+    public List<ZhsqMj> getMjList()
+    {
+        List<ZhsqMj> List = zhsqMjService.getMjList();
+        return List;
     }
 }

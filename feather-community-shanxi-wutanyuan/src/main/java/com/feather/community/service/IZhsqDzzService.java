@@ -58,4 +58,6 @@ public interface IZhsqDzzService {
      * @return 结果
      */
     public int deleteZhsqDzzById(String dzzid);
+
+    public Integer getDzzSun();
 }

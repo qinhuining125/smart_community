@@ -65,4 +65,6 @@ public interface IZhsqShService
      * @return 结果
      */
      int deleteZhsqShById(String shid);
+
+    List<ZhsqSh> getShList();
 }

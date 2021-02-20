@@ -2,6 +2,7 @@ package com.feather.community.mapper;
 
 
 import com.feather.community.domain.ZhsqDy;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -63,4 +64,13 @@ public interface ZhsqDyMapper {
      * @return 结果
      */
     public int deleteZhsqDyByIds(String[] dyids);
+
+    /**
+     * 获取党员总数
+     *
+     * @return 结果
+     */
+
+    @Select(" select count(*) from zhsq_dy")
+    public Integer getDySun();
 }

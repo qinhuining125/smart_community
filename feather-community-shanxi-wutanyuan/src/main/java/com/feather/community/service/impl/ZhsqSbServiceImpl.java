@@ -90,4 +90,9 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
     {
         return zhsqSbMapper.deleteZhsqSbById(deviceCode);
     }
+
+    @Override
+    public List<ZhsqSb> getSbList() {
+        return zhsqSbMapper.getSbList();
+    }
 }

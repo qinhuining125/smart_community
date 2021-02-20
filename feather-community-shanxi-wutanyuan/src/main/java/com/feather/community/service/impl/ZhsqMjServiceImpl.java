@@ -85,4 +85,9 @@ public class ZhsqMjServiceImpl implements IZhsqMjService {
     public int deleteZhsqMjById(String mjid) {
         return zhsqMjMapper.deleteZhsqMjById(mjid);
     }
+
+    @Override
+    public List<ZhsqMj> getMjList() {
+        return zhsqMjMapper.getMjList();
+    }
 }

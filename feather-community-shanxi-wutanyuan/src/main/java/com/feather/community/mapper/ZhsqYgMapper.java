@@ -2,6 +2,7 @@ package com.feather.community.mapper;
 
 
 import com.feather.community.domain.ZhsqYg;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -67,4 +68,6 @@ public interface ZhsqYgMapper
      * @return 结果
      */
     public int deleteZhsqYgByIds(String[] ygids);
+    @Select(" select * from zhsq_yg")
+    List<ZhsqYg> getYgList();
 }

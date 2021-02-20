@@ -96,4 +96,9 @@ public class ZhsqYgServiceImpl implements IZhsqYgService
     {
         return zhsqYgMapper.deleteZhsqYgById(ygid);
     }
+
+    @Override
+    public List<ZhsqYg> getYgList() {
+        return zhsqYgMapper.getYgList();
+    }
 }

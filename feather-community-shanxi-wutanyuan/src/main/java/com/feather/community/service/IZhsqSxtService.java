@@ -66,4 +66,6 @@ public interface IZhsqSxtService {
      * @return
      */
     AjaxResult getSxtTj(Map<String, Object> params);
+
+    List<ZhsqSxt> getSxtList();
 }

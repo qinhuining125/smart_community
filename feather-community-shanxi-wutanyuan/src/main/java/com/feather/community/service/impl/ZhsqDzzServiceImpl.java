@@ -85,4 +85,9 @@ public class ZhsqDzzServiceImpl implements IZhsqDzzService {
     public int deleteZhsqDzzById(String dzzid) {
         return zhsqDzzMapper.deleteZhsqDzzById(dzzid);
     }
+
+    @Override
+    public Integer getDzzSun() {
+        return zhsqDzzMapper.getDzzSun();
+    }
 }

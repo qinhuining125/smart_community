@@ -58,4 +58,6 @@ public interface IZhsqMjService {
      * @return 结果
      */
     public int deleteZhsqMjById(String mjid);
+
+    List<ZhsqMj> getMjList();
 }

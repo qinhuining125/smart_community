@@ -104,4 +104,9 @@ public class ZhsqShServiceImpl implements IZhsqShService {
     public int deleteZhsqShById(String shid) {
         return zhsqShMapper.deleteZhsqShById(shid);
     }
+
+    @Override
+    public List<ZhsqSh> getShList() {
+        return zhsqShMapper.getShList();
+    }
 }

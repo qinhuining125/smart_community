@@ -2,6 +2,7 @@ package com.feather.community.mapper;
 
 
 import com.feather.community.domain.ZhsqDzz;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -63,4 +64,6 @@ public interface ZhsqDzzMapper {
      * @return 结果
      */
     public int deleteZhsqDzzByIds(String[] dzzids);
+    @Select(" select count(*) from zhsq_dzz")
+    public Integer getDzzSun();
 }
