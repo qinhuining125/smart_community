@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feather.community.mapper.ZhsqClJcMapper">
+    
+    <resultMap type="ZhsqClJc" id="ZhsqClJcResult">
+        <result property="clid"    column="clid"    />
+        <result property="clhm"    column="cphm"    />
+        <result property="cx"      column="cx"    />
+        <result property="czxm"    column="czxm"    />
+        <result property="lxdh"    column="lxdh"    />
+        <result property="cllx"    column="cllx"    />
+        <result property="jczt"    column="jczt"    />
+    </resultMap>
+
+    <sql id="selectZhsqClJcVo">
+        select clid, cphm, cx, czxm, lxdh, cllx，jczt from zhsq_cljc
+    </sql>
+
+    <select id="selectZhsqClJcList" parameterType="ZhsqClJc" resultMap="ZhsqClJcResult">
+        <include refid="selectZhsqClJcVo"/>
+        <where>  
+            <if test="clhm != null  and clhm != ''">
+                <bind name="_clhm" value="'%'+ clhm +'%'"/>
+                and cphm like  #{_clhm}
+            </if>
+            <if test="cx != null  and cx != ''"> and cx = #{cx}</if>
+            <if test="cllx != null  and cllx != ''"> and cllx = #{cllx}</if>
+        </where>
+    </select>
+    
+</mapper>
