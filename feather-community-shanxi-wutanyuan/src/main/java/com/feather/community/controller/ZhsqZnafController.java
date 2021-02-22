@@ -210,6 +210,8 @@ public class ZhsqZnafController extends BaseController {
         color.add("#f38949");
         color.add("#7aedfb");
         color.add("#4bd896");
+        color.add("#3aedfb");
+        color.add("#5bd896");
         List<Map<String, Object>> resultList = new ArrayList<>();
         double total = 0;
         for (int i = 0; i < list.size(); i++) {

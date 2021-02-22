@@ -63,7 +63,8 @@ public class ScreenIndexController extends BaseController {
     private IZhsqYgService zhsqYgService;
     @Autowired
     private IZhsqMjService zhsqMjService;
-
+    @Autowired
+    public IZhsqZnafService iZhsqZnafService;
     @GetMapping()
     public String index() {
         return "redirect:/bus/community/index.html";
@@ -542,5 +543,45 @@ public class ScreenIndexController extends BaseController {
         resultMap.put("data", resultList);
         return AjaxResult.success(resultMap);
     }
+    /**
+     * 设备列表（井盖）
+     */
+    @GetMapping("/api/getBjtj")
+    @ClearPage
+    @ResponseBody
+    public AjaxResult getBjtj() {
+        List<Map<String, Object>> list = iZhsqZnafService.getBjtj2();
+        List<String> color = new ArrayList();
+        color.add("#43e8bf");
+        color.add("#fde57c");
+        color.add("#f38949");
+        color.add("#7aedfb");
+        color.add("#4bd896");
+        color.add("#3aedfb");
+        color.add("#5bd896");
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        double total = 0;
+        for (int i = 0; i < list.size(); i++) {
+            Map map1 = list.get(i);
+            int num = Integer.parseInt(String.valueOf(map1.get("NUM")));
+            total += num;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> map2 = list.get(i);
+            int num = Integer.parseInt(String.valueOf(map2.get("NUM")));
+            double zb = (num / total) * 100;
+            int bfzb = new Double(zb).intValue();
+//            String bfzb = String.valueOf(zb2);
+            Map<String, Object> map3 = new HashMap<>();
+            map3.put("name", map2.get("TYPE"));
+            map3.put("value", map2.get("NUM"));
+            map3.put("percentage", bfzb);
+            map3.put("color", color.get(i));
+            resultList.add(map3);
+            System.out.println(resultList.toString());
+        }
+        return AjaxResult.success(resultList);
+    }
+
 
 }

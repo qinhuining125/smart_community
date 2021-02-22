@@ -170,4 +170,9 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
         return zhsqZnafMapper.getXwgg(sqid,xqid);
     }
 
+    @Override
+    public List<Map<String, Object>> getBjtj2() {
+        return zhsqZnafMapper.getBjtj2();
+    }
+
 }

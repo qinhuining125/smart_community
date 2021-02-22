@@ -85,5 +85,6 @@ public interface IZhsqZnafService {
     //新闻公告
     public List<Map<String, Object>>  getXwgg(String sqid, String xqid);
 
+    public List<Map<String, Object>> getBjtj2();
 
 }

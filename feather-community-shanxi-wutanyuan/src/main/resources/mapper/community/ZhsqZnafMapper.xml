@@ -123,15 +123,14 @@
     <select id="getBjtj" resultType="map">
         SELECT SJLX as type,count(*) as num from ZHSQ_YC n
         <where>
-            <choose>
-                <when test="xqid!=null and xqid!=''">
-                    n.XQID=#{xqid}
-                </when>
-                <otherwise>
-                    n.sqid=#{sqid}
-                </otherwise>
-            </choose>
+            <if test="xqid != null  and xqid != ''"> and   n.XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''"> and n.sqid = #{sqid}</if>
         </where>
+        group by SJLX
+    </select>
+    <!--报警统计-->
+    <select id="getBjtj2" resultType="map">
+        SELECT SJLX as type,count(*) as num from ZHSQ_YC n
         group by SJLX
     </select>
 
@@ -139,10 +138,12 @@
     <select id="getBjcz" resultType="map">
         SELECT CZZT as type,count(*) as num from ZHSQ_YC n
         <where>
-            <choose>
-                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>
-                <otherwise>n.sqid=#{sqid}</otherwise>
-            </choose>
+            <if test="xqid != null  and xqid != ''"> and   n.XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''"> and n.sqid = #{sqid}</if>
+<!--            <choose>-->
+<!--                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>-->
+<!--                <otherwise>n.sqid=#{sqid}</otherwise>-->
+<!--            </choose>-->
         </where>
         GROUP BY CZZT
     </select>
@@ -151,12 +152,15 @@
     <select id="getYcnr" resultType="map">
         SELECT YCID,YCSJ, YCNR ,YCJB, CZZT ,YCLY from ZHSQ_YC n
         <where>
-            <choose>
-                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>
-                <otherwise>n.sqid=#{sqid}</otherwise>
-            </choose>
+            n.czzt='未处置'
+            <if test="xqid != null  and xqid != ''"> and n.XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''"> and n.sqid = #{sqid}</if>
+<!--            <choose>-->
+<!--                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>-->
+<!--                <otherwise>n.sqid=#{sqid}</otherwise>-->
+<!--            </choose>-->
         </where>
-        and n.czzt='未处置' order by CZSJ
+         order by CZSJ
     </select>
 
     <!--视频列表-->

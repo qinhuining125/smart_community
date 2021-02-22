@@ -86,6 +86,6 @@ public interface ZhsqZnafMapper {
     public List<Map<String, Object>> getXwgg(@Param("sqid") String sqid, @Param("xqid") String xqid);
 
 
-
-
+    //报警统计
+    public List<Map<String, Object>> getBjtj2();
 }
