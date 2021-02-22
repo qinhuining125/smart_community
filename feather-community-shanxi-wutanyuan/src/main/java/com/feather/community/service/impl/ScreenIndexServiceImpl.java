@@ -104,9 +104,13 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
 
     @Override
     public AjaxResult sqglSbTj() {
-        int sbzs = 0;
-        int sbyc = 0;
-        int sbzx = 0;
+        int sxtzs=0;
+        int sbzs=0;
+        int zjzs=0;
+        int dgzs=0;
+        int jgzs=0;
+        int shzs=0;
+        int ygzs=0;
         Map<String, String> result = new HashMap<>(16);
         try {
             List<Map<String, String>> sbtj = screenIndexMapper.sqglSbTj();
@@ -120,20 +124,35 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
                     String mapKey = entry.getKey();
                     String mapValue = entry.getValue();
                     int mapValueInt = Integer.parseInt(mapValue);
-                    // 离线设备
-                    if (mapKey.endsWith("lx")) {
-                        sbyc += mapValueInt;
+                    if(mapKey.equals("sxtzx")||mapKey.equals("sxtlx")){
+                        sxtzs+=mapValueInt;
                     }
-                    // 在线设备
-                    if (mapKey.endsWith("zx")) {
-                        sbzx += mapValueInt;
+                    if(mapKey.equals("sbzx")||mapKey.equals("sblx")){
+                        sbzs+=mapValueInt;
                     }
-                    sbzs += mapValueInt;
-
+                    if(mapKey.equals("zjzx")||mapKey.equals("zjlx")){
+                        zjzs+=mapValueInt;
+                    }
+                    if(mapKey.equals("dgzx")||mapKey.equals("dglx")){
+                        dgzs+=mapValueInt;
+                    }
+                    if(mapKey.equals("jgzx")||mapKey.equals("jglx")){
+                        jgzs+=mapValueInt;
+                    }
+                    if(mapKey.equals("shzx")||mapKey.equals("shlx")){
+                        shzs+=mapValueInt;
+                    }
+                    if(mapKey.equals("ygzx")||mapKey.equals("yglx")){
+                        ygzs+=mapValueInt;
+                    }
                 }
+                result.put("sxtzs", String.valueOf(sxtzs));
                 result.put("sbzs", String.valueOf(sbzs));
-                result.put("sbyc", String.valueOf(sbyc));
-                result.put("sbzx", String.valueOf(sbzx));
+                result.put("zjzs", String.valueOf(zjzs));
+                result.put("dgzs", String.valueOf(dgzs));
+                result.put("jgzs", String.valueOf(jgzs));
+                result.put("shzs", String.valueOf(jgzs));
+                result.put("ygzs", String.valueOf(jgzs));
             }
             return AjaxResult.success(result);
         } catch (Exception e) {
