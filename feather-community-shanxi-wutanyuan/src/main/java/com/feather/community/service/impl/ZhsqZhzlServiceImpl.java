@@ -1,5 +1,7 @@
 package com.feather.community.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +29,50 @@ public class ZhsqZhzlServiceImpl implements IZhsqZhzlService {
      * @return
      */
     @Override
-    public Map<String, Object> selectZdryCount(Map<String, Object> maps) {
-        return zhsqZhzlMapper.selectZdryCount(maps);
+    public List<Map<String, Object>> selectZdryCount(Map<String, Object> maps) {
+
+        Map<String, Object> map=zhsqZhzlMapper.selectZdryCount(maps);
+        List< Map<String, Object> > ls=new ArrayList<>();
+        for (String key : map.keySet()) {
+            if(key.equals("XMSF")){
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","刑满释放");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }else if(key.equals("CJLR")){
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","残疾人员");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }else if(key.equals("MUN")){
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","总人数");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }else if(key.equals("DBRY")){
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","低保人员");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }else if(key.equals("DJLR")){
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","独居老人");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }else if(key.equals("TWJR")){
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","退伍军人");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }else{
+                Map<String, Object> map1=new HashMap<>();
+                map1.put("name","空巢老人");
+                map1.put("value",map.get(key));
+                ls.add(map1);
+            }
+
+        }
+        return ls;
     }
 
     /**

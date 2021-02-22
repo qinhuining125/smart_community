@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--综合治理重点人员统计分布情况-->
     <select id="getZdryFb" parameterType="map" resultType="map">
+        select LDMC as "name",MUN as "value" from (
         SELECT
         LDMC,
         count(LDID) as MUN
@@ -44,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="sfdb != null  and sfdb != ''"> and jm.SFDB = #{sfdb}</if>
         <if test="sfcj != null  and sfcj != ''"> and jm.SFCJ = #{sfcj}</if>
         )  a
-         GROUP BY LDMC ORDER BY MUN DESC
+         GROUP BY LDMC ORDER BY MUN DESC ) m where rownum <![CDATA[ <= ]]> 5
     </select>
 
     <!--综合治理重点人员年龄结构统计-->
@@ -75,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--综合治理重点人员男女比例统计-->
     <select id="getZdNnBl" parameterType="map" resultType="map">
-        SELECT XB ,count(1) as MUN FROM ZHSQ_JM
+        SELECT XB as "name",count(1) as "value" FROM ZHSQ_JM
         where (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
 
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
@@ -91,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--综合治理重点人员民族比例统计-->
     <select id="getZdMzBl" parameterType="map" resultType="map">
-        SELECT MZ,count(1) as MUN FROM ZHSQ_JM
+        SELECT MZ as "name",count(1) as "value" FROM ZHSQ_JM
         where (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>

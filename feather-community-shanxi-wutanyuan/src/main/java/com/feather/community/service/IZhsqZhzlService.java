@@ -10,7 +10,7 @@ import java.util.Map;
  * @date 2020-05-14
  */
 public interface IZhsqZhzlService {
-    public Map<String, Object> selectZdryCount(Map<String, Object> maps);
+    public List<Map<String, Object>> selectZdryCount(Map<String, Object> maps);
 
     /**
      * 统计重点人员分布情况
