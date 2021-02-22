@@ -111,7 +111,15 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
         int jgzs=0;
         int shzs=0;
         int ygzs=0;
+        int sxtlx=0;
+        int sblx=0;
+        int shlx=0;
+        int zjlx=0;
+        int jglx=0;
+        int dglx=0;
+        int yglx=0;
         Map<String, String> result = new HashMap<>(16);
+        Map<String, String> result2 = new HashMap<>(16);
         try {
             List<Map<String, String>> sbtj = screenIndexMapper.sqglSbTj();
             if (sbtj != null && sbtj.size() > 0) {
@@ -126,35 +134,100 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
                     int mapValueInt = Integer.parseInt(mapValue);
                     if(mapKey.equals("sxtzx")||mapKey.equals("sxtlx")){
                         sxtzs+=mapValueInt;
+                        if(mapKey.equals("sxtlx")){
+                            sxtlx=mapValueInt;
+                        }
                     }
                     if(mapKey.equals("sbzx")||mapKey.equals("sblx")){
                         sbzs+=mapValueInt;
+                        if(mapKey.equals("sblx")){
+                            sblx=mapValueInt;
+                        }
                     }
                     if(mapKey.equals("zjzx")||mapKey.equals("zjlx")){
                         zjzs+=mapValueInt;
+                        if(mapKey.equals("zjlx")){
+                            zjlx=mapValueInt;
+                        }
                     }
                     if(mapKey.equals("dgzx")||mapKey.equals("dglx")){
                         dgzs+=mapValueInt;
+                        if(mapKey.equals("dglx")){
+                            dglx=mapValueInt;
+                        }
                     }
                     if(mapKey.equals("jgzx")||mapKey.equals("jglx")){
                         jgzs+=mapValueInt;
+                        if(mapKey.equals("jglx")){
+                            jglx=mapValueInt;
+                        }
                     }
                     if(mapKey.equals("shzx")||mapKey.equals("shlx")){
                         shzs+=mapValueInt;
+                        if(mapKey.equals("shlx")){
+                            shlx=mapValueInt;
+                        }
                     }
                     if(mapKey.equals("ygzx")||mapKey.equals("yglx")){
                         ygzs+=mapValueInt;
+                        if(mapKey.equals("yglx")){
+                            yglx=mapValueInt;
+                        }
                     }
                 }
-                result.put("sxtzs", String.valueOf(sxtzs));
-                result.put("sbzs", String.valueOf(sbzs));
-                result.put("zjzs", String.valueOf(zjzs));
-                result.put("dgzs", String.valueOf(dgzs));
-                result.put("jgzs", String.valueOf(jgzs));
-                result.put("shzs", String.valueOf(jgzs));
-                result.put("ygzs", String.valueOf(jgzs));
+                List<Map> list=new ArrayList<>();
+                //摄像头
+                Map mapsxt=new HashMap();
+                mapsxt.put("id","01");
+                mapsxt.put("name","摄像头");
+                mapsxt.put("abNormal",sxtlx);
+                mapsxt.put("allNumber",sxtzs);
+                list.add(mapsxt);
+                //水表
+                Map mapsb=new HashMap();
+                mapsb.put("id","02");
+                mapsb.put("name","水表");
+                mapsb.put("abNormal",sblx);
+                mapsb.put("allNumber",sbzs);
+                list.add(mapsb);
+                //闸机
+                Map mapzj=new HashMap();
+                mapzj.put("id","03");
+                mapzj.put("name","闸机");
+                mapzj.put("abNormal",zjlx);
+                mapzj.put("allNumber",zjzs);
+                list.add(mapzj);
+                //导杆
+                Map mapdg=new HashMap();
+                mapdg.put("id","04");
+                mapdg.put("name","道杆");
+                mapdg.put("abNormal",dglx);
+                mapdg.put("allNumber",dgzs);
+                list.add(mapdg);
+                //井盖
+                Map mapjg=new HashMap();
+                mapjg.put("id","05");
+                mapjg.put("name","井盖");
+                mapjg.put("abNormal",jglx);
+                mapjg.put("allNumber",jgzs);
+                list.add(mapjg);
+                //手环
+                Map mapsh=new HashMap();
+                mapsh.put("id","06");
+                mapsh.put("name","手环");
+                mapsh.put("abNormal",shlx);
+                mapsh.put("allNumber",shzs);
+                list.add(mapsh);
+                //烟感
+                Map mapyg=new HashMap();
+                mapyg.put("id","07");
+                mapyg.put("name","烟感");
+                mapyg.put("abNormal",yglx);
+                mapyg.put("allNumber",ygzs);
+                list.add(mapyg);
+                result2.put("equipmentList",list.toString());
             }
-            return AjaxResult.success(result);
+            return AjaxResult.success(result2);
         } catch (Exception e) {
             e.printStackTrace();
             String errInfo = ExceptionUtil.getExceptionMessage(e);

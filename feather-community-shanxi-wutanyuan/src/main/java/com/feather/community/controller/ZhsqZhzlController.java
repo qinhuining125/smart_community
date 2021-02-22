@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.feather.common.core.page.TableDataInfo;
+import com.feather.community.domain.ZhsqJm;
+import com.feather.community.util.MyTableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -137,7 +140,7 @@ public class ZhsqZhzlController extends BaseController {
      */
     @GetMapping("/api/getZdRyList")
     @ResponseBody
-    public AjaxResult getZdRyList(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
+    public MyTableDataInfo getZdRyList(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
             @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
             @Param("sfdb") String sfdb, @Param("sfcj") String sfcj, @Param("zdry") String zdry) {
         Map<String, Object> maps = new HashMap<>();
@@ -150,7 +153,13 @@ public class ZhsqZhzlController extends BaseController {
         maps.put("sfdb", sfdb);
         maps.put("sfcj", sfcj);
         maps.put("zdry", zdry);
-        return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
+
+        startPage();
+        List<Map<String, Object>> list = zhsqZhzlService.getZdRyList(maps);
+        TableDataInfo tableDataInfo = getDataTable(list);
+        MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
+        return myTableDataInfo;
+       // return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
     }
 
     /**

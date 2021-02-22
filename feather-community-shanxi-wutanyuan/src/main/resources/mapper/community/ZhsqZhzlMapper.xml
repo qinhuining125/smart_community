@@ -107,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--重点人员列表-->
     <select id="getZdRyList" parameterType="map" resultType="map">
-        SELECT * FROM ZHSQ_JM
+        SELECT JMID as "jmid",XM as "xm", XB as "xb",DH as "dh",NL as "nl",JG as "jg",HJXZ as "hjxz",MZ as "mz",ZZMM　as "zzmm",XL as "xl",SFZH as "sfzh",SFFZ as "sffz",FWID as "fwid",LDID as "ldid",ZZ as "zz",SFDJ as "sfdj",SFKC as "sfkc",SFXMSF as "sfxmsf",SFTYJR as "sftyjr",SFDB as "sfdb",SFCJ as "sfcj",SFCZ as "sfcz" FROM ZHSQ_JM
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
