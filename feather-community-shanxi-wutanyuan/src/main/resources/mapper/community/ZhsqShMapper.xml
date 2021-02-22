@@ -37,6 +37,7 @@
     <select id="selectZhsqShList" parameterType="ZhsqSh" resultMap="ZhsqShResult">
         <include refid="selectZhsqShVo"/>
         <where>
+            <if test="jmid != null  and jmid != ''"> and jmid=#{jmid}</if>
         </where>
     </select>
 

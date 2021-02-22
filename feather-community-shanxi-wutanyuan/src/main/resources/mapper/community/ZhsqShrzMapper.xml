@@ -38,6 +38,7 @@
         <include refid="selectZhsqShrzVo"/>
         <where>
         </where>
+        order by create_time desc
     </select>
 
     <select id="selectZhsqShrzById" parameterType="String" resultMap="ZhsqShrzResult">

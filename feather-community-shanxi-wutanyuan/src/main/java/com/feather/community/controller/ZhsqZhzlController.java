@@ -7,6 +7,10 @@ import java.util.Map;
 
 import com.feather.common.core.page.TableDataInfo;
 import com.feather.community.domain.ZhsqJm;
+import com.feather.community.domain.ZhsqSh;
+import com.feather.community.domain.ZhsqShrz;
+import com.feather.community.service.IZhsqShService;
+import com.feather.community.service.IZhsqShrzService;
 import com.feather.community.util.MyTableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +38,11 @@ public class ZhsqZhzlController extends BaseController {
     private IZhsqZhzlService zhsqZhzlService;
     @Autowired
     private IZhsqZcService zhsqZcService;
+    @Autowired
+    private IZhsqShrzService zhsqShrzService;
+    @Autowired
+    private IZhsqShService zhsqShService;
+
 
     @GetMapping("/api/selectZdryCount")
     @ResponseBody
@@ -160,6 +169,32 @@ public class ZhsqZhzlController extends BaseController {
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
         return myTableDataInfo;
        // return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
+    }
+
+    /**
+     * 人员佩带手环信息
+     *
+     * @return
+     */
+    @GetMapping("/api/getRyShInfo")
+    @ResponseBody
+    public AjaxResult getRyShInfo(@Param("jmid") String jmid) {
+        Map<String, Object> maps = new HashMap<>();
+        ZhsqSh zhsqSh=new ZhsqSh();
+        zhsqSh.setJmid(jmid);
+        List<ZhsqSh> ls=zhsqShService.selectZhsqShList(zhsqSh);
+        maps.put("flag",false);
+        if(ls!=null&&ls.size()>0){
+            maps.put("flag",true);
+            String shid=ls.get(0).getShid();
+            ZhsqShrz zhsqShrz=new ZhsqShrz();
+            zhsqShrz.setShid(shid);
+            List<ZhsqShrz> shrzlist=zhsqShrzService.selectZhsqShrzList(zhsqShrz);
+            if(shrzlist!=null && shrzlist.size()>0 ){
+                maps.put("shxx", shrzlist.get(0));
+            }
+        }
+        return AjaxResult.success(maps);
     }
 
     /**
