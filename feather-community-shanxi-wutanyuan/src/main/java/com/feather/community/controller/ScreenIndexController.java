@@ -392,9 +392,12 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/get5DayData")
     @ClearPage
     @ResponseBody
-    public List<String[]> get5DayData() {
+    public AjaxResult get5DayData() {
         List<String[]> list = zhsqSbrzService.get5DayData();
-        return list;
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("data", list);
+        return AjaxResult.success(resultMap);
+//        return list;
 //        return getDataTable(list);
     }
 
@@ -406,6 +409,7 @@ public class ScreenIndexController extends BaseController {
     @ResponseBody
     public Integer getDySun() {
         Integer sum = zhsqDyService.getDySun();
+
         return sum;
     }
 
@@ -437,9 +441,10 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getSxtList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqSxt> getSxtList() {
-        List<ZhsqSxt> List = zhsqSxtService.getSxtList();
-        return List;
+    public AjaxResult getSxtList() {
+        List<ZhsqSxt> list = zhsqSxtService.getSxtList();
+        return AjaxResult.success(list);
+
     }
 
     /**
@@ -448,9 +453,10 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getZjList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqZj> getZjList() {
-        List<ZhsqZj> List = zhsqZjService.getZjList();
-        return List;
+    public AjaxResult getZjList() {
+        List<ZhsqZj> list = zhsqZjService.getZjList();
+        return AjaxResult.success(list);
+//        return List;
     }
 
     /**
@@ -459,9 +465,9 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getJgList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqJg> getJgList() {
-        List<ZhsqJg> List = zhsqJgService.getJgList();
-        return List;
+    public AjaxResult getJgList() {
+        List<ZhsqJg> list = zhsqJgService.getJgList();
+        return AjaxResult.success(list);
     }
 
     /**
@@ -470,9 +476,9 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getShList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqSh> getShList() {
-        List<ZhsqSh> List = zhsqShService.getShList();
-        return List;
+    public AjaxResult getShList() {
+        List<ZhsqSh> list = zhsqShService.getShList();
+        return AjaxResult.success(list);
     }
 
     /**
@@ -481,9 +487,9 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getYgList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqYg> getYgList() {
-        List<ZhsqYg> List = zhsqYgService.getYgList();
-        return List;
+    public AjaxResult getYgList() {
+        List<ZhsqYg> list = zhsqYgService.getYgList();
+        return AjaxResult.success(list);
     }
 
     /**
@@ -492,9 +498,9 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getMjList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqMj> getMjList() {
-        List<ZhsqMj> List = zhsqMjService.getMjList();
-        return List;
+    public AjaxResult getMjList() {
+        List<ZhsqMj> list = zhsqMjService.getMjList();
+        return AjaxResult.success(list);
     }
 
     //智能安防

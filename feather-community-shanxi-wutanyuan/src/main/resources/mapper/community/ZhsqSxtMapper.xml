@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZhsqSxtVo"/>
         where sxtid = #{sxtid}
     </select>
-        
+
     <insert id="insertZhsqSxt" parameterType="ZhsqSxt">
         insert into zhsq_sxt
         <trim prefix="(" suffix=")" suffixOverrides=",">
