@@ -101,4 +101,14 @@ public class ZhsqYgServiceImpl implements IZhsqYgService
     public List<ZhsqYg> getYgList() {
         return zhsqYgMapper.getYgList();
     }
+
+    @Override
+    public int getYgtcount() {
+        return zhsqYgMapper.getYgtcount();
+    }
+
+    @Override
+    public int getDgtcount() {
+        return zhsqYgMapper.getDgtcount();
+    }
 }

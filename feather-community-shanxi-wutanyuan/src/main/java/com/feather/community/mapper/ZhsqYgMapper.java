@@ -70,4 +70,8 @@ public interface ZhsqYgMapper
     public int deleteZhsqYgByIds(String[] ygids);
     @Select(" select * from zhsq_yg")
     List<ZhsqYg> getYgList();
+    @Select(" select count(*) from zhsq_yg")
+    int getYgtcount();
+    @Select(" select count(*) from zhsq_dg")
+    int getDgtcount();
 }

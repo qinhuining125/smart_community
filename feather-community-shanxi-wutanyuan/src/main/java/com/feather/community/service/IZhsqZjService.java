@@ -60,4 +60,6 @@ public interface IZhsqZjService {
     public int deleteZhsqZjById(String zjid);
 
     public List<ZhsqZj> getZjList();
+
+    int getZjtcount();
 }

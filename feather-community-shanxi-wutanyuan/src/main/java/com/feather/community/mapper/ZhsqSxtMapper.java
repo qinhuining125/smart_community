@@ -74,4 +74,6 @@ public interface ZhsqSxtMapper {
     List<Map<String, String>> getSxtTj(Map<String, Object> params);
     @Select(" select * from zhsq_sxt")
     List<ZhsqSxt> getSxtList();
+    @Select(" select count(*) from zhsq_sxt")
+    int getSxtcount();
 }

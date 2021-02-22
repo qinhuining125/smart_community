@@ -4,6 +4,7 @@ import com.feather.common.core.domain.AjaxResult;
 import com.feather.common.core.text.Convert;
 
 import com.feather.common.utils.ExceptionUtil;
+import com.feather.community.domain.ZhsqMj;
 import com.feather.community.domain.ZhsqSxt;
 import com.feather.community.mapper.ZhsqSxtMapper;
 import com.feather.community.service.IZhsqSxtService;
@@ -114,5 +115,10 @@ public class ZhsqSxtServiceImpl implements IZhsqSxtService {
     @Override
     public List<ZhsqSxt> getSxtList() {
         return zhsqSxtMapper.getSxtList();
+    }
+
+    @Override
+    public int getSxtcount() {
+        return zhsqSxtMapper.getSxtcount();
     }
 }

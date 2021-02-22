@@ -1,5 +1,6 @@
 package com.feather.community.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,7 @@ public class ScreenIndexController extends BaseController {
     private IZhsqYgService zhsqYgService;
     @Autowired
     private IZhsqMjService zhsqMjService;
+
     @GetMapping()
     public String index() {
         return "redirect:/bus/community/index.html";
@@ -362,9 +364,7 @@ public class ScreenIndexController extends BaseController {
      * 首页查询汇总，type=3表示为对居民信息的查询，数据库现在数据一共为：652条
      * 1.3号楼假居民数据为66条。
      * 2.'JM000646','JM000647'有两条数据为流动人员，测试数据，假造的3号楼的数据。
-     *
-     *
-     * */
+     */
     @RequestMapping("/api/searZhsqListByType")
     @ClearPage
     @ResponseBody
@@ -384,6 +384,7 @@ public class ScreenIndexController extends BaseController {
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
         return myTableDataInfo;
     }
+
     /**
      * 水表日志接口
      */
@@ -391,109 +392,149 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/get5DayData")
     @ClearPage
     @ResponseBody
-    public List<String[]> get5DayData()
-    {
+    public List<String[]> get5DayData() {
         List<String[]> list = zhsqSbrzService.get5DayData();
         return list;
 //        return getDataTable(list);
     }
+
     /**
      * 党员总数
      */
     @GetMapping("/api/getDySun")
     @ClearPage
     @ResponseBody
-    public Integer getDySun()
-    {
+    public Integer getDySun() {
         Integer sum = zhsqDyService.getDySun();
         return sum;
     }
+
     /**
      * 党组织总数
      */
     @GetMapping("/api/getDzzSun")
     @ClearPage
     @ResponseBody
-    public Integer getDzzSun()
-    {
+    public Integer getDzzSun() {
         Integer sum = zhsqDzzService.getDzzSun();
         return sum;
     }
+
     /**
      * 设备列表（水表）
      */
     @GetMapping("/api/getSbList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqSb> getSbList()
-    {
+    public List<ZhsqSb> getSbList() {
         List<ZhsqSb> List = zhsqSbService.getSbList();
         return List;
     }
+
     /**
      * 设备列表（摄像头）
      */
     @GetMapping("/api/getSxtList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqSxt> getSxtList()
-    {
+    public List<ZhsqSxt> getSxtList() {
         List<ZhsqSxt> List = zhsqSxtService.getSxtList();
         return List;
     }
+
     /**
      * 设备列表（闸机）
      */
     @GetMapping("/api/getZjList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqZj> getZjList()
-    {
+    public List<ZhsqZj> getZjList() {
         List<ZhsqZj> List = zhsqZjService.getZjList();
         return List;
     }
+
     /**
      * 设备列表（井盖）
      */
     @GetMapping("/api/getJgList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqJg> getJgList()
-    {
+    public List<ZhsqJg> getJgList() {
         List<ZhsqJg> List = zhsqJgService.getJgList();
         return List;
     }
+
     /**
      * 设备列表（井盖）
      */
     @GetMapping("/api/getShList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqSh> getShList()
-    {
+    public List<ZhsqSh> getShList() {
         List<ZhsqSh> List = zhsqShService.getShList();
         return List;
     }
+
     /**
      * 设备列表（井盖）
      */
     @GetMapping("/api/getYgList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqYg> getYgList()
-    {
+    public List<ZhsqYg> getYgList() {
         List<ZhsqYg> List = zhsqYgService.getYgList();
         return List;
     }
+
     /**
      * 设备列表（井盖）
      */
     @GetMapping("/api/getMjList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqMj> getMjList()
-    {
+    public List<ZhsqMj> getMjList() {
         List<ZhsqMj> List = zhsqMjService.getMjList();
         return List;
     }
+
+    //智能安防
+    //设备统计
+
+    /**
+     * 设备列表（井盖）
+     */
+    @GetMapping("/api/getSbtjcount")
+    @ResponseBody
+    public AjaxResult getSbtjcount() {
+        int sxtCount = zhsqSxtService.getSxtcount();
+        int zjCount = zhsqZjService.getZjtcount();
+        int ygCount = zhsqYgService.getYgtcount();
+        int dgCount = zhsqYgService.getDgtcount();
+        int sbtjCount = sxtCount + zjCount + ygCount + dgCount;
+
+        List<Map<String, Object>> resultList = new ArrayList<>();
+
+        Map<String, Object> sxtMap = new HashMap<>();
+        sxtMap.put("TYPE",  "摄像头");
+        sxtMap.put("NUM", sxtCount);
+        resultList.add(sxtMap);
+        Map<String, Object> zjMap = new HashMap<>();
+        zjMap.put("TYPE", "闸机");
+        zjMap.put("NUM", zjCount);
+        resultList.add(zjMap);
+        Map<String, Object> ygMap = new HashMap<>();
+        ygMap.put("TYPE", "烟感");
+        ygMap.put("NUM", ygCount);
+        resultList.add(ygMap);
+        Map<String, Object> dgMap = new HashMap<>();
+        dgMap.put("TYPE", "车辆道杆");
+        dgMap.put("NUM", dgCount);
+        resultList.add(dgMap);
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("TOTAL", sbtjCount);
+        resultMap.put("data", resultList);
+        return AjaxResult.success(resultMap);
+    }
+
 }

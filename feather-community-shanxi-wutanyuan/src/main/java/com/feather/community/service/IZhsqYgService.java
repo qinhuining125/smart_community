@@ -62,4 +62,8 @@ public interface IZhsqYgService
     public int deleteZhsqYgById(String ygid);
 
     List<ZhsqYg> getYgList();
+
+    int getYgtcount();
+
+    int getDgtcount();
 }

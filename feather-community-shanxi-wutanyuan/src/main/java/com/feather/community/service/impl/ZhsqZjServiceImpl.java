@@ -90,4 +90,9 @@ public class ZhsqZjServiceImpl implements IZhsqZjService {
     public List<ZhsqZj> getZjList() {
         return zhsqZjMapper.getZjList();
     }
+
+    @Override
+    public int getZjtcount() {
+        return zhsqZjMapper.getZjtcount();
+    }
 }

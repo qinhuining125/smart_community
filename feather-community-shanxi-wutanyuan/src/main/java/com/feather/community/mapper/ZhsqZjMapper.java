@@ -66,4 +66,6 @@ public interface ZhsqZjMapper {
     public int deleteZhsqZjByIds(String[] zjids);
     @Select(" select * from zhsq_zj")
     public List<ZhsqZj> getZjList();
+    @Select(" select count(*) from zhsq_zj")
+    int getZjtcount();
 }

@@ -1,6 +1,7 @@
 package com.feather.community.service;
 
 import com.feather.common.core.domain.AjaxResult;
+import com.feather.community.domain.ZhsqMj;
 import com.feather.community.domain.ZhsqSxt;
 
 import java.util.List;
@@ -68,4 +69,6 @@ public interface IZhsqSxtService {
     AjaxResult getSxtTj(Map<String, Object> params);
 
     List<ZhsqSxt> getSxtList();
+
+    int getSxtcount();
 }
