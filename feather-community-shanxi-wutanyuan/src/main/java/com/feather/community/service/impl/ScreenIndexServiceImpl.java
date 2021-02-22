@@ -119,7 +119,7 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
         int dglx=0;
         int yglx=0;
         Map<String, String> result = new HashMap<>(16);
-        Map<String, String> result2 = new HashMap<>(16);
+        Map<String, Object> result2 = new HashMap<>(16);
         try {
             List<Map<String, String>> sbtj = screenIndexMapper.sqglSbTj();
             if (sbtj != null && sbtj.size() > 0) {
@@ -225,7 +225,7 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
                 mapyg.put("abNormal",yglx);
                 mapyg.put("allNumber",ygzs);
                 list.add(mapyg);
-                result2.put("equipmentList",list.toString());
+                result2.put("equipmentList",list);
             }
             return AjaxResult.success(result2);
         } catch (Exception e) {
