@@ -12,6 +12,8 @@ import com.feather.community.domain.ZhsqShrz;
 import com.feather.community.service.IZhsqShService;
 import com.feather.community.service.IZhsqShrzService;
 import com.feather.community.util.MyTableDataInfo;
+import com.feather.system.service.ISysDictDataService;
+import com.feather.system.service.ISysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,9 @@ public class ZhsqZhzlController extends BaseController {
     private IZhsqShrzService zhsqShrzService;
     @Autowired
     private IZhsqShService zhsqShService;
+    @Autowired
+    private ISysDictDataService sysDictDataService;
+
 
 
     @GetMapping("/api/selectZdryCount")
@@ -192,6 +197,12 @@ public class ZhsqZhzlController extends BaseController {
             List<ZhsqShrz> shrzlist=zhsqShrzService.selectZhsqShrzList(zhsqShrz);
             if(shrzlist!=null && shrzlist.size()>0 ){
                 maps.put("shxx", shrzlist.get(0));
+                //添加手环报警信息进入
+                String alarmConent=sysDictDataService.selectDictLabel("zhsq_shjg",shrzlist.get(0).getAlarmState());
+                if(alarmConent==null){
+                    alarmConent="";
+                }
+                shrzlist.get(0).setAlarmContent(alarmConent);
             }
         }
         return AjaxResult.success(maps);

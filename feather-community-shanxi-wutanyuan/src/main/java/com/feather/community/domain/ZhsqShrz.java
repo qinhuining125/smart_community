@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.feather.common.annotation.Excel;
 import com.feather.common.core.domain.BaseEntity;
+import org.springframework.data.annotation.Transient;
 
 /**
  * 手环日志对象 zhsq_shrz
@@ -92,5 +93,11 @@ public class ZhsqShrz extends BaseEntity
     @Excel(name = "报警状态")
     @ApiModelProperty("报警状态")
     private String alarmState ;
+
+    /**
+     * 报警内容
+     * */
+     @Transient
+    private String alarmContent;
 
 }
