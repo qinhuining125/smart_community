@@ -121,8 +121,8 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
-    public List<Map<String, Object>> getYgzs(Integer page, Integer size) {
-        return zhsqZnafMapper.getYgzs(page,size);
+    public List<Map<String, Object>> getYgzs(Integer page, Integer size ,String sbmc) {
+        return zhsqZnafMapper.getYgzs(page,size,sbmc);
     }
     @Override
     public List<Map<String, Object>> getYg() {
@@ -134,8 +134,8 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
-    public List<Map<String, Object>> getJgzs(Integer page, Integer size) {
-        return zhsqZnafMapper.getJgzs(page,size);
+    public List<Map<String, Object>> getJgzs(Integer page, Integer size,String sbmc) {
+        return zhsqZnafMapper.getJgzs(page,size,sbmc);
     }
 
     @Override
@@ -149,8 +149,8 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
-    public List<Map<String, Object>> getSbzs(Integer page, Integer size) {
-        return zhsqZnafMapper.getSbzs(page,size);
+    public List<Map<String, Object>> getSbzs(Integer page, Integer size,String sbmc) {
+        return zhsqZnafMapper.getSbzs(page,size,sbmc);
     }
 
     @Override

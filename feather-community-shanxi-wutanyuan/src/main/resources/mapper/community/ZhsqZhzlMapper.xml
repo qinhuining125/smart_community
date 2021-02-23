@@ -178,14 +178,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         count(case when jc.SJLX='卫生事件' then 1 else null end) as wssj,
         count(case when jc.SJLX='能源事件' then 1 else null end) as nysj,
         count(case when jc.SJLX='矛盾纠纷' then 1 else null end) as mdjf,
-        count(case when jc.SJLX='报修事件' then 1 else null end) as bxsj
+        count(case when jc.SJLX='报修事件' then 1 else null end) as bxsj,
+        count(case when jc.SJLX='设备报警事件' then 1 else null end) as bxsj,
+        count(case when jc.SJLX='手环报警事件' then 1 else null end) as bxsj
 
-        FROM
-        (SELECT * FROM [dbo].[ZHSQ_YC]
-        <where>
-            <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
-        </where>) as jc
+        FROM ZHSQ_YC jc
+
     </select>
 
     <!--重点事件发生率-->
@@ -198,42 +196,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				(CASE WHEN t1.zs = 0 THEN 0 ELSE CAST(round((CAST(round(t6.bxsjs,2) as DECIMAL(18,2)) /CAST(round(t1.zs,2) as DECIMAL(18,2)))*100,2) as DECIMAL(18,2)) END) as bxsjL
 				FROM
 				(
-            SELECT ISNULL(COUNT(1), 0) as zs FROM [dbo].[ZHSQ_YC]
+            SELECT ISNULL(COUNT(1), 0) as zs FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
         </where>
         ) as t1
         OUTER apply(
-            SELECT ISNULL(COUNT(1), 0) as zasjs FROM [dbo].[ZHSQ_YC]
+            SELECT ISNULL(COUNT(1), 0) as zasjs FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
         </where> and SJLX = '治安事件'
         ) as t2
 				OUTER apply(
-            SELECT ISNULL(COUNT(1), 0) as wssjs FROM [dbo].[ZHSQ_YC]
+            SELECT ISNULL(COUNT(1), 0) as wssjs FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
         </where> and SJLX = '卫生事件'
         ) as t3
 				OUTER apply(
-            SELECT ISNULL(COUNT(1), 0) as nysjs FROM [dbo].[ZHSQ_YC]
+            SELECT ISNULL(COUNT(1), 0) as nysjs FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
         </where> and SJLX = '能源事件'
         ) as t4
 				OUTER apply(
-            SELECT ISNULL(COUNT(1), 0) as mdjfs FROM [dbo].[ZHSQ_YC]
+            SELECT ISNULL(COUNT(1), 0) as mdjfs FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
         </where> and SJLX = '矛盾纠纷'
         ) as t5
 				OUTER apply(
-            SELECT ISNULL(COUNT(1), 0) as bxsjs FROM [dbo].[ZHSQ_YC]
+            SELECT ISNULL(COUNT(1), 0) as bxsjs FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -243,7 +241,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--重点事件扇形图-->
     <select id="selectZdsjTCount" parameterType="map" resultType="map">
-        SELECT SJLX ,count(1) as MUN FROM [dbo].[ZHSQ_YC]
+        SELECT SJLX ,count(1) as MUN FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -251,9 +249,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         GROUP BY SJLX
     </select>
 
+<!--    <result property="ycly"    column="YCLY"    />-->
+<!--    <result property="ycsj"    column=""    />-->
+<!--    <result property="czzt"    column=""    />-->
+<!--    <result property="czry"    column=""    />-->
+<!--    <result property="czjg"    column=""    />-->
+<!--    <result property="fj"    column=""    />-->
+<!--    <result property="x"    column="X"    />-->
+<!--    <result property="y"    column="Y"    />-->
+<!--    <result property="z"    column="Z"    />-->
+<!--    <result property="xqid"    column="XQID"    />-->
+<!--    <result property="sbid"    column="SBID"    />-->
+<!--    <result property="sqid"    column="SQID"    />-->
+<!--    <result property="sjlx"    column="SJLX"    />-->
+<!--    <result property="czsj"    column="CZSJ"    />-->
+<!--    <result property="noticeRead"    column="NOTICE_READ"    />-->
     <!--重点事件列表-->
+<!--    YCID as ycid,YCJB as ycjb,YCNR as ycnr,YCLY as ycly,YCSJ as ycsj,CZZT as czzt,CZRY as czty,CZJG as czjg,-->
+<!--    FJ as fj,X as x,Y as y,Z as z, XQID as xqid, SBID as sbid, SJLX as sjlx,CZSJ as czsj, NOTICE_READ as noticeRead-->
     <select id="getZdsjList" parameterType="map" resultType="map">
-        SELECT * FROM [dbo].[ZHSQ_YC]
+        SELECT *
+        FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
@@ -263,5 +279,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and (SJLX like #{_sjlx} OR YCNR like #{_sjlx} OR CZZT like #{_sjlx})
             </if>
         </where>
+        order by CZSJ
     </select>
 </mapper>

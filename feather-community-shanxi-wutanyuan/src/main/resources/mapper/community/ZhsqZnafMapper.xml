@@ -250,8 +250,13 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--烟感展示-->
     <select id="getYgzs" resultType="map">
-    select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from (select SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no  FROM ZHSQ_YG) t
-       where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+        select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
+        (select SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no  FROM ZHSQ_YG
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and SBMC = #{sbmc}</if>
+        </where>
+        ) t
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
     <!--烟感展示总记录-->
@@ -266,8 +271,13 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--井盖展示-->
     <select id="getJgzs" resultType="map">
-   select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no  FROM ZHSQ_JG) t
-       where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+        select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
+        (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_JG
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and SBMC = #{sbmc}</if>
+        </where>
+        ) t
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
     <!--井盖展示总记录-->
@@ -283,7 +293,8 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--水表展示-->
     <select id="getSbzs" resultType="map">
-   select *L from (select * FROM ZHSQ_SB  )
+   select  t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
+   (select  SBMC, PPMC, X, Y, Z, WZ,SBZT FROM ZHSQ_SB  ) t
        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 

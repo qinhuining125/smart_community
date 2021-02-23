@@ -60,14 +60,14 @@ public interface IZhsqZnafService {
     public Integer getDgjcCount(String jczt);
 
     //烟感展示
-    public List<Map<String, Object>> getYgzs(Integer page, Integer size);
+    public List<Map<String, Object>> getYgzs(Integer page, Integer size,String sbmc);
     //烟感总记录
     public List<Map<String, Object>> getYg();
     //烟感总记录数
     public Integer getYgzsCount();
 
     //井盖展示
-    public List<Map<String, Object>> getJgzs(Integer page, Integer size);
+    public List<Map<String, Object>> getJgzs(Integer page, Integer size,String sbmc);
     //井盖总记录
     public List<Map<String, Object>>  getJg();
     //井盖总记录数
@@ -76,7 +76,7 @@ public interface IZhsqZnafService {
 
 
     //水表展示
-    public List<Map<String, Object>> getSbzs(Integer page, Integer size);
+    public List<Map<String, Object>> getSbzs(Integer page, Integer size,String sbmc);
     //水表总记录
     public List<Map<String, Object>>  getSb();
     //水表盖总记录数

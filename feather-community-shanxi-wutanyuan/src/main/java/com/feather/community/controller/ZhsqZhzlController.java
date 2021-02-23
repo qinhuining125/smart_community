@@ -1,10 +1,12 @@
 package com.feather.community.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.feather.common.core.page.TableDataInfo;
 import com.feather.community.domain.ZhsqJm;
 import com.feather.community.domain.ZhsqSh;
@@ -321,12 +323,29 @@ public class ZhsqZhzlController extends BaseController {
     @GetMapping("/api/getZdsjList")
     @ResponseBody
     public AjaxResult getZdsjList(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("czzt") String czzt,
-            @Param("sjlx") String sjlx) {
+            @Param("sjlx") String sjlx)throws SQLException {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
         maps.put("czzt", czzt);
         maps.put("sjlx", sjlx);
-        return AjaxResult.success(zhsqZhzlService.getZdsjList(maps));
+        List<Map<String, Object>> ycList = zhsqZhzlService.getZdsjList(maps);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < ycList.size(); i++) {
+            Map<String, Object> map = ycList.get(i);
+            Object ycxw = map.get("YCNR");
+            if (ycxw instanceof ClobProxyImpl) {
+                ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
+            }
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("YCID", String.valueOf(map.get("YCID")));
+            map1.put("YCSJ", String.valueOf(map.get("YCSJ")));
+            map1.put("YCNR", ycxw);
+            map1.put("YCJB", String.valueOf(map.get("YCJB")));
+            map1.put("CZZT", String.valueOf(map.get("CZZT")));
+            map1.put("YCLY", String.valueOf(map.get("YCLY")));
+            list.add(map1);
+        }
+        return AjaxResult.success(list);
     }
 }

@@ -400,12 +400,12 @@ public class ZhsqZnafController extends BaseController {
      */
     @GetMapping("/api/getYgzs")
     @ResponseBody
-    public AjaxResult getYgzs(Integer page, Integer size) {
+    public AjaxResult getYgzs(Integer page, Integer size,String sbmc) {
         Map<String, Object> resultMap = new HashMap<>();
         if (page == null || size == null) {
             resultMap.put("rows", iZhsqZnafService.getYg());
         } else {
-            resultMap.put("rows", iZhsqZnafService.getYgzs(page, size));
+            resultMap.put("rows", iZhsqZnafService.getYgzs(page, size,sbmc));
         }
         resultMap.put("total", iZhsqZnafService.getYgzsCount());
         return AjaxResult.success(resultMap);
@@ -419,12 +419,12 @@ public class ZhsqZnafController extends BaseController {
      */
     @GetMapping("/api/getJgzs")
     @ResponseBody
-    public AjaxResult getJgzs(Integer page, Integer size) {
+    public AjaxResult getJgzs(Integer page, Integer size,String sbmc) {
         Map<String, Object> resultMap = new HashMap<>();
         if (page == null || size == null) {
             resultMap.put("rows", iZhsqZnafService.getJg());
         } else {
-            resultMap.put("rows", iZhsqZnafService.getJgzs(page, size));
+            resultMap.put("rows", iZhsqZnafService.getJgzs(page, size,sbmc));
         }
         resultMap.put("total", iZhsqZnafService.getJgzsCount());
         return AjaxResult.success(resultMap);
@@ -437,12 +437,12 @@ public class ZhsqZnafController extends BaseController {
      */
     @GetMapping("/api/getSbzs")
     @ResponseBody
-    public AjaxResult getSbzs(Integer page, Integer size) {
+    public AjaxResult getSbzs(Integer page, Integer size, String sbmc) {
         Map<String, Object> resultMap = new HashMap<>();
         if (page == null || size == null) {
             resultMap.put("rows", iZhsqZnafService.getSb());
         } else {
-            resultMap.put("rows", iZhsqZnafService.getSbzs(page, size));
+            resultMap.put("rows", iZhsqZnafService.getSbzs(page, size,sbmc));
         }
         resultMap.put("total", iZhsqZnafService.getSbzsCount());
         return AjaxResult.success(resultMap);

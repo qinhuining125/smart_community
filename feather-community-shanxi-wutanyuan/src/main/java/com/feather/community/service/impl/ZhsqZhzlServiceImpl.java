@@ -174,8 +174,8 @@ public class ZhsqZhzlServiceImpl implements IZhsqZhzlService {
     @Override
     public Map<String, Object> selectZdsjCount(Map<String, Object> maps) {
         Map<String, Object> stringObjectMap = zhsqZhzlMapper.selectZdsjCount(maps);
-        Map<String, Object> stringObjectMap1 = zhsqZhzlMapper.selectZdsjFslCount(maps);
-        stringObjectMap.putAll(stringObjectMap1);
+//        Map<String, Object> stringObjectMap1 = zhsqZhzlMapper.selectZdsjFslCount(maps);
+//        stringObjectMap.putAll(stringObjectMap1);
         return stringObjectMap;
     }
 
