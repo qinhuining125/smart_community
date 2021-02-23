@@ -431,11 +431,20 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getSbList")
     @ClearPage
     @ResponseBody
-    public List<ZhsqSb> getSbList() {
-        List<ZhsqSb> List = zhsqSbService.getSbList();
-        return List;
+    public AjaxResult getSbList() {
+        List<ZhsqSb> list = zhsqSbService.getSbList();
+        return AjaxResult.success(list);
     }
-
+    /**
+     * 设备列表（道杆）
+     */
+    @GetMapping("/api/getDgList")
+    @ClearPage
+    @ResponseBody
+    public AjaxResult getDgList() {
+        List<ZhsqDg> list = zhsqSbService.getDgList();
+        return AjaxResult.success(list);
+    }
     /**
      * 设备列表（摄像头）
      */
@@ -472,7 +481,7 @@ public class ScreenIndexController extends BaseController {
     }
 
     /**
-     * 设备列表（井盖）
+     * 设备列表（手环）
      */
     @GetMapping("/api/getShList")
     @ClearPage
@@ -483,7 +492,7 @@ public class ScreenIndexController extends BaseController {
     }
 
     /**
-     * 设备列表（井盖）
+     * 设备列表（烟感）
      */
     @GetMapping("/api/getYgList")
     @ClearPage
@@ -494,7 +503,7 @@ public class ScreenIndexController extends BaseController {
     }
 
     /**
-     * 设备列表（井盖）
+     * 设备列表（门禁）
      */
     @GetMapping("/api/getMjList")
     @ClearPage
@@ -508,7 +517,7 @@ public class ScreenIndexController extends BaseController {
     //设备统计
 
     /**
-     * 设备列表（井盖）
+     * 设备（统计）
      */
     @GetMapping("/api/getSbtjcount")
     @ResponseBody
@@ -544,7 +553,7 @@ public class ScreenIndexController extends BaseController {
         return AjaxResult.success(resultMap);
     }
     /**
-     * 设备列表（井盖）
+     * 报警事件
      */
     @GetMapping("/api/getBjtj")
     @ClearPage

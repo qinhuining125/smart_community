@@ -1,6 +1,8 @@
 package com.feather.community.service.impl;
 
 import java.util.List;
+
+import com.feather.community.domain.ZhsqDg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.feather.community.mapper.ZhsqSbMapper;
@@ -94,5 +96,10 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
     @Override
     public List<ZhsqSb> getSbList() {
         return zhsqSbMapper.getSbList();
+    }
+
+    @Override
+    public List<ZhsqDg> getDgList() {
+        return zhsqSbMapper.getDgList();
     }
 }

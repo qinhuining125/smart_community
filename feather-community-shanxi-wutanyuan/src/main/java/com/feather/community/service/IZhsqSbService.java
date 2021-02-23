@@ -1,5 +1,6 @@
 package com.feather.community.service;
 
+import com.feather.community.domain.ZhsqDg;
 import com.feather.community.domain.ZhsqSb;
 import java.util.List;
 
@@ -60,4 +61,6 @@ public interface IZhsqSbService
     public int deleteZhsqSbById(String deviceCode);
 
     public List<ZhsqSb> getSbList();
+
+    List<ZhsqDg> getDgList();
 }

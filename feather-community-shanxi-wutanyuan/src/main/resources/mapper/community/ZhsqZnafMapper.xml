@@ -283,19 +283,19 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--水表展示-->
     <select id="getSbzs" resultType="map">
-   select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ ,t.SBZT ,t.DRYS, t.DYYS,t.ZYSL from (select a.SBMC ,a.PPMC , a.X, a.Y , a.Z , a.WZ , a.SBZT , b.DRYS ,b.DYYS,b.ZYSL,rownum as no  FROM ZHSQ_SB a LEFT JOIN  ZHSQ_SBJC b ON a.SBID=b.SBID) t
+   select *L from (select * FROM ZHSQ_SB  )
        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
     <!--水表展示总记录-->
     <select id="getSb" resultType="map">
-  select a.SBMC ,a.PPMC , a.X, a.Y , a.Z , a.WZ , a.SBZT , b.DRYS ,b.DYYS,b.ZYSL  FROM ZHSQ_SB a LEFT JOIN  ZHSQ_SBJC b ON a.SBID=b.SBID
+  select *  FROM ZHSQ_SB
 
     </select>
 
     <!--水表展示总数-->
     <select id="getSbzsCount" resultType="Integer">
-    select count(1) from (select a.SBMC ,a.PPMC , a.X, a.Y , a.Z , a.WZ , a.SBZT , b.DRYS,b.DYYS,b.ZYSL ,rownum as no  FROM ZHSQ_SB a LEFT JOIN  ZHSQ_SBJC b ON a.SBID=b.SBID) t
+    select count(1) from (select * FROM ZHSQ_SB  )
     </select>
 
 

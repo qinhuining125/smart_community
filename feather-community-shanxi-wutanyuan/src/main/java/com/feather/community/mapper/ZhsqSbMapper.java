@@ -1,5 +1,6 @@
 package com.feather.community.mapper;
 
+import com.feather.community.domain.ZhsqDg;
 import com.feather.community.domain.ZhsqSb;
 import org.apache.ibatis.annotations.Select;
 
@@ -62,4 +63,6 @@ public interface ZhsqSbMapper
     public int deleteZhsqSbByIds(String[] deviceCodes);
     @Select(" select * from zhsq_sb")
     public List<ZhsqSb> getSbList();
+    @Select(" select * from zhsq_dg")
+    List<ZhsqDg> getDgList();
 }
