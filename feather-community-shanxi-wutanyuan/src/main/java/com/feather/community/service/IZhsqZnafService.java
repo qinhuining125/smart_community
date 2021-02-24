@@ -64,14 +64,14 @@ public interface IZhsqZnafService {
     //烟感总记录
     public List<Map<String, Object>> getYg();
     //烟感总记录数
-    public Integer getYgzsCount();
+    public Integer getYgzsCount(Integer page, Integer size,String sbmc);
 
     //井盖展示
     public List<Map<String, Object>> getJgzs(Integer page, Integer size,String sbmc);
     //井盖总记录
     public List<Map<String, Object>>  getJg();
     //井盖总记录数
-    public Integer getJgzsCount();
+    public Integer getJgzsCount(Integer page, Integer size,String sbmc);
 
 
 
@@ -80,7 +80,7 @@ public interface IZhsqZnafService {
     //水表总记录
     public List<Map<String, Object>>  getSb();
     //水表盖总记录数
-    public Integer getSbzsCount();
+    public Integer getSbzsCount(Integer page, Integer size, String sbmc);
 
     //新闻公告
     public List<Map<String, Object>>  getXwgg(String sqid, String xqid);

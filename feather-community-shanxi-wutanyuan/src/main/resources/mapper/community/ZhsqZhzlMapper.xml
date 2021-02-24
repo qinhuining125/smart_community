@@ -172,15 +172,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         count(1) as zs,
         count(case when jc.CZZT='未处置' then 1 else null end) as wcz,
         count(case when jc.CZZT='处置中' then 1 else null end) as czz,
-        count(case when jc.CZZT='已处置' then 1 else null end) as ycz,
+        count(case when jc.CZZT='已处置' then 1 else null end) as ycz
         --事件类型
-        count(case when jc.SJLX='治安事件' then 1 else null end) as zasj,
-        count(case when jc.SJLX='卫生事件' then 1 else null end) as wssj,
-        count(case when jc.SJLX='能源事件' then 1 else null end) as nysj,
-        count(case when jc.SJLX='矛盾纠纷' then 1 else null end) as mdjf,
-        count(case when jc.SJLX='报修事件' then 1 else null end) as bxsj,
-        count(case when jc.SJLX='设备报警事件' then 1 else null end) as bxsj,
-        count(case when jc.SJLX='手环报警事件' then 1 else null end) as bxsj
+--         count(case when jc.SJLX='治安事件' then 1 else null end) as zasj,
+--         count(case when jc.SJLX='卫生事件' then 1 else null end) as wssj,
+--         count(case when jc.SJLX='能源事件' then 1 else null end) as nysj,
+--         count(case when jc.SJLX='矛盾纠纷' then 1 else null end) as mdjf,
+--         count(case when jc.SJLX='报修事件' then 1 else null end) as bxsj,
+--         count(case when jc.SJLX='设备报警事件' then 1 else null end) as bxsj,
+--         count(case when jc.SJLX='手环报警事件' then 1 else null end) as bxsj
 
         FROM ZHSQ_YC jc
 
@@ -249,36 +249,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         GROUP BY SJLX
     </select>
 
-<!--    <result property="ycly"    column="YCLY"    />-->
-<!--    <result property="ycsj"    column=""    />-->
-<!--    <result property="czzt"    column=""    />-->
-<!--    <result property="czry"    column=""    />-->
-<!--    <result property="czjg"    column=""    />-->
-<!--    <result property="fj"    column=""    />-->
-<!--    <result property="x"    column="X"    />-->
-<!--    <result property="y"    column="Y"    />-->
-<!--    <result property="z"    column="Z"    />-->
-<!--    <result property="xqid"    column="XQID"    />-->
-<!--    <result property="sbid"    column="SBID"    />-->
-<!--    <result property="sqid"    column="SQID"    />-->
-<!--    <result property="sjlx"    column="SJLX"    />-->
-<!--    <result property="czsj"    column="CZSJ"    />-->
-<!--    <result property="noticeRead"    column="NOTICE_READ"    />-->
+
     <!--重点事件列表-->
 <!--    YCID as ycid,YCJB as ycjb,YCNR as ycnr,YCLY as ycly,YCSJ as ycsj,CZZT as czzt,CZRY as czty,CZJG as czjg,-->
 <!--    FJ as fj,X as x,Y as y,Z as z, XQID as xqid, SBID as sbid, SJLX as sjlx,CZSJ as czsj, NOTICE_READ as noticeRead-->
     <select id="getZdsjList" parameterType="map" resultType="map">
-        SELECT *
-        FROM ZHSQ_YC
+        SELECT T.YCID AS YCID,T.YCSJ AS YCSJ,T.YCNR AS YCNR,T.YCJB AS YCJB,T.CZZT AS CZZT,T.YCLY AS YCLY,T.SJLX AS SJLX FROM(
+        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,rownum as no FROM ZHSQ_YC
         <where>
-            <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
-            <if test="czzt != null  and czzt != ''"> and CZZT = #{czzt}</if>
+            <if test="xqid != null  and xqid != ''">and XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''">and SQID = #{sqid}</if>
+            <if test="czzt != null  and czzt != ''">and CZZT = #{czzt}</if>
             <if test="sjlx != null  and sjlx != ''">
                 <bind name="_sjlx" value="'%'+ sjlx +'%'"/>
                 and (SJLX like #{_sjlx} OR YCNR like #{_sjlx} OR CZZT like #{_sjlx})
             </if>
         </where>
-        order by CZSJ
+        order by CZSJ) T
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
+    <select id="getZdsjCount" parameterType="map" resultType="Integer">
+        SELECT count(1) FROM (
+        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,rownum as no FROM ZHSQ_YC
+        <where>
+            <if test="xqid != null  and xqid != ''">and XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''">and SQID = #{sqid}</if>
+            <if test="czzt != null  and czzt != ''">and CZZT = #{czzt}</if>
+            <if test="sjlx != null  and sjlx != ''">
+                <bind name="_sjlx" value="'%'+ sjlx +'%'"/>
+                and (SJLX like #{_sjlx} OR YCNR like #{_sjlx} OR CZZT like #{_sjlx})
+            </if>
+        </where>)
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+    </select>
+
 </mapper>

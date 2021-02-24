@@ -114,4 +114,11 @@ public interface ZhsqZhzlMapper {
      * @return
      */
     public List<Map<String, Object>> getZdsjList(Map<String, Object> maps);
+    /**
+     * 重点事件总数
+     *
+     * @param maps
+     * @return
+     */
+    public Integer getZdsjCount(Map<String, Object> maps);
 }

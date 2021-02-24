@@ -322,15 +322,20 @@ public class ZhsqZhzlController extends BaseController {
      */
     @GetMapping("/api/getZdsjList")
     @ResponseBody
-    public AjaxResult getZdsjList(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("czzt") String czzt,
+    public AjaxResult getZdsjList(@Param("page") Integer page,@Param("page")  Integer size, @Param("xqid") String xqid, @Param("sqid") String sqid, @Param("czzt") String czzt,
             @Param("sjlx") String sjlx)throws SQLException {
         Map<String, Object> maps = new HashMap<>();
+        maps.put("page", page);
+        maps.put("size", size);
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
         maps.put("czzt", czzt);
         maps.put("sjlx", sjlx);
         List<Map<String, Object>> ycList = zhsqZhzlService.getZdsjList(maps);
         List<Map<String, Object>> list = new ArrayList<>();
+        Map<String, Object> resultMap = new HashMap<>();
+       Integer ii= zhsqZhzlService.getZdsjCount(maps);
+        resultMap.put("total", zhsqZhzlService.getZdsjCount(maps));
         for (int i = 0; i < ycList.size(); i++) {
             Map<String, Object> map = ycList.get(i);
             Object ycxw = map.get("YCNR");
@@ -344,8 +349,10 @@ public class ZhsqZhzlController extends BaseController {
             map1.put("YCJB", String.valueOf(map.get("YCJB")));
             map1.put("CZZT", String.valueOf(map.get("CZZT")));
             map1.put("YCLY", String.valueOf(map.get("YCLY")));
+            map1.put("SJLX", String.valueOf(map.get("SJLX")));
             list.add(map1);
         }
-        return AjaxResult.success(list);
+        resultMap.put("rows", list);
+        return AjaxResult.success(resultMap);
     }
 }

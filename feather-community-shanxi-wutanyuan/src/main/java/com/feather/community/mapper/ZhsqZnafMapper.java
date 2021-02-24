@@ -64,21 +64,21 @@ public interface ZhsqZnafMapper {
     //烟感展示总记录
     public List<Map<String, Object>> getYg();
     //烟感展示总数
-    public Integer getYgzsCount();
+    public Integer getYgzsCount(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
 
     //井盖展示
     public List<Map<String, Object>> getJgzs(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
     //井盖展示总记录
     public  List<Map<String, Object>> getJg();
     //井盖展示总数
-    public Integer getJgzsCount();
+    public Integer getJgzsCount(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
 
     //水表展示
     public List<Map<String, Object>> getSbzs(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
     //水表总记录
    public List<Map<String, Object>> getSb();
     //水表展示总数
-    public Integer getSbzsCount();
+    public Integer getSbzsCount(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
 
 
 

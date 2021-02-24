@@ -407,7 +407,7 @@ public class ZhsqZnafController extends BaseController {
         } else {
             resultMap.put("rows", iZhsqZnafService.getYgzs(page, size,sbmc));
         }
-        resultMap.put("total", iZhsqZnafService.getYgzsCount());
+        resultMap.put("total", iZhsqZnafService.getYgzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);
     }
 
@@ -426,7 +426,7 @@ public class ZhsqZnafController extends BaseController {
         } else {
             resultMap.put("rows", iZhsqZnafService.getJgzs(page, size,sbmc));
         }
-        resultMap.put("total", iZhsqZnafService.getJgzsCount());
+        resultMap.put("total", iZhsqZnafService.getJgzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);
     }
 
@@ -444,7 +444,7 @@ public class ZhsqZnafController extends BaseController {
         } else {
             resultMap.put("rows", iZhsqZnafService.getSbzs(page, size,sbmc));
         }
-        resultMap.put("total", iZhsqZnafService.getSbzsCount());
+        resultMap.put("total", iZhsqZnafService.getSbzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);
     }
 

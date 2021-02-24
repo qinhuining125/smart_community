@@ -129,8 +129,8 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
         return zhsqZnafMapper.getYg();
     }
     @Override
-    public Integer getYgzsCount() {
-        return zhsqZnafMapper.getYgzsCount();
+    public Integer getYgzsCount(Integer page, Integer size,String sbmc) {
+        return zhsqZnafMapper.getYgzsCount(page,size,sbmc);
     }
 
     @Override
@@ -144,8 +144,8 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
-    public Integer getJgzsCount() {
-        return zhsqZnafMapper.getJgzsCount();
+    public Integer getJgzsCount(Integer page, Integer size,String sbmc) {
+        return zhsqZnafMapper.getJgzsCount(page,size,sbmc);
     }
 
     @Override
@@ -159,8 +159,8 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
-    public Integer getSbzsCount() {
-        return zhsqZnafMapper.getSbzsCount();
+    public Integer getSbzsCount(Integer page, Integer size, String sbmc) {
+        return zhsqZnafMapper.getSbzsCount(page,size,sbmc);
     }
 
 

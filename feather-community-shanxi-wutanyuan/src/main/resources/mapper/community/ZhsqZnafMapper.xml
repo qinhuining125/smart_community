@@ -123,8 +123,8 @@
     <select id="getBjtj" resultType="map">
         SELECT SJLX as type,count(*) as num from ZHSQ_YC n
         <where>
-            <if test="xqid != null  and xqid != ''"> and   n.XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and n.sqid = #{sqid}</if>
+            <if test="xqid != null  and xqid != ''">and n.XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''">and n.sqid = #{sqid}</if>
         </where>
         group by SJLX
     </select>
@@ -138,12 +138,12 @@
     <select id="getBjcz" resultType="map">
         SELECT CZZT as type,count(*) as num from ZHSQ_YC n
         <where>
-            <if test="xqid != null  and xqid != ''"> and   n.XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and n.sqid = #{sqid}</if>
-<!--            <choose>-->
-<!--                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>-->
-<!--                <otherwise>n.sqid=#{sqid}</otherwise>-->
-<!--            </choose>-->
+            <if test="xqid != null  and xqid != ''">and n.XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''">and n.sqid = #{sqid}</if>
+            <!--            <choose>-->
+            <!--                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>-->
+            <!--                <otherwise>n.sqid=#{sqid}</otherwise>-->
+            <!--            </choose>-->
         </where>
         GROUP BY CZZT
     </select>
@@ -153,14 +153,14 @@
         SELECT YCID,YCSJ, YCNR ,YCJB, CZZT ,YCLY from ZHSQ_YC n
         <where>
             n.czzt='未处置'
-            <if test="xqid != null  and xqid != ''"> and n.XQID = #{xqid}</if>
-            <if test="sqid != null  and sqid != ''"> and n.sqid = #{sqid}</if>
-<!--            <choose>-->
-<!--                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>-->
-<!--                <otherwise>n.sqid=#{sqid}</otherwise>-->
-<!--            </choose>-->
+            <if test="xqid != null  and xqid != ''">and n.XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''">and n.sqid = #{sqid}</if>
+            <!--            <choose>-->
+            <!--                <when test="xqid!=null and xqid!=''">n.XQID=#{xqid}</when>-->
+            <!--                <otherwise>n.sqid=#{sqid}</otherwise>-->
+            <!--            </choose>-->
         </where>
-         order by CZSJ
+        order by CZSJ
     </select>
 
     <!--视频列表-->
@@ -251,9 +251,9 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
     <!--烟感展示-->
     <select id="getYgzs" resultType="map">
         select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
-        (select SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no  FROM ZHSQ_YG
+        (select SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no FROM ZHSQ_YG
         <where>
-            <if test="sbmc != null  and sbmc != ''">and SBMC = #{sbmc}</if>
+            <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
         ) t
         where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
@@ -266,7 +266,12 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--烟感展示总数-->
     <select id="getYgzsCount" resultType="Integer">
-    select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no  FROM ZHSQ_YG) t
+        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no FROM ZHSQ_YG
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
+        </where>
+        ) t
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
     <!--井盖展示-->
@@ -274,7 +279,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
         select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
         (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_JG
         <where>
-            <if test="sbmc != null  and sbmc != ''">and SBMC = #{sbmc}</if>
+            <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
         ) t
         where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
@@ -287,15 +292,24 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--井盖展示总数-->
     <select id="getJgzsCount" resultType="Integer">
-    select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no  FROM ZHSQ_JG) t
+        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_JG
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
+        </where>
+        ) t
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
 
     <!--水表展示-->
     <select id="getSbzs" resultType="map">
-   select  t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
-   (select  SBMC, PPMC, X, Y, Z, WZ,SBZT FROM ZHSQ_SB  ) t
-       where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+        select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
+        (select SBMC, PPMC, X, Y, Z, WZ,SBZT ,rownum as no FROM ZHSQ_SB
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
+        </where>
+        ) t
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
     <!--水表展示总记录-->
@@ -306,15 +320,18 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--水表展示总数-->
     <select id="getSbzsCount" resultType="Integer">
-    select count(1) from (select * FROM ZHSQ_SB  )
+        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_SB
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
+        </where>
+        )
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
-
-
 
 
     <!--新闻公告/通知-->
     <select id="getXwgg" resultType="map">
-   select t.GGLX,t.BT,t.NR,t.FBSJ,t.FBRY,t.XXLY FROM ZHSQ_GG t
+        select t.GGLX,t.BT,t.NR,t.FBSJ,t.FBRY,t.XXLY FROM ZHSQ_GG t
         <where>
             <choose>
                 <when test="xqid!=null and xqid!=''">t.XQID=#{xqid}</when>

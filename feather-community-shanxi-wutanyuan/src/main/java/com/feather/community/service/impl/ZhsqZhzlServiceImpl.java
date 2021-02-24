@@ -200,4 +200,9 @@ public class ZhsqZhzlServiceImpl implements IZhsqZhzlService {
     public List<Map<String, Object>> getZdsjList(Map<String, Object> maps) {
         return zhsqZhzlMapper.getZdsjList(maps);
     }
+
+    @Override
+    public Integer getZdsjCount(Map<String, Object> maps) {
+        return zhsqZhzlMapper.getZdsjCount(maps);
+    }
 }
