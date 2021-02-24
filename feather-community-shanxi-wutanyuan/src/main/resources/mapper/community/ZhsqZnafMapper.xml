@@ -271,7 +271,6 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
         ) t
-        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
 
     <!--井盖展示-->
@@ -297,7 +296,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
         ) t
-        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+
     </select>
 
 
@@ -325,7 +324,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
         )
-        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+
     </select>
 
 
