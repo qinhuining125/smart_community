@@ -6,6 +6,7 @@ import com.feather.common.annotation.ClearPage;
 import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.community.domain.ZhsqMj;
+import lombok.SneakyThrows;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -31,10 +32,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/viid")
@@ -65,7 +63,15 @@ public class VideoAlarmController extends BaseController {
         JSONObject secondStr =  this.doPostUrl(urlStr, params);
         accessToken= (String) secondStr.get("AccessToken");
         String keepUrlStr = "http://127.0.0.1/service-wutanyuan/device/api/addShrz";
-        String keepResult=keep(keepUrlStr);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @SneakyThrows
+            public void run() {
+                String keepResult=keep(keepUrlStr);
+            }
+        }, 0, 30000);
+
 
         Map<String, Object> paramsOpen = new HashMap();
         paramsOpen.put("Data", "http://208.208.101.245:8088/VIID/gethello");
@@ -74,6 +80,7 @@ public class VideoAlarmController extends BaseController {
         doPostUrl(urlStrOpen,paramsOpen);
         return AjaxResult.success("成功");
     }
+
 
 
     /**
