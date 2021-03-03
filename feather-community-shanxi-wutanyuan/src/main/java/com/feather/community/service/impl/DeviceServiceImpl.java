@@ -32,6 +32,10 @@ public class DeviceServiceImpl implements IDeviceService {
     IZhsqYgService zhsqYgService;
     @Autowired
     IZhsqYgrzService zhsqYgrzService;
+    @Autowired
+    IZhsqSxtService zhsqSxtService;
+    @Autowired
+    IZhsqYcService zhsqYcService;
 
     @Override
     public AjaxResult addSh(ZhsqSh zhsqSh) {
@@ -109,6 +113,31 @@ public class DeviceServiceImpl implements IDeviceService {
             zhsqYgrz.setImsi(zhsqYg.getYgid());
 //            zhsqSbrz.setShid(zhsqSh.getShid());
             int affectNum = zhsqYgrzService.insertZhsqYgrz(zhsqYgrz);
+            if (affectNum > 0) {
+                return AjaxResult.success();
+            }
+            return AjaxResult.error(CommunityConstants.AFFECT_ZERO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            String errInfo = ExceptionUtil.getExceptionMessage(e);
+            return AjaxResult.error(errInfo);
+        }
+    }
+
+    @Override
+    public AjaxResult addSxtptgj(ZhsqSxtptgj zhsqSxtptgj) {
+        try {
+
+            String sxtid = zhsqSxtptgj.getDeviceCode();
+            if (Strings.isBlank(sxtid)) {
+                return AjaxResult.error(CommunityConstants.NO_SXTID_CODE);
+            }
+            ZhsqSxt zhsqSxt = zhsqSxtService.selectZhsqSxtById(sxtid);
+            if (Objects.isNull(zhsqSxt)) {
+                return AjaxResult.error(CommunityConstants.NO_SXTID_CODE);
+            }
+
+            int affectNum = zhsqYcService.insertZhsqSxtpugj(zhsqSxtptgj);
             if (affectNum > 0) {
                 return AjaxResult.success();
             }

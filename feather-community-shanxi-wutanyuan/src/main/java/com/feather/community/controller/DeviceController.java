@@ -2,25 +2,16 @@ package com.feather.community.controller;
 
 import com.feather.common.config.Global;
 import com.feather.common.core.domain.AjaxResult;
-import com.feather.common.utils.StringUtils;
-import com.feather.common.utils.poi.ExcelUtil;
-import com.feather.community.domain.ZhsqSbrz;
-import com.feather.community.domain.ZhsqSh;
-import com.feather.community.domain.ZhsqShrz;
-import com.feather.community.domain.ZhsqYgrz;
+import com.feather.community.domain.*;
 import com.feather.community.service.IDeviceService;
 import com.feather.community.util.HttpUtil;
-import io.lettuce.core.dynamic.annotation.Param;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author nothing
@@ -84,4 +75,14 @@ public class DeviceController {
         String url = Global.getConfig("device.sh.xfzl");
         return AjaxResult.success(HttpUtil.sendGet(url, "imei="+imei));
     }
+    @ApiOperation("增加摄像头告警日志")
+    @RequestMapping(value = "/api/addSxtptgj",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqSxtgj",name = "zhsqSxtgj")
+    )
+    public AjaxResult addSxtptgj(@RequestBody ZhsqSxtptgj zhsqSxtptgj) {
+        return deviceService.addSxtptgj(zhsqSxtptgj);
+    }
+
 }

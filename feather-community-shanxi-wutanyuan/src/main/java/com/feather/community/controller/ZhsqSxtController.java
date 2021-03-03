@@ -69,7 +69,7 @@ public class ZhsqSxtController extends BaseController {
     public String add(ModelMap mmap) {
         ZhsqSxt SXT = new ZhsqSxt();
         mmap.put("SXT", SXT);
-        return prefix + "/add";
+        return prefix + "/edit";
     }
 
     /**

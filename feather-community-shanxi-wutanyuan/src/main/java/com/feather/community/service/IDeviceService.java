@@ -1,10 +1,7 @@
 package com.feather.community.service;
 
 import com.feather.common.core.domain.AjaxResult;
-import com.feather.community.domain.ZhsqSbrz;
-import com.feather.community.domain.ZhsqSh;
-import com.feather.community.domain.ZhsqShrz;
-import com.feather.community.domain.ZhsqYgrz;
+import com.feather.community.domain.*;
 
 /**
  * @author nothing
@@ -39,4 +36,10 @@ public interface IDeviceService {
      * @return
      */
     AjaxResult addYgrz(ZhsqYgrz zhsqYgrz);
+    /**
+     * 增加摄像头普通告警
+     * @param zhsqSxtptgj
+     * @return
+     */
+    AjaxResult addSxtptgj(ZhsqSxtptgj zhsqSxtptgj);
 }

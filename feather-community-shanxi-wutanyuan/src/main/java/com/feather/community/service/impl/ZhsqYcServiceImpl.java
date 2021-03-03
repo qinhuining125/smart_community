@@ -1,8 +1,13 @@
 package com.feather.community.service.impl;
 
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+import com.feather.common.config.UidWorker;
+import com.feather.community.domain.ZhsqSxt;
+import com.feather.community.domain.ZhsqSxtptgj;
+import com.feather.community.domain.ZhsqYg;
+import com.feather.community.mapper.ZhsqSxtMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +26,11 @@ import com.feather.community.service.IZhsqYcService;
 public class ZhsqYcServiceImpl implements IZhsqYcService {
     @Autowired
     private ZhsqYcMapper zhsqYcMapper;
+    @Autowired
+    private UidWorker uidWorker;
+    @Autowired
+    private ZhsqSxtMapper zhsqSxtMapper;
+
 
     /**
      * 查询异常信息
@@ -103,6 +113,65 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
     @Override
     public List<Map> getStatusCount(String sqid, String xqid) {
         return zhsqYcMapper.getStatusCount(sqid, xqid);
+    }
+
+    @Override
+    public int insertZhsqSxtpugj(ZhsqSxtptgj zhsqSxtptgj) {
+        String sxtpugjid = "SXTPTGJ" + uidWorker.getNextId();
+        zhsqSxtptgj.setSxtptgjid(sxtpugjid);
+
+//        long content = zhsqYgrz.getContent();
+        ZhsqYc zhsqYc=new ZhsqYc();
+        String ycid = "YC" + uidWorker.getNextId();
+        zhsqYc.setYcid(ycid);
+        zhsqYc.setYcly("摄像头普通报警");
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        String sdate = sdf.format(calendar.getTime());
+        zhsqYc.setYcsj(zhsqSxtptgj.getEventTime());
+        if (zhsqSxtptgj.getAlarmStatus()==0){
+            zhsqYc.setCzzt("未确认");
+        }else if (zhsqSxtptgj.getAlarmStatus()==1){
+            zhsqYc.setCzzt("已确认");
+        }else if (zhsqSxtptgj.getAlarmStatus()==2){
+            zhsqYc.setCzzt("未核警");
+        }else if (zhsqSxtptgj.getAlarmStatus()==3){
+            zhsqYc.setCzzt("已核警");
+        }
+        zhsqYc.setCzry("李磊");//处置人员
+        zhsqYc.setCzjg("");//处置时间
+        zhsqYc.setFj("无");
+        ZhsqSxt zhsqSxt= zhsqSxtMapper.selectZhsqSxtById(zhsqSxtptgj.getDeviceCode());
+        zhsqYc.setX(zhsqSxt.getX());
+        zhsqYc.setY(zhsqSxt.getY());
+        zhsqYc.setZ(zhsqSxt.getZ());
+        zhsqYc.setXqid(zhsqSxt.getXqid());
+        zhsqYc.setSbid(zhsqSxt.getSxtid());
+        zhsqYc.setSqid(zhsqSxt.getSqid());
+        zhsqYc.setSjlx("摄像头报警事件");
+        zhsqYc.setNoticeRead("0");
+        if (zhsqSxtptgj.getEventSecurity()==0){
+            zhsqYc.setYcjb("红");
+            zhsqYc.setYcnr("摄像头发生危机报警，请马上处理");
+        }
+        if (zhsqSxtptgj.getEventSecurity()==1){
+            zhsqYc.setYcjb("黄");
+            zhsqYc.setYcnr("摄像头发生报警（主要），请马上处理");
+        }
+        if (zhsqSxtptgj.getEventSecurity()==2){
+            zhsqYc.setYcjb("黄");
+            zhsqYc.setYcnr("摄像头发生报警（次要），请及时处理");
+        }
+        if (zhsqSxtptgj.getEventSecurity()==3){
+            zhsqYc.setYcjb("黄");
+            zhsqYc.setYcnr("摄像头发生警告，请及时处理处理");
+        }
+        if (zhsqSxtptgj.getEventSecurity()==4){
+            zhsqYc.setYcjb("绿");
+            zhsqYc.setYcnr("摄像头发出提示，请及时处理处理");
+        }
+        return  zhsqYcMapper.insertZhsqYc(zhsqYc);
     }
 
 }

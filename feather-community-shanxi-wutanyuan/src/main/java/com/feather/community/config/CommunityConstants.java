@@ -12,4 +12,6 @@ public class CommunityConstants {
     public static final String NO_DEVICE_CODE = "根据DEVICE_CODE,未找到设备！";
 
     public static final String NO_YGID_CODE = "根据YGID,未找到设备！";
+
+    public static final String NO_SXTID_CODE = "根据SXTID,未找到设备！";
 }

@@ -3,6 +3,7 @@ package com.feather.community.service;
 import java.util.List;
 import java.util.Map;
 
+import com.feather.community.domain.ZhsqSxtptgj;
 import com.feather.community.domain.ZhsqYc;
 
 /**
@@ -69,4 +70,6 @@ public interface IZhsqYcService {
     public List<Map> getSourceCount(String sqid, String xqid);
 
     public List<Map> getStatusCount(String sqid, String xqid);
+
+    int insertZhsqSxtpugj(ZhsqSxtptgj zhsqSxtptgj);
 }
