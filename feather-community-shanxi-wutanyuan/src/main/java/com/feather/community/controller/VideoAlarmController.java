@@ -7,10 +7,7 @@ import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.community.domain.ZhsqMj;
 import lombok.SneakyThrows;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -24,6 +21,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,58 +42,76 @@ import java.util.*;
 @Controller
 @RequestMapping("/viid")
 public class VideoAlarmController extends BaseController {
-    public String accessToken;
+    public static String accessToken;
+
+
     /**
-     *
+     *登陆摄像头硬件
      */
     @PostMapping("/api/login")
     @ClearPage
     @ResponseBody
     public AjaxResult login() throws Exception {
         // BASE64("UserName")//编码
-        final BASE64Encoder encoder = new BASE64Encoder();
-        final String userName = "用户名";
-        final byte[] userNameByte = userName.getBytes("UTF-8");
-        final String encodedUserName = encoder.encode(userNameByte);
-        System.out.println(encodedUserName);
-
-//        String urlStr = "http://server-addr:8088/VIID/login";
-        String urlStr = "http://127.0.0.1/service-wutanyuan/device/api/addYgrz";
+        String urlStr = "http://172.16.0.10:8088/VIID/login";
         Map<String, Object> params = new HashMap();
         String str="UTF-8";
         JSONObject jsonObject=new JSONObject();
-        String firstStr= send(urlStr,jsonObject,str);
+        String firstStr=sendInfoPost(urlStr,"");
+        System.out.println(firstStr);
+        //String firstStr= send(urlStr,jsonObject,str);
         JSONObject jsonFirstObject =JSONObject.parseObject(firstStr);
-        String accessCode = (String) jsonFirstObject.get("msg");
-        jsonObject.put("UserName", "admin");
-        jsonObject.put("AccessCode", accessCode);
-        String loginSignature = encodeByMD5(encodedUserName + accessCode + encodeByMD5("用户密码"));
-        params.put("LoginSignature", loginSignature);
-        String secondStr= send(urlStr,jsonObject,str);
-//        JSONObject firstStr = this.doPostUrl(urlStr, params);
-//        String accessCode = (String) firstStr.get("AccessCode");
-//        params.put("UserName", "admin");
-//        params.put("AccessCode", accessCode);
-//        String loginSignature = encodeByMD5(encodedUserName + accessCode + encodeByMD5("用户密码"));
-//        params.put("LoginSignature", accessCode);
-//        JSONObject secondStr =  this.doPostUrl(urlStr, params);
-//        accessToken= (String) secondStr.get("AccessToken");
 
-//        String keepUrlStr = "http://127.0.0.1/service-wutanyuan/device/api/addShrz";
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @SneakyThrows
-//            public void run() {
-//                String keepResult=keep(keepUrlStr);
-//            }
-//        }, 0, 30000);
+        System.out.println("========"+jsonFirstObject);
+
+        //第二次调用
+        String accessCode = (String) jsonFirstObject.get("AccessCode");
+        final BASE64Encoder encoder = new BASE64Encoder();
+        final String userName = "loadmin";
+        final byte[] userNameByte = userName.getBytes("UTF-8");
+        final String encodedUserName = encoder.encode(userNameByte);
+
+        String passwordMd=DigestUtils.md5DigestAsHex("*Ab123456".getBytes());
+        String last=encodedUserName + accessCode +passwordMd;
+        String loginSignature = DigestUtils.md5DigestAsHex(last.getBytes());
+        //encodeByMD5(encodedUserName + accessCode + encodeByMD5("*Ab123456"));
+
+        //放置参数进入
+        Map map1 = new HashMap();
+        map1.put("UserName", "loadmin");
+        map1.put("LoginSignature", loginSignature);
+        map1.put("AccessCode", accessCode);
+        com.feather.common.json.JSONObject json1 = com.feather.common.json.JSONObject.toJSONObject(map1);
+        String secondStr= sendInfoPost(urlStr,json1.toString());
+        System.out.println("第二次访问结果====="+secondStr);
+        //获取到token
+
+        JSONObject jsonFirstObject2 =JSONObject.parseObject(secondStr);
+        System.out.println("========"+jsonFirstObject2);
+        accessToken = (String) jsonFirstObject.get("AccessToken");
+        System.out.println("accessToken="+accessToken);
+        return AjaxResult.success("成功");
+    }
 
 
-//        Map<String, Object> paramsOpen = new HashMap();
-//        paramsOpen.put("Data", "http://208.208.101.245:8088/VIID/gethello");
-//        paramsOpen.put("Type", 0);
-//        String urlStrOpen = "http://server-addr:8088/VIID/alarm/open";
-//        doPostUrl(urlStrOpen,paramsOpen);
+
+    /**
+     *登陆摄像头硬件
+     */
+    @PostMapping("/api/OpenOrder")
+    @ClearPage
+    @ResponseBody
+    public AjaxResult openOrder() throws Exception {
+
+        // BASE64("UserName")//编码
+        String urlStr = "http://172.16.0.10:8088/VIID/alarm/open";
+        //放置参数
+        Map<String, Object> paramsOpen = new HashMap();
+        paramsOpen.put("Data", "http://127.0.0.1/service-wutanyuan/device/api/addSxtptgj");
+        paramsOpen.put("Type", 0);
+        com.feather.common.json.JSONObject jsonOpenAlarm = com.feather.common.json.JSONObject.toJSONObject(paramsOpen);
+        String result= sendInfoPost(urlStr,jsonOpenAlarm.toString());
+        System.out.println("result="+result);
         return AjaxResult.success("成功");
     }
 
@@ -262,4 +278,35 @@ public class VideoAlarmController extends BaseController {
         int d2 = n%16;
         return hexDigits[d1] + hexDigits[d2];
     }
+
+
+    /***
+     *
+     * @param url
+     * @param param
+     * @return 发送返回响应
+     * @throws IOException
+     */
+    public static String sendInfoPost(String url,String param) throws IOException {
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        HttpPost httppost = new HttpPost(url);
+        httppost.addHeader("Content-Type", "application/json; charset=utf-8");
+        httppost.addHeader("AccessToken", accessToken);
+
+        String textMsg = param;
+        StringEntity se = new StringEntity(textMsg, "utf-8");
+        httppost.setEntity(se);
+        String result = null;
+        org.apache.http.HttpResponse response = httpclient.execute(httppost);
+        if (response.getStatusLine().getStatusCode()== HttpStatus.SC_OK){
+            result= EntityUtils.toString(response.getEntity(), "utf-8");
+        }else{
+            result= EntityUtils.toString(response.getEntity(), "utf-8");
+        }
+
+        return result;
+    }
+
 }

@@ -79,7 +79,7 @@ public class DeviceController {
     @RequestMapping(value = "/api/addSxtptgj",method = RequestMethod.POST)
     @ResponseBody
     @ApiImplicitParams(
-            @ApiImplicitParam(dataType = "ZhsqSxtgj",name = "zhsqSxtgj")
+            @ApiImplicitParam(dataType = "ZhsqSxtptgj",name = "zhsqSxtptgj")
     )
     public AjaxResult addSxtptgj(@RequestBody ZhsqSxtptgj zhsqSxtptgj) {
         return deviceService.addSxtptgj(zhsqSxtptgj);
