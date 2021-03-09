@@ -13,7 +13,7 @@ import java.net.URLConnection;
 @Component
 public class Keep {
   public static String keepResult;
-    @Scheduled(cron = "0/30 * * * * *")
+//    @Scheduled(cron = "0/30 * * * * *")
     public static void corn() throws Exception {
 //        System.out.println("《《《《《>>>>《保活");
         String keepUrlStr = "http://172.16.0.10:8088/VIID/token/alive/keep";

@@ -42,4 +42,10 @@ public interface IDeviceService {
      * @return
      */
     AjaxResult addSxtptgj(ZhsqSxtptgj zhsqSxtptgj);
+    /**
+     * 增加摄像头人脸布控告警
+     * @param zhsqSxtrlbkgj
+     * @return
+     */
+    AjaxResult addSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
 }

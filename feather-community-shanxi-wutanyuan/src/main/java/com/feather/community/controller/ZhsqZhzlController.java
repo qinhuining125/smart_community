@@ -343,6 +343,10 @@ public class ZhsqZhzlController extends BaseController {
                 ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
             }
             Map<String, Object> map1 = new HashMap<>();
+            map1.put("GJSJID", "GJSJID");
+            if (map.get("GJSJ_ID")!=null){
+
+            }
             map1.put("YCID", String.valueOf(map.get("YCID")));
             map1.put("YCSJ", String.valueOf(map.get("YCSJ")));
             map1.put("YCNR", ycxw);

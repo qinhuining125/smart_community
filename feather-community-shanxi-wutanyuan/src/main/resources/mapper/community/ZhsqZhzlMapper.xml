@@ -254,8 +254,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--    YCID as ycid,YCJB as ycjb,YCNR as ycnr,YCLY as ycly,YCSJ as ycsj,CZZT as czzt,CZRY as czty,CZJG as czjg,-->
 <!--    FJ as fj,X as x,Y as y,Z as z, XQID as xqid, SBID as sbid, SJLX as sjlx,CZSJ as czsj, NOTICE_READ as noticeRead-->
     <select id="getZdsjList" parameterType="map" resultType="map">
-        SELECT T.YCID AS YCID,T.YCSJ AS YCSJ,T.YCNR AS YCNR,T.YCJB AS YCJB,T.CZZT AS CZZT,T.YCLY AS YCLY,T.SJLX AS SJLX FROM(
-        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,rownum as no FROM ZHSQ_YC
+        SELECT T.YCID AS YCID,T.YCSJ AS YCSJ,T.YCNR AS YCNR,T.YCJB AS YCJB,T.CZZT AS CZZT,T.YCLY AS YCLY,T.SJLX AS SJLX,T.GJSJ_ID AS GJSJID FROM(
+        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,GJSJ_ID,rownum as no FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''">and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''">and SQID = #{sqid}</if>
@@ -270,7 +270,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getZdsjCount" parameterType="map" resultType="Integer">
         SELECT count(1) FROM (
-        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,rownum as no FROM ZHSQ_YC
+        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,GJSJ_ID,rownum as no FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''">and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''">and SQID = #{sqid}</if>

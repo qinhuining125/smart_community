@@ -95,7 +95,7 @@ public class ZhsqShrzServiceImpl implements IZhsqShrzService
         zhsqYc.setXqid(zhsqSh.getXqid());
         zhsqYc.setSbid(zhsqSh.getShid());
         zhsqYc.setSqid(zhsqSh.getSqid());
-        zhsqYc.setSjlx("手环报警事件");
+        zhsqYc.setSjlx("设备报警事件");
         zhsqYc.setNoticeRead("0");
         if (alarmState.equals("01")){
             zhsqYc.setYcjb("红");

@@ -76,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sjlx != null  and sjlx != ''">SJLX,</if>
             <if test="czsj != null  and czsj != ''">CZSJ,</if>
             <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ,</if>
+            <if test="gjsjid != null  and gjsjid != ''">GJSJ_ID,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ycid != null  and ycid != ''">#{ycid},</if>
@@ -96,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sjlx != null  and sjlx != ''">#{sjlx},</if>
             <if test="czsj != null  and czsj != ''">#{czsj},</if>
             <if test="noticeRead != null  and noticeRead != ''">#{noticeRead},</if>
+            <if test="gjsjid != null  and gjsjid != ''">#{gjsjid},</if>
          </trim>
     </insert>
 

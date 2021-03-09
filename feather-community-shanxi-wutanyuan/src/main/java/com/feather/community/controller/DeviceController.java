@@ -75,7 +75,7 @@ public class DeviceController {
         String url = Global.getConfig("device.sh.xfzl");
         return AjaxResult.success(HttpUtil.sendGet(url, "imei="+imei));
     }
-    @ApiOperation("增加摄像头告警日志")
+    @ApiOperation("增加摄像头普通告警日志")
     @RequestMapping(value = "/api/addSxtptgj",method = RequestMethod.POST)
     @ResponseBody
     @ApiImplicitParams(
@@ -84,5 +84,13 @@ public class DeviceController {
     public AjaxResult addSxtptgj(@RequestBody ZhsqSxtptgj zhsqSxtptgj) {
         return deviceService.addSxtptgj(zhsqSxtptgj);
     }
-
+    @ApiOperation("增加摄像头人脸布控告警")
+    @RequestMapping(value = "/api/addSxtrlbkgj",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqSxtptgj",name = "zhsqSxtptgj")
+    )
+    public AjaxResult addSxtrlbkgj(@RequestBody ZhsqSxtrlbkgj zhsqSxtrlbkgj) {
+        return deviceService.addSxtrlbkgj(zhsqSxtrlbkgj);
+    }
 }

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feather.community.mapper.ZhsqSxtrlbkgjMapper">
+
+    <resultMap type="ZhsqSxtrlbkgj" id="ZhsqSxtrlbkgjResult">
+        <result property="Id"    column="Id"    />
+        <result property="SnappicId"    column="SnappicId"    />
+        <result property="GuardtaskId"    column="GuardtaskId"    />
+        <result property="FacecamCode"    column="FacecamCode"    />
+        <result property="AlarmTime"    column="AlarmTime"    />
+        <result property="AlarmType"    column="AlarmType"    />
+        <result property="GuardReason"    column="GuardReason"    />
+        <result property="GuardType"    column="GuardType"    />
+        <result property="FacelibId"    column="FacelibId"    />
+        <result property="FaceId"    column="FaceId"    />
+        <result property="FacePicurl"    column="FacePicurl"    />
+        <result property="SnapPicurl"    column="SnapPicurl"    />
+        <result property="FaceSamevalue"    column="FaceSamevalue"    />
+        <result property="SnapfacePicurl"    column="SnapfacePicurl"    />
+        <result property="FaceCountry"    column="FaceCountry"    />
+        <result property="FaceProvince"    column="FaceProvince"    />
+        <result property="FaceCity"    column="FaceCity"    />
+        <result property="FaceIdtype"    column="FaceIdtype"    />
+        <result property="FaceCardid"    column="FaceCardid"    />
+        <result property="FaceGender"    column="FaceGender"    />
+        <result property="FaceAge"    column="FaceAge"    />
+        <result property="FaceName"    column="FaceName"    />
+        <result property="FaceBirthday"    column="FaceBirthday"    />
+        <result property="SnapTime"    column="SnapTime"    />
+        <result property="FacePlaction"    column="FacePlaction"    />
+        <result property="Longitude"    column="Longitude"    />
+        <result property="Latitude"    column="Latitude"    />
+        <result property="FaceRemark"    column="FaceRemark"    />
+        <result property="Nation"    column="Nation"    />
+        <result property="FaceCamName"    column="FaceCamName"    />
+        <result property="AlarmCount"    column="AlarmCount"    />
+        <result property="FacelibName"    column="FacelibName"    />
+    </resultMap>
+
+    <sql id="selectZhsqSxtrlbkgjVo">
+        select Id, SnappicId, GuardtaskId, FacecamCode, AlarmTime, AlarmType, GuardReason, GuardType, FacelibId, FaceId,
+         FacePicurl, SnapPicurl, FaceSamevalue, SnapfacePicurl, FaceCountry,FaceProvince,FaceCity,FaceIdtype,FaceCardid,
+          FaceGender,FaceAge,FaceName,FaceBirthday,SnapTime,FacePlaction,Longitude,Latitude,FaceRemark,Nation,FaceCamName
+           AlarmCount,FacelibName from ZHSQ_SXTRLBKGJSJ
+    </sql>
+
+    <select id="selectZhsqSxtrlbkgjList" parameterType="ZhsqYgrz" resultMap="ZhsqSxtrlbkgjResult">
+        <include refid="selectZhsqSxtrlbkgjVo"/>
+<!--        <where>-->
+<!--            <if test="sbrzid != null  and sbrzid != ''"> and sbrzid = #{sbrzid}</if>-->
+<!--            <if test="sn != null  and sn != ''"> and sn = #{sn}</if>-->
+<!--            <if test="imsi != null and imsi != ''"> and imsi = #{imsi}</if>-->
+<!--            <if test="rssi != null  and rssi != ''"> and rssi = #{rssi}</if>-->
+<!--            <if test="baterry != null  and baterry != ''"> and baterry = #{baterry}</if>-->
+<!--            <if test="infotype != null "> and infotype = #{infotype}</if>-->
+<!--            <if test="content != null "> and content = #{content}</if>-->
+<!--            <if test="createTime != null "> and create_time = #{createTime}</if>-->
+<!--            <if test="updateTime != null "> and update_time = #{updateTime}</if>-->
+<!--            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>-->
+<!--        </where>-->
+    </select>
+
+    <select id="selectZhsqSxtrlbkgjById" parameterType="String" resultMap="ZhsqSxtrlbkgjResult">
+        <include refid="selectZhsqSxtrlbkgjVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertZhsqSxtrlbkgj" parameterType="ZhsqSxtrlbkgj">
+        insert into ZHSQ_SXTRLBKGJSJ
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Id != null  and Id != ''">ID,</if>
+            <if test="SnappicId != null  and SnappicId != ''">SNAPPICID,</if>
+            <if test="GuardtaskId != null ">GUARDTASKID,</if>
+            <if test="FacecamCode != null  and FacecamCode != ''">FACECAMCODE,</if>
+            <if test="AlarmTime != null  and AlarmTime != ''">ALARMTIME,</if>
+            <if test="AlarmType != null ">ALARMTYPE,</if>
+            <if test="GuardReason != null ">GUARDREASON,</if>
+            <if test="GuardType != null  and GuardType != ''">GUARDTYPE,</if>
+            <if test="FacelibId != null ">FACELIBID,</if>
+            <if test="FaceId != null  and FaceId != ''">FACEID,</if>
+            <if test="FacePicurl != null ">FACEPICURL,</if>
+            <if test="SnapPicurl != null  and SnapPicurl != ''">SNAPPICURL,</if>
+            <if test="FaceSamevalue != null ">FACESAMEVALUE,</if>
+            <if test="SnapfacePicurl != null ">SNAPFACEPICURL,</if>
+            <if test="FaceCountry != null  and FaceCountry != ''">FACECOUNTRY,</if>
+
+            <if test="FaceProvince != null  and FaceProvince != ''">FACEPROVINCE,</if>
+            <if test="FaceCity != null  and FaceCountry != ''">FACECITY,</if>
+            <if test="FaceIdtype != null  and FaceIdtype != ''">FACEIDTYPE,</if>
+            <if test="FaceCardid != null  and FaceCardid != ''">FACECARDID,</if>
+            <if test="FaceGender != null  and FaceGender != ''">FACEGENDER,</if>
+            <if test="FaceAge != null  and FaceAge != ''">FACEAGE,</if>
+            <if test="FaceName != null  and FaceName != ''">FACENAME,</if>
+            <if test="FaceBirthday != null  and FaceBirthday != ''">FACEBIRTHDAY,</if>
+            <if test="SnapTime != null  and SnapTime != ''">SNAPTIME,</if>
+            <if test="FacePlaction != null  and FacePlaction != ''">FACEPLACTION,</if>
+            <if test="Longitude != null  and Longitude != ''">LONGITUDE,</if>
+            <if test="Latitude != null  and Latitude != ''">LATITUDE,</if>
+            <if test="FaceRemark != null  and FaceRemark != ''">FACEREMARK,</if>
+            <if test="Nation != null  and Nation != ''">NATION,</if>
+            <if test="FaceCamName != null  and FaceCamName != ''">FACECAMNAME,</if>
+            <if test="AlarmCount != null  and AlarmCount != ''">ALARMCOUNT,</if>
+            <if test="FacelibName != null  and FacelibName != ''">FACELIBNAME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Id != null  and Id != ''"> #{Id},</if>
+            <if test="SnappicId != null  and SnappicId != ''">  #{SnappicId},</if>
+            <if test="GuardtaskId != null ">#{GuardtaskId},</if>
+            <if test="FacecamCode != null  and FacecamCode != ''">#{FacecamCode},</if>
+            <if test="AlarmTime != null  and AlarmTime != ''">#{AlarmTime},</if>
+            <if test="AlarmType != null ">#{AlarmType},</if>
+            <if test="GuardReason != null ">#{GuardReason},</if>
+            <if test="GuardType != null  and GuardType != ''">#{GuardType},</if>
+            <if test="FacelibId != null ">#{FacelibId},</if>
+            <if test="FaceId != null  and FaceId != ''">#{FaceId},</if>
+            <if test="FacePicurl != null ">#{FacePicurl},</if>
+            <if test="SnapPicurl != null  and SnapPicurl != ''">#{SnapPicurl},</if>
+            <if test="FaceSamevalue != null ">#{FaceSamevalue},</if>
+            <if test="SnapfacePicurl != null ">#{SnapfacePicurl},</if>
+            <if test="FaceCountry != null  and FaceCountry != ''">#{FaceCountry},</if>
+
+            <if test="FaceProvince != null  and FaceProvince != ''">#{FaceProvince},</if>
+            <if test="FaceCity != null  and FaceCountry != ''">#{FaceCountry},</if>
+            <if test="FaceIdtype != null  and FaceIdtype != ''">#{FaceIdtype},</if>
+            <if test="FaceCardid != null  and FaceCardid != ''">#{FaceCardid},</if>
+            <if test="FaceGender != null  and FaceGender != ''">#{FaceGender},</if>
+            <if test="FaceAge != null  and FaceAge != ''">#{FaceAge},</if>
+            <if test="FaceName != null  and FaceName != ''">#{FaceName},</if>
+            <if test="FaceBirthday != null  and FaceBirthday != ''">#{FaceBirthday},</if>
+            <if test="SnapTime != null  and SnapTime != ''">#{SnapTime},</if>
+            <if test="FacePlaction != null  and FacePlaction != ''">#{FacePlaction},</if>
+            <if test="Longitude != null  and Longitude != ''">#{Longitude},</if>
+            <if test="Latitude != null  and Latitude != ''">#{Latitude},</if>
+            <if test="FaceRemark != null  and FaceRemark != ''">#{FaceRemark},</if>
+            <if test="Nation != null  and Nation != ''">#{Nation},</if>
+            <if test="FaceCamName != null  and FaceCamName != ''">#{FaceCamName},</if>
+            <if test="AlarmCount != null  and AlarmCount != ''">#{AlarmCount},</if>
+            <if test="FacelibName != null  and FacelibName != ''">#{FacelibName},</if>
+         </trim>
+    </insert>
+
+
+
+
+
+    <update id="updateZhsqYgrz" parameterType="ZhsqYgrz">
+        update ZHSQ_YGRZ
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sn != null  and sn != ''">sn = #{sn},</if>
+            <if test="imsi != null ">imsi = #{imsi},</if>
+            <if test="rssi != null  and rssi != ''">rssi = #{rssi},</if>
+            <if test="baterry != null  and baterry != ''">baterry = #{baterry},</if>
+            <if test="infotype != null ">infotype = #{infotype},</if>
+            <if test="content != null ">content = #{content},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createByid != null ">create_byid = #{createByid},</if>
+            <if test="updateByid != null ">update_byid = #{updateByid},</if>
+            <if test="ygid != null  and ygid != ''">ygid = #{ygid},</if>
+        </trim>
+        where sbrzid = #{sbrzid}
+    </update>
+
+    <delete id="deleteZhsqYgrzById" parameterType="String">
+        delete from ZHSQ_YGRZ where sbrzid = #{sbrzid}
+    </delete>
+
+    <delete id="deleteZhsqYgrzByIds" parameterType="String">
+        delete from ZHSQ_YGRZ where sbrzid in
+        <foreach item="sbrzid" collection="array" open="(" separator="," close=")">
+            #{sbrzid}
+        </foreach>
+    </delete>
+
+</mapper>

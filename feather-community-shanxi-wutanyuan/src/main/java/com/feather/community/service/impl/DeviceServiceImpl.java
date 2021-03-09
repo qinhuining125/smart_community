@@ -148,4 +148,29 @@ public class DeviceServiceImpl implements IDeviceService {
             return AjaxResult.error(errInfo);
         }
     }
+
+    @Override
+    public AjaxResult addSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj) {
+        try {
+            String sxtid = zhsqSxtrlbkgj.getFacecamCode();
+            if (Strings.isBlank(sxtid)) {
+                return AjaxResult.error(CommunityConstants.NO_SXTID_CODE);
+            }
+            ZhsqSxt zhsqSxt = zhsqSxtService.selectZhsqSxtById(sxtid);
+            if (Objects.isNull(zhsqSxt)) {
+                return AjaxResult.error(CommunityConstants.NO_SXTID_CODE);
+            }
+
+            int affectNum = zhsqYcService.insertZhsqSxtrlbkgj(zhsqSxtrlbkgj);
+            if (affectNum > 0) {
+                return AjaxResult.success();
+            }
+            return AjaxResult.error(CommunityConstants.AFFECT_ZERO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            String errInfo = ExceptionUtil.getExceptionMessage(e);
+            return AjaxResult.error(errInfo);
+        }
+    }
+
 }

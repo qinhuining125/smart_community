@@ -72,4 +72,6 @@ public class ZhsqYc extends BaseEntity
     private String czsj;
     /** 异常信息是否已读，0：表示未读，默认给0，1表示已读 */
     private String noticeRead;
+    /** 告警事件id */
+    private String gjsjid;
 }
