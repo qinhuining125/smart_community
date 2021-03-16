@@ -2,6 +2,7 @@ package com.feather.community.service.impl;
 
 import java.util.List;
 
+import com.feather.common.config.UidWorker;
 import com.feather.community.domain.ZhsqDg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import com.feather.common.core.text.Convert;
 @Service
 public class ZhsqSbServiceImpl implements IZhsqSbService
 {
+    @Autowired
+    private UidWorker uidWorker;
     @Autowired
     private ZhsqSbMapper zhsqSbMapper;
 
@@ -55,6 +58,8 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
     @Override
     public int insertZhsqSb(ZhsqSb zhsqSb)
     {
+        String sbid = "SB" + uidWorker.getNextId();
+        zhsqSb.setDeviceCode(sbid);
         return zhsqSbMapper.insertZhsqSb(zhsqSb);
     }
 
@@ -67,7 +72,8 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
     @Override
     public int updateZhsqSb(ZhsqSb zhsqSb)
     {
-        return zhsqSbMapper.updateZhsqSb(zhsqSb);
+        int b= zhsqSbMapper.updateZhsqSb(zhsqSb);
+        return b;
     }
 
     /**
