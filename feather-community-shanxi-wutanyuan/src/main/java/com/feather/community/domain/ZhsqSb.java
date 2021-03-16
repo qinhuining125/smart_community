@@ -58,4 +58,13 @@ public class ZhsqSb extends BaseEntity
     /** 社区ID */
     @Excel(name = "社区ID")
     private String sqid;
+
+    /**水表地址（硬件）*/
+    private String waterMeterAddress;
+    /**水表编码（硬件）*/
+    private String waterMeterSn;
+    /**设备编码（硬件）*/
+    private String deviceSn;
+    /**采集周期（硬件）*/
+    private int period;
 }

@@ -13,6 +13,32 @@
                 <input name="deviceCode" th:field="*{deviceCode}" class="form-control" type="text">
             </div>
         </div>-->
+        <!--设备编码是可以重复的-->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">设备编码：</label>
+            <div class="col-sm-8">
+                <input name="deviceSn" th:field="*{deviceSn}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">水表地址：</label>
+            <div class="col-sm-8">
+                <input name="waterMeterAddress" th:field="*{waterMeterAddress}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">水表编码：</label>
+            <div class="col-sm-8">
+                <input name="waterMeterSn" th:field="*{waterMeterSn}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">采集周期：</label>
+            <div class="col-sm-8">
+                <input name="period" th:field="*{period}" class="form-control" type="text">
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">设备类型：</label>
             <div class="col-sm-8">

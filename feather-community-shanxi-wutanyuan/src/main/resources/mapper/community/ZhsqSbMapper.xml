@@ -18,10 +18,16 @@
         <result property="ldid"    column="ldid"    />
         <result property="xqid"    column="xqid"    />
         <result property="sqid"    column="sqid"    />
+        <!--新添加水表地址-->
+        <result property="waterMeterAddress"    column="waterMeterAddress"  />
+        <result property="deviceSn"    column="deviceSn"  />
+        <result property="period"    column="period"  />
+        <result property="waterMeterSn"    column="waterMeterSn"  />
+
     </resultMap>
 
     <sql id="selectZhsqSbVo">
-        select device_code, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid from zhsq_sb
+        select device_code, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid,waterMeterAddress,deviceSn,period,waterMeterSn from zhsq_sb
     </sql>
 
     <select id="selectZhsqSbList" parameterType="ZhsqSb" resultMap="ZhsqSbResult">
@@ -67,6 +73,10 @@
             <if test="ldid != null  and ldid != ''">ldid,</if>
             <if test="xqid != null  and xqid != ''">xqid,</if>
             <if test="sqid != null  and sqid != ''">sqid,</if>
+            <if test="waterMeterAddress != null  and waterMeterAddress != ''">waterMeterAddress,</if>
+            <if test="deviceSn != null  and deviceSn != ''">deviceSn,</if>
+            <if test="period != null  and period != ''">period,</if>
+            <if test="waterMeterSn != null  and waterMeterSn != ''">waterMeterSn,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="deviceCode != null  and deviceCode != ''">#{deviceCode},</if>
@@ -82,6 +92,10 @@
             <if test="ldid != null  and ldid != ''">#{ldid},</if>
             <if test="xqid != null  and xqid != ''">#{xqid},</if>
             <if test="sqid != null  and sqid != ''">#{sqid},</if>
+            <if test="waterMeterAddress != null  and waterMeterAddress != ''">#{waterMeterAddress},</if>
+            <if test="deviceSn != null  and deviceSn != ''">#{deviceSn},</if>
+            <if test="period != null  and period != ''">#{period},</if>
+            <if test="waterMeterSn != null  and waterMeterSn != ''">#{waterMeterSn},</if>
         </trim>
     </insert>
 
@@ -100,6 +114,10 @@
             <if test="ldid != null  and ldid != ''">ldid = #{ldid},</if>
             <if test="xqid != null  and xqid != ''">xqid = #{xqid},</if>
             <if test="sqid != null  and sqid != ''">sqid = #{sqid},</if>
+            <if test="waterMeterAddress != null  and waterMeterAddress != ''">waterMeterAddress = #{waterMeterAddress},</if>
+            <if test="deviceSn != null  and deviceSn != ''">deviceSn = #{deviceSn},</if>
+            <if test="period != null  and period != ''">period = #{period},</if>
+            <if test="waterMeterSn != null  and waterMeterSn != ''">waterMeterSn = #{waterMeterSn},</if>
         </trim>
         where device_code = #{deviceCode}
     </update>

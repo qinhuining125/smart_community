@@ -54,7 +54,7 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
      */
     @Override
     public int insertZhsqSbrz(ZhsqSbrz zhsqSbrz) {
-        String shrzid = "SHRZ" + uidWorker.getNextId();
+        String shrzid = "SBRZ" + uidWorker.getNextId();
         zhsqSbrz.setSbrzid(shrzid);
         return zhsqSbrzMapper.insertZhsqSbrz(zhsqSbrz);
     }
