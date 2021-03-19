@@ -116,7 +116,7 @@ public class VideoAlarmLogion {
         String keepUrlStr = "http://172.16.0.10:8088/VIID/token/alive/keep";
 //        String keepUrlStr = "http://localhost/service-wutanyuan/zhzl/api/getZdsjList";
         keepResult = getParams(keepUrlStr);
-        System.out.println("keep--->定时测试" + keepResult);
+        System.out.println("keep--->定时测试。accessToken:"+accessToken + ";keepResult"+keepResult);
 
     }
 

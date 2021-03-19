@@ -310,22 +310,24 @@ public class ZhsqZnafController extends BaseController {
      */
     @GetMapping("/api/getSplb")
     @ResponseBody
-    public AjaxResult getSplb() {
-        List<Map<String, Object>> splb = iZhsqZnafService.getSplb();
-        List<Map<String, Object>> ckrk = new ArrayList<>();
-        List<Map<String, Object>> zdqy = new ArrayList<>();
-        for (int i = 0; i < splb.size(); i++) {
-            Map<String, Object> map = splb.get(i);
-            if (map.get("WZLX").equals("出口入口")) {
-                ckrk.add(map);
-            } else {
-                zdqy.add(map);
-            }
+    public AjaxResult getSplb(Integer page, Integer size,String sbmc) {
+        List<Map<String, Object>> splb =  iZhsqZnafService.getSplb(page, size,sbmc);
 
-        }
+//        List<Map<String, Object>> ckrk = new ArrayList<>();
+//        List<Map<String, Object>> zdqy = new ArrayList<>();
+//        for (int i = 0; i < splb.size(); i++) {
+//            Map<String, Object> map = splb.get(i);
+//            if (map.get("WZLX").equals("出口入口")) {
+//                ckrk.add(map);
+//            } else {
+//                zdqy.add(map);
+//            }
+//
+//        }
         Map<String, Object> resultmap = new HashMap<>();
-        resultmap.put("CKRK", ckrk);
-        resultmap.put("ZDQY", zdqy);
+        resultmap.put("splb", splb);
+//        resultmap.put("ZDQY", zdqy);
+        resultmap.put("total", iZhsqZnafService.getSplbCount(page, size,sbmc));
         return AjaxResult.success(resultmap);
     }
 

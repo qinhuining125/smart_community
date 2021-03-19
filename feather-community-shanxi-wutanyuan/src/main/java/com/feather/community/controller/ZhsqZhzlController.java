@@ -8,11 +8,8 @@ import java.util.Map;
 
 import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.feather.common.core.page.TableDataInfo;
-import com.feather.community.domain.ZhsqJm;
-import com.feather.community.domain.ZhsqSh;
-import com.feather.community.domain.ZhsqShrz;
-import com.feather.community.service.IZhsqShService;
-import com.feather.community.service.IZhsqShrzService;
+import com.feather.community.domain.*;
+import com.feather.community.service.*;
 import com.feather.community.util.MyTableDataInfo;
 import com.feather.system.service.ISysDictDataService;
 import com.feather.system.service.ISysDictTypeService;
@@ -24,8 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
-import com.feather.community.service.IZhsqZcService;
-import com.feather.community.service.IZhsqZhzlService;
 
 import io.lettuce.core.dynamic.annotation.Param;
 
@@ -48,8 +43,10 @@ public class ZhsqZhzlController extends BaseController {
     private IZhsqShService zhsqShService;
     @Autowired
     private ISysDictDataService sysDictDataService;
-
-
+    @Autowired
+    private IZhsqSxtrlbkgjService zhsqSxtrlbkgjService;
+    @Autowired
+    private IZhsqYcService zhsqYcService;
 
     @GetMapping("/api/selectZdryCount")
     @ResponseBody
@@ -332,6 +329,7 @@ public class ZhsqZhzlController extends BaseController {
         maps.put("czzt", czzt);
         maps.put("sjlx", sjlx);
         List<Map<String, Object>> ycList = zhsqZhzlService.getZdsjList(maps);
+        System.out.printf(ycList.toString());
         List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> resultMap = new HashMap<>();
        Integer ii= zhsqZhzlService.getZdsjCount(maps);
@@ -343,9 +341,25 @@ public class ZhsqZhzlController extends BaseController {
                 ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
             }
             Map<String, Object> map1 = new HashMap<>();
-            map1.put("GJSJID", "GJSJID");
-            if (map.get("GJSJ_ID")!=null){
-
+            if (map.get("GJSJID")!=null){
+                ZhsqSxtrlbkgj zhsqSxtrlbkgj=  zhsqSxtrlbkgjService.selectZhsqSxtrlbkgjById((String) map.get("GJSJID"));
+                if (zhsqSxtrlbkgj!=null){
+                    map1.put("LONGITUDE", zhsqSxtrlbkgj.getLongitude());
+                    map1.put("LATITUDE", zhsqSxtrlbkgj.getLatitude());
+                    map1.put("SNAPTIME", zhsqSxtrlbkgj.getSnapTime());//人脸抓拍时间
+                    map1.put("ALARMTIME", zhsqSxtrlbkgj.getAlarmTime());//报警时间
+                    map1.put("ALARMTYPE", zhsqSxtrlbkgj.getAlarmType());//报警类型1：黑名单告警2：白名单告警（即未匹配上的陌生人告警）3：为白名单命中告警（即白名单）
+                    map1.put("SNAPFACEPICURL",zhsqSxtrlbkgj.getSnapfacePicurl());//人脸抓拍小图片url
+                    map1.put("FACEPICURL", zhsqSxtrlbkgj.getFacePicurl());//名单库人脸url
+                    map1.put("SNAPPICURL", zhsqSxtrlbkgj.getSnapPicurl());//人脸抓拍图片url
+                    map1.put("FACESAMEVALUE", zhsqSxtrlbkgj.getFaceSamevalue());//人脸相似度
+                }
+            }
+            if (map.get("EVENT_TYPE")!=null){
+                ZhsqYcType zhsqYcType =  zhsqYcService.selectZhsqYcTypeById((String) map.get("EVENT_TYPE"));
+                if (zhsqYcType!=null){
+                    map1.put("EVENT_TYPE", zhsqYcType.getName());
+                }
             }
             map1.put("YCID", String.valueOf(map.get("YCID")));
             map1.put("YCSJ", String.valueOf(map.get("YCSJ")));

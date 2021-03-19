@@ -2,7 +2,6 @@ package com.feather.community.mapper;
 
 
 import com.feather.community.domain.ZhsqSxtrlbkgj;
-import com.feather.community.domain.ZhsqYg;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -21,14 +20,14 @@ public interface ZhsqSxtrlbkgjMapper
      * @param id 告警事件ID
      * @return 告警事件
      */
-    public ZhsqYg selectZhsqSxtrlbkgjById(String id);
+    public ZhsqSxtrlbkgj selectZhsqSxtrlbkgjById(String id);
     /**
      * 查询人脸布控告警列表
      *
      * @param zhsqSxtrlbkgj 人脸布控告警
      * @return 烟感集合
      */
-    public List<ZhsqYg> selectZhsqSxtrlbkgjList(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
+    public List<ZhsqSxtrlbkgj> selectZhsqSxtrlbkgjList(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
 
     /**
      * 新增人脸布控告警事件

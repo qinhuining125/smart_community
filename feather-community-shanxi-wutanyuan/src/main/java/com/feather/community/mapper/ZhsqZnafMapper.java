@@ -42,8 +42,7 @@ public interface ZhsqZnafMapper {
     //异常内容
     public List<Map<String, Object>> getYcnr(@Param("sqid") String sqid, @Param("xqid") String xqid);
 
-    //视频列表
-    public List<Map<String, Object>> getSplb();
+
 
     //门禁出入
     public List<Map<String, Object>> getMjjc(@Param("page")Integer page, @Param("size")Integer size,@Param("jczt")String jczt);
@@ -88,4 +87,8 @@ public interface ZhsqZnafMapper {
 
     //报警统计
     public List<Map<String, Object>> getBjtj2();
+    //视频列表
+    public List<Map<String, Object>> getSplb(@Param("page") Integer page, @Param("size") Integer size, @Param("sbmc")String sbmc);
+
+    public Integer getSplbCount(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
 }

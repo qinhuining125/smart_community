@@ -72,6 +72,9 @@ public class ZhsqYc extends BaseEntity
     private String czsj;
     /** 异常信息是否已读，0：表示未读，默认给0，1表示已读 */
     private String noticeRead;
-    /** 告警事件id */
+    /** 告警事件id -->目前只有摄像头人脸布控告警需要 */
     private String gjsjid;
+    /** 告警类型-->目前只有摄像头普通告警需要 */
+    private String eventType;
+
 }

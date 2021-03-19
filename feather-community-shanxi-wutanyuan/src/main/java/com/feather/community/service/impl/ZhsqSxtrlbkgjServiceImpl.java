@@ -4,11 +4,8 @@ package com.feather.community.service.impl;
 import com.feather.common.config.UidWorker;
 import com.feather.common.core.text.Convert;
 import com.feather.community.domain.ZhsqSxtrlbkgj;
-import com.feather.community.domain.ZhsqYg;
 import com.feather.community.mapper.ZhsqSxtrlbkgjMapper;
-import com.feather.community.mapper.ZhsqYgMapper;
 import com.feather.community.service.IZhsqSxtrlbkgjService;
-import com.feather.community.service.IZhsqYgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +27,11 @@ public class ZhsqSxtrlbkgjServiceImpl implements IZhsqSxtrlbkgjService
     /**
      * 查询烟感
      *
-     * @param ygid 烟感ID
+     * @param id 烟感ID
      * @return 烟感
      */
     @Override
-    public ZhsqYg selectZhsqSxtrlbkgjById(String id)
+    public ZhsqSxtrlbkgj selectZhsqSxtrlbkgjById(String id)
     {
         return zhsqSxtrlbkgjMapper.selectZhsqSxtrlbkgjById(id);
     }
@@ -42,11 +39,11 @@ public class ZhsqSxtrlbkgjServiceImpl implements IZhsqSxtrlbkgjService
     /**
      * 查询烟感列表
      *
-     * @param zhsqYg 烟感
+     * @param zhsqSxtrlbkgj 烟感
      * @return 烟感
      */
     @Override
-    public List<ZhsqYg> selectZhsqSxtrlbkgjList(ZhsqSxtrlbkgj zhsqSxtrlbkgj)
+    public List<ZhsqSxtrlbkgj> selectZhsqSxtrlbkgjList(ZhsqSxtrlbkgj zhsqSxtrlbkgj)
     {
         return zhsqSxtrlbkgjMapper.selectZhsqSxtrlbkgjList(zhsqSxtrlbkgj);
     }

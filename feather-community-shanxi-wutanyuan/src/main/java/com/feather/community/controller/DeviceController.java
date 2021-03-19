@@ -93,4 +93,5 @@ public class DeviceController {
     public AjaxResult addSxtrlbkgj(@RequestBody ZhsqSxtrlbkgj zhsqSxtrlbkgj) {
         return deviceService.addSxtrlbkgj(zhsqSxtrlbkgj);
     }
+
 }

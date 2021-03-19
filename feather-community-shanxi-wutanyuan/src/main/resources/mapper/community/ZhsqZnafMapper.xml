@@ -163,11 +163,31 @@
         order by CZSJ
     </select>
 
-    <!--视频列表-->
+<!--    &lt;!&ndash;视频列表&ndash;&gt;-->
+<!--    <select id="getSplb" resultType="map">-->
+
+<!--          select a.SXTID, b.JCSJ, a.WZLX,  a.SBMC ,a.WZ,a.SBZT FROM ZHSQ_SXT a left join ZHSQ_SXTJC b on a.SXTID = b.SXTID-->
+
+<!--    </select>-->
+
+    <!--烟感展示-->
     <select id="getSplb" resultType="map">
+        select t.SXTID, t.SBMC, t.X, t.Y, t.Z, t.WZ,t.WZLX,t.SBZT from
+        (select SXTID,SBMC , X,Y,Z ,WZ,WZLX,SBZT ,rownum as no FROM ZHSQ_SXT
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and WZLX like concat(concat('%',#{sbmc}),'%')</if>
+        </where>
+        ) t
+        where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
+    </select>
 
-          select  b.JCSJ, a.WZLX,  a.SBMC ,a.WZ,a.SBZT FROM ZHSQ_SXT a left join ZHSQ_SXTJC b on a.SXTID = b.SXTID
-
+    <!--烟感展示总数-->
+    <select id="getSplbCount" resultType="Integer">
+        select count(1) from (select SXTID,SBMC , X,Y,Z ,WZ,WZLX,SBZT ,rownum as no FROM ZHSQ_SXT
+        <where>
+            <if test="sbmc != null  and sbmc != ''">and WZLX like concat(concat('%',#{sbmc}),'%')</if>
+        </where>
+        ) t
     </select>
 
     <!--门禁出入-->

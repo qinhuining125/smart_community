@@ -85,8 +85,13 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
-    public List<Map<String, Object>>getSplb() {
-        return zhsqZnafMapper.getSplb();
+    public List<Map<String, Object>>getSplb(Integer page, Integer size, String sbmc) {
+        return zhsqZnafMapper.getSplb(page,size,sbmc);
+    }
+
+    @Override
+    public Integer getSplbCount(Integer page, Integer size, String sbmc) {
+        return zhsqZnafMapper.getSplbCount(page,size,sbmc);
     }
 
     @Override

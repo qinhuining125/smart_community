@@ -152,6 +152,7 @@ public class DeviceServiceImpl implements IDeviceService {
     @Override
     public AjaxResult addSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj) {
         try {
+            System.out.printf("=========================================="+String.valueOf(zhsqSxtrlbkgj));
             String sxtid = zhsqSxtrlbkgj.getFacecamCode();
             if (Strings.isBlank(sxtid)) {
                 return AjaxResult.error(CommunityConstants.NO_SXTID_CODE);

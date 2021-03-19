@@ -40,8 +40,7 @@ public interface IZhsqZnafService {
     //异常处理
     public List<Map<String, Object>> getYcnr(String sqid, String xqid);
 
-    //视频列表
-    public List<Map<String, Object>> getSplb();
+
 
     //门禁出入
     public List<Map<String, Object>> getMjjc(Integer page, Integer size, String jczt);
@@ -86,5 +85,8 @@ public interface IZhsqZnafService {
     public List<Map<String, Object>>  getXwgg(String sqid, String xqid);
 
     public List<Map<String, Object>> getBjtj2();
-
+    //视频列表
+    public List<Map<String, Object>> getSplb(Integer page, Integer size, String sbmc);
+    //视频总数
+    public Integer getSplbCount(Integer page, Integer size, String sbmc);
 }

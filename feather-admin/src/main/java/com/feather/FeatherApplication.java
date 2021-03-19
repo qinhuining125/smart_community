@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @EnableCaching(order = Ordered.HIGHEST_PRECEDENCE)
-@EnableScheduling
+//@EnableScheduling
 public class FeatherApplication {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext ctx = SpringApplication.run(FeatherApplication.class, args);

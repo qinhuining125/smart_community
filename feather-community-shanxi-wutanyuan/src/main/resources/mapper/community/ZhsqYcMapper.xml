@@ -23,10 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sjlx"    column="SJLX"    />
         <result property="czsj"    column="CZSJ"    />
         <result property="noticeRead"    column="NOTICE_READ"    />
+        <result property="gjsjid"    column="GJSJ_ID"    />
+        <result property="eventType"    column="EVENT_TYPE"    />
     </resultMap>
 
     <sql id="selectZhsqYcVo">
-        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z,XQID,SBID,SQID,SJLX,CZSJ, NOTICE_READ from ZHSQ_YC
+        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z,XQID,SBID,SQID,SJLX,CZSJ, NOTICE_READ,GJSJ_ID,EVENT_TYPE from ZHSQ_YC
     </sql>
 
     <select id="selectZhsqYcList" parameterType="ZhsqYc" resultMap="ZhsqYcResult">
@@ -49,12 +51,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="z != null  and z != ''"> and Z = #{z}</if>
         </where>
     </select>
-    
+
+    <resultMap type="ZhsqYcType" id="ZhsqYcTypeResult">
+        <result property="eventType"    column="EVENT_TYPE"    />
+        <result property="name"    column="NAME"    />
+    </resultMap>
+    <sql id="selectZhsqYcTypeVo">
+        select EVENT_TYPE, NAME from ZHSQ_YC_EVENT_TYPE
+    </sql>
+    <select id="selectZhsqYcTypeById" parameterType="String" resultMap="ZhsqYcTypeResult">
+        <include refid="selectZhsqYcTypeVo"/>
+        where EVENT_TYPE = #{eventType}
+    </select>
+
     <select id="selectZhsqYcById" parameterType="String" resultMap="ZhsqYcResult">
         <include refid="selectZhsqYcVo"/>
         where YCID = #{ycid}
     </select>
-        
+
     <insert id="insertZhsqYc" parameterType="ZhsqYc">
         insert into ZHSQ_YC
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -77,6 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="czsj != null  and czsj != ''">CZSJ,</if>
             <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ,</if>
             <if test="gjsjid != null  and gjsjid != ''">GJSJ_ID,</if>
+            <if test="eventType != null  and eventType != ''">EVENT_TYPE,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ycid != null  and ycid != ''">#{ycid},</if>
@@ -98,6 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="czsj != null  and czsj != ''">#{czsj},</if>
             <if test="noticeRead != null  and noticeRead != ''">#{noticeRead},</if>
             <if test="gjsjid != null  and gjsjid != ''">#{gjsjid},</if>
+            <if test="eventType != null  and eventType != ''">#{eventType},</if>
          </trim>
     </insert>
 

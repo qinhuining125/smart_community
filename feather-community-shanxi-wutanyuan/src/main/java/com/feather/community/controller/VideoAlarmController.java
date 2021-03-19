@@ -45,6 +45,18 @@ public class VideoAlarmController extends BaseController {
     public static String accessToken;
 
 
+
+//    /**
+//     * 获取摄像头token
+//     */
+//    @GetMapping("/api/getToken")
+//    @ClearPage
+//    @ResponseBody
+//    public String getToken() {
+//
+//
+//        return sum;
+//    }
     /**
      *登陆摄像头硬件
      */
@@ -90,7 +102,8 @@ public class VideoAlarmController extends BaseController {
         System.out.println("========"+jsonFirstObject2);
         accessToken = (String) jsonFirstObject.get("AccessToken");
         System.out.println("accessToken="+accessToken);
-        return AjaxResult.success("成功");
+//        return jsonFirstObject2;
+        return AjaxResult.success(jsonFirstObject2);
     }
 
 

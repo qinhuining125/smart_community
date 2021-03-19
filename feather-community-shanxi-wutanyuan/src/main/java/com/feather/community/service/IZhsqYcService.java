@@ -6,6 +6,7 @@ import java.util.Map;
 import com.feather.community.domain.ZhsqSxtptgj;
 import com.feather.community.domain.ZhsqSxtrlbkgj;
 import com.feather.community.domain.ZhsqYc;
+import com.feather.community.domain.ZhsqYcType;
 
 /**
  * 异常信息Service接口
@@ -75,4 +76,14 @@ public interface IZhsqYcService {
     int insertZhsqSxtpugj(ZhsqSxtptgj zhsqSxtptgj);
 
     int insertZhsqSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
+
+
+    /**
+     * 查询异常信息
+     *
+     * @param eventType
+     *            异常信息ID
+     * @return 异常信息
+     */
+    public ZhsqYcType selectZhsqYcTypeById(String eventType);
 }

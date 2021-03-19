@@ -3,6 +3,7 @@ package com.feather.community.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.feather.community.domain.ZhsqYcType;
 import org.apache.ibatis.annotations.Param;
 
 import com.feather.community.domain.ZhsqYc;
@@ -72,4 +73,5 @@ public interface ZhsqYcMapper {
 
     public List<Map> getStatusCount(@Param("sqid") String sqid, @Param("xqid") String xqid);
 
+    ZhsqYcType selectZhsqYcTypeById(String eventType);
 }

@@ -20,20 +20,20 @@ public interface IZhsqSxtrlbkgjService
      * @param gjsjid 告警事件ID
      * @return 烟感
      */
-    public ZhsqYg selectZhsqSxtrlbkgjById(String gjsjid);
+    public ZhsqSxtrlbkgj selectZhsqSxtrlbkgjById(String gjsjid);
 
     /**
      * 查询人脸布控事件列表
      *
-     * @param zhsqYg 烟感
+     * @param zhsqSxtrlbkgj 烟感
      * @return 烟感集合
      */
-    public List<ZhsqYg> selectZhsqSxtrlbkgjList(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
+    public List<ZhsqSxtrlbkgj> selectZhsqSxtrlbkgjList(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
 
     /**
      * 新增烟感
      *
-     * @param zhsqYg 烟感
+     * @param zhsqSxtrlbkgj 烟感
      * @return 结果
      */
     public int insertZhsqSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj);

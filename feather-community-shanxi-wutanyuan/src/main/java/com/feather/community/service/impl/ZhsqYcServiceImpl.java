@@ -164,6 +164,7 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
             zhsqYc.setYcjb("绿");
             zhsqYc.setYcnr("摄像头发出提示，请及时处理处理");
         }
+        zhsqYc.setEventType(zhsqSxtptgj.getEventType());
         return zhsqYcMapper.insertZhsqYc(zhsqYc);
     }
 
@@ -209,6 +210,16 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
         zhsqYc.setGjsjid(zhsqSxtrlbkgj.getId());
         zhsqSxtrlbkgjMapper.insertZhsqSxtrlbkgj(zhsqSxtrlbkgj);
         return zhsqYcMapper.insertZhsqYc(zhsqYc);
+    }
+    /**
+     * 查询异常信息
+     *
+     * @param eventType 类型编号
+     * @return 异常信息
+     */
+    @Override
+    public ZhsqYcType selectZhsqYcTypeById(String eventType) {
+        return zhsqYcMapper.selectZhsqYcTypeById(eventType);
     }
 
 }
