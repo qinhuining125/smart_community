@@ -18,10 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sbmc"    column="sbmc"    />
         <result property="sblx"    column="sblx"    />
         <result property="x"    column="x"    />
+        <!--添加一些参数进入，硬件参数-->
+        <result property="sn"    column="sn"    />
+        <result property="frequency"    column="frequency"    />
+        <result property="modifysn"    column="modifysn"    />
+        <result property="heartbeat"    column="heartbeat"    />
+        <result property="distancethreshold"    column="distancethreshold"    />
+        <result property="ipport"    column="ipport"    />
+        <result property="result"    column="result"    />
     </resultMap>
 
     <sql id="selectZhsqJgVo">
-        select jgid, xqid, ldid, wz, z, y, sqid, sbzt, sbxh, ppmc, sbmc, sblx, x from ZHSQ_JG
+        select jgid, xqid, ldid, wz, z, y, sqid, sbzt, sbxh, ppmc, sbmc, sblx, x,sn,frequency,modifysn,heartbeat,distancethreshold, ipport,result from ZHSQ_JG
     </sql>
 
     <select id="selectZhsqJgList" parameterType="ZhsqJg" resultMap="ZhsqJgResult">
@@ -40,6 +48,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sbmc != null  and sbmc != ''"> and sbmc = #{sbmc}</if>
             <if test="sblx != null  and sblx != ''"> and sblx = #{sblx}</if>
             <if test="x != null  and x != ''"> and x = #{x}</if>
+            <!--修添加的硬件配置参数-->
+            <if test="sn != null  and sn != ''"> and sn = #{sn}</if>
+            <if test="modifysn != null  and modifysn != ''"> and modifysn = #{modifysn}</if>
+            <if test="frequency != null  and frequency != ''"> and frequency = #{frequency}</if>
+            <if test="heartbeat != null  and heartbeat != ''"> and heartbeat = #{heartbeat}</if>
+            <if test="distancethreshold != null  and distancethreshold != ''"> and distancethreshold = #{distancethreshold}</if>
+            <if test="ipport != null  and ipport != ''"> and ipport = #{ipport}</if>
+            <if test="result != null  and result != ''"> and result = #{result}</if>
         </where>
     </select>
     
@@ -47,7 +63,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectZhsqJgVo"/>
         where jgid = #{jgid}
     </select>
-        
+
+
+    <select id="selectZhsqJgBySn" parameterType="String" resultMap="ZhsqJgResult">
+        <include refid="selectZhsqJgVo"/>
+        where sn = #{sn}
+    </select>
     <insert id="insertZhsqJg" parameterType="ZhsqJg">
         insert into ZHSQ_JG
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -64,6 +85,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sbmc != null  and sbmc != ''">sbmc,</if>
             <if test="sblx != null  and sblx != ''">sblx,</if>
             <if test="x != null  and x != ''">x,</if>
+            <if test="sn != null  and sn != ''">sn,</if>
+            <if test="modifysn != null  and modifysn != ''">modifysn,</if>
+            <if test="frequency != null  and frequency != ''">frequency,</if>
+            <if test="heartbeat != null  and heartbeat != ''">heartbeat,</if>
+            <if test="distancethreshold != null  and distancethreshold != ''">distancethreshold,</if>
+            <if test="ipport != null  and ipport != ''">ipport,</if>
+            <if test="result != null  and result != ''">result,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="jgid != null  and jgid != ''">#{jgid},</if>
@@ -79,6 +107,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sbmc != null  and sbmc != ''">#{sbmc},</if>
             <if test="sblx != null  and sblx != ''">#{sblx},</if>
             <if test="x != null  and x != ''">#{x},</if>
+            <if test="sn != null  and sn != ''">#{sn},</if>
+            <if test="modifysn != null  and modifysn != ''">#{modifysn},</if>
+            <if test="frequency != null  and frequency != ''">#{frequency},</if>
+            <if test="heartbeat != null  and heartbeat != ''">#{heartbeat},</if>
+            <if test="distancethreshold != null  and distancethreshold != ''">#{distancethreshold},</if>
+            <if test="ipport != null  and ipport != ''">#{ipport},</if>
+            <if test="result != null  and result != ''">#{result},</if>
          </trim>
     </insert>
 
@@ -97,6 +132,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ldid != null  and ldid != ''">ldid = #{ldid},</if>
             <if test="xqid != null  and xqid != ''">xqid = #{xqid},</if>
             <if test="sqid != null  and sqid != ''">sqid = #{sqid},</if>
+            <if test="sn != null  and sn != ''">sn = #{sn},</if>
+            <if test="modifysn != null  and modifysn != ''">modifysn = #{modifysn},</if>
+            <if test="frequency != null  and frequency != ''">frequency = #{frequency},</if>
+            <if test="heartbeat != null  and heartbeat != ''">heartbeat = #{heartbeat},</if>
+            <if test="distancethreshold != null  and distancethreshold != ''">distancethreshold = #{distancethreshold},</if>
+            <if test="ipport != null  and ipport != ''">ipport = #{ipport},</if>
+            <if test="result != null  and result != ''">result = #{result},</if>
         </trim>
         where jgid = #{jgid}
     </update>

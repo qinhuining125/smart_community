@@ -7,12 +7,12 @@
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-JG-edit" th:object="${JG}">
             <input th:field="*{jgid}" type="hidden">
-            <div class="form-group">
+           <!-- <div class="form-group">
                 <label class="col-sm-3 control-label">井盖ID：</label>
                 <div class="col-sm-8">
                     <input name="jgid" th:field="*{jgid}" class="form-control" type="text">
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">    
                 <label class="col-sm-3 control-label">小区ID：</label>
                 <div class="col-sm-8">
@@ -43,7 +43,7 @@
                     <input name="y" th:field="*{y}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">社区ID：</label>
                 <div class="col-sm-8">
                     <input name="sqid" th:field="*{sqid}" class="form-control" type="text">
@@ -55,7 +55,7 @@
                     <input name="sbzt" th:field="*{sbzt}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+           <!-- <div class="form-group">
                 <label class="col-sm-3 control-label">设备型号：</label>
                 <div class="col-sm-8">
                     <input name="sbxh" th:field="*{sbxh}" class="form-control" type="text">
@@ -66,29 +66,69 @@
                 <div class="col-sm-8">
                     <input name="ppmc" th:field="*{ppmc}" class="form-control" type="text">
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">    
                 <label class="col-sm-3 control-label">设备名称：</label>
                 <div class="col-sm-8">
                     <input name="sbmc" th:field="*{sbmc}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <!--<div class="form-group">
                 <label class="col-sm-3 control-label">设备类型：</label>
                 <div class="col-sm-8">
                     <input name="sblx" th:field="*{sblx}" class="form-control" type="text">
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">    
                 <label class="col-sm-3 control-label">经度：</label>
                 <div class="col-sm-8">
                     <input name="x" th:field="*{x}" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+          <!--  <div class="form-group">
                 <label class="col-sm-3 control-label">备注：</label>
                 <div class="col-sm-8">
                     <input name="remark" th:field="*{remark}" class="form-control" type="text">
+                </div>
+            </div>-->
+            <!--添加配置信息-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">配置信息：</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">井盖编号：</label>
+                <div class="col-sm-8">
+                    <input name="sn" th:field="*{sn}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">井盖修改后的编号：</label>
+                <div class="col-sm-8">
+                    <input name="modifysn" th:field="*{modifysn}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">采集频率：</label>
+                <div class="col-sm-8">
+                    <input name="frequency" th:field="*{frequency}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">心跳时间：</label>
+                <div class="col-sm-8">
+                    <input name="heartbeat" th:field="*{heartbeat}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">距离阈值：</label>
+                <div class="col-sm-8">
+                    <input name="distancethreshold" th:field="*{distancethreshold}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">IP以及端口号：</label>
+                <div class="col-sm-8">
+                    <input name="ipport" th:field="*{ipport}" class="form-control" type="text">
                 </div>
             </div>
         </form>

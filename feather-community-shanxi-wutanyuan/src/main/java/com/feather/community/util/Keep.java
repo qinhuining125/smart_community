@@ -16,10 +16,10 @@ public class Keep {
 //    @Scheduled(cron = "0/30 * * * * *")
     public static void corn() throws Exception {
 //        System.out.println("《《《《《>>>>《保活");
-        String keepUrlStr = "http://172.16.0.10:8088/VIID/token/alive/keep";
+        //String keepUrlStr = "http://172.16.0.10:8088/VIID/token/alive/keep";
 //        String keepUrlStr = "http://localhost/service-wutanyuan/zhzl/api/getZdsjList";
-        keepResult=keep(keepUrlStr);
-        System.out.println("《《《《《>>>>《定时测试"+keepResult);
+        //keepResult=keep(keepUrlStr);
+       // System.out.println("《《《《《>>>>《定时测试"+keepResult);
 
     }
     /**

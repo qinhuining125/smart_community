@@ -1,5 +1,6 @@
 package com.feather.community.service.impl;
 
+import com.feather.common.config.UidWorker;
 import com.feather.common.core.text.Convert;
 import com.feather.community.domain.ZhsqJg;
 import com.feather.community.mapper.ZhsqJgMapper;
@@ -20,7 +21,8 @@ public class ZhsqJgServiceImpl implements IZhsqJgService
 {
     @Autowired
     private ZhsqJgMapper zhsqJgMapper;
-
+    @Autowired
+    private UidWorker uidWorker;
     /**
      * 查询井盖
      * 
@@ -31,6 +33,17 @@ public class ZhsqJgServiceImpl implements IZhsqJgService
     public ZhsqJg selectZhsqJgById(String jgid)
     {
         return zhsqJgMapper.selectZhsqJgById(jgid);
+    }
+    /**
+     * 查询井盖
+     *
+     * @param sn 井盖编号
+     * @return 井盖
+     */
+    @Override
+    public ZhsqJg selectZhsqJgBySn(String sn)
+    {
+        return zhsqJgMapper.selectZhsqJgBySn(sn);
     }
 
     /**
@@ -54,6 +67,8 @@ public class ZhsqJgServiceImpl implements IZhsqJgService
     @Override
     public int insertZhsqJg(ZhsqJg zhsqJg)
     {
+        String sbid = "JG" + uidWorker.getNextId();
+        zhsqJg.setJgid(sbid);
         return zhsqJgMapper.insertZhsqJg(zhsqJg);
     }
 
@@ -66,7 +81,6 @@ public class ZhsqJgServiceImpl implements IZhsqJgService
     @Override
     public int updateZhsqJg(ZhsqJg zhsqJg)
     {
-        System.out.println(zhsqJg.toString());
         return zhsqJgMapper.updateZhsqJg(zhsqJg);
     }
 

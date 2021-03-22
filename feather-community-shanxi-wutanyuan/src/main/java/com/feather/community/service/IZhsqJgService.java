@@ -18,6 +18,13 @@ public interface IZhsqJgService
      * @return 井盖
      */
     public ZhsqJg selectZhsqJgById(String jgid);
+    /**
+     * 查询井盖
+     *
+     * @param sn 井盖编号
+     * @return 井盖
+     */
+    public ZhsqJg selectZhsqJgBySn(String sn);
 
     /**
      * 查询井盖列表

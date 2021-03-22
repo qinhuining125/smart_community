@@ -9,6 +9,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -76,21 +77,22 @@ public class DeviceServiceImpl implements IDeviceService {
     @Override
     public AjaxResult addSbrz(ZhsqSbrz zhsqSbrz) {
         try {
-            String deviceCode = zhsqSbrz.getDeviceCode();
-            if (Strings.isBlank(deviceCode)) {
-                return AjaxResult.error(CommunityConstants.NO_DEVICE_CODE);
+            ZhsqSb zhsqSb =new ZhsqSb();
+            zhsqSb.setWaterMeterSn(zhsqSbrz.getWaterMeterSn());
+            zhsqSb.setDeviceSn(zhsqSbrz.getDeviceSn());
+            List<ZhsqSb> list=zhsqSbService.selectZhsqSbList(zhsqSb);
+            if(list==null){
+                //没有找到相关的设备信息
+                return AjaxResult.error(CommunityConstants.NO_WATER_SN);
+            }else{
+                String deviceCode=zhsqSbService.selectZhsqSbList(zhsqSb).get(0).getDeviceCode();
+                zhsqSbrz.setDeviceCode(deviceCode);
+                int affectNum = zhsqSbrzService.insertZhsqSbrz(zhsqSbrz);
+                if (affectNum > 0) {
+                    return AjaxResult.success();
+                }
+                return AjaxResult.error(CommunityConstants.AFFECT_ZERO);
             }
-            ZhsqSb zhsqSb = zhsqSbService.selectZhsqSbById(deviceCode);
-            if (Objects.isNull(zhsqSb)) {
-                return AjaxResult.error(CommunityConstants.NO_DEVICE_CODE);
-            }
-            zhsqSbrz.setDeviceCode(zhsqSb.getDeviceCode());
-//            zhsqSbrz.setShid(zhsqSh.getShid());
-            int affectNum = zhsqSbrzService.insertZhsqSbrz(zhsqSbrz);
-            if (affectNum > 0) {
-                return AjaxResult.success();
-            }
-            return AjaxResult.error(CommunityConstants.AFFECT_ZERO);
         } catch (Exception e) {
             e.printStackTrace();
             String errInfo = ExceptionUtil.getExceptionMessage(e);
@@ -152,7 +154,6 @@ public class DeviceServiceImpl implements IDeviceService {
     @Override
     public AjaxResult addSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj) {
         try {
-            System.out.printf("=========================================="+String.valueOf(zhsqSxtrlbkgj));
             String sxtid = zhsqSxtrlbkgj.getFacecamCode();
             if (Strings.isBlank(sxtid)) {
                 return AjaxResult.error(CommunityConstants.NO_SXTID_CODE);

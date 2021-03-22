@@ -6,16 +6,27 @@ import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.common.core.page.TableDataInfo;
 import com.feather.common.enums.BusinessType;
+import com.feather.common.json.JSONObject;
 import com.feather.common.utils.poi.ExcelUtil;
-import com.feather.community.domain.ZhsqJg;
+import com.feather.community.domain.*;
+import com.feather.community.service.IZhsqJgDistanceService;
+import com.feather.community.service.IZhsqJgErrorService;
 import com.feather.community.service.IZhsqJgService;
+import com.feather.community.util.HttpUtil;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 井盖Controller
@@ -28,9 +39,14 @@ import java.util.List;
 public class ZhsqJgController extends BaseController
 {
     private String prefix = "community/JG";
+    static ExecutorService fixedThreadPool = Executors.newCachedThreadPool();
 
     @Autowired
     private IZhsqJgService zhsqJgService;
+    @Autowired
+    private IZhsqJgDistanceService zhsqJgDistanceService;
+    @Autowired
+    private IZhsqJgErrorService zhsqJgErrorService;
 
     @RequiresPermissions("community:JG:view")
     @GetMapping()
@@ -86,7 +102,8 @@ public class ZhsqJgController extends BaseController
     @ResponseBody
     public AjaxResult addSave(ZhsqJg zhsqJg)
     {
-        zhsqJg.setJgid(zhsqJg.getJgid().replace(",",""));
+        //这里的id进行修改
+       // zhsqJg.setJgid(zhsqJg.getJgid().replace(",",""));
         return toAjax(zhsqJgService.insertZhsqJg(zhsqJg), zhsqJg);
     }
 
@@ -110,8 +127,6 @@ public class ZhsqJgController extends BaseController
     @ResponseBody
     public AjaxResult editSave(ZhsqJg zhsqJg)
     {
-        System.out.println(zhsqJg.toString());
-
         zhsqJg.setJgid(zhsqJg.getJgid().split(",")[0]);
         return toAjax(zhsqJgService.updateZhsqJg(zhsqJg));
     }
@@ -127,4 +142,85 @@ public class ZhsqJgController extends BaseController
     {
         return toAjax(zhsqJgService.deleteZhsqJgByIds(ids));
     }
+
+
+    /**
+     * 配置井盖
+     * */
+    @Log(title = "井盖", businessType = BusinessType.OTHER)
+    @PostMapping( "/makeup")
+    @ResponseBody
+    public AjaxResult makeup(String jgid)
+    {
+        //调用子豪那边的请求进行井盖的配置
+        ZhsqJg JG = zhsqJgService.selectZhsqJgById(jgid);
+        byte a=0;
+        JG.setResult(a);
+        zhsqJgService.updateZhsqJg(JG);
+        String url="http://59.48.93.206:8000/api/well/config";
+        Map map = new HashMap();
+        map.put("Sn",JG.getSn());
+        map.put("ModifySn",JG.getModifysn());
+        map.put("Frequency",JG.getFrequency());
+        map.put("Heartbeat",JG.getHeartbeat());
+        map.put("DistanceThreshold",JG.getDistancethreshold());
+        map.put("IpPort",JG.getIpport());
+        JSONObject json = JSONObject.toJSONObject(map);
+        String result=HttpUtil.doPostJson(url, json.toString());
+        return AjaxResult.success(result);
+    }
+
+
+    /**
+     * 接收井盖的测距信息
+     * */
+    @ApiOperation("推送井盖的测距信息")
+    @RequestMapping(value = "/api/addJgDistance",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqJgDistance",name = "hsqJgDistance")
+    )
+    public AjaxResult addJgDisatnce(@RequestBody ZhsqJgDistance ZhsqJgDistance) {
+
+        return AjaxResult.success(zhsqJgDistanceService.insertZhsqJgDistance(ZhsqJgDistance));
+    }
+
+    /**
+     * 接收井盖的报错信息
+     **/
+    @ApiOperation("推送井盖的报错信息")
+    @RequestMapping(value = "/api/addJgError",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqJgError",name = "zhsqJgError")
+    )
+    public AjaxResult addJgError(@RequestBody ZhsqJgError ZhsqJgError) {
+        return AjaxResult.success(zhsqJgErrorService.insertZhsqJgError(ZhsqJgError));
+    }
+
+    /**
+     * 接收井盖的配置信息结果是否正确
+     * */
+    @ApiOperation("推送井盖的配置信息是否正确配置")
+    @RequestMapping(value = "/api/addJgConfigLog",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqJgConfig",name = "zhsqJgConfig")
+    )
+    public AjaxResult addJgConfigLog(@RequestBody ZhsqJgConfig zhsqJgConfig) {
+
+        byte result=zhsqJgConfig.getResult();
+        byte b=31;
+        if((result&b)==b){
+            System.out.println("配置成功");
+            ZhsqJg jg = zhsqJgService.selectZhsqJgBySn(zhsqJgConfig.getSn());
+            byte a=1;
+            jg.setResult(a);
+            zhsqJgService.updateZhsqJg(jg);
+        }else{
+            System.out.println("配置失败");
+        }
+        return AjaxResult.success();
+    }
+
 }

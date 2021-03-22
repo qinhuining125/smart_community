@@ -58,4 +58,14 @@ public class ZhsqJg extends BaseEntity
     /** 经度 */
     @Excel(name = "经度")
     private String x;
+    //配置信息
+    private String sn;
+    private int frequency;
+    private String modifysn;
+    private int heartbeat;
+    private int distancethreshold;
+    private String ipport;
+
+    //配置结果
+    private byte result;
 }

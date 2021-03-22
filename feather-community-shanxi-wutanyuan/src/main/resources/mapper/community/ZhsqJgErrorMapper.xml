@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feather.community.mapper.ZhsqJgErrorMapper">
+    
+    <resultMap type="ZhsqJgError" id="ZhsqJgErrorResult">
+        <result property="id"    column="id"    />
+        <result property="sn"    column="sn"    />
+        <result property="error"    column="error"    />
+        <result property="createTime"    column="create_time"    jdbcType="BIGINT" />
+    </resultMap>
+
+   <!-- <sql id="selectZhsqJgDistanceVo">
+        select id,sn,distance from ZHSQ_JG_Distance
+    </sql>
+-->
+    <insert id="insertZhsqJgError" parameterType="ZhsqJgError">
+        insert into ZHSQ_JG_ERROR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="sn != null  and sn != ''">sn,</if>
+            <if test="error != null  and error != ''">error,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="sn != null  and sn != ''">#{sn},</if>
+            <if test="error != null  and  error!= ''">#{error},</if>
+            <if test="createTime != null ">#{createTime, jdbcType=BIGINT},</if>
+         </trim>
+    </insert>
+</mapper>

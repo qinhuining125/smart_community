@@ -49,6 +49,8 @@
             <if test="ldid != null  and ldid != ''"> and ldid = #{ldid}</if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and sqid = #{sqid}</if>
+            <if test="deviceSn != null  and deviceSn != ''"> and deviceSn = #{deviceSn}</if>
+            <if test="waterMeterSn != null  and waterMeterSn != ''"> and waterMeterSn = #{waterMeterSn}</if>
         </where>
     </select>
 

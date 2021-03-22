@@ -118,22 +118,22 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
         String[] dates = new String[5];
         String[] counts = new String[5];
 
-        dates[4] = zhsqSbrzs1.get(0).getDeviceClock();
+        /*dates[4] = zhsqSbrzs1.get(0).getDeviceClock();
         dates[3] = zhsqSbrzs2.get(0).getDeviceClock();
         dates[2] = zhsqSbrzs3.get(0).getDeviceClock();
         dates[1] = zhsqSbrzs4.get(0).getDeviceClock();
-        dates[0] = zhsqSbrzs5.get(0).getDeviceClock();
+        dates[0] = zhsqSbrzs5.get(0).getDeviceClock();*/
 
-        Long consumption1 = zhsqSbrzs1.get(0).getDeviceTotalData() - zhsqSbrzs1.get(zhsqSbrzs1.size()-1).getDeviceTotalData();
+       /* Long consumption1 = zhsqSbrzs1.get(0).getTotal() - zhsqSbrzs1.get(zhsqSbrzs1.size()-1).getTotal();
         counts[4] = consumption1.toString();
-        Long consumption2 = zhsqSbrzs2.get(0).getDeviceTotalData() - zhsqSbrzs2.get(zhsqSbrzs2.size()-1).getDeviceTotalData();
+        Long consumption2 = zhsqSbrzs2.get(0).getTotal() - zhsqSbrzs2.get(zhsqSbrzs2.size()-1).getTotal();
         counts[3] = consumption2.toString();
-        Long consumption3 = zhsqSbrzs3.get(0).getDeviceTotalData() - zhsqSbrzs3.get(zhsqSbrzs3.size()-1).getDeviceTotalData();
+        Long consumption3 = zhsqSbrzs3.get(0).getTotal() - zhsqSbrzs3.get(zhsqSbrzs3.size()-1).getTotal();
         counts[2] = consumption3.toString();
-        Long consumption4 = zhsqSbrzs4.get(0).getDeviceTotalData() - zhsqSbrzs4.get(zhsqSbrzs4.size()-1).getDeviceTotalData();
+        Long consumption4 = zhsqSbrzs4.get(0).getTotal() - zhsqSbrzs4.get(zhsqSbrzs4.size()-1).getTotal();
         counts[1] = consumption4.toString();
-        Long consumption5 = zhsqSbrzs5.get(0).getDeviceTotalData() - zhsqSbrzs5.get(zhsqSbrzs5.size()-1).getDeviceTotalData();
-        counts[0] = consumption5.toString();
+        Long consumption5 = zhsqSbrzs5.get(0).getTotal() - zhsqSbrzs5.get(zhsqSbrzs5.size()-1).getTotal();
+        counts[0] = consumption5.toString();*/
         List<String[]> list = new ArrayList<>();
         list.add(dates);
         list.add(counts);

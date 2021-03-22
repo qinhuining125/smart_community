@@ -60,7 +60,7 @@ public class ZhsqSb extends BaseEntity
     private String sqid;
 
     /**水表地址（硬件）*/
-    private String waterMeterAddress;
+    private byte waterMeterAddress;
     /**水表编码（硬件）*/
     private String waterMeterSn;
     /**设备编码（硬件）*/

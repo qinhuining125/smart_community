@@ -21,6 +21,15 @@ public interface ZhsqJgMapper
      */
     public ZhsqJg selectZhsqJgById(String jgid);
 
+
+    /**
+     * 查询井盖
+     *
+     * @param sn 井盖的编号
+     * @return 井盖
+     */
+    public ZhsqJg selectZhsqJgBySn(String sn);
+
     /**
      * 查询井盖列表
      * 

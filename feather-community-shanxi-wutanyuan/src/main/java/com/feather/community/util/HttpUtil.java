@@ -1,6 +1,14 @@
 package com.feather.community.util;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import com.feather.common.json.JSONObject;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -58,5 +66,35 @@ public class HttpUtil {
         }
         return result;
     }
+
+    public static String doPostJson(String url,String json) {
+        // 创建连接池
+        CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
+        ResponseHandler<String> responseHandler = new BasicResponseHandler();
+        // 声明呀一个字符串用来存储response
+        String result;
+        // 创建httppost对象
+        HttpPost httpPost = new HttpPost(url);
+        // 给httppost对象设置json格式的参数
+        StringEntity httpEntity = new StringEntity(json,"utf-8");
+        // 设置请求格式
+        httpPost.setHeader("Content-type","application/json");
+        // 传参
+        httpPost.setEntity(httpEntity);
+
+        // 发送请求，并获取返回值
+        try {
+            CloseableHttpResponse response = closeableHttpClient.execute(httpPost);
+            // 将response转成String并存储在result中
+            result = response.toString();
+            return result;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "error";
+    }
+
+
 
 }
