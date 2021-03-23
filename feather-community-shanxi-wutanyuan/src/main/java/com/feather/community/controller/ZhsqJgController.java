@@ -2,6 +2,7 @@ package com.feather.community.controller;
 
 import com.feather.common.annotation.ClearPage;
 import com.feather.common.annotation.Log;
+import com.feather.common.config.Global;
 import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.common.core.page.TableDataInfo;
@@ -152,12 +153,12 @@ public class ZhsqJgController extends BaseController
     @ResponseBody
     public AjaxResult makeup(String jgid)
     {
-        //调用子豪那边的请求进行井盖的配置
         ZhsqJg JG = zhsqJgService.selectZhsqJgById(jgid);
         byte a=0;
         JG.setResult(a);
         zhsqJgService.updateZhsqJg(JG);
-        String url="http://59.48.93.206:8000/api/well/config";
+        //这里的url需要更改为配置
+        String url = Global.getConfig("device.sh.pzjg");
         Map map = new HashMap();
         map.put("Sn",JG.getSn());
         map.put("ModifySn",JG.getModifysn());
@@ -212,13 +213,12 @@ public class ZhsqJgController extends BaseController
         byte result=zhsqJgConfig.getResult();
         byte b=31;
         if((result&b)==b){
-            System.out.println("配置成功");
+            //默认是将sn进行了更新
             ZhsqJg jg = zhsqJgService.selectZhsqJgBySn(zhsqJgConfig.getSn());
             byte a=1;
             jg.setResult(a);
+            jg.setSn(jg.getModifysn());
             zhsqJgService.updateZhsqJg(jg);
-        }else{
-            System.out.println("配置失败");
         }
         return AjaxResult.success();
     }

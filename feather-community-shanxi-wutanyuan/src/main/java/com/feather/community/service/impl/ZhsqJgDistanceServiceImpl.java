@@ -65,7 +65,7 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
             zhsqYc.setYcly("井盖距离报警");
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(new Date());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:MM:ss");
             String sdate = sdf.format(calendar.getTime());
             zhsqYc.setYcsj(sdate);
             //这里先统一放入的是未确认

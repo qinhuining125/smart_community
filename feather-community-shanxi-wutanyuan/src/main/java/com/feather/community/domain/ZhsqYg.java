@@ -22,6 +22,7 @@ public class ZhsqYg extends BaseEntity
     /** $column.columnComment */
     @Excel(name = "烟感ID")
     private String ygid;
+
     @Excel(name = "IMSI")
     private String IMSI;
     /** 设备类型 */
