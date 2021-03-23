@@ -16,7 +16,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">异常级别：</label>
                 <div class="col-sm-8">
-                    <select name="ycjb" class="form-control m-b" th:with="type=${@dict.getType('null')}">
+                    <select name="ycjb" class="form-control m-b" th:with="type=${@dict.getType('exception_level')}">
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{ycjb}"></option>
                     </select>
                 </div>
@@ -42,7 +42,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">处置状态：</label>
                 <div class="col-sm-8">
-                    <select name="czzt" class="form-control m-b" th:with="type=${@dict.getType('null')}">
+                    <select name="czzt" class="form-control m-b" th:with="type=${@dict.getType('disposal_status')}">
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{czzt}"></option>
                     </select>
                 </div>
