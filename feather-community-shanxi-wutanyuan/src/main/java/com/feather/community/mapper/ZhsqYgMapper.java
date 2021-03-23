@@ -74,4 +74,6 @@ public interface ZhsqYgMapper
     int getYgtcount();
     @Select(" select count(*) from zhsq_dg")
     int getDgtcount();
+
+    ZhsqYg selectZhsqYgByImei(String imei);
 }

@@ -86,7 +86,7 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
         zhsqYc.setCzry("李磊");//处置人员
         zhsqYc.setCzjg("");//处置时间
         zhsqYc.setFj("无");
-        ZhsqYg zhsqYg= zhsqYgMapper.selectZhsqYgById(zhsqYgrz.getImsi());
+        ZhsqYg zhsqYg= zhsqYgMapper.selectZhsqYgByImei(zhsqYgrz.getImei());
         zhsqYc.setX(zhsqYg.getX());
         zhsqYc.setY(zhsqYg.getY());
         zhsqYc.setZ(zhsqYg.getZ());

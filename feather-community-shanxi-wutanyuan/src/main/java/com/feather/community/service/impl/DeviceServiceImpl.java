@@ -103,16 +103,15 @@ public class DeviceServiceImpl implements IDeviceService {
     @Override
     public AjaxResult addYgrz(ZhsqYgrz zhsqYgrz) {
         try {
-//            sn为烟感id
-            String ygid = zhsqYgrz.getImsi();
-            if (Strings.isBlank(ygid)) {
+            String imei = zhsqYgrz.getImei();
+            if (Strings.isBlank(imei)) {
                 return AjaxResult.error(CommunityConstants.NO_YGID_CODE);
             }
-            ZhsqYg zhsqYg = zhsqYgService.selectZhsqYgById(ygid);
+            ZhsqYg zhsqYg = zhsqYgService.selectZhsqYgByImei(imei);
             if (Objects.isNull(zhsqYg)) {
                 return AjaxResult.error(CommunityConstants.NO_YGID_CODE);
             }
-            zhsqYgrz.setImsi(zhsqYg.getYgid());
+            zhsqYgrz.setImei(zhsqYg.getImei());
 //            zhsqSbrz.setShid(zhsqSh.getShid());
             int affectNum = zhsqYgrzService.insertZhsqYgrz(zhsqYgrz);
             if (affectNum > 0) {

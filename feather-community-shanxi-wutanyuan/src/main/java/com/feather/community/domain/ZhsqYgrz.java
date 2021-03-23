@@ -1,5 +1,6 @@
 package com.feather.community.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,4 +44,8 @@ public class ZhsqYgrz extends BaseEntity
     /** 烟感ID */
     @Excel(name = "烟感ID")
     private String ygid;
+    /** 设备唯一编号 */
+    @Excel(name = "设备唯一编号")
+    @ApiModelProperty("设备唯一编号")
+    private String imei;
 }

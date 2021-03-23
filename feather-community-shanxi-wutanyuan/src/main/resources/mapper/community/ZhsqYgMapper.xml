@@ -6,7 +6,7 @@
 
     <resultMap type="ZhsqYg" id="ZhsqYgResult">
         <result property="ygid"    column="ygid"    />
-        <result property="IMSI"    column="IMSI"    />
+        <result property="imei"    column="imei"    />
         <result property="sblx"    column="sblx"    />
         <result property="sbmc"    column="sbmc"    />
         <result property="ppmc"    column="ppmc"    />
@@ -22,7 +22,7 @@
     </resultMap>
 
     <sql id="selectZhsqYgVo">
-        select ygid,IMSI, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid from ZHSQ_YG
+        select ygid,imei, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid from ZHSQ_YG
     </sql>
 
     <select id="selectZhsqYgList" parameterType="ZhsqYg" resultMap="ZhsqYgResult">
@@ -53,13 +53,17 @@
     </select>
     <select id="selectZhsqYgByIMSI" parameterType="String" resultMap="ZhsqYgResult">
         <include refid="selectZhsqYgVo"/>
-        where IMSI = #{IMSI}
+        where IMSI = #{imsi}
+    </select>
+    <select id="selectZhsqYgByImei" parameterType="String" resultMap="ZhsqYgResult">
+        <include refid="selectZhsqYgVo"/>
+        where IMEI = #{imei}
     </select>
     <insert id="insertZhsqYg" parameterType="ZhsqYg">
         insert into ZHSQ_YG
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ygid != null  and ygid != ''">ygid,</if>
-            <if test="IMSI != null  and IMSI != ''">IMSI,</if>
+            <if test="imei != null  and imei != ''">imei,</if>
             <if test="sblx != null  and sblx != ''">sblx,</if>
             <if test="sbmc != null  and sbmc != ''">sbmc,</if>
             <if test="ppmc != null  and ppmc != ''">ppmc,</if>
@@ -75,7 +79,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ygid != null  and ygid != ''">#{ygid},</if>
-            <if test="IMSI != null  and IMSI != ''">#{IMSI},</if>
+            <if test="imei != null  and imei != ''">#{imei},</if>
             <if test="sblx != null  and sblx != ''">#{sblx},</if>
             <if test="sbmc != null  and sbmc != ''">#{sbmc},</if>
             <if test="ppmc != null  and ppmc != ''">#{ppmc},</if>

@@ -156,10 +156,10 @@ body.signin {
 	background:url(../img/loginTopBg.png) no-repeat center;
 	background-size: 100% 8.5vh;
 }
-.loginLogo .logo{
-	display:inline-block;
-	height:6vh;
-	margin-top:1.2vh;
+.loginLogo .logo {
+	display: inline-block;
+	height: 4vh;
+	margin-top: 1.2vh;
 }
 .signinpanel {
 	width: 22vw;

@@ -66,4 +66,6 @@ public interface IZhsqYgService
     int getYgtcount();
 
     int getDgtcount();
+
+    ZhsqYg selectZhsqYgByImei(String imei);
 }

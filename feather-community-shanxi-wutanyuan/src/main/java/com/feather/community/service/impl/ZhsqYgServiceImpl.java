@@ -57,8 +57,8 @@ public class ZhsqYgServiceImpl implements IZhsqYgService
     @Override
     public int insertZhsqYg(ZhsqYg zhsqYg)
     {
-//        String ygid = "YG" + uidWorker.getNextId();
-//        zhsqYg.setYgid(ygid);
+        String ygid = "YG" + uidWorker.getNextId();
+        zhsqYg.setYgid(ygid);
         return zhsqYgMapper.insertZhsqYg(zhsqYg);
     }
 
@@ -110,5 +110,10 @@ public class ZhsqYgServiceImpl implements IZhsqYgService
     @Override
     public int getDgtcount() {
         return zhsqYgMapper.getDgtcount();
+    }
+
+    @Override
+    public ZhsqYg selectZhsqYgByImei(String imei) {
+        return zhsqYgMapper.selectZhsqYgByImei(imei);
     }
 }
