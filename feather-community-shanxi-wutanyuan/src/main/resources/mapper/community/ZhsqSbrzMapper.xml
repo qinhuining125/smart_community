@@ -109,8 +109,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
 
-    <select id="get5DayData" parameterType="String" resultMap="ZhsqSbrzResult">
-        <include refid="selectZhsqSbrzVo"/>
-        where DEVICE_CLOCK LIKE CONCAT(#{current},'%')   ORDER BY UPDATE_TIME DESC
+    <select id="get5DayData" parameterType="String" resultType="map">
+        SELECT
+        t1.today as today,
+        nvl( t2.total, 0 ) as total
+        FROM
+        ( SELECT to_char( SYSDATE - LEVEL + 1, 'yyyy-mm-dd' ) today FROM DUAL CONNECT BY LEVEL <![CDATA[ <= ]]> 5 ) t1
+        LEFT JOIN (
+        SELECT
+        sum( maxt ) AS total,
+        tf
+        FROM
+        (
+        SELECT
+        DEVICE_CODE,
+        max( total ) AS maxt,
+        to_char( CREATE_TIME, 'yyyy-mm-dd' ) AS tf
+        FROM
+        ZHSQ_SBRZ
+        GROUP BY
+        DEVICE_CODE,
+        to_char( CREATE_TIME, 'yyyy-mm-dd' )
+        ) m
+        GROUP BY
+        tf
+        ) t2 ON t1.today = t2.tf
     </select>
 </mapper>

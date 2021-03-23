@@ -2,6 +2,7 @@ package com.feather.community.mapper;
 
 import com.feather.community.domain.ZhsqSbrz;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 水表日志Mapper接口
@@ -63,5 +64,5 @@ public interface ZhsqSbrzMapper
      *
      * @return 结果
      */
-    List<ZhsqSbrz> get5DayData(String current);
+    List<Map<String, String>> get5DayData();
 }

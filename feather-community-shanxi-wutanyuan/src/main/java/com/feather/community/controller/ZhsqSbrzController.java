@@ -1,6 +1,8 @@
 package com.feather.community.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,17 +57,7 @@ public class ZhsqSbrzController extends BaseController
         List<ZhsqSbrz> list = zhsqSbrzService.selectZhsqSbrzList(zhsqSbrz);
         return getDataTable(list);
     }
-    /**
-     * 水表日志接口
-     */
-//    @RequiresPermissions("community:sbrz:get5DayData")
-    @GetMapping("/get5DayData")
-    public List<String[]> get5DayData()
-    {
-        List<String[]> list = zhsqSbrzService.get5DayData();
-        return list;
-//        return getDataTable(list);
-    }
+
     /**
      * 导出水表日志列表
      */

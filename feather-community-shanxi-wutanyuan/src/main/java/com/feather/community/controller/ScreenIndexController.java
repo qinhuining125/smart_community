@@ -387,19 +387,14 @@ public class ScreenIndexController extends BaseController {
     }
 
     /**
-     * 水表日志接口
+     * 水量统计接口
      */
-//    @RequiresPermissions("community:sbrz:get5DayData")
     @GetMapping("/api/get5DayData")
     @ClearPage
     @ResponseBody
     public AjaxResult get5DayData() {
-        List<String[]> list = zhsqSbrzService.get5DayData();
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("data", list);
-        return AjaxResult.success(resultMap);
-//        return list;
-//        return getDataTable(list);
+        List<Map<String, String>> list = zhsqSbrzService.get5DayData();
+        return AjaxResult.success(list);
     }
 
     /**
