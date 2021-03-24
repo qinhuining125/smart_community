@@ -61,7 +61,7 @@ public interface ZhsqSbMapper
      * @return 结果
      */
     public int deleteZhsqSbByIds(String[] deviceCodes);
-    @Select(" select * from zhsq_sb")
+    @Select("select * from zhsq_sb")
     public List<ZhsqSb> getSbList();
     @Select(" select * from zhsq_dg")
     List<ZhsqDg> getDgList();
