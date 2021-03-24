@@ -134,5 +134,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         GROUP BY
         tf
         ) t2 ON t1.today = t2.tf
+        order by today desc
     </select>
 </mapper>
