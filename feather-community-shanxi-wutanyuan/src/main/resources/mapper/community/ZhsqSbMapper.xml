@@ -54,6 +54,10 @@
         </where>
     </select>
 
+
+    <select id="getSbList" parameterType="ZhsqSb" resultMap="ZhsqSbResult">
+        <include refid="selectZhsqSbVo"/>
+    </select>
     <select id="selectZhsqSbById" parameterType="String" resultMap="ZhsqSbResult">
         <include refid="selectZhsqSbVo"/>
         where device_code = #{deviceCode}

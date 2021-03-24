@@ -21,7 +21,7 @@ public class ZhsqSb extends BaseEntity
 
     /** 水表ID */
     @Excel(name = "水表ID")
-    private String device_code;
+    private String deviceCode;
     /** 设备类型 */
     @Excel(name = "设备类型")
     private String sblx;

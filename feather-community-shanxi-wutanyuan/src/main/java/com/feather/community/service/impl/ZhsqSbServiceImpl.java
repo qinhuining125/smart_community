@@ -59,7 +59,7 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
     public int insertZhsqSb(ZhsqSb zhsqSb)
     {
         String sbid = "SB" + uidWorker.getNextId();
-        zhsqSb.setDevice_code(sbid);
+        zhsqSb.setDeviceCode(sbid);
         return zhsqSbMapper.insertZhsqSb(zhsqSb);
     }
 
