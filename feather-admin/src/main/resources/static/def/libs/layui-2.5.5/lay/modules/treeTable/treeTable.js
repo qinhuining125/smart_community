@@ -7,7 +7,7 @@ layui.define(['layer', 'laytpl', 'form'], function (exports) {
     var layer = layui.layer;
     var laytpl = layui.laytpl;
     var form = layui.form;
-    var = layui.device();
+    var device= layui.device();
     var MOD_NAME = 'treeTable';  // 绑定事件的模块名
     layui.link(layui.cache.base + 'treeTable/treeTable.css');
 
