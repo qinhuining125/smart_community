@@ -430,6 +430,18 @@ public class ScreenIndexController extends BaseController {
         List<ZhsqSb> list = zhsqSbService.getSbList();
         return AjaxResult.success(list);
     }
+
+    /**
+     * 获取单个水表详情信息
+     * */
+    @GetMapping("/api/getSbDetail")
+    @ClearPage
+    @ResponseBody
+    public AjaxResult getSbDetail(String deviceCode) {
+        List<Map<String, String>> liat= zhsqSbService.getSbDetail(deviceCode);
+        return AjaxResult.success(liat);
+    }
+
     /**
      * 设备列表（道杆）
      */

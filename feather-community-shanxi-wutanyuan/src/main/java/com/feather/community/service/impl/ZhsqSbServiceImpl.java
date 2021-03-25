@@ -1,6 +1,7 @@
 package com.feather.community.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.feather.common.config.UidWorker;
 import com.feather.community.domain.ZhsqDg;
@@ -47,6 +48,11 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
     public List<ZhsqSb> selectZhsqSbList(ZhsqSb zhsqSb)
     {
         return zhsqSbMapper.selectZhsqSbList(zhsqSb);
+    }
+
+    @Override
+    public List<Map<String, String>> getSbDetail(String deviceCode) {
+        return zhsqSbMapper.getSbDetail(deviceCode);
     }
 
     /**

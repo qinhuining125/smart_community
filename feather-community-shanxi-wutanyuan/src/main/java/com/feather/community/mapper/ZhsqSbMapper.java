@@ -5,6 +5,7 @@ import com.feather.community.domain.ZhsqSb;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 水表Mapper接口
@@ -21,6 +22,15 @@ public interface ZhsqSbMapper
      * @return 水表
      */
     public ZhsqSb selectZhsqSbById(String deviceCode);
+
+    /**
+     * 查询水表详情
+     *
+     * @param deviceCode 水表ID
+     * @return 水表
+     */
+    public List<Map<String, String>> getSbDetail(String deviceCode);
+
 
     /**
      * 查询水表列表
@@ -67,6 +77,7 @@ public interface ZhsqSbMapper
      * @return 结果
      */
     public List<ZhsqSb> getSbList();
+
     @Select(" select * from zhsq_dg")
     List<ZhsqDg> getDgList();
 }

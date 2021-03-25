@@ -3,6 +3,7 @@ package com.feather.community.service;
 import com.feather.community.domain.ZhsqDg;
 import com.feather.community.domain.ZhsqSb;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 水表Service接口
@@ -27,6 +28,14 @@ public interface IZhsqSbService
      * @return 水表集合
      */
     public List<ZhsqSb> selectZhsqSbList(ZhsqSb zhsqSb);
+
+    /**
+     * 查询水表单个详情
+     *
+     * @param deviceCode 水表设备code
+     * @return 水表集合
+     */
+    public List<Map<String, String>> getSbDetail(String deviceCode);
 
     /**
      * 新增水表

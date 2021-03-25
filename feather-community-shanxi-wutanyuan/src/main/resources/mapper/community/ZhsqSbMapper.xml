@@ -69,6 +69,16 @@
         where device_code = #{deviceCode}
     </select>
 
+    <select id="getSbDetail" parameterType="String" resultType="Map">
+       	select z.device_code,z.ppmc,z.sbzt,z.sbmc,z.x,z.y,z.z,z.wz,m.*,m2.* ,m3.* from ZHSQ_SB z , (select max(tmax)-min(tmax) as drys from (
+				select nvl(max(total),0) as tmax  from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(CREATE_TIME, 'yyyy-mm-dd' )=(select TO_CHAR(SYSDATE-1,'yyyy-mm-dd') from dual) union all
+				select nvl(max(total),0) as tmax from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(CREATE_TIME, 'yyyy-mm-dd' )=(select TO_CHAR(SYSDATE,'yyyy-mm-dd') from dual) )t) m ,(select max(tmax)-min(tmax) as dyys from (
+				select nvl(max(total),0) as tmax  from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(CREATE_TIME, 'yyyy-mm' )=(select to_char(add_months(trunc(sysdate),-1),'yyyy-mm') from dual) union all
+				select nvl(max(total),0) as tmax from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(CREATE_TIME, 'yyyy-mm' )=(select TO_CHAR(SYSDATE,'yyyy-mm') from dual ))t) m2  ,(select max(total) as zysl  from ZHSQ_SBRZ where device_code=#{deviceCode} ) m3  where z.device_code= #{deviceCode}
+    </select>
+
+
+
     <insert id="insertZhsqSb" parameterType="ZhsqSb">
         insert into zhsq_sb
         <trim prefix="(" suffix=")" suffixOverrides=",">
