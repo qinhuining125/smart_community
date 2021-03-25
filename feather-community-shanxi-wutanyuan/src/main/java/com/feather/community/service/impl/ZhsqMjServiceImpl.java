@@ -1,5 +1,6 @@
 package com.feather.community.service.impl;
 
+import com.feather.common.config.UidWorker;
 import com.feather.common.core.text.Convert;
 import com.feather.community.domain.ZhsqMj;
 import com.feather.community.mapper.ZhsqMjMapper;
@@ -19,7 +20,8 @@ import java.util.List;
 public class ZhsqMjServiceImpl implements IZhsqMjService {
     @Autowired
     private ZhsqMjMapper zhsqMjMapper;
-
+    @Autowired
+    private UidWorker uidWorker;
     /**
      * 查询门禁
      * 
@@ -50,6 +52,8 @@ public class ZhsqMjServiceImpl implements IZhsqMjService {
      */
     @Override
     public int insertZhsqMj(ZhsqMj zhsqMj) {
+        String ygid = "MJ" + uidWorker.getNextId();
+        zhsqMj.setMjid(ygid);
         return zhsqMjMapper.insertZhsqMj(zhsqMj);
     }
 

@@ -2,6 +2,7 @@ package com.feather.community.service.impl;
 
 import java.util.List;
 
+import com.feather.common.config.UidWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ import com.feather.community.service.IZhsqClService;
 public class ZhsqClServiceImpl implements IZhsqClService {
     @Autowired
     private ZhsqClMapper zhsqClMapper;
-
+    @Autowired
+    private UidWorker uidWorker;
     /**
      * 查询车辆
      * 
@@ -54,6 +56,8 @@ public class ZhsqClServiceImpl implements IZhsqClService {
      */
     @Override
     public int insertZhsqCl(ZhsqCl zhsqCl) {
+        String ygid = "CL" + uidWorker.getNextId();
+        zhsqCl.setClid(ygid);
         return zhsqClMapper.insertZhsqCl(zhsqCl);
     }
 

@@ -99,12 +99,8 @@
                     url: prefix + "/add",
                     data: $('#form-sxt-add').serialize(),
                     success: function(result, _option) {
-                        if (result.data.sxtid) {
-                            top.formmsg = result.msg;
-                            location.href = prefix + "/edit/" + result.data.sxtid;
-                        } else {
-                            $.modal.msgError("没有返回数据：ldid");
-                        }
+                        console.log(result)
+                        $.modal.msg(result.msg);
                     }
                 });
             }

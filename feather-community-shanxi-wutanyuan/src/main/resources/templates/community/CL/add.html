@@ -5,12 +5,9 @@
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-CL-edit">
+    <form class="form-horizontal m" id="form-CL-add">
         <div class="form-group">
             <label class="col-sm-3 control-label">车牌号码：</label>
-            <div class="col-sm-8">
-                <input name="clhm" class="form-control" type="text">
-            </div>
             <div class="col-sm-8">
                 <input name="clhm" class="form-control" type="text">
             </div>
@@ -45,15 +42,22 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script type="text/javascript">
-    var prefix = ctx + "community/cl"
-    $("#form-CL-edit").validate({
+    var prefix = ctx + "community/CL"
+    $("#form-CL-add").validate({
         focusCleanup: true
     });
-    console.log($('#form-CL-edit').serialize())
-
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.save(prefix + "/add", $('#form-CL-edit').serialize());
+            console.log($('#form-CL-add').serialize())
+            console.log(prefix + "/add",)
+            $.operate.save({
+                url: prefix + "/add",
+                data: $('#form-CL-add').serialize(),
+                success: function(result, _option) {
+                    console.log(result)
+                    $.modal.msg(result.msg);
+                }
+            });
         }
     }
 </script>

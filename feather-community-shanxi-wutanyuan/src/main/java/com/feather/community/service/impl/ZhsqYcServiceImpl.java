@@ -124,13 +124,13 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
         String sdate = sdf.format(calendar.getTime());
         zhsqYc.setYcsj(zhsqSxtptgj.getEventTime());
         if (zhsqSxtptgj.getAlarmStatus() == 0) {
-            zhsqYc.setCzzt("未确认");
+            zhsqYc.setCzzt("未处置");
         } else if (zhsqSxtptgj.getAlarmStatus() == 1) {
-            zhsqYc.setCzzt("已确认");
+            zhsqYc.setCzzt("处置中");
         } else if (zhsqSxtptgj.getAlarmStatus() == 2) {
-            zhsqYc.setCzzt("未核警");
+            zhsqYc.setCzzt("处置中");
         } else if (zhsqSxtptgj.getAlarmStatus() == 3) {
-            zhsqYc.setCzzt("已核警");
+            zhsqYc.setCzzt("已处置");
         }
         zhsqYc.setCzry("李磊");//处置人员
         zhsqYc.setCzjg("");//处置时间
