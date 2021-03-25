@@ -42,7 +42,10 @@
                 and XM like #{_xm}
             </if>
             <if test="xb != null  and xb != ''">and XB = #{xb}</if>
-            <if test="dh != null  and dh != ''">and DH = #{dh}</if>
+            <if test="dh != null  and dh != ''">
+                <bind name="_dh" value="'%'+ dh +'%'"/>
+                and DH like #{_dh}
+            </if>
             <if test="nl != null  and nl != ''">and NL = #{nl}</if>
             <if test="jg != null  and jg != ''">
                 <bind name="_jg" value="'%'+ jg +'%'"/>

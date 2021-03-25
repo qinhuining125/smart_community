@@ -22,7 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectZhsqXqList" parameterType="ZhsqXq" resultMap="ZhsqXqResult">
         <include refid="selectZhsqXqVo"/>
         <where>  
-            <if test="xqmc != null  and xqmc != ''"> and xqmc = #{xqmc}</if>
+            <if test="xqmc != null  and xqmc != ''">
+                <bind name="_xqmc" value="'%'+ xqmc +'%'"/>
+                and xqmc like #{_xqmc}
+             </if>
             <if test="jj != null  and jj != ''"> and jj = #{jj}</if>
             <if test="x != null  and x != ''"> and x = #{x}</if>
             <if test="y != null  and y != ''"> and y = #{y}</if>
@@ -67,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update zhsq_xq
         <trim prefix="SET" suffixOverrides=",">
             <if test="xqmc != null  and xqmc != ''">xqmc = #{xqmc},</if>
-            <if test="jj != null  and jj != ''">jj = #{jj},</if>
+            <if test="jj != null ">jj = #{jj},</if>
             <if test="x != null  and x != ''">x = #{x},</if>
             <if test="y != null  and y != ''">y = #{y},</if>
             <if test="z != null  and z != ''">z = #{z},</if>

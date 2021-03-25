@@ -85,7 +85,7 @@ public class DeviceServiceImpl implements IDeviceService {
                 //没有找到相关的设备信息
                 return AjaxResult.error(CommunityConstants.NO_WATER_SN);
             }else{
-                String deviceCode=zhsqSbService.selectZhsqSbList(zhsqSb).get(0).getDevice_code();
+                String deviceCode=zhsqSbService.selectZhsqSbList(zhsqSb).get(0).getDeviceCode();
                 zhsqSbrz.setDeviceCode(deviceCode);
                 int affectNum = zhsqSbrzService.insertZhsqSbrz(zhsqSbrz);
                 if (affectNum > 0) {

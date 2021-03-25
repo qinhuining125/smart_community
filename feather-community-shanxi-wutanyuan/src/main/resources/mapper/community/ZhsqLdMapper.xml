@@ -31,9 +31,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="jzwmj != null  and jzwmj != ''"> and jzwmj = #{jzwmj}</if>
             <if test="cs != null  and cs != ''"> and cs = #{cs}</if>
+            <if test="ssjd != null  and ssjd != ''">
+                <bind name="_ssjd" value="'%'+ ssjd +'%'"/>
+                and ssjd like #{_ssjd}
+            </if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and sqid = #{sqid}</if>
-            <if test="ssjd != null  and ssjd != ''"> and ssjd = #{ssjd}</if>
         </where>
     </select>
 

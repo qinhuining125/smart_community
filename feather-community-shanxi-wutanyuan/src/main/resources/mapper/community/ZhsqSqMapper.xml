@@ -21,7 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectZhsqSqList" parameterType="ZhsqSq" resultMap="ZhsqSqResult">
         <include refid="selectZhsqSqVo"/>
         <where>  
-            <if test="sqmc != null  and sqmc != ''"> and sqmc = #{sqmc}</if>
+            <if test="sqmc != null  and sqmc != ''">
+                <bind name="_sqmc" value="'%'+ sqmc +'%'"/>
+                and sqmc like #{_sqmc}
+             </if>
             <if test="jj != null  and jj != ''"> and jj = #{jj}</if>
             <if test="x != null  and x != ''"> and x = #{x}</if>
             <if test="y != null  and y != ''"> and y = #{y}</if>
@@ -43,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sqid != null  and sqid != ''">sqid,</if>
             <if test="sqmc != null  and sqmc != ''">sqmc,</if>
-            <if test="jj != null  and jj != ''">jj,</if>
+            <if test="jj != null">jj,</if>
             <if test="x != null  and x != ''">x,</if>
             <if test="y != null  and y != ''">y,</if>
             <if test="z != null  and z != ''">z,</if>
@@ -52,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sqid != null  and sqid != ''">#{sqid},</if>
             <if test="sqmc != null  and sqmc != ''">#{sqmc},</if>
-            <if test="jj != null  and jj != ''">#{jj},</if>
+            <if test="jj != null">#{jj},</if>
             <if test="x != null  and x != ''">#{x},</if>
             <if test="y != null  and y != ''">#{y},</if>
             <if test="z != null  and z != ''">#{z},</if>
