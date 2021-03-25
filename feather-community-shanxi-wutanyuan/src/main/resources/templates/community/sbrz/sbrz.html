@@ -10,15 +10,23 @@
             <form id="formId">
                 <div class="select-list">
                     <ul>
-                        <li>
+                       <!--<li>
                             <p>水表日志id：</p>
                             <input type="text" name="sbrzid"/>
-                        </li>
-                        <li>
+                        </li>-->
+                       <li>
                             <p>水表ID：</p>
                             <input type="text" name="deviceCode"/>
                         </li>
                         <li>
+                            <p>水表编码：</p>
+                            <input type="text" name="waterMeterSn"/>
+                        </li>
+                        <li>
+                            <p>设备编码：</p>
+                            <input type="text" name="deviceSn"/>
+                        </li>
+                        <!--<li>
                             <p>设备时钟：</p>
                             <input type="text" name="deviceClock"/>
                         </li>
@@ -36,35 +44,35 @@
                                 <option value="">所有</option>
                                 <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                             </select>
-                        </li>
+                        </li>-->
                         <li>
-                            <p>设备累计流量：</p>
+                            <p>累计流量：</p>
                             <input type="text" name="deviceTotalData"/>
                         </li>
-                        <li>
+                        <!--<li>
                             <p>结算日流量：</p>
                             <input type="text" name="deviceSettleDayData"/>
                         </li>
                         <li>
                             <p>结算日：</p>
                             <input type="text" name="deviceSettleDay"/>
-                        </li>
+                        </li>-->
                         <li class="select-time">
                             <p>创建时间：</p>
                             <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
                             <span>-</span>
                             <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
                         </li>
-                        <li class="select-time">
+                      <!--  <li class="select-time">
                             <p>更新时间：</p>
                             <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdateTime]"/>
                             <span>-</span>
                             <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdateTime]"/>
-                        </li>
-                        <li>
+                        </li>-->
+                       <!-- <li>
                             <p>备注：</p>
                             <input type="text" name="remark"/>
-                        </li>
+                        </li>-->
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i> 搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i> 重置</a>
@@ -159,7 +167,7 @@
                     title : '创建时间',
 
                 },
-                {
+              /*  {
                     field : 'updateTime',
                     title : '更新时间',
 
@@ -168,7 +176,7 @@
                     field : 'remark',
                     title : '备注',
 
-                },
+                },*/
                 {
                     title: '操作',
                     align: 'center',

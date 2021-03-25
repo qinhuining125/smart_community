@@ -10,14 +10,14 @@
             <form id="formId">
                 <div class="select-list">
                     <ul>
-                        <li>
+                       <!-- <li>
                             <p>水表ID：</p>
                             <input type="text" name="deviceCode"/>
-                        </li>
-                        <li>
+                        </li>-->
+                       <!-- <li>
                             <p>设备类型：</p>
                             <input type="text" name="sblx"/>
-                        </li>
+                        </li>-->
                         <li>
                             <p>设备名称：</p>
                             <input type="text" name="sbmc"/>
@@ -26,15 +26,15 @@
                             <p>品牌名称：</p>
                             <input type="text" name="ppmc"/>
                         </li>
-                        <li>
+                       <!-- <li>
                             <p>设备型号：</p>
                             <input type="text" name="sbxh"/>
-                        </li>
+                        </li>-->
                         <li>
                             <p>设备状态：</p>
                             <input type="text" name="sbzt"/>
                         </li>
-                        <li>
+                        <!--<li>
                             <p>经度：</p>
                             <input type="text" name="x"/>
                         </li>
@@ -45,19 +45,19 @@
                         <li>
                             <p>高程：</p>
                             <input type="text" name="z"/>
-                        </li>
+                        </li>-->
                         <li>
                             <p>位置：</p>
                             <input type="text" name="wz"/>
                         </li>
-                        <li>
+                       <!-- <li>
                             <p>小区ID：</p>
                             <input type="text" name="xqid"/>
                         </li>
                         <li>
                             <p>社区ID：</p>
                             <input type="text" name="sqid"/>
-                        </li>
+                        </li>-->
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i> 搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i> 重置</a>
@@ -116,9 +116,14 @@
             columns: [{
                 checkbox: true
             },
-                {
+              /*  {
                     field : 'deviceCode',
                     title : '水表ID',
+
+                },*/
+                {
+                    field : 'sbmc',
+                    title : '设备名称',
 
                 },
                 {
@@ -127,40 +132,36 @@
 
                 },
                 {
-                    field : 'waterMeterAddress',
-                    title : '水表地址',
-
-                },
-                {
                     field : 'waterMeterSn',
                     title : '水表编码',
 
                 },
+              /*  {
+                    field : 'waterMeterAddress',
+                    title : '水表地址',
+
+                },*/
                 {
                     field : 'period',
                     title : '采集周期',
 
                 },
-                {
+              /*  {
                     field : 'sblx',
                     title : '设备类型',
 
-                },
-                {
-                    field : 'sbmc',
-                    title : '设备名称',
+                },*/
 
-                },
                 {
                     field : 'ppmc',
                     title : '品牌名称',
 
                 },
-                {
+               /* {
                     field : 'sbxh',
                     title : '设备型号',
 
-                },
+                },*/
                 {
                     field : 'sbzt',
                     title : '设备状态',
@@ -186,7 +187,7 @@
                     title : '位置',
 
                 },
-                {
+             /*   {
                     field : 'ldid',
                     title : '位置',
 
@@ -200,7 +201,7 @@
                     field : 'sqid',
                     title : '社区ID',
 
-                },
+                },*/
                 {
                     title: '操作',
                     align: 'center',

@@ -23,7 +23,6 @@ public class ZhsqSb extends BaseEntity
     @Excel(name = "水表ID")
     private String deviceCode;
     /** 设备类型 */
-    @Excel(name = "设备类型")
     private String sblx;
     /** 设备名称 */
     @Excel(name = "设备名称")
@@ -32,7 +31,6 @@ public class ZhsqSb extends BaseEntity
     @Excel(name = "品牌名称")
     private String ppmc;
     /** 设备型号 */
-    @Excel(name = "设备型号")
     private String sbxh;
     /** 设备状态 */
     @Excel(name = "设备状态")
@@ -50,21 +48,22 @@ public class ZhsqSb extends BaseEntity
     @Excel(name = "位置")
     private String wz;
     /** $column.columnComment */
-    @Excel(name = "位置")
     private String ldid;
     /** 小区ID */
-    @Excel(name = "小区ID")
     private String xqid;
     /** 社区ID */
-    @Excel(name = "社区ID")
     private String sqid;
 
     /**水表地址（硬件）*/
+    @Excel(name = "水表地址")
     private byte waterMeterAddress;
     /**水表编码（硬件）*/
+    @Excel(name = "水表编码")
     private String waterMeterSn;
     /**设备编码（硬件）*/
+    @Excel(name = "设备编码")
     private String deviceSn;
     /**采集周期（硬件）*/
+    @Excel(name = "采集周期")
     private int period;
 }

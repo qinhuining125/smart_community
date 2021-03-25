@@ -77,6 +77,7 @@ public class DeviceServiceImpl implements IDeviceService {
     @Override
     public AjaxResult addSbrz(ZhsqSbrz zhsqSbrz) {
         try {
+
             ZhsqSb zhsqSb =new ZhsqSb();
             zhsqSb.setWaterMeterSn(zhsqSbrz.getWaterMeterSn());
             zhsqSb.setDeviceSn(zhsqSbrz.getDeviceSn());
@@ -85,6 +86,7 @@ public class DeviceServiceImpl implements IDeviceService {
                 //没有找到相关的设备信息
                 return AjaxResult.error(CommunityConstants.NO_WATER_SN);
             }else{
+                //理论上来讲，这里只会出现单一结果
                 String deviceCode=zhsqSbService.selectZhsqSbList(zhsqSb).get(0).getDeviceCode();
                 zhsqSbrz.setDeviceCode(deviceCode);
                 int affectNum = zhsqSbrzService.insertZhsqSbrz(zhsqSbrz);

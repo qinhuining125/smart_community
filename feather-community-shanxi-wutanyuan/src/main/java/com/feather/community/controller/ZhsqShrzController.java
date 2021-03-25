@@ -126,6 +126,7 @@ public class ZhsqShrzController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
+
         return toAjax(zhsqShrzService.deleteZhsqShrzByIds(ids));
     }
 }

@@ -39,13 +39,19 @@
                 <bind name="_sbmc" value="'%'+ sbmc +'%'"/>
                 and sbmc like #{_sbmc}
             </if>
-            <if test="ppmc != null  and ppmc != ''"> and ppmc = #{ppmc}</if>
+            <if test="ppmc != null  and ppmc != ''">
+                <bind name="_ppmc" value="'%'+ ppmc +'%'"/>
+                and ppmc like #{_ppmc}
+            </if>
             <if test="sbxh != null  and sbxh != ''"> and sbxh = #{sbxh}</if>
             <if test="sbzt != null  and sbzt != ''"> and sbzt = #{sbzt}</if>
             <if test="x != null  and x != ''"> and x = #{x}</if>
             <if test="y != null  and y != ''"> and y = #{y}</if>
             <if test="z != null  and z != ''"> and z = #{z}</if>
-            <if test="wz != null  and wz != ''"> and wz = #{wz}</if>
+            <if test="wz != null  and wz != ''">
+                <bind name="_wz" value="'%'+ wz +'%'"/>
+                and wz like #{_wz}
+             </if>
             <if test="ldid != null  and ldid != ''"> and ldid = #{ldid}</if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and sqid = #{sqid}</if>
