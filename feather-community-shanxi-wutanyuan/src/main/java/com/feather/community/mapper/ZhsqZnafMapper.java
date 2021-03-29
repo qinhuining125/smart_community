@@ -91,4 +91,6 @@ public interface ZhsqZnafMapper {
     public List<Map<String, Object>> getSplb(@Param("page") Integer page, @Param("size") Integer size, @Param("sbmc")String sbmc);
 
     public Integer getSplbCount(@Param("page")Integer page, @Param("size")Integer size,@Param("sbmc")String sbmc);
+
+    public List<Map<String, Object>> getHJ();
 }

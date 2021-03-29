@@ -95,6 +95,11 @@ public class ZhsqZnafServiceImpl implements IZhsqZnafService  {
     }
 
     @Override
+    public List<Map<String, Object>> getHJ() {
+        return zhsqZnafMapper.getHJ();
+    }
+
+    @Override
     public List<Map<String, Object>> getMjjc(Integer page, Integer size,String jczt) {
 
         return zhsqZnafMapper.getMjjc(page,size,jczt);

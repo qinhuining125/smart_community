@@ -89,4 +89,6 @@ public interface IZhsqZnafService {
     public List<Map<String, Object>> getSplb(Integer page, Integer size, String sbmc);
     //视频总数
     public Integer getSplbCount(Integer page, Integer size, String sbmc);
+    //火警
+    public List<Map<String, Object>> getHJ();
 }

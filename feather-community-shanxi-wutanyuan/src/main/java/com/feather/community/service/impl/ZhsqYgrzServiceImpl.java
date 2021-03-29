@@ -76,7 +76,7 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
         ZhsqYc zhsqYc=new ZhsqYc();
         String ycid = "YC" + uidWorker.getNextId();
         zhsqYc.setYcid(ycid);
-        zhsqYc.setYcly("设备报警");
+        zhsqYc.setYcly("烟感报警");
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
@@ -95,6 +95,7 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
         zhsqYc.setSqid(zhsqYg.getSqid());
         zhsqYc.setSjlx("设备报警事件");
         zhsqYc.setNoticeRead("0");
+        zhsqYc.setEventType("1");
         if (content==1){
             zhsqYc.setYcjb("红");
             zhsqYc.setYcnr("烟感设备发生烟感报警，请马上处理");

@@ -359,6 +359,11 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
         </where>
         order by t.FBSJ
     </select>
-
-
+    <!--获取摄像头报警-->
+    <select id="getHJ" resultType="map">
+        select * from ZHSQ_YC
+        <where>
+            EVENT_TYPE=1 or EVENT_TYPE=207
+        </where>
+    </select>
 </mapper>

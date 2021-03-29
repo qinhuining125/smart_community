@@ -1,10 +1,12 @@
 package com.feather.community.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.feather.common.annotation.ClearPage;
 import com.feather.community.domain.*;
 import com.feather.community.pojo.SearchEntity;
@@ -599,5 +601,30 @@ public class ScreenIndexController extends BaseController {
         return AjaxResult.success(resultList);
     }
 
-
+    /**
+     * 火警事件
+     */
+    @GetMapping("/api/getHJ")
+    @ClearPage
+    @ResponseBody
+    public AjaxResult getHJ() throws SQLException {
+        List<Map<String, Object>> list = iZhsqZnafService.getHJ();
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            Map<String, Object> map = new HashMap<>();
+            map.put("YCID", list.get(i).get("YCID"));
+            map.put("YCLY", list.get(i).get("YCLY"));
+            Object ycxw = list.get(i).get("YCNR");
+            if (ycxw instanceof ClobProxyImpl) {
+                ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
+            }
+            map.put("YCNR", ycxw);
+            map.put("NOTICE_READ", list.get(i).get("NOTICE_READ"));
+            map.put("X", list.get(i).get("X"));
+            map.put("Y", list.get(i).get("Y"));
+            map.put("Z", list.get(i).get("Z"));
+            resultList.add(map);
+        }
+        return AjaxResult.success(resultList);
+    }
 }

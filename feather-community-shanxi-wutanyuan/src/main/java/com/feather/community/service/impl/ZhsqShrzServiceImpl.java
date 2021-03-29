@@ -78,7 +78,7 @@ public class ZhsqShrzServiceImpl implements IZhsqShrzService
         ZhsqYc zhsqYc=new ZhsqYc();
         String ycid = "YC" + uidWorker.getNextId();
         zhsqYc.setYcid(ycid);
-        zhsqYc.setYcly("设备报警");
+        zhsqYc.setYcly("手环报警");
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
