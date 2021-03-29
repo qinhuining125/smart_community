@@ -131,12 +131,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
         DEVICE_CODE,
         max( total ) AS maxt,
-        to_char( CREATE_TIME, 'yyyy-mm-dd' ) AS tf
+        to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') AS tf
         FROM
         ZHSQ_SBRZ
         GROUP BY
         DEVICE_CODE,
-        to_char( CREATE_TIME, 'yyyy-mm-dd' )
+        to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')
         ) m
         GROUP BY
         tf

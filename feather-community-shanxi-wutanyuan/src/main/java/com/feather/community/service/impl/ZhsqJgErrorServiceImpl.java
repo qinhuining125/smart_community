@@ -79,7 +79,7 @@ public class ZhsqJgErrorServiceImpl implements IZhsqJgErrorService
             zhsqYc.setSjlx("设备报警事件");
             zhsqYc.setNoticeRead("0");
             zhsqYc.setYcjb("黄");
-            zhsqYc.setYcnr("井盖设备发出提示，请及时处理");
+            zhsqYc.setYcnr("井盖设备发出报警，请及时处理");
             int d= zhsqYcMapper.insertZhsqYc(zhsqYc);
             zhsqJgError.setCreateTime(new Date());
             return zhsqJgErrorMapper.insertZhsqJgError(zhsqJgError);

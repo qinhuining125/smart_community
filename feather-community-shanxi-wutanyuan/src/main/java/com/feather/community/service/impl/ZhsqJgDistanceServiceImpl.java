@@ -57,7 +57,6 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
         ZhsqJg zhsqJg=zhsqJgMapper.selectZhsqJgBySn(zhsqJgDistance.getSn());
         int threshold=zhsqJg.getDistancethreshold();
         if(zhsqJgDistance.getDistance()>threshold){
-            System.out.println("井盖距离超过阈值的范围");
             //进行报警值的插入
             ZhsqYc zhsqYc = new ZhsqYc();
             String ycid = "YC" + uidWorker.getNextId();
@@ -82,7 +81,7 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
             zhsqYc.setSjlx("设备报警事件");
             zhsqYc.setNoticeRead("0");
             zhsqYc.setYcjb("黄");
-            zhsqYc.setYcnr("井盖设备发出提示，请及时处理");
+            zhsqYc.setYcnr("井盖距离超过阈值，请及时处理");
             int d= zhsqYcMapper.insertZhsqYc(zhsqYc);
         }
         zhsqJgDistance.setCreateTime(new Date());

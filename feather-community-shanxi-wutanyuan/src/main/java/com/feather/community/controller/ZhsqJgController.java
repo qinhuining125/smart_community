@@ -157,8 +157,8 @@ public class ZhsqJgController extends BaseController
         byte a=0;
         JG.setResult(a);
         zhsqJgService.updateZhsqJg(JG);
-        //这里的url需要更改为配置
         String url = Global.getConfig("device.sh.pzjg");
+        //默认每次发送的都是全部信息
         Map map = new HashMap();
         map.put("Sn",JG.getSn());
         map.put("ModifySn",JG.getModifysn());
@@ -213,7 +213,6 @@ public class ZhsqJgController extends BaseController
         byte result=zhsqJgConfig.getResult();
         byte b=31;
         if((result&b)==b){
-            //默认是将sn进行了更新
             ZhsqJg jg = zhsqJgService.selectZhsqJgBySn(zhsqJgConfig.getSn());
             byte a=1;
             jg.setResult(a);
