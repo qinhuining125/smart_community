@@ -10,25 +10,24 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-                            <li>
-                                <p>设备类型：</p>
-                                <input type="text" name="sblx"/>
-                            </li>
+<!--                            <li>-->
+<!--                                <p>设备类型：</p>-->
+<!--                                <input type="text" name="sblx"/>-->
+<!--                            </li>-->
                             <li>
                                 <p>设备名称：</p>
                                 <input type="text" name="sbmc"/>
                             </li>
                             <li>
-                                <p>品牌名称：</p>
-                                <input type="text" name="ppmc"/>
-                            </li>
-                            <li>
-                                <p>设备型号：</p>
-                                <input type="text" name="sbxh"/>
+                                <p>位置：</p>
+                                <input type="text" name="wz"/>
                             </li>
                             <li>
                                 <p>设备状态：</p>
-                                <input type="text" name="sbzt"/>
+                                <select name="sbzt" >
+                                    <option value="在线">在线</option>
+                                    <option value="离线">离线</option>
+                                </select>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -76,8 +75,8 @@
                     checkbox: true
                 },
                 {
-                    field : 'zjid',
-                    title : '闸机id',
+                    field : 'mjid',
+                    title : '门禁id',
                     visible: false
                 },
                 {
@@ -86,11 +85,11 @@
                 },
                 {
                     field : 'sbmc',
-                    title : '设备名称111'
+                    title : '设备名称'
                 },
                 {
-                    field : 'ppmc',
-                    title : '品牌名称'
+                    field : 'wz',
+                    title : '位置'
                 },
                 {
                     field : 'sbxh',

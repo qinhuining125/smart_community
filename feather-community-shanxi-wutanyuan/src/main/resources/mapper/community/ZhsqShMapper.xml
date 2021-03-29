@@ -38,6 +38,10 @@
         <include refid="selectZhsqShVo"/>
         <where>
             <if test="jmid != null  and jmid != ''"> and jmid=#{jmid}</if>
+            <if test="sbmc != null  and sbmc != ''"> and sbmc like concat(concat('%',#{sbmc}),'%')</if>
+            <if test="wz != null  and wz != ''"> and wz like concat(concat('%',#{wz}),'%')</if>
+            <if test="sbzt != null  and sbzt != ''"> and sbzt=#{sbzt}</if>
+            <if test="xm != null  and xm != ''"> and xm like concat(concat('%',#{xm}),'%')</if>
         </where>
     </select>
 

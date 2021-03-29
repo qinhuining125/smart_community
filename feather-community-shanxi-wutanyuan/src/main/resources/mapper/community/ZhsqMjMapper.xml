@@ -29,11 +29,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="mjid != null  and mjid != ''"> and mjid = #{mjid}</if>
             <if test="sblx != null  and sblx != ''"> and sblx = #{sblx}</if>
-            <if test="sbmc != null  and sbmc != ''"> and sbmc = #{sbmc}</if>
+            <if test="sbmc != null  and sbmc != ''"> and sbmc like concat(concat('%',#{sbmc}),'%')</if>
             <if test="ppmc != null  and ppmc != ''"> and ppmc = #{ppmc}</if>
             <if test="sbxh != null  and sbxh != ''"> and sbxh = #{sbxh}</if>
             <if test="sbzt != null  and sbzt != ''"> and sbzt = #{sbzt}</if>
-            <if test="wz != null  and wz != ''"> and wz = #{wz}</if>
+            <if test="wz != null  and wz != ''"> and wz like concat(concat('%',#{wz}),'%')</if>
             <if test="ldid != null  and ldid != ''"> and ldid = #{ldid}</if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and sqid = #{sqid}</if>

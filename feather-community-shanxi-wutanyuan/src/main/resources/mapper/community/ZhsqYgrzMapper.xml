@@ -8,12 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sbrzid"    column="sbrzid"    />
         <result property="sn"    column="sn"    />
         <result property="imsi"    column="imsi"    />
+        <result property="imei"    column="imei"    />
         <result property="rssi"    column="rssi"    />
         <result property="baterry"    column="baterry"    />
         <result property="infotype"    column="infotype"    />
         <result property="content"    column="content"    />
         <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
+        <result property="createTime"    column="create_time"  jdbcType="BIGINT"  />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
@@ -22,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZhsqYgrzVo">
-        select sbrzid, sn, imsi, rssi, baterry, infotype, content, create_by, create_time, update_by, update_time, remark, create_byid, update_byid, ygid from ZHSQ_YGRZ
+        select sbrzid, sn, imsi,imei, rssi, baterry, infotype, content, create_by, create_time, update_by, update_time, remark, create_byid, update_byid, ygid from ZHSQ_YGRZ
     </sql>
 
     <select id="selectZhsqYgrzList" parameterType="ZhsqYgrz" resultMap="ZhsqYgrzResult">
@@ -30,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="sbrzid != null  and sbrzid != ''"> and sbrzid = #{sbrzid}</if>
             <if test="sn != null  and sn != ''"> and sn = #{sn}</if>
-            <if test="imsi != null and imsi != ''"> and imsi = #{imsi}</if>
+            <if test="imei != null and imei != ''"> and imei = #{imei}</if>
             <if test="rssi != null  and rssi != ''"> and rssi = #{rssi}</if>
             <if test="baterry != null  and baterry != ''"> and baterry = #{baterry}</if>
             <if test="infotype != null "> and infotype = #{infotype}</if>
@@ -38,6 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null "> and create_time = #{createTime}</if>
             <if test="updateTime != null "> and update_time = #{updateTime}</if>
             <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != ''"><!-- 开始时间检索 -->
+                and create_time &gt;= #{params.beginCreateTime, jdbcType=BIGINT}
+            </if>
+            <if test="params.endCreateTime != null and params.endCreateTime != ''"><!-- 结束时间检索 -->
+                and create_time &lt;= #{params.endCreateTime, jdbcType=BIGINT}
+            </if>
         </where>
     </select>
     
@@ -64,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createByid != null ">create_byid,</if>
             <if test="updateByid != null ">update_byid,</if>
             <if test="ygid != null  and ygid != ''">ygid,</if>
+            <if test="imei != null  and imei != ''">imei,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sbrzid != null  and sbrzid != ''">#{sbrzid},</if>
@@ -81,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createByid != null ">#{createByid},</if>
             <if test="updateByid != null ">#{updateByid},</if>
             <if test="ygid != null  and ygid != ''">#{ygid},</if>
+            <if test="imei != null  and imei != ''">#{imei},</if>
          </trim>
     </insert>
 

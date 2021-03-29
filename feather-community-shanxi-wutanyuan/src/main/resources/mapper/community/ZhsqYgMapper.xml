@@ -40,7 +40,7 @@
             <if test="x != null "> and x = #{x}</if>
             <if test="y != null "> and y = #{y}</if>
             <if test="z != null  and z != ''"> and z = #{z}</if>
-            <if test="wz != null  and wz != ''"> and wz = #{wz}</if>
+            <if test="wz != null  and wz != ''"> and wz like concat(concat('%',#{wz}),'%')</if>
             <if test="ldid != null  and ldid != ''"> and ldid = #{ldid}</if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and sqid = #{sqid}</if>

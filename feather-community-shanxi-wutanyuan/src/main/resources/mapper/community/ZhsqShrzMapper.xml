@@ -37,6 +37,14 @@
     <select id="selectZhsqShrzList" parameterType="ZhsqShrz" resultMap="ZhsqShrzResult">
         <include refid="selectZhsqShrzVo"/>
         <where>
+            <if test="wearState != null  and wearState != ''"> and sfpd = #{wearState}</if>
+            <if test="alarmState != null  and alarmState != ''"> and bj = #{alarmState}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != ''"><!-- 开始时间检索 -->
+                and create_time &gt;= #{params.beginCreateTime, jdbcType=BIGINT}
+            </if>
+            <if test="params.endCreateTime != null and params.endCreateTime != ''"><!-- 结束时间检索 -->
+                and create_time &lt;= #{params.endCreateTime, jdbcType=BIGINT}
+            </if>
         </where>
         order by create_time desc
     </select>

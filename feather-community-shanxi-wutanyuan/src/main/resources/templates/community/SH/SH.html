@@ -11,32 +11,19 @@
                 <div class="select-list">
                     <ul>
                         <li>
-                            <p>手环ID：</p>
-                            <input type="text" name="shid"/>
-                        </li>
-                        <li>
-                            <p>设备类型：</p>
-                            <input type="text" name="sblx"/>
-                        </li>
-                        <li>
                             <p>设备名称：</p>
                             <input type="text" name="sbmc"/>
                         </li>
                         <li>
-                            <p>品牌名称：</p>
-                            <input type="text" name="ppmc"/>
-                        </li>
-                        <li>
-                            <p>设备型号：</p>
-                            <input type="text" name="sbxh"/>
+                            <p>位置：</p>
+                            <input type="text" name="wz"/>
                         </li>
                         <li>
                             <p>设备状态：</p>
-                            <input type="text" name="sbzt"/>
-                        </li>
-                        <li>
-                            <p>设备唯一编号：</p>
-                            <input type="text" name="imei"/>
+                            <select name="sbzt" >
+                                <option value="在线">在线</option>
+                                <option value="离线">离线</option>
+                            </select>
                         </li>
                         <li>
                             <p>姓名：</p>
@@ -117,13 +104,17 @@
                     title : '设备名称'
                 },
                 {
-                    field : 'ppmc',
-                    title : '品牌名称'
+                    field : 'wz',
+                    title : '位置'
                 },
-                {
-                    field : 'sbxh',
-                    title : '设备型号'
-                },
+                // {
+                //     field : 'ppmc',
+                //     title : '品牌名称'
+                // },
+                // {
+                //     field : 'sbxh',
+                //     title : '设备型号'
+                // },
                 {
                     field : 'sbzt',
                     title : '设备状态'

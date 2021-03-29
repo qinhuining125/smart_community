@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="instant"    column="instant"    />
         <result property="total"    column="total"    />
         <result property="waterMeterSn"    column="waterMeterSn"    />
-        <result property="createTime"    column="create_time"    />
+        <result property="createTime"    column="create_time"  jdbcType="BIGINT"  />
         <result property="createBy"    column="create_by"    />
         <result property="deviceSn"    column="deviceSn"    />
         <result property="updateByid"    column="update_byid"    />
@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectZhsqSbrzList" parameterType="ZhsqSbrz" resultMap="ZhsqSbrzResult">
         <include refid="selectZhsqSbrzVo"/>
-        <where>  
+        <where>
+            <if test="createByid != null "> and create_byid = #{createByid}</if>
             <if test="createByid != null "> and create_byid = #{createByid}</if>
             <if test="deviceCode != null  and deviceCode != ''"> and device_code = #{deviceCode}</if>
             <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
@@ -33,9 +34,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
             <if test="instant != null and instant !='' "> and instant = #{instant}</if>
             <if test="total != null and total !='' "> and total = #{total}</if>
-            <if test="waterMeterSn != null and  waterMeterSn!='' "> and waterMeterSn = #{waterMeterSn}</if>
-            <if test="deviceSn != null  and deviceSn != ''"> and deviceSn = #{deviceSn}</if>
+            <if test="waterMeterSn != null and  waterMeterSn!='' "> and waterMeterSn like concat(concat('%',#{waterMeterSn}),'%')</if>
+            <if test="deviceSn != null  and deviceSn != ''"> and deviceSn like concat(concat('%',#{deviceSn}),'%')</if>
             <if test="updateByid != null "> and update_byid = #{updateByid}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != ''"><!-- 开始时间检索 -->
+                and create_time &gt;= #{params.beginCreateTime, jdbcType=BIGINT}
+            </if>
+            <if test="params.endCreateTime != null and params.endCreateTime != ''"><!-- 结束时间检索 -->
+                and create_time &lt;= #{params.endCreateTime, jdbcType=BIGINT}
+            </if>
         </where>
     </select>
     

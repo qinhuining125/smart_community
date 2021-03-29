@@ -29,12 +29,14 @@ public class ZhsqSbrz extends BaseEntity
     private double instant;
     /** 设备累计流量 */
     @Excel(name = "设备累计流量")
-    private double total;
+    private Double total;
     /** 设备状态 */
     @Excel(name = "水表编码")
     private String waterMeterSn;
-    /** 电池电压 */
     @Excel(name = "设备编码")
     private String deviceSn;
-
+//    @Excel(name = "开始时间")
+//    private String beginCreateTime;
+//    @Excel(name = "结束时间")
+//    private String endCreateTime;
 }

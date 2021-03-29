@@ -37,7 +37,7 @@
             <if test="sblx != null  and sblx != ''"> and sblx = #{sblx}</if>
             <if test="sbmc != null  and sbmc != ''">
                 <bind name="_sbmc" value="'%'+ sbmc +'%'"/>
-                and sbmc like #{_sbmc}
+                and sbmc like concat(concat('%',#{_sbmc}),'%')
             </if>
             <if test="ppmc != null  and ppmc != ''">
                 <bind name="_ppmc" value="'%'+ ppmc +'%'"/>
@@ -50,7 +50,7 @@
             <if test="z != null  and z != ''"> and z = #{z}</if>
             <if test="wz != null  and wz != ''">
                 <bind name="_wz" value="'%'+ wz +'%'"/>
-                and wz like #{_wz}
+                and wz  like concat(concat('%',#{_wz}),'%')
              </if>
             <if test="ldid != null  and ldid != ''"> and ldid = #{ldid}</if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
