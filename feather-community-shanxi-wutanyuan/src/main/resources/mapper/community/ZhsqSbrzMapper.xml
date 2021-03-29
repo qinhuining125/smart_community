@@ -73,9 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sbrzid != null  and sbrzid != ''">#{sbrzid},</if>
             <if test="deviceCode != null  and deviceCode != ''">#{deviceCode},</if>
             <if test="remark != null  and remark != ''">#{remark},</if>
-            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createTime != null ">#{createTime, jdbcType=BIGINT},</if>
             <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
-            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime, jdbcType=BIGINT},</if>
             <if test="createBy != null  and createBy != ''">#{createBy},</if>
             <if test="instant != null ">#{instant},</if>
             <if test="total != null ">#{total},</if>
@@ -91,9 +91,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createByid != null ">create_byid = #{createByid},</if>
             <if test="deviceCode != null  and deviceCode != ''">device_code = #{deviceCode},</if>
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
-            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createTime != null ">create_time = #{createTime, jdbcType=BIGINT},</if>
             <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
-            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime, jdbcType=BIGINT},</if>
             <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
             <if test="instant != null ">instant = #{instant},</if>
             <if test="total != null ">total = #{total},</if>
