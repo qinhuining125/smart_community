@@ -48,4 +48,11 @@ public interface IDeviceService {
      * @return
      */
     AjaxResult addSxtrlbkgj(ZhsqSxtrlbkgj zhsqSxtrlbkgj);
+
+    /**
+     * 获取手环轨迹
+     * @param zhsqShrz
+     * @return
+     */
+    AjaxResult getShgj(ZhsqShrz zhsqShrz);
 }

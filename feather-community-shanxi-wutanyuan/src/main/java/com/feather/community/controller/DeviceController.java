@@ -93,5 +93,16 @@ public class DeviceController {
     public AjaxResult addSxtrlbkgj(@RequestBody ZhsqSxtrlbkgj zhsqSxtrlbkgj) {
         return deviceService.addSxtrlbkgj(zhsqSxtrlbkgj);
     }
+    /**输入手环imei，进行手环轨迹的查询*/
+    @ApiOperation("手环轨迹查询")
+    @RequestMapping(value = "/api/getShgj",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqShrz",name = "zhsqShrz")
+    )
+    public AjaxResult getShgj(@RequestBody ZhsqShrz zhsqShrz) {
+        //进行轨迹的查询
+        return deviceService.getShgj(zhsqShrz);
+    }
 
 }

@@ -4,6 +4,7 @@ package com.feather.community.mapper;
 import com.feather.community.domain.ZhsqShrz;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 手环日志Mapper接口
@@ -60,4 +61,12 @@ public interface ZhsqShrzMapper
      * @return 结果
      */
     public int deleteZhsqShrzByIds(String[] shrzids);
+
+    /**
+     * 查询手环轨迹
+     *
+     * @param zhsqShrz 手环日志
+     * @return 手环日志集合
+     */
+    public List<Map<String,String>> getShgj(ZhsqShrz zhsqShrz);
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -169,6 +170,28 @@ public class DeviceServiceImpl implements IDeviceService {
                 return AjaxResult.success();
             }
             return AjaxResult.error(CommunityConstants.AFFECT_ZERO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            String errInfo = ExceptionUtil.getExceptionMessage(e);
+            return AjaxResult.error(errInfo);
+        }
+    }
+
+    @Override
+    public AjaxResult getShgj(ZhsqShrz zhsqShrz) {
+        try {
+            String imei = zhsqShrz.getImei();
+            if (Strings.isBlank(imei)) {
+                return AjaxResult.error(CommunityConstants.NO_IEMI);
+            }
+            ZhsqSh zhsqSh = zhsqShService.selectZhsqShByImei(imei);
+            if (Objects.isNull(zhsqSh)) {
+                return AjaxResult.error(CommunityConstants.NO_DEVICE_FOUND);
+            }
+            zhsqShrz.setShid(zhsqSh.getShid());
+            //查询轨迹
+            List<Map<String,String>> ls=zhsqShrzService.getShgj(zhsqShrz);
+            return AjaxResult.success(ls);
         } catch (Exception e) {
             e.printStackTrace();
             String errInfo = ExceptionUtil.getExceptionMessage(e);

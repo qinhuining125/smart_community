@@ -1,5 +1,6 @@
 package com.feather.community.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 import com.feather.common.annotation.Excel;
 import com.feather.common.core.domain.BaseEntity;
 import org.springframework.data.annotation.Transient;
+
+import java.util.Date;
 
 /**
  * 手环日志对象 zhsq_shrz
@@ -98,6 +101,13 @@ public class ZhsqShrz extends BaseEntity
      * 报警内容
      * */
      @Transient
-    private String alarmContent;
+     private String alarmContent;
+
+     /**开始时间 beginTime*/
+     @Transient
+     private Date beginTime;
+     /**结束时间 endTime*/
+     @Transient
+     private Date endTime;
 
 }

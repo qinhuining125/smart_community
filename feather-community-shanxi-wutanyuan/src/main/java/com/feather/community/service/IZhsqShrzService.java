@@ -2,6 +2,7 @@ package com.feather.community.service;
 
 import com.feather.community.domain.ZhsqShrz;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 手环日志Service接口
@@ -58,4 +59,12 @@ public interface IZhsqShrzService
      * @return 结果
      */
     public int deleteZhsqShrzById(String shrzid);
+
+    /**
+     * 查询手环日志列表
+     *
+     * @param zhsqShrz 手环日志
+     * @return 手环日志集合
+     */
+    public List<Map<String,String>> getShgj(ZhsqShrz zhsqShrz);
 }

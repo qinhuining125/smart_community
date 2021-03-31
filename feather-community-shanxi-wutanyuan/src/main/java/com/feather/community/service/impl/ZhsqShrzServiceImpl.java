@@ -1,10 +1,7 @@
 package com.feather.community.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 import com.feather.common.config.UidWorker;
 import com.feather.community.domain.ZhsqSh;
@@ -200,4 +197,19 @@ public class ZhsqShrzServiceImpl implements IZhsqShrzService
     {
         return zhsqShrzMapper.deleteZhsqShrzById(shrzid);
     }
+
+    /**
+     * 查询手环轨迹列表
+     *
+     * @param zhsqShrz 手环日志
+     * @return 手环日志
+     */
+    @Override
+    public List<Map<String,String>> getShgj(ZhsqShrz zhsqShrz)
+    {
+
+
+        return zhsqShrzMapper.getShgj(zhsqShrz);
+    }
+
 }
