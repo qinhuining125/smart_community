@@ -27,10 +27,13 @@
         <result property="sfdb" column="SFDB"/>
         <result property="sfcj" column="SFCJ"/>
         <result property="sfcz" column="SFCZ"/>
+        <result property="x"       column="X"    />
+        <result property="y"       column="Y"    />
+        <result property="z"       column="Z"    />
     </resultMap>
 
     <sql id="selectZhsqJmVo">
-        select JMID, XM, XB, DH, NL, JG, HJXZ, MZ, ZZMM, XL, SFZH, SFFZ, FWID, LDID, ZZ, SFDJ, SFKC, SFXMSF, SFTYJR, SFDB, SFCJ, SFCZ from ZHSQ_JM
+        select JMID, XM, XB, DH, NL, JG, HJXZ, MZ, ZZMM, XL, SFZH, SFFZ, FWID, LDID, ZZ, SFDJ, SFKC, SFXMSF, SFTYJR, SFDB, SFCJ, SFCZ,X,Y,Z  from ZHSQ_JM
     </sql>
 
     <select id="selectZhsqJmList" parameterType="ZhsqJm" resultMap="ZhsqJmResult">
@@ -118,6 +121,9 @@
             <if test="sftyjr != null  and sftyjr != ''">SFTYJR,</if>
             <if test="sfdb != null  and sfdb != ''">SFDB,</if>
             <if test="sfcj != null  and sfcj != ''">SFCJ,</if>
+            <if test="x != null  and x != ''">x,</if>
+            <if test="y != null  and y != ''">y,</if>
+            <if test="z != null  and z != ''">z,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="jmid != null  and jmid != ''">#{jmid},</if>
@@ -141,6 +147,9 @@
             <if test="sftyjr != null  and sftyjr != ''">#{sftyjr},</if>
             <if test="sfdb != null  and sfdb != ''">#{sfdb},</if>
             <if test="sfcj != null  and sfcj != ''">#{sfcj},</if>
+            <if test="x != null  and x != ''">#{x},</if>
+            <if test="y != null  and y != ''">#{y},</if>
+            <if test="z != null  and z != ''">#{z},</if>
         </trim>
     </insert>
 
@@ -167,6 +176,9 @@
             <if test="sftyjr != null  and sftyjr != ''">SFTYJR = #{sftyjr},</if>
             <if test="sfdb != null  and sfdb != ''">SFDB = #{sfdb},</if>
             <if test="sfcj != null  and sfcj != ''">SFCJ = #{sfcj},</if>
+            <if test="x != null  and x != ''">x = #{x},</if>
+            <if test="y != null  and y != ''">y = #{y},</if>
+            <if test="z != null  and z != ''">z = #{z},</if>
         </trim>
         where JMID = #{jmid}
     </update>

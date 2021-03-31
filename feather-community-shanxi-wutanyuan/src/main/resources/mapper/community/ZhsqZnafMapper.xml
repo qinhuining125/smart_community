@@ -322,8 +322,8 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--水表展示-->
     <select id="getSbzs" resultType="map">
-        select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT from
-        (select SBMC, PPMC, X, Y, Z, WZ,SBZT ,rownum as no FROM ZHSQ_SB
+        select t.SBMC, t.PPMC, t.X, t.Y, t.Z, t.WZ,t.SBZT,t.DEVICE_CODE from
+        (select SBMC, PPMC, X, Y, Z, WZ,SBZT ,DEVICE_CODE,rownum as no FROM ZHSQ_SB
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>

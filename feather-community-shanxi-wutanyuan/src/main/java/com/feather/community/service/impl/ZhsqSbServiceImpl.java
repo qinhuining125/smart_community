@@ -1,5 +1,7 @@
 package com.feather.community.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -107,7 +109,18 @@ public class ZhsqSbServiceImpl implements IZhsqSbService
 
     @Override
     public List<ZhsqSb> getSbList() {
-        return zhsqSbMapper.getSbList();
+        List<ZhsqSb> sb=zhsqSbMapper.getSbList();
+        List<ZhsqSb> sa=new ArrayList<ZhsqSb>();
+        for(int i=0;i<sb.size();i++){
+            ZhsqSb entity=sb.get(i);
+            List<Map<String, String>> liat= zhsqSbMapper.getSbDetail(entity.getDeviceCode());
+            Map<String, String> map= liat.get(0);
+            entity.setDyys(String.valueOf(map.get("DYYS")));
+            entity.setDrys(String.valueOf( map.get("DRYS") ));
+            entity.setZysl(String.valueOf(map.get("ZYSL")));
+            sa.add(entity);
+        }
+        return sa;
     }
 
     @Override

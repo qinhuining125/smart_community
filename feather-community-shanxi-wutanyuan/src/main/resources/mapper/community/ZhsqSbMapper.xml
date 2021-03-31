@@ -70,11 +70,64 @@
     </select>
 
     <select id="getSbDetail" parameterType="String" resultType="Map">
-       	select z.device_code,z.ppmc,z.sbzt,z.sbmc,z.x,z.y,z.z,z.wz,m.*,m2.* ,m3.* from ZHSQ_SB z , (select max(tmax)-min(tmax) as drys from (
-				select nvl(max(total),0) as tmax  from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')=(select TO_CHAR(SYSDATE-1,'yyyy-mm-dd') from dual) union all
-				select nvl(max(total),0) as tmax from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')=(select TO_CHAR(SYSDATE,'yyyy-mm-dd') from dual) )t) m ,(select max(tmax)-min(tmax) as dyys from (
-				select nvl(max(total),0) as tmax  from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')=(select to_char(add_months(trunc(sysdate),-1),'yyyy-mm') from dual) union all
-				select nvl(max(total),0) as tmax from ZHSQ_SBRZ where device_code= #{deviceCode} and to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')=(select TO_CHAR(SYSDATE,'yyyy-mm') from dual ))t) m2  ,(select max(total) as zysl  from ZHSQ_SBRZ where device_code=#{deviceCode} ) m3  where z.device_code= #{deviceCode}
+SELECT
+	z.device_code,
+	z.ppmc,
+	z.sbzt,
+	z.sbmc,
+	z.x,
+	z.y,
+	z.z,
+	z.wz,
+	case when h1.h11-h2.h21>0 then 0 else h1.h11-h2.h21 end as drys,
+	m2.*,
+	m3.*
+FROM
+	ZHSQ_SB z,
+	(
+		SELECT
+			nvl( max( total ), 0 ) AS h11
+		FROM
+			ZHSQ_SBRZ
+		WHERE
+			device_code = #{deviceCode}
+			AND to_char( to_date( CREATE_TIME, 'yyyymmddHH24:MI:SS' ), 'yyyy-mm-dd' ) = ( SELECT TO_CHAR( SYSDATE - 1, 'yyyy-mm-dd' ) FROM dual )
+	) h1,
+   (
+		SELECT
+			nvl( max( total ), 0 ) AS h21
+		FROM
+			ZHSQ_SBRZ
+		WHERE
+			device_code = #{deviceCode}
+			AND to_char( to_date( CREATE_TIME, 'yyyymmddHH24:MI:SS' ), 'yyyy-mm-dd' ) = ( SELECT TO_CHAR( SYSDATE, 'yyyy-mm-dd' ) FROM dual )
+		) h2,
+	(
+	SELECT
+		max( tmax ) - min( tmax ) AS dyys
+	FROM
+		(
+		SELECT
+			nvl( max( total ), 0 ) AS tmax
+		FROM
+			ZHSQ_SBRZ
+		WHERE
+			device_code =#{deviceCode}
+			AND to_char( to_date( CREATE_TIME, 'yyyymmddHH24:MI:SS' ), 'yyyy-mm' ) = ( SELECT to_char( add_months( trunc( SYSDATE ),- 1 ), 'yyyy-mm' ) FROM dual ) UNION ALL
+		SELECT
+			nvl( max( total ), 0 ) AS tmax
+		FROM
+			ZHSQ_SBRZ
+		WHERE
+			device_code =#{deviceCode}
+			AND to_char( to_date( CREATE_TIME, 'yyyymmddHH24:MI:SS' ), 'yyyy-mm' ) = ( SELECT TO_CHAR( SYSDATE, 'yyyy-mm' ) FROM dual )
+		) t
+	) m2,
+	( SELECT max( total ) AS zysl FROM ZHSQ_SBRZ WHERE device_code =#{deviceCode} ) m3
+WHERE
+	z.device_code = #{deviceCode}
+
+
     </select>
 
 

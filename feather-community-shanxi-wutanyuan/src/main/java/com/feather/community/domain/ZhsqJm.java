@@ -84,4 +84,10 @@ public class ZhsqJm extends BaseEntity
     private String sfcj;
     @Excel(name = "是否长住")
     private String sfcz;
+    @Excel(name = "经度")
+    private String x;
+    @Excel(name = "纬度")
+    private String y;
+    @Excel(name = "高程")
+    private String z;
 }

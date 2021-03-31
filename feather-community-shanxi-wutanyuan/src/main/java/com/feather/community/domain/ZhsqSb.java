@@ -5,6 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.feather.common.annotation.Excel;
 import com.feather.common.core.domain.BaseEntity;
+import org.springframework.data.annotation.Transient;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 水表对象 zhsq_sb
@@ -66,4 +70,15 @@ public class ZhsqSb extends BaseEntity
     /**采集周期（硬件）*/
     @Excel(name = "采集周期")
     private int period;
+
+    //当月用水
+    @Transient
+    private String dyys;
+    //当日用水
+    @Transient
+    private String drys;
+
+    @Transient
+    private String zysl;
+
 }
