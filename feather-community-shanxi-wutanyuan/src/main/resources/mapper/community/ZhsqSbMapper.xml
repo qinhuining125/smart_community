@@ -71,17 +71,17 @@
 
     <select id="getSbDetail" parameterType="String" resultType="Map">
 SELECT
-	z.device_code,
-	z.ppmc,
-	z.sbzt,
-	z.sbmc,
-	z.x,
-	z.y,
-	z.z,
-	z.wz,
-	case when h1.h11-h2.h21>0 then 0 else h1.h11-h2.h21 end as drys,
-	m2.*,
-	m3.*
+	z.device_code as "deviceCode",
+	z.ppmc as "ppmc",
+	z.sbzt as "sbzt",
+	z.sbmc as "sbmc",
+	z.x as "x",
+	z.y as "y",
+	z.z as "z",
+	z.wz as "wz",
+	case when h1.h11-h2.h21>0 then 0 else h1.h11-h2.h21 end as "drys",
+	m2.dyys as "dyys",
+	m3.zysl as "zysl"
 FROM
 	ZHSQ_SB z,
 	(
