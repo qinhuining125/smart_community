@@ -67,5 +67,7 @@ public class ZhsqYg extends BaseEntity
     /** $column.columnComment */
     @Excel(name = "社区ID")
     private String sqid;
+    @Excel(name = "社区dy")
+    private String dy;
 
 }
