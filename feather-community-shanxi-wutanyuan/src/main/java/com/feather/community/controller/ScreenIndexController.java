@@ -612,13 +612,25 @@ public class ScreenIndexController extends BaseController {
         List<Map<String, Object>> resultList = new ArrayList<>();
         for (int i=0;i<list.size();i++){
             Map<String, Object> map = new HashMap<>();
+            if (list.get(i).get("YCLY").equals("摄像头普通报警")){
+                map.put("报警设备", "摄像头");
+                ZhsqSxt zhsqSxt = zhsqSxtService.selectZhsqSxtById((String) list.get(i).get("SBID"));
+                map.put("设备编号", zhsqSxt.getSbmc());
+                map.put("设备位置", zhsqSxt.getWz());
+            }
+            if (list.get(i).get("YCLY").equals("烟感报警")){
+                map.put("报警设备", "烟感");
+                ZhsqYg YG = zhsqYgService.selectZhsqYgById((String) list.get(i).get("SBID"));
+                map.put("设备编号", YG.getSbmc());
+                map.put("设备位置", YG.getWz());
+            }
             map.put("YCID", list.get(i).get("YCID"));
-            map.put("YCLY", list.get(i).get("YCLY"));
             Object ycxw = list.get(i).get("YCNR");
             if (ycxw instanceof ClobProxyImpl) {
                 ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
             }
-            map.put("YCNR", ycxw);
+            map.put("报警详情", ycxw);
+            map.put("报警时间", list.get(i).get("YCSJ"));
             map.put("NOTICE_READ", list.get(i).get("NOTICE_READ"));
             map.put("X", list.get(i).get("X"));
             map.put("Y", list.get(i).get("Y"));
