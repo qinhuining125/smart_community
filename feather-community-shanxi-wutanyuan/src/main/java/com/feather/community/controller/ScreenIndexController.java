@@ -628,6 +628,7 @@ public class ScreenIndexController extends BaseController {
                 map.put("设备编号", YG.getSbmc());
                 map.put("设备位置", YG.getWz());
             }
+            map.put("SBID", list.get(i).get("SBID"));
             map.put("YCID", list.get(i).get("YCID"));
             Object ycxw = list.get(i).get("YCNR");
             if (ycxw instanceof ClobProxyImpl) {
