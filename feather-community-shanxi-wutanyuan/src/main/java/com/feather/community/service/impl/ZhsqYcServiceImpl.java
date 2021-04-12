@@ -222,4 +222,5 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
         return zhsqYcMapper.selectZhsqYcTypeById(eventType);
     }
 
+
 }

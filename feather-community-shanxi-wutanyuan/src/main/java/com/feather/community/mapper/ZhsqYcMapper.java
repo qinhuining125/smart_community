@@ -74,4 +74,5 @@ public interface ZhsqYcMapper {
     public List<Map> getStatusCount(@Param("sqid") String sqid, @Param("xqid") String xqid);
 
     ZhsqYcType selectZhsqYcTypeById(String eventType);
+
 }

@@ -8,14 +8,18 @@ import java.util.Map;
 
 import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.feather.common.annotation.ClearPage;
+import com.feather.common.annotation.Log;
+import com.feather.common.enums.BusinessType;
 import com.feather.community.domain.*;
 import com.feather.community.pojo.SearchEntity;
 import com.feather.community.service.*;
 import com.feather.community.util.MyTableDataInfo;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

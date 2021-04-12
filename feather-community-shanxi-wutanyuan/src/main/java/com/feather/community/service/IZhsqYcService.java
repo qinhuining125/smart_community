@@ -86,4 +86,5 @@ public interface IZhsqYcService {
      * @return 异常信息
      */
     public ZhsqYcType selectZhsqYcTypeById(String eventType);
+
 }
