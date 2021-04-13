@@ -179,9 +179,9 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
         zhsqYc.setYcly("摄像头人脸布控报警");
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String sdate = sdf.format(calendar.getTime());
-        zhsqYc.setYcsj(zhsqSxtrlbkgj.getAlarmTime());
+        zhsqYc.setYcsj(sdate);
         zhsqYc.setCzzt("未确认");
         zhsqYc.setCzry("李磊");//处置人员
         zhsqYc.setCzjg("");//处置时间

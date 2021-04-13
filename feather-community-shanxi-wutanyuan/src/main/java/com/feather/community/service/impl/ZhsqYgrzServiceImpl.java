@@ -79,7 +79,7 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
         zhsqYc.setYcly("烟感报警");
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String sdate = sdf.format(calendar.getTime());
         zhsqYc.setYcsj(sdate);
         zhsqYc.setCzzt("未处置");
