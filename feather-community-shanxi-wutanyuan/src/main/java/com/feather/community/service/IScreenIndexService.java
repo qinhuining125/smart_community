@@ -3,6 +3,7 @@ package com.feather.community.service;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.common.core.page.TableDataInfo;
 import com.feather.community.domain.ZhsqLd;
+import com.feather.community.domain.ZhsqYgVo;
 import com.feather.community.pojo.SearchEntity;
 
 import java.util.List;
@@ -67,4 +68,11 @@ public interface IScreenIndexService {
      * @return
      */
     TableDataInfo searchLdList(ZhsqLd zhsqLd);
+
+    /**
+     * 查询烟感列表
+     * @param zhsqLd
+     * @return
+     */
+    List<ZhsqYgVo> searchYgList(ZhsqLd zhsqLd);
 }

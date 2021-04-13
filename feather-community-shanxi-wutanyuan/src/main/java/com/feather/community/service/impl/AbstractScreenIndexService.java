@@ -52,6 +52,8 @@ public abstract class AbstractScreenIndexService implements IScreenIndexService 
     ScreenIndexMapper screenIndexMapper;
     @Autowired
     KeyEntityMapper keyEntityMapper;
+    @Autowired
+    IZhsqYgService zhsqYgService;
 
     @Autowired
     TableStrategyContext tableStrategyContext;

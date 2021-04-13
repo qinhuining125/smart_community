@@ -19,10 +19,11 @@
         <result property="ldid"    column="ldid"    />
         <result property="xqid"    column="xqid"    />
         <result property="sqid"    column="sqid"    />
+        <result property="dy"    column="dy"    />
     </resultMap>
 
     <sql id="selectZhsqYgVo">
-        select ygid,imei, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid from ZHSQ_YG
+        select ygid,imei, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid ,dy from ZHSQ_YG
     </sql>
 
     <select id="selectZhsqYgList" parameterType="ZhsqYg" resultMap="ZhsqYgResult">
@@ -44,6 +45,7 @@
             <if test="ldid != null  and ldid != ''"> and ldid = #{ldid}</if>
             <if test="xqid != null  and xqid != ''"> and xqid = #{xqid}</if>
             <if test="sqid != null  and sqid != ''"> and sqid = #{sqid}</if>
+            <if test="dy != null  and dy != ''"> and dy = #{dy}</if>
         </where>
     </select>
 

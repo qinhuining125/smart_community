@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.feather.common.config.UidWorker;
 import com.feather.common.core.page.TableDataInfo;
 import com.feather.community.domain.*;
 import com.feather.community.pojo.SearchEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.common.utils.ExceptionUtil;
@@ -23,6 +25,9 @@ import com.feather.community.util.MathUtil;
  */
 @Service
 public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
+
+    @Autowired
+    private UidWorker uidWorker;
 
     @Override
     public AjaxResult getSfczTj(Map<String, Object> params) {
@@ -345,5 +350,41 @@ public class ScreenIndexServiceImpl extends AbstractScreenIndexService {
         }
         TableDataInfo tableDataInfo = getDataTable(zhsqLds);
         return tableDataInfo;
+    }
+
+    @Override
+    public List<ZhsqYgVo> searchYgList(ZhsqLd zhsqLd) {
+        //数据结构，
+        List<ZhsqYgVo> resultList=new ArrayList<ZhsqYgVo>();
+        //1.查询出楼栋信息
+        List<ZhsqLd> zhsqLds = zhsqLdService.selectZhsqLdList(zhsqLd);
+        List<String> ldids = zhsqLds.stream().map(ZhsqLd::getLdid).collect(Collectors.toList());
+        if (ldids != null && ldids.size() > 0) {
+            List<ZhsqFw> zhsqFws = zhsqFwService.selectZhsqFwByLdids(ldids);
+            Map<String, Map<String, List<ZhsqFw>>> zhsqFwMapList = zhsqFws.stream().collect(Collectors.groupingBy(ZhsqFw::getLdid, Collectors.groupingBy(ZhsqFw::getDy)));
+            for (ZhsqLd zhsqLd1 : zhsqLds) {
+                String ldid = zhsqLd1.getLdid();
+                Map<String, List<ZhsqFw>> zhsqFwListMap = zhsqFwMapList.get(ldid);
+                for(String key : zhsqFwListMap.keySet()){
+                    ZhsqYgVo  zhsqYgVo=new ZhsqYgVo();
+                    zhsqYgVo.setDyh(key+"单元");
+                    zhsqYgVo.setLdid(ldid);
+                    //需要查询烟感的信息
+                    ZhsqYg zhsqYg=new ZhsqYg();
+                    zhsqYg.setLdid(ldid);
+                    zhsqYg.setDy(key);
+                    //随机生成这些单元id
+                    zhsqYgVo.setDyid("DY" + uidWorker.getNextId());
+                    List<ZhsqYg> zhsqYgs = zhsqYgService.selectZhsqYgList(zhsqYg);
+                    zhsqYgVo.setZhsqYgs(zhsqYgs);
+                    if(zhsqYgs!=null && !zhsqYgs.isEmpty()){
+                        zhsqYgVo.setX(zhsqYgs.get(0).getX());
+                        zhsqYgVo.setY(zhsqYgs.get(0).getY());
+                        resultList.add(zhsqYgVo);
+                    }
+                }
+            }
+        }
+        return resultList;
     }
 }

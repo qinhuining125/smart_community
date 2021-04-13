@@ -1,12 +1,10 @@
 package com.feather.community.domain;
 
-import com.feather.common.core.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author nothing
@@ -17,7 +15,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZhsqLdVo {
+public class ZhsqYgVo {
     private static final long serialVersionUID = 1L;
 
     /** 楼栋id */
@@ -33,7 +31,11 @@ public class ZhsqLdVo {
     private String dyid;
 
     /**房屋列表*/
-    private List<ZhsqFw> zhsqFws;
+    private List<ZhsqYg> zhsqYgs;
+
+
+    private String x;
+    private String y;
 
 
 

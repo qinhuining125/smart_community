@@ -58,4 +58,6 @@ public class ZhsqLd extends BaseEntity {
 
     private List<ZhsqLdVo> zhsqFwListMap;
 
+    private List<ZhsqYgVo> zhsqYgListMap;
+
 }

@@ -644,4 +644,13 @@ public class ScreenIndexController extends BaseController {
         }
         return AjaxResult.success(resultList);
     }
+    /**
+     * 查询烟感列表，根据楼栋单元号出结果
+     * */
+    @RequestMapping("/api/searchYgList")
+    @ClearPage
+    @ResponseBody
+    public AjaxResult searchYgList(ZhsqLd zhsqLd) {
+        return AjaxResult.success(screenIndexServie.searchYgList(zhsqLd));
+    }
 }
