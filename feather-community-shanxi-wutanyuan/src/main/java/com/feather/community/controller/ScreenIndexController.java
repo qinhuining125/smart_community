@@ -617,16 +617,16 @@ public class ScreenIndexController extends BaseController {
         for (int i=0;i<list.size();i++){
             Map<String, Object> map = new HashMap<>();
             if (list.get(i).get("YCLY").equals("摄像头普通报警")){
-                map.put("报警设备", "摄像头");
+                map.put("bjsb", "摄像头");
                 ZhsqSxt zhsqSxt = zhsqSxtService.selectZhsqSxtById((String) list.get(i).get("SBID"));
-                map.put("设备编号", zhsqSxt.getSbmc());
-                map.put("设备位置", zhsqSxt.getWz());
+                map.put("sbbh", zhsqSxt.getSbmc());
+                map.put("sbwz", zhsqSxt.getWz());
             }
             if (list.get(i).get("YCLY").equals("烟感报警")){
-                map.put("报警设备", "烟感");
+                map.put("bjsb", "烟感");
                 ZhsqYg YG = zhsqYgService.selectZhsqYgById((String) list.get(i).get("SBID"));
-                map.put("设备编号", YG.getSbmc());
-                map.put("设备位置", YG.getWz());
+                map.put("sbbh", YG.getSbmc());
+                map.put("sbwz", YG.getWz());
             }
             map.put("SBID", list.get(i).get("SBID"));
             map.put("YCID", list.get(i).get("YCID"));
@@ -634,8 +634,8 @@ public class ScreenIndexController extends BaseController {
             if (ycxw instanceof ClobProxyImpl) {
                 ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
             }
-            map.put("报警详情", ycxw);
-            map.put("报警时间", list.get(i).get("YCSJ"));
+            map.put("bjxq", ycxw);
+            map.put("bjsj", list.get(i).get("YCSJ"));
             map.put("NOTICE_READ", list.get(i).get("NOTICE_READ"));
             map.put("X", list.get(i).get("X"));
             map.put("Y", list.get(i).get("Y"));
@@ -644,6 +644,7 @@ public class ScreenIndexController extends BaseController {
         }
         return AjaxResult.success(resultList);
     }
+
     /**
      * 查询烟感列表，根据楼栋单元号出结果
      * */
