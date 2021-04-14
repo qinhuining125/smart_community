@@ -196,9 +196,17 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         druid:
-            # 默认数据源
+            # 默认数据源（主数据源）
             default:
                 url: jdbc:oracle:thin:@59.48.93.206:8022/orcl
+                username: wutanyuan
+                password: 123
+                validationQuery: SELECT 1 from dual
+            # 硬件读取数据源
+            a:
+                # 从数据源开关/默认关闭
+                enabled: true
+                url: jdbc:oracle:thin:@192.168.32.213:1521/orcl
                 username: wutanyuan
                 password: 123
                 validationQuery: SELECT 1 from dual
