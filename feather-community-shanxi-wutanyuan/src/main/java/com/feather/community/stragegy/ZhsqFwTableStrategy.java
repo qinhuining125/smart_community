@@ -33,6 +33,7 @@ public class ZhsqFwTableStrategy extends AbstraceTableStrategy {
         zhsqFw.setLdmc(searchEntity.getName());
         zhsqFw.setMph(searchEntity.getMph());
         zhsqFw.setFwrzqk(searchEntity.getFwrzqk());
+        zhsqFw.setC(searchEntity.getCeng());
         zhsqFw.setDy(searchEntity.getDy());
         List<ZhsqFw> zhsqFws = zhsqFwService.selectZhsqFwList(zhsqFw);
         List<ZhsqFw> cc=new ArrayList<ZhsqFw>();

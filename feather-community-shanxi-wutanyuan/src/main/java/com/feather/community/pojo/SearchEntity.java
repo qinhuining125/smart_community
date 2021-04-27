@@ -36,6 +36,7 @@ public class SearchEntity {
     private String mph;
     private String fwrzqk;
     private String dy;
+    private String ceng;
 
     /**
      * type=4 即为车辆的参数
