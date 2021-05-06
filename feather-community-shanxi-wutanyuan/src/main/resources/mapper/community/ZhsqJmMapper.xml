@@ -86,6 +86,7 @@
             <if test="sfdb != null  and sfdb != ''">and SFDB = #{sfdb}</if>
             <if test="sfcj != null  and sfcj != ''">and SFCJ = #{sfcj}</if>
         </where>
+        ORDER BY SFFZ DESC
     </select>
 
     <select id="selectZhsqJmType" resultType="map">
