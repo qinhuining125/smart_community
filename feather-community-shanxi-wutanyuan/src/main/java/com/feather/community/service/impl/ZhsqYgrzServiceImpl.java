@@ -11,6 +11,7 @@ import com.feather.community.domain.ZhsqYc;
 import com.feather.community.domain.ZhsqYg;
 import com.feather.community.mapper.ZhsqYcMapper;
 import com.feather.community.mapper.ZhsqYgMapper;
+import com.feather.community.service.IZhsqYgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.feather.community.mapper.ZhsqYgrzMapper;
@@ -99,6 +100,9 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
         if (content==1){
             zhsqYc.setYcjb("红");
             zhsqYc.setYcnr("烟感设备发生烟感报警，请马上处理");
+            int frequency=Integer.parseInt(zhsqYg.getFrequency())+1;
+            zhsqYg.setFrequency(frequency+"");
+            zhsqYgMapper.updateZhsqYg(zhsqYg);
             zhsqYcMapper.insertZhsqYc(zhsqYc);
         }
         if (content==2){

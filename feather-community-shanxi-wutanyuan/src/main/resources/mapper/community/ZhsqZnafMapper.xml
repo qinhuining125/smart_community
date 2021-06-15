@@ -270,8 +270,8 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--烟感展示-->
     <select id="getYgzs" resultType="map">
-        select t.YGID as "ygid",t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt" from
-        (select YGID, SBMC ,PPMC , X,Y,Z ,WZ,SBZT ,rownum as no FROM ZHSQ_YG
+        select t.YGID as "ygid",t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt",t.FREQUENCY as "frequency" from
+        (select YGID, SBMC ,PPMC , X,Y,Z ,WZ,SBZT,FREQUENCY ,rownum as no FROM ZHSQ_YG
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>

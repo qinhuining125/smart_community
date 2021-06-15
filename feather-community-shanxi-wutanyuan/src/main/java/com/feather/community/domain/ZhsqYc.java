@@ -41,6 +41,9 @@ public class ZhsqYc extends BaseEntity
     @Excel(name = "处置人员")
     private String czry;
     /** 处置时间 */
+    @Excel(name = "最晚处置时间")
+    private String zwczsj;
+    /** 处置时间 */
     @Excel(name = "处置时间")
     private String czjg;
     /** 附件 */

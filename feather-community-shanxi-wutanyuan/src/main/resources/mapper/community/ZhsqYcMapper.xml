@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="ycsj"    column="YCSJ"    />
         <result property="czzt"    column="CZZT"    />
         <result property="czry"    column="CZRY"    />
+        <result property="zwczsj"    column="ZWCZSJ"    />
         <result property="czjg"    column="CZJG"    />
         <result property="fj"    column="FJ"    />
         <result property="x"    column="X"    />
@@ -28,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectZhsqYcVo">
-        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY, CZJG, FJ, X, Y, Z,XQID,SBID,SQID,SJLX,CZSJ, NOTICE_READ,GJSJ_ID,EVENT_TYPE from ZHSQ_YC
+        select YCID, YCJB, YCNR, YCLY, YCSJ, CZZT, CZRY,ZWCZSJ, CZJG, FJ, X, Y, Z,XQID,SBID,SQID,SJLX,CZSJ, NOTICE_READ,GJSJ_ID,EVENT_TYPE from ZHSQ_YC
     </sql>
 
     <select id="selectZhsqYcList" parameterType="ZhsqYc" resultMap="ZhsqYcResult">
@@ -79,6 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ycsj != null  and ycsj != ''">YCSJ,</if>
             <if test="czzt != null  and czzt != ''">CZZT,</if>
             <if test="czry != null  and czry != ''">CZRY,</if>
+            <if test="zwczsj != null  and czry != ''">ZWCZSJ,</if>
             <if test="czjg != null  and czjg != ''">CZJG,</if>
             <if test="fj != null  and fj != ''">FJ,</if>
             <if test="x != null  and x != ''">X,</if>
@@ -101,6 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ycsj != null  and ycsj != ''">#{ycsj},</if>
             <if test="czzt != null  and czzt != ''">#{czzt},</if>
             <if test="czry != null  and czry != ''">#{czry},</if>
+            <if test="zwczsj != null  and zwczsj != ''">#{zwczsj},</if>
             <if test="czjg != null  and czjg != ''">#{czjg},</if>
             <if test="fj != null  and fj != ''">#{fj},</if>
             <if test="x != null  and x != ''">#{x},</if>
@@ -126,6 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ycsj != null  and ycsj != ''">YCSJ = #{ycsj},</if>
             <if test="czzt != null  and czzt != ''">CZZT = #{czzt},</if>
             <if test="czry != null  and czry != ''">CZRY = #{czry},</if>
+            <if test="zwczsj != null  and zwczsj != ''">ZWCZSJ = #{zwczsj},</if>
             <if test="czjg != null  and czjg != ''">CZJG = #{czjg},</if>
             <if test="fj != null  and fj != ''">FJ = #{fj},</if>
             <if test="x != null  and x != ''">X = #{x},</if>

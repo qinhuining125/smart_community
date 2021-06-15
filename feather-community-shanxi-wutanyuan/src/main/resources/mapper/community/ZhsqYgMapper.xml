@@ -20,10 +20,11 @@
         <result property="xqid"    column="xqid"    />
         <result property="sqid"    column="sqid"    />
         <result property="dy"    column="dy"    />
+        <result property="frequency"    column="frequency"    />
     </resultMap>
 
     <sql id="selectZhsqYgVo">
-        select ygid,imei, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid ,dy from ZHSQ_YG
+        select ygid,imei, sblx, sbmc, ppmc, sbxh, sbzt, x, y, z, wz, ldid, xqid, sqid ,dy,frequency from ZHSQ_YG
     </sql>
 
     <select id="selectZhsqYgList" parameterType="ZhsqYg" resultMap="ZhsqYgResult">
@@ -78,6 +79,7 @@
             <if test="ldid != null  and ldid != ''">ldid,</if>
             <if test="xqid != null  and xqid != ''">xqid,</if>
             <if test="sqid != null  and sqid != ''">sqid,</if>
+            <if test="frequency != null  and frequency != ''">frequency,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ygid != null  and ygid != ''">#{ygid},</if>
@@ -94,6 +96,7 @@
             <if test="ldid != null  and ldid != ''">#{ldid},</if>
             <if test="xqid != null  and xqid != ''">#{xqid},</if>
             <if test="sqid != null  and sqid != ''">#{sqid},</if>
+            <if test="frequency != null  and frequency != ''">#{frequency},</if>
         </trim>
     </insert>
 
@@ -112,6 +115,7 @@
             <if test="ldid != null  and ldid != ''">ldid = #{ldid},</if>
             <if test="xqid != null  and xqid != ''">xqid = #{xqid},</if>
             <if test="sqid != null  and sqid != ''">sqid = #{sqid},</if>
+            <if test="frequency != null  and frequency != ''">frequency = #{frequency},</if>
         </trim>
         where ygid = #{ygid}
     </update>

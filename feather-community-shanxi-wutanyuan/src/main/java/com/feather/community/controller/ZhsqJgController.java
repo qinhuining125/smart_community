@@ -168,6 +168,7 @@ public class ZhsqJgController extends BaseController
         map.put("IpPort",JG.getIpport());
         JSONObject json = JSONObject.toJSONObject(map);
         String result=HttpUtil.doPostJson(url, json.toString());
+        System.out.printf("配置指令下返回结果"+result);
         return AjaxResult.success(result);
     }
 

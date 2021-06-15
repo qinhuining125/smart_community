@@ -26,7 +26,7 @@ import com.feather.community.service.IZhsqYcService;
 
 /**
  * 异常信息Controller
- * 
+ *
  * @author fancy
  * @date 2020-05-14
  */
@@ -125,12 +125,38 @@ public class ZhsqYcController extends BaseController {
     /**
      * 前端页面：通知公告更新状态接口
      * 1:通知。 2:公告
-     * */
+     */
     @RequestMapping("/api/updateYc")
     @ResponseBody
     public AjaxResult updateYc(@Parameter String id) {
         ZhsqYc yc = zhsqYcService.selectZhsqYcById(id);
         yc.setNoticeRead("1");
+        return toAjax(zhsqYcService.updateZhsqYc(yc));
+    }
+
+    /**
+     * 异常派遣处置人和处置时间
+     */
+    @RequestMapping("/api/updateYcpq")
+    @ResponseBody
+    public AjaxResult updateYcpq(@Parameter String id, @Parameter String czry, @Parameter String zwczsj) {
+        ZhsqYc yc = zhsqYcService.selectZhsqYcById(id);
+        yc.setCzry(czry);
+        yc.setZwczsj(zwczsj);
+        yc.setCzzt("处置中");
+        return toAjax(zhsqYcService.updateZhsqYc(yc));
+    }
+
+    /**
+     * 处置时间和处置结果
+     */
+    @RequestMapping("/api/updateYccz")
+    @ResponseBody
+    public AjaxResult updateYccz(@Parameter String id, @Parameter String czjg, @Parameter String czsj) {
+        ZhsqYc yc = zhsqYcService.selectZhsqYcById(id);
+        yc.setCzjg(czjg);
+        yc.setCzsj(czsj);
+        yc.setCzzt("已处置");
         return toAjax(zhsqYcService.updateZhsqYc(yc));
     }
 }

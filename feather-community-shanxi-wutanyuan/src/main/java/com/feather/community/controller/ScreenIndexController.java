@@ -640,6 +640,7 @@ public class ScreenIndexController extends BaseController {
             map.put("X", list.get(i).get("X"));
             map.put("Y", list.get(i).get("Y"));
             map.put("Z", list.get(i).get("Z"));
+            map.put("XQID", list.get(i).get("XQID"));
             resultList.add(map);
         }
         return AjaxResult.success(resultList);
