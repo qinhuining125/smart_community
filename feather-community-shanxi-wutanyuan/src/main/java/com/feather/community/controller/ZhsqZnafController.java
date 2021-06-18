@@ -4,6 +4,7 @@ import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
 import com.feather.community.mapper.ZhsqJgDistanceMapper;
+import com.feather.community.service.IZhsqSbrzService;
 import com.feather.community.service.IZhsqZcService;
 import com.feather.community.service.IZhsqZnafService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ZhsqZnafController extends BaseController {
     public IZhsqZcService iZhsqZcService;
     @Autowired
     private ZhsqJgDistanceMapper zhsqJgDistanceMapper;
+
+    @Autowired
+    private IZhsqSbrzService zhsqSbrzService;
 
     @RequestMapping("/api/getCountSb")
     @ResponseBody
@@ -458,7 +462,17 @@ public class ZhsqZnafController extends BaseController {
         if (page == null || size == null) {
             resultMap.put("rows", iZhsqZnafService.getSb());
         } else {
-            resultMap.put("rows", iZhsqZnafService.getSbzs(page, size,sbmc));
+            List<Map<String, Object>> sbList=iZhsqZnafService.getSbzs(page, size,sbmc);
+            List<Map<String, Object>> rows= new ArrayList<Map<String, Object>>();
+            for (int i=0;i<sbList.size();i++){
+                Map<String, Object> sb=sbList.get(i);
+                List<Map<String, Object>> zhsqSBRZ= zhsqSbrzService.selectZhsqSbrzByIdNew((String) sb.get("deviceCode"));
+                List<Map<String, Object>> zhsqSBRZList= zhsqSbrzService.selectZhsqSbrzById1List((String) sb.get("deviceCode"));
+                sb.put("total",zhsqSBRZ.get(0).get("TOTAL"));
+                sb.put("dayFlow",zhsqSBRZList);
+                rows.add(sb);
+            }
+            resultMap.put("rows", rows);
         }
         resultMap.put("total", iZhsqZnafService.getSbzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);

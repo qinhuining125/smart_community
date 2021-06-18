@@ -65,4 +65,16 @@ public interface IZhsqSbrzService
      * @return 结果
      */
     List<Map<String, String>> get5DayData();
+    /**
+     * 获取最新
+     *
+     * @return 结果
+     */
+    List<Map<String, Object>> selectZhsqSbrzByIdNew(String deviceCode);
+    /**
+     * 获取水表每天总流量
+     *
+     * @return 结果
+     */
+    List<Map<String, Object>> selectZhsqSbrzById1List(String deviceCode);
 }

@@ -35,6 +35,12 @@ public class ZhsqSbrz extends BaseEntity
     private String waterMeterSn;
     @Excel(name = "设备编码")
     private String deviceSn;
+    @Excel(name = "年")
+    private Integer year;
+    @Excel(name = "月")
+    private Integer month;
+    @Excel(name = "日")
+    private Integer day;
 //    @Excel(name = "开始时间")
 //    private String beginCreateTime;
 //    @Excel(name = "结束时间")

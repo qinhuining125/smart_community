@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.feather.community.mapper.ZhsqSbrzMapper">
-    
+
     <resultMap type="ZhsqSbrz" id="ZhsqSbrzResult">
-        <result property="createByid"    column="create_byid"    />
-        <result property="sbrzid"    column="sbrzid"    />
-        <result property="deviceCode"    column="device_code"    />
-        <result property="instant"    column="instant"    />
-        <result property="total"    column="total"    />
-        <result property="waterMeterSn"    column="waterMeterSn"    />
-        <result property="createTime"    column="create_time"  jdbcType="BIGINT"  />
-        <result property="createBy"    column="create_by"    />
-        <result property="deviceSn"    column="deviceSn"    />
-        <result property="updateByid"    column="update_byid"    />
+        <result property="createByid" column="create_byid"/>
+        <result property="sbrzid" column="sbrzid"/>
+        <result property="deviceCode" column="device_code"/>
+        <result property="instant" column="instant"/>
+        <result property="total" column="total"/>
+        <result property="waterMeterSn" column="waterMeterSn"/>
+        <result property="createTime" column="create_time" jdbcType="BIGINT"/>
+        <result property="createBy" column="create_by"/>
+        <result property="deviceSn" column="deviceSn"/>
+        <result property="updateByid" column="update_byid"/>
     </resultMap>
 
     <sql id="selectZhsqSbrzVo">
@@ -24,19 +24,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectZhsqSbrzList" parameterType="ZhsqSbrz" resultMap="ZhsqSbrzResult">
         <include refid="selectZhsqSbrzVo"/>
         <where>
-            <if test="createByid != null "> and create_byid = #{createByid}</if>
-            <if test="createByid != null "> and create_byid = #{createByid}</if>
-            <if test="deviceCode != null  and deviceCode != ''"> and device_code = #{deviceCode}</if>
-            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
-            <if test="updateTime != null "> and update_time = #{updateTime}</if>
-            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
-            <if test="createTime != null "> and create_time = #{createTime}</if>
-            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
-            <if test="instant != null and instant !='' "> and instant = #{instant}</if>
-            <if test="total != null and total !='' "> and total = #{total}</if>
-            <if test="waterMeterSn != null and  waterMeterSn!='' "> and waterMeterSn like concat(concat('%',#{waterMeterSn}),'%')</if>
-            <if test="deviceSn != null  and deviceSn != ''"> and deviceSn like concat(concat('%',#{deviceSn}),'%')</if>
-            <if test="updateByid != null "> and update_byid = #{updateByid}</if>
+            <if test="createByid != null ">and create_byid = #{createByid}</if>
+            <if test="createByid != null ">and create_byid = #{createByid}</if>
+            <if test="deviceCode != null  and deviceCode != ''">and device_code = #{deviceCode}</if>
+            <if test="remark != null  and remark != ''">and remark = #{remark}</if>
+            <if test="updateTime != null ">and update_time = #{updateTime}</if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+            <if test="createTime != null ">and create_time = #{createTime}</if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="instant != null and instant !='' ">and instant = #{instant}</if>
+            <if test="total != null and total !='' ">and total = #{total}</if>
+            <if test="waterMeterSn != null and  waterMeterSn!='' ">and waterMeterSn like
+                concat(concat('%',#{waterMeterSn}),'%')
+            </if>
+            <if test="deviceSn != null  and deviceSn != ''">and deviceSn like concat(concat('%',#{deviceSn}),'%')</if>
+            <if test="updateByid != null ">and update_byid = #{updateByid}</if>
             <if test="params.beginCreateTime != null and params.beginCreateTime != ''"><!-- 开始时间检索 -->
                 and create_time &gt;= #{params.beginCreateTime, jdbcType=BIGINT}
             </if>
@@ -45,12 +47,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
         </where>
     </select>
-    
+
+
+    <!--获取水表日志最新数据-->
+    <select id="selectZhsqSbrzNew" resultType="map">
+        select * from
+            (select * from ZHSQ_SBRZ order by CREATE_TIME desc)
+        where rownum = 1
+    </select>
+
+    <!--获取水表日志最新数据-->
+    <select id="selectZhsqSbrzByIdNew" resultType="map">
+        select * from
+        (select * from ZHSQ_SBRZ
+        <where>
+            <if test="deviceCode != null  and deviceCode != ''">and DEVICE_CODE = #{deviceCode}</if>
+        </where>
+        order by CREATE_TIME desc)
+        where rownum = 1
+    </select>
+    <!--获取水表每天1使用量-->
+    <select id="selectZhsqSbrzById1List" resultType="map">
+        SELECT
+        CREATE_TIME,DAY,
+        TOTAL
+        FROM
+        (
+        SELECT
+        CREATE_TIME,DAY,
+        TOTAL,
+        row_number ( ) over ( partition BY DAY ORDER BY CREATE_TIME DESC ) rn
+        FROM
+        ZHSQ_SBRZ
+        <where>
+            <if test="deviceCode != null  and deviceCode != ''">and DEVICE_CODE = #{deviceCode}</if>
+        </where>
+        )
+        WHERE
+        rn = 1
+        ORDER BY
+        DAY
+    </select>
     <select id="selectZhsqSbrzById" parameterType="String" resultMap="ZhsqSbrzResult">
         <include refid="selectZhsqSbrzVo"/>
         where sbrzid = #{sbrzid}
     </select>
-        
+
     <insert id="insertZhsqSbrz" parameterType="ZhsqSbrz">
         insert into ZHSQ_SBRZ
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,7 +109,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterMeterSn != null ">waterMeterSn,</if>
             <if test="deviceSn != null  and deviceSn != ''">deviceSn,</if>
             <if test="updateByid != null ">update_byid,</if>
-         </trim>
+            <if test="year != null ">year,</if>
+            <if test="month != null ">month,</if>
+            <if test="day != null ">day,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="createByid != null ">#{createByid},</if>
             <if test="sbrzid != null  and sbrzid != ''">#{sbrzid},</if>
@@ -82,7 +127,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterMeterSn != null and waterMeterSn != '' ">#{waterMeterSn},</if>
             <if test="deviceSn != null  and deviceSn != ''">#{deviceSn},</if>
             <if test="updateByid != null ">#{updateByid},</if>
-         </trim>
+            <if test="year != null ">#{year},</if>
+            <if test="month != null ">#{month},</if>
+            <if test="day != null ">#{day},</if>
+        </trim>
     </insert>
 
     <update id="updateZhsqSbrz" parameterType="ZhsqSbrz">
@@ -109,7 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteZhsqSbrzByIds" parameterType="String">
-        delete from ZHSQ_SBRZ where sbrzid in 
+        delete from ZHSQ_SBRZ where sbrzid in
         <foreach item="sbrzid" collection="array" open="(" separator="," close=")">
             #{sbrzid}
         </foreach>

@@ -2,6 +2,7 @@ package com.feather;
 
 import java.util.Properties;
 
+import com.feather.community.util.TimerManager;
 import com.feather.community.util.VideoAlarmLogion;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +28,8 @@ public class FeatherApplication {
         props.put("ConfigurableApplicationContext@com.feather.FeatherApplication", ctx);
 
         VideoAlarmLogion.corn();
+//        new TimerManager();
         System.out.println("\n启动成功\n\n");
     }
+
 }

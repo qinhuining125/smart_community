@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.feather.community.mapper.ZhsqJgDistanceMapper">
 
-    <!--烟感展示总记录-->
+    <!--获取井盖测距最新数据-->
     <select id="selectZhsqJgDistanceNew" resultType="map">
         select * from
             (select * from ZHSQ_JG_DISTANCE order by CREATE_TIME desc)

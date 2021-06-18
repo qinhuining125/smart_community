@@ -56,6 +56,13 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
     public int insertZhsqSbrz(ZhsqSbrz zhsqSbrz) {
         String shrzid = "SBRZ" + uidWorker.getNextId();
         zhsqSbrz.setSbrzid(shrzid);
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int year = cal.get(Calendar.YEAR);
+        zhsqSbrz.setYear(year);
+        zhsqSbrz.setMonth(month);
+        zhsqSbrz.setDay(day);
         return zhsqSbrzMapper.insertZhsqSbrz(zhsqSbrz);
     }
 
@@ -94,5 +101,15 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
     @Override
     public List<Map<String, String>> get5DayData() {
         return zhsqSbrzMapper.get5DayData();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectZhsqSbrzByIdNew(String deviceCode) {
+        return zhsqSbrzMapper.selectZhsqSbrzByIdNew(deviceCode);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectZhsqSbrzById1List(String deviceCode) {
+        return zhsqSbrzMapper.selectZhsqSbrzById1List(deviceCode);
     }
 }
