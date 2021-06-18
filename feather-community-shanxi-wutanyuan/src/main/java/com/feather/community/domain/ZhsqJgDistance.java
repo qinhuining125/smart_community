@@ -28,4 +28,6 @@ public class ZhsqJgDistance extends BaseEntity
     /** 井盖距离 */
     @Excel(name = "井盖距离")
     private Double distance;
+    @Excel(name = "井盖状态")
+    private String jgstate;
 }

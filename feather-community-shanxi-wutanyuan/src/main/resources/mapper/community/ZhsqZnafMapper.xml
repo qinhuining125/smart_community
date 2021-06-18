@@ -295,8 +295,8 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--井盖展示-->
     <select id="getJgzs" resultType="map">
-        select t.JGID as "jgid", t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt" from
-        (select JGID,SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_JG
+        select t.JGID as "jgid", t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt",t.SN as "sn" from
+        (select JGID,SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,SN,rownum as no FROM ZHSQ_JG
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>

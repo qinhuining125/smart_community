@@ -252,11 +252,8 @@ device:
     sh:
         # 下发指令地址
         xfzl: http://192.168.32.2:8000/api/Watch/HealthData
-
-
-
-
-
+        # 井盖下发指令地址
+        pzjg: http://39.104.49.171:8009/api/well/config
 
 
 city:

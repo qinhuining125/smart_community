@@ -17,10 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.Transient;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * 井盖Service业务层处理
@@ -55,37 +52,50 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
         zhsqJgDistance.setId(sbid);
         //进行查询比较
         ZhsqJg zhsqJg=zhsqJgMapper.selectZhsqJgBySn(zhsqJgDistance.getSn());
+
+        List<Map<String, Object>> lastzhsqJgDistance=zhsqJgDistanceMapper.selectZhsqJgDistanceNew();
         int threshold=zhsqJg.getDistancethreshold();
+        int result=0;
         if(zhsqJgDistance.getDistance()>threshold){
-            //进行报警值的插入
-            ZhsqYc zhsqYc = new ZhsqYc();
-            String ycid = "YC" + uidWorker.getNextId();
-            zhsqYc.setYcid(ycid);
-            zhsqYc.setYcly("井盖距离报警");
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(new Date());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:MM:ss");
-            String sdate = sdf.format(calendar.getTime());
-            zhsqYc.setYcsj(sdate);
-            //这里先统一放入的是未确认
-            zhsqYc.setCzzt("未确认");
-            zhsqYc.setCzry("李磊");//处置人员
-            zhsqYc.setCzjg("");//处置时间
-            zhsqYc.setFj("无");
-            zhsqYc.setX(zhsqJg.getX());
-            zhsqYc.setY(zhsqJg.getY());
-            zhsqYc.setZ(zhsqJg.getZ());
-            zhsqYc.setXqid(zhsqJg.getXqid());
-            zhsqYc.setSbid(zhsqJg.getJgid());
-            zhsqYc.setSqid(zhsqJg.getSqid());
-            zhsqYc.setSjlx("设备报警事件");
-            zhsqYc.setNoticeRead("0");
-            zhsqYc.setYcjb("黄");
-            zhsqYc.setYcnr("井盖距离超过阈值，请及时处理");
-            int d= zhsqYcMapper.insertZhsqYc(zhsqYc);
+            zhsqJgDistance.setJgstate("on");
+            if ((lastzhsqJgDistance.size()==0)||(lastzhsqJgDistance.size()>0 && lastzhsqJgDistance.get(0).get("JGSTATE").equals("off"))){
+                //进行报警值的插入
+                ZhsqYc zhsqYc = new ZhsqYc();
+                String ycid = "YC" + uidWorker.getNextId();
+                zhsqYc.setYcid(ycid);
+                zhsqYc.setYcly("井盖距离报警");
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(new Date());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:MM:ss");
+                String sdate = sdf.format(calendar.getTime());
+                zhsqYc.setYcsj(sdate);
+                //这里先统一放入的是未确认
+                zhsqYc.setCzzt("未处置");
+                zhsqYc.setCzry("");//处置人员
+                zhsqYc.setCzjg("");//处置时间
+                zhsqYc.setFj("无");
+                zhsqYc.setX(zhsqJg.getX());
+                zhsqYc.setY(zhsqJg.getY());
+                zhsqYc.setZ(zhsqJg.getZ());
+                zhsqYc.setXqid(zhsqJg.getXqid());
+                zhsqYc.setSbid(zhsqJg.getJgid());
+                zhsqYc.setSqid(zhsqJg.getSqid());
+                zhsqYc.setSjlx("设备报警事件");
+                zhsqYc.setNoticeRead("0");
+                zhsqYc.setYcjb("黄");
+                zhsqYc.setYcnr("井盖距离超过阈值，请及时处理");
+                int d= zhsqYcMapper.insertZhsqYc(zhsqYc);
+                zhsqJgDistance.setCreateTime(new Date());
+                result = zhsqJgDistanceMapper.insertZhsqJgDistance(zhsqJgDistance);
+            }
+        }else {
+            zhsqJgDistance.setJgstate("off");
+            if (lastzhsqJgDistance.size()==0||(lastzhsqJgDistance.size()>0 && lastzhsqJgDistance.get(0).get("JGSTATE").equals("on"))) {
+                zhsqJgDistance.setCreateTime(new Date());
+                result = zhsqJgDistanceMapper.insertZhsqJgDistance(zhsqJgDistance);
+            }
         }
-        zhsqJgDistance.setCreateTime(new Date());
-        return zhsqJgDistanceMapper.insertZhsqJgDistance(zhsqJgDistance);
+        return result;
     }
 
 

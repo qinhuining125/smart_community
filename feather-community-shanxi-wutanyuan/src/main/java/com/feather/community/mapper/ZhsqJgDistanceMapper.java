@@ -5,6 +5,7 @@ import com.feather.community.domain.ZhsqJgDistance;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 井盖距离Mapper接口
@@ -25,4 +26,9 @@ public interface ZhsqJgDistanceMapper
     public int insertZhsqJgDistance(ZhsqJgDistance zhsqJgDistance);
 
 
+    List<Map<String, Object>> selectZhsqJgDistanceNew();
+
+    List<Map<String, Object>> findBySn(String sn);
+
+    ;
 }

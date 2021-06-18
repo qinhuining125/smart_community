@@ -72,7 +72,12 @@
                     "jgid": id
                 },
                 success: function(r) {
-                     alert("配置指令已下发");
+                    if (r.msg=="error"){
+                        alert("配置指令已下发失败");
+                    }else {
+                        alert("配置指令已下发成功");
+                    }
+
                 }
             });
         }

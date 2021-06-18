@@ -3,6 +3,7 @@ package com.feather.community.controller;
 import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
+import com.feather.community.mapper.ZhsqJgDistanceMapper;
 import com.feather.community.service.IZhsqZcService;
 import com.feather.community.service.IZhsqZnafService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class ZhsqZnafController extends BaseController {
     public IZhsqZnafService iZhsqZnafService;
     @Autowired
     public IZhsqZcService iZhsqZcService;
+    @Autowired
+    private ZhsqJgDistanceMapper zhsqJgDistanceMapper;
 
     @RequestMapping("/api/getCountSb")
     @ResponseBody
@@ -426,7 +429,18 @@ public class ZhsqZnafController extends BaseController {
         if (page == null || size == null) {
             resultMap.put("rows", iZhsqZnafService.getJg());
         } else {
-            resultMap.put("rows", iZhsqZnafService.getJgzs(page, size,sbmc));
+            List<Map<String, Object>> jginfoList=iZhsqZnafService.getJgzs(page, size,sbmc);
+            List<Map<String, Object>> rows= new ArrayList<Map<String, Object>>();
+            for (int i=0;i<jginfoList.size();i++){
+                Map<String, Object> jginfo=jginfoList.get(i);
+                List<Map<String, Object>> zhsqJgDistance= zhsqJgDistanceMapper.findBySn((String) jginfo.get("sn"));
+                jginfo.put("zhsqJgDistance",zhsqJgDistance);
+                jginfo.put("frequency",(int)Math.ceil((double)zhsqJgDistance.size()/2));
+
+                rows.add(jginfo);
+            }
+            resultMap.put("rows", rows);
+//            resultMap.put("rows", iZhsqZnafService.getJgzs(page, size,sbmc));
         }
         resultMap.put("total", iZhsqZnafService.getJgzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);

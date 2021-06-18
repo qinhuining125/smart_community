@@ -3,12 +3,30 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.feather.community.mapper.ZhsqJgDistanceMapper">
-    
+
+    <!--烟感展示总记录-->
+    <select id="selectZhsqJgDistanceNew" resultType="map">
+        select * from
+            (select * from ZHSQ_JG_DISTANCE order by CREATE_TIME desc)
+        where rownum = 1
+    </select>
+
+    <!--井盖展示-->
+    <select id="findBySn" resultType="map">
+        select SN as "sn", DISTANCE as "distance", CREATE_TIME as "createTime", JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        <where>
+            <if test="sn != null  and sn != ''">and SN = #{sn}</if>
+        </where>
+        ORDER BY  CREATE_TIME ASC
+    </select>
+
+
     <resultMap type="ZhsqJgDistance" id="ZhsqJgDistanceResult">
         <result property="id"    column="id"    />
         <result property="sn"    column="sn"    />
         <result property="distance"    column="distance"    />
         <result property="createTime"    column="create_time"    jdbcType="BIGINT" />
+        <result property="jgstate"    column="jgstate"    />
     </resultMap>
 
    <!-- <sql id="selectZhsqJgDistanceVo">
@@ -22,12 +40,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sn != null  and sn != ''">sn,</if>
             <if test="distance != null  and distance != ''">distance,</if>
             <if test="createTime != null ">create_time,</if>
+            <if test="jgstate != null  and jgstate != ''">jgstate,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null  and id != ''">#{id},</if>
             <if test="sn != null  and sn != ''">#{sn},</if>
             <if test="distance != null  and distance != ''">#{distance},</if>
             <if test="createTime != null ">#{createTime, jdbcType=BIGINT},</if>
+            <if test="jgstate != null  and jgstate != ''">#{jgstate},</if>
          </trim>
     </insert>
 </mapper>
