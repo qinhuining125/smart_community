@@ -7,23 +7,28 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
+import com.feather.common.annotation.Log;
 import com.feather.common.core.page.TableDataInfo;
+import com.feather.common.enums.BusinessType;
 import com.feather.community.domain.*;
 import com.feather.community.service.*;
 import com.feather.community.util.MyTableDataInfo;
 import com.feather.system.service.ISysDictDataService;
 import com.feather.system.service.ISysDictTypeService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.feather.common.core.controller.BaseController;
 import com.feather.common.core.domain.AjaxResult;
 
 import io.lettuce.core.dynamic.annotation.Param;
-
+import com.feather.community.domain.ZhsqJmrwgh;
+import com.feather.community.service.IZhsqJmrwghService;
 /**
  * 综合治理
  * 
@@ -47,6 +52,9 @@ public class ZhsqZhzlController extends BaseController {
     private IZhsqSxtrlbkgjService zhsqSxtrlbkgjService;
     @Autowired
     private IZhsqYcService zhsqYcService;
+
+    @Autowired
+    private IZhsqJmrwghService zhsqJmrwghService;
 
     @GetMapping("/api/selectZdryCount")
     @ResponseBody
@@ -169,11 +177,28 @@ public class ZhsqZhzlController extends BaseController {
 
         startPage();
         List<Map<String, Object>> list = zhsqZhzlService.getZdRyList(maps);
-        TableDataInfo tableDataInfo = getDataTable(list);
+        List<Map<String, Object>> zdList= new ArrayList<Map<String, Object>>();
+        for (int i=0;i<list.size();i++){
+            Map<String, Object> zdryjm=  list.get(0);
+            List<Map<String, Object>> rwghList=  zhsqJmrwghService.findAllByJmid((String) zdryjm.get("jmid"));
+            zdryjm.put("rwgh",rwghList);
+            zdList.add(zdryjm);
+        }
+        TableDataInfo tableDataInfo = getDataTable(zdList);
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
         return myTableDataInfo;
        // return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
     }
+    @ApiOperation("添加人文关怀")
+    @RequestMapping(value = "/api/addRwgh",method = RequestMethod.POST)
+    @ResponseBody
+    @ApiImplicitParams(
+            @ApiImplicitParam(dataType = "ZhsqJmrwgh",name = "zhsqJmrwgh")
+    )
+    public AjaxResult addYgrz(@RequestBody ZhsqJmrwgh zhsqJmrwgh) {
+        return toAjax(zhsqJmrwghService.insertZhsqJmrwgh(zhsqJmrwgh), zhsqJmrwgh);
+    }
+
 
     /**
      * 人员佩带手环信息
