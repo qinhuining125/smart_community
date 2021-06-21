@@ -269,6 +269,7 @@
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="fwrzqk != null  and fwrzqk != ''"> and FWRZQK = #{fwrzqk}</if>
             <if test="fwlylx != null  and fwlylx != ''"> and FWLYLX = #{fwlylx}</if>
+            <if test="cqzt != null  and cqzt != ''"> and CQZT = #{cqzt}</if>
             <if test="fw != null  and fw != ''">
                 <bind name="_fw" value="'%'+ fw +'%'"/>
                 and (LDMC like #{_fw} OR MPH like #{_fw} OR FWRZQK like #{_fw} OR FWLYLX like #{_fw})

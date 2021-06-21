@@ -291,12 +291,13 @@ public class ZhsqSqglController extends BaseController {
     @GetMapping("/api/getFwList")
     @ResponseBody
     public AjaxResult getFwList(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("fwrzqk") String fwrzqk,
-            @Param("fwlylx") String fwlylx, @Param("fw") String fw) {
+            @Param("fwlylx") String fwlylx, @Param("cqzt") String cqzt, @Param("fw") String fw) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
         maps.put("fwrzqk", fwrzqk);
         maps.put("fwlylx", fwlylx);
+        maps.put("cqzt", cqzt);
         maps.put("fw", fw);
         return AjaxResult.success(iZhsqSqglService.getFwList(maps));
     }
