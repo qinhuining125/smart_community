@@ -50,4 +50,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jgstate != null  and jgstate != ''">#{jgstate},</if>
          </trim>
     </insert>
+
+
+
+
+
+    <sql id="selectZhsqJgDistanceVo">
+        select id, sn, distance, create_time, jgstate from ZHSQ_JG_DISTANCE
+    </sql>
+
+    <select id="selectZhsqJgDistanceList" parameterType="ZhsqJgDistance" resultMap="ZhsqJgDistanceResult">
+        <include refid="selectZhsqJgDistanceVo"/>
+        <where>
+            <if test="sn != null  and sn != ''"> and sn = #{sn}</if>
+            <if test="distance != null "> and distance = #{distance}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="jgstate != null  and jgstate != ''"> and jgstate = #{jgstate}</if>
+        </where>
+    </select>
+
+    <select id="selectZhsqJgDistanceById" parameterType="String" resultMap="ZhsqJgDistanceResult">
+        <include refid="selectZhsqJgDistanceVo"/>
+        where id = #{id}
+    </select>
+
+
+    <update id="updateZhsqJgDistance" parameterType="ZhsqJgDistance">
+        update ZHSQ_JG_DISTANCE
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sn != null  and sn != ''">sn = #{sn},</if>
+            <if test="distance != null ">distance = #{distance},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="jgstate != null  and jgstate != ''">jgstate = #{jgstate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZhsqJgDistanceById" parameterType="String">
+        delete from ZHSQ_JG_DISTANCE where id = #{id}
+    </delete>
+
+    <delete id="deleteZhsqJgDistanceByIds" parameterType="String">
+        delete from ZHSQ_JG_DISTANCE where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

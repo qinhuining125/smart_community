@@ -99,4 +99,63 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
     }
 
 
+    /**
+     * 查询井盖开关记录
+     *
+     * @param id 井盖开关记录ID
+     * @return 井盖开关记录
+     */
+    @Override
+    public ZhsqJgDistance selectZhsqJgDistanceById(String id)
+    {
+        return zhsqJgDistanceMapper.selectZhsqJgDistanceById(id);
+    }
+
+    /**
+     * 查询井盖开关记录列表
+     *
+     * @param zhsqJgDistance 井盖开关记录
+     * @return 井盖开关记录
+     */
+    @Override
+    public List<ZhsqJgDistance> selectZhsqJgDistanceList(ZhsqJgDistance zhsqJgDistance)
+    {
+        return zhsqJgDistanceMapper.selectZhsqJgDistanceList(zhsqJgDistance);
+    }
+
+
+    /**
+     * 修改井盖开关记录
+     *
+     * @param zhsqJgDistance 井盖开关记录
+     * @return 结果
+     */
+    @Override
+    public int updateZhsqJgDistance(ZhsqJgDistance zhsqJgDistance)
+    {
+        return zhsqJgDistanceMapper.updateZhsqJgDistance(zhsqJgDistance);
+    }
+
+    /**
+     * 删除井盖开关记录对象
+     *
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+    @Override
+    public int deleteZhsqJgDistanceByIds(String ids)
+    {
+        return zhsqJgDistanceMapper.deleteZhsqJgDistanceByIds(Convert.toStrArray(ids));
+    }
+
+    /**
+     * 删除井盖开关记录信息
+     *
+     * @param id 井盖开关记录ID
+     * @return 结果
+     */
+    public int deleteZhsqJgDistanceById(String id)
+    {
+        return zhsqJgDistanceMapper.deleteZhsqJgDistanceById(id);
+    }
 }
