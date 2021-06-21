@@ -32,7 +32,8 @@ public class WtyService {
     IZhsqFwService fwService;
     @Autowired
     IZhsqJmService jmService;
-
+    @Autowired
+    IZhsqJmrwghService zdService;
     public List<Map<String, String>> getSqType() {
         List<Map<String, String>> list = sqService.selectZhsqSqType();
         return list;
@@ -55,6 +56,10 @@ public class WtyService {
 
     public List<Map<String, String>> getJmType(){
         List<Map<String, String>> list = jmService.selectZhsqJmType();
+        return list;
+    }
+    public List<Map<String, String>> getZdType() {
+        List<Map<String, String>> list = zdService.selectZhsqZdType();
         return list;
     }
 }

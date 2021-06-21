@@ -61,4 +61,6 @@ public interface ZhsqJmrwghMapper
     public int deleteZhsqJmrwghByIds(String[] jmrwghids);
 
     List<Map<String, Object>> findAllByJmid(String jmid);
+
+    List<Map<String, String>> selectZhsqZdType();
 }

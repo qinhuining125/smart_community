@@ -33,7 +33,7 @@
                 <label class="col-sm-3 control-label">设备状态：</label>
                 <div class="col-sm-8">
                     <select name="sbzt" class="form-control m-b" th:with="type=${@dict.getType('getSbzt')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sbzt}"></option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:mmm,mmZ="*{sbzt}"></option>
                     </select>
                 </div>
             </div>

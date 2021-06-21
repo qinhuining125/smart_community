@@ -66,4 +66,6 @@ public interface IZhsqJmrwghService
      * @return 结果
      */
     List<Map<String, Object>> findAllByJmid(String jmid);
+
+    List<Map<String, String>> selectZhsqZdType();
 }

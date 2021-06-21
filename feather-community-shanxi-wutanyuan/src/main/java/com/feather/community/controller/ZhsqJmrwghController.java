@@ -1,6 +1,9 @@
 package com.feather.community.controller;
 
 import java.util.List;
+
+import com.feather.community.domain.ZhsqJm;
+import com.feather.community.service.IZhsqJmService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,15 +30,16 @@ import com.feather.common.core.page.TableDataInfo;
  * @date 2021-06-21
  */
 @Controller
-@RequestMapping("/dev/jmrwgh")
+@RequestMapping("/community/jmrwgh")
 public class ZhsqJmrwghController extends BaseController
 {
-    private String prefix = "dev/jmrwgh";
+    private String prefix = "community/jmrwgh";
 
     @Autowired
     private IZhsqJmrwghService zhsqJmrwghService;
-
-    @RequiresPermissions("dev:jmrwgh:view")
+    @Autowired
+    private IZhsqJmService zhsqJmService;
+    @RequiresPermissions("community:jmrwgh:view")
     @GetMapping()
     public String jmrwgh()
     {
@@ -45,7 +49,7 @@ public class ZhsqJmrwghController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @RequiresPermissions("dev:jmrwgh:list")
+    @RequiresPermissions("community:jmrwgh:list")
     @PostMapping("/list")
     @ClearPage
     @ResponseBody
@@ -59,7 +63,7 @@ public class ZhsqJmrwghController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @RequiresPermissions("dev:jmrwgh:export")
+    @RequiresPermissions("community:jmrwgh:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(ZhsqJmrwgh zhsqJmrwgh)
@@ -83,12 +87,16 @@ public class ZhsqJmrwghController extends BaseController
     /**
      * 新增保存【请填写功能名称】
      */
-    @RequiresPermissions("dev:jmrwgh:add")
+    @RequiresPermissions("community:jmrwgh:add")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(ZhsqJmrwgh zhsqJmrwgh)
     {
+        if (zhsqJmrwgh.getJmid()!=""&&zhsqJmrwgh.getXm()==""){
+            ZhsqJm JM = zhsqJmService.selectZhsqJmById(zhsqJmrwgh.getJmid());
+            zhsqJmrwgh.setXm(JM.getXm());
+        }
         return toAjax(zhsqJmrwghService.insertZhsqJmrwgh(zhsqJmrwgh), zhsqJmrwgh);
     }
 
@@ -106,7 +114,7 @@ public class ZhsqJmrwghController extends BaseController
     /**
      * 修改保存【请填写功能名称】
      */
-    @RequiresPermissions("dev:jmrwgh:edit")
+    @RequiresPermissions("community:jmrwgh:edit")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -118,7 +126,7 @@ public class ZhsqJmrwghController extends BaseController
     /**
      * 删除【请填写功能名称】
      */
-    @RequiresPermissions("dev:jmrwgh:remove")
+    @RequiresPermissions("community:jmrwgh:remove")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

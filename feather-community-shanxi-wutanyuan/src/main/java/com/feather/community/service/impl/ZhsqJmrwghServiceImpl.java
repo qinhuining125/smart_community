@@ -101,4 +101,9 @@ public class ZhsqJmrwghServiceImpl implements IZhsqJmrwghService
     public List<Map<String, Object>> findAllByJmid(String jmid) {
         return zhsqJmrwghMapper.findAllByJmid(jmid);
     }
+
+    @Override
+    public List<Map<String, String>> selectZhsqZdType() {
+        return zhsqJmrwghMapper.selectZhsqZdType();
+    }
 }

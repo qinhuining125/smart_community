@@ -25,6 +25,9 @@ public class ZhsqJmrwgh extends BaseEntity
     /** 居民id */
     @Excel(name = "居民id")
     private String jmid;
+    /** 居民姓名 */
+    @Excel(name = "居民姓名")
+    private String xm;
     /** 人员 */
     @Excel(name = "人员")
     private String personnel;

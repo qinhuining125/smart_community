@@ -11,10 +11,6 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>人文关怀id：</p>
-                                <input type="text" name="jmrwghid"/>
-                            </li>
-                            <li>
                                 <p>居民id：</p>
                                 <input type="text" name="jmid"/>
                             </li>
@@ -40,16 +36,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="dev:jmrwgh:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="community:jmrwgh:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="dev:jmrwgh:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="community:jmrwgh:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="dev:jmrwgh:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="community:jmrwgh:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="dev:jmrwgh:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="community:jmrwgh:export">
                     <i class="fa fa-download"></i> 导出
                  </a>
             </div>
@@ -60,14 +56,14 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('dev:jmrwgh:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('dev:jmrwgh:remove')}]];
+        var editFlag = [[${@permission.hasPermi('community:jmrwgh:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('community:jmrwgh:remove')}]];
         var jmrwghidDatas = [[${@dict.getType('${column.dictType}')}]];
         var jmidDatas = [[${@dict.getType('${column.dictType}')}]];
         var personnelDatas = [[${@dict.getType('${column.dictType}')}]];
         var eventDatas = [[${@dict.getType('${column.dictType}')}]];
         var timeDatas = [[${@dict.getType('${column.dictType}')}]];
-        var prefix = ctx + "dev/jmrwgh";
+        var prefix = ctx + "community/jmrwgh";
 
         $(function() {
             var options = {
@@ -81,39 +77,25 @@
                     checkbox: true
                 },
                 {
-                    field : 'jmrwghid', 
+                    field : 'jmrwghid',
                     title : '人文关怀id',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(jmrwghidDatas, value);
-                    }
+                    visible: false
                 },
                 {
-                    field : 'jmid', 
-                    title : '居民id',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(jmidDatas, value);
-                    }
+                    field : 'xm',
+                    title : '居民'
                 },
                 {
                     field : 'personnel', 
-                    title : '人员',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(personnelDatas, value);
-                    }
+                    title : '人员'
                 },
                 {
                     field : 'event', 
-                    title : '事件',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(eventDatas, value);
-                    }
+                    title : '事件'
                 },
                 {
                     field : 'time', 
-                    title : '时间',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(timeDatas, value);
-                    }
+                    title : '时间'
                 },
                 {
                     title: '操作',
