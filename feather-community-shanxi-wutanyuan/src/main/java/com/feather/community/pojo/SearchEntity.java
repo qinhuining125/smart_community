@@ -37,6 +37,10 @@ public class SearchEntity {
     private String fwrzqk;
     private String dy;
     private String ceng;
+    private String cqzt;
+    private String fwlylx;
+
+
 
     /**
      * type=4 即为车辆的参数

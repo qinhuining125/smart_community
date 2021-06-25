@@ -77,4 +77,5 @@ public interface IZhsqSbrzService
      * @return 结果
      */
     List<Map<String, Object>> selectZhsqSbrzById1List(String deviceCode);
+    List<Map<String, Object>> selectZhsqSbrzByIdAndSEList(String deviceCode,String start, String end);
 }

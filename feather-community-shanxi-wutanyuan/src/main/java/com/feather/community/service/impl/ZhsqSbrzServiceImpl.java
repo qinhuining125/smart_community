@@ -112,4 +112,8 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
     public List<Map<String, Object>> selectZhsqSbrzById1List(String deviceCode) {
         return zhsqSbrzMapper.selectZhsqSbrzById1List(deviceCode);
     }
+    @Override
+    public List<Map<String, Object>> selectZhsqSbrzByIdAndSEList(String deviceCode,String start, String end) {
+        return zhsqSbrzMapper.selectZhsqSbrzByIdAndSEList(deviceCode,start,end);
+    }
 }

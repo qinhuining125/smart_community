@@ -71,6 +71,7 @@ public class ScreenIndexController extends BaseController {
     private IZhsqMjService zhsqMjService;
     @Autowired
     public IZhsqZnafService iZhsqZnafService;
+
     @GetMapping()
     public String index() {
         return "redirect:/bus/community/index.html";
@@ -400,6 +401,28 @@ public class ScreenIndexController extends BaseController {
     @ResponseBody
     public AjaxResult get5DayData() {
         List<Map<String, String>> list = zhsqSbrzService.get5DayData();
+
+
+//        List<ZhsqSb> sbList = zhsqSbService.getSbList();
+//        List<Map<String, String>> lslist = new ArrayList<Map<String, String>>();
+//        for (int k=0;k<sbList.size();k++){
+//            List<Map<String, Object>> zhsqSBRZList = zhsqSbrzService.selectZhsqSbrzById1List((String) sbList.get(k).getDeviceCode());
+//            Double lastdata = 0.0;
+//            List<Map<String, Object>> dayFlow = new ArrayList<Map<String, Object>>();
+//            for (int j = 0; j < zhsqSBRZList.size(); j++) {
+//                Map<String, Object> sbrz = zhsqSBRZList.get(j);
+//                Object total = sbrz.get("TOTAL");
+//                Double current = Double.parseDouble(total.toString());
+//                Double flow = current - lastdata;
+//                sbrz.put("flow", flow);
+//                dayFlow.add(sbrz);
+//                lastdata = current;
+//            }
+//            for (int j=0;j<dayFlow.size();j++){
+//
+//            }
+//        }
+
         return AjaxResult.success(list);
     }
 
@@ -439,12 +462,12 @@ public class ScreenIndexController extends BaseController {
 
     /**
      * 获取单个水表详情信息
-     * */
+     */
     @GetMapping("/api/getSbDetail")
     @ClearPage
     @ResponseBody
     public AjaxResult getSbDetail(String deviceCode) {
-        List<Map<String, String>> liat= zhsqSbService.getSbDetail(deviceCode);
+        List<Map<String, String>> liat = zhsqSbService.getSbDetail(deviceCode);
         return AjaxResult.success(liat);
     }
 
@@ -458,6 +481,7 @@ public class ScreenIndexController extends BaseController {
         List<ZhsqDg> list = zhsqSbService.getDgList();
         return AjaxResult.success(list);
     }
+
     /**
      * 设备列表（摄像头）
      */
@@ -544,7 +568,7 @@ public class ScreenIndexController extends BaseController {
         List<Map<String, Object>> resultList = new ArrayList<>();
 
         Map<String, Object> sxtMap = new HashMap<>();
-        sxtMap.put("TYPE",  "摄像头");
+        sxtMap.put("TYPE", "摄像头");
         sxtMap.put("NUM", sxtCount);
         resultList.add(sxtMap);
         Map<String, Object> zjMap = new HashMap<>();
@@ -565,6 +589,7 @@ public class ScreenIndexController extends BaseController {
         resultMap.put("data", resultList);
         return AjaxResult.success(resultMap);
     }
+
     /**
      * 报警事件
      */
@@ -614,15 +639,15 @@ public class ScreenIndexController extends BaseController {
     public AjaxResult getHJ() throws SQLException {
         List<Map<String, Object>> list = iZhsqZnafService.getHJ();
         List<Map<String, Object>> resultList = new ArrayList<>();
-        for (int i=0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map = new HashMap<>();
-            if (list.get(i).get("YCLY").equals("摄像头普通报警")){
+            if (list.get(i).get("YCLY").equals("摄像头普通报警")) {
                 map.put("bjsb", "摄像头");
                 ZhsqSxt zhsqSxt = zhsqSxtService.selectZhsqSxtById((String) list.get(i).get("SBID"));
                 map.put("sbbh", zhsqSxt.getSbmc());
                 map.put("sbwz", zhsqSxt.getWz());
             }
-            if (list.get(i).get("YCLY").equals("烟感报警")){
+            if (list.get(i).get("YCLY").equals("烟感报警")) {
                 map.put("bjsb", "烟感");
                 ZhsqYg YG = zhsqYgService.selectZhsqYgById((String) list.get(i).get("SBID"));
                 map.put("sbbh", YG.getSbmc());
@@ -648,7 +673,7 @@ public class ScreenIndexController extends BaseController {
 
     /**
      * 查询烟感列表，根据楼栋单元号出结果
-     * */
+     */
     @RequestMapping("/api/searchYgList")
     @ClearPage
     @ResponseBody

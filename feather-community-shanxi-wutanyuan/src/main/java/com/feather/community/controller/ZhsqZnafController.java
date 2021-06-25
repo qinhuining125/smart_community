@@ -488,7 +488,28 @@ public class ZhsqZnafController extends BaseController {
         resultMap.put("total", iZhsqZnafService.getSbzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);
     }
-
+    /**
+     * 水表展示
+     *
+     * @return
+     */
+    @GetMapping("/api/getSbinfo")
+    @ResponseBody
+    public AjaxResult getSbinfo( String deviceCode,String start, String end) {
+        List<Map<String, Object>> zhsqSBRZList= zhsqSbrzService.selectZhsqSbrzByIdAndSEList(deviceCode,start,end);
+        Double lastdata=0.0;
+        List<Map<String, Object>> dayFlow= new ArrayList<Map<String, Object>>();
+        for (int j=0;j<zhsqSBRZList.size();j++){
+            Map<String, Object> sbrz=zhsqSBRZList.get(j);
+            Object total= sbrz.get("TOTAL");
+            Double current= Double.parseDouble(total.toString());
+            Double flow=current-lastdata;
+            sbrz.put("flow",flow);
+            dayFlow.add(sbrz);
+            lastdata=current;
+        }
+        return AjaxResult.success(dayFlow);
+    }
     /**
      * 新闻通知或者公告
      *
