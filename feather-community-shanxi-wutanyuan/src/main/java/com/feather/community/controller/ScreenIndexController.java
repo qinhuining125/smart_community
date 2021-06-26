@@ -466,7 +466,7 @@ public class ScreenIndexController extends BaseController {
     @GetMapping("/api/getSbDetail")
     @ClearPage
     @ResponseBody
-    public AjaxResult getSbDetail(String deviceCode) {
+    public AjaxResult getSbDetail(String deviceCode,String start, String end) {
         List<Map<String, String>> liat = zhsqSbService.getSbDetail(deviceCode);
         Map<String, String> map =liat.get(0);
         Map<String, Object> map2= new HashMap<String, Object>();
@@ -481,7 +481,7 @@ public class ScreenIndexController extends BaseController {
         map2.put("z",map.get("z"));
         map2.put("deviceCode",map.get("deviceCode"));
         map2.put("sbzt",map.get("sbzt"));
-        List<Map<String, Object>> zhsqSBRZList= zhsqSbrzService.selectZhsqSbrzById1List(deviceCode);
+        List<Map<String, Object>> zhsqSBRZList= zhsqSbrzService.selectZhsqSbrzByIdAndSEList(deviceCode,start,end);
         Double lastdata=0.0;
         List<Map<String, Object>> dayFlow= new ArrayList<Map<String, Object>>();
         for (int j=0;j<zhsqSBRZList.size();j++){
