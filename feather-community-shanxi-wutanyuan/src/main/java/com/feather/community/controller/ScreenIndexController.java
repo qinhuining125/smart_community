@@ -468,7 +468,35 @@ public class ScreenIndexController extends BaseController {
     @ResponseBody
     public AjaxResult getSbDetail(String deviceCode) {
         List<Map<String, String>> liat = zhsqSbService.getSbDetail(deviceCode);
-        return AjaxResult.success(liat);
+        Map<String, String> map =liat.get(0);
+        Map<String, Object> map2= new HashMap<String, Object>();
+        map2.put("sbmc",map.get("sbmc"));
+        map2.put("dyys",map.get("dyys"));
+        map2.put("zysl",map.get("zysl"));
+        map2.put("ppmc",map.get("ppmc"));
+        map2.put("wz",map.get("wz"));
+        map2.put("drys",map.get("drys"));
+        map2.put("x",map.get("x"));
+        map2.put("y",map.get("y"));
+        map2.put("z",map.get("z"));
+        map2.put("deviceCode",map.get("deviceCode"));
+        map2.put("sbzt",map.get("sbzt"));
+        List<Map<String, Object>> zhsqSBRZList= zhsqSbrzService.selectZhsqSbrzById1List(deviceCode);
+        Double lastdata=0.0;
+        List<Map<String, Object>> dayFlow= new ArrayList<Map<String, Object>>();
+        for (int j=0;j<zhsqSBRZList.size();j++){
+            Map<String, Object> sbrz=zhsqSBRZList.get(j);
+            Object total= sbrz.get("TOTAL");
+            Double current= Double.parseDouble(total.toString());
+            Double flow=current-lastdata;
+            sbrz.put("flow",flow);
+            dayFlow.add(sbrz);
+            lastdata=current;
+        }
+        map2.put("dayFlow",dayFlow);
+        List<Map<String, Object>> detal=new ArrayList<Map<String, Object>>();
+        detal.add(map2);
+        return AjaxResult.success(detal);
     }
 
     /**
