@@ -68,4 +68,6 @@ public interface IZhsqJmrwghService
     List<Map<String, Object>> findAllByJmid(String jmid);
 
     List<Map<String, String>> selectZhsqZdType();
+
+    List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid);
 }

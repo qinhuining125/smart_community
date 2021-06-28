@@ -1,6 +1,8 @@
 package com.feather.community.mapper;
 
 import com.feather.community.domain.ZhsqJmrwgh;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -63,4 +65,6 @@ public interface ZhsqJmrwghMapper
     List<Map<String, Object>> findAllByJmid(String jmid);
 
     List<Map<String, String>> selectZhsqZdType();
+
+    List<Map<String, Object>> findRwghByJmid(@Param("page")Integer page, @Param("size")Integer size, @Param("jmid")String jmid);
 }

@@ -29,9 +29,10 @@ import com.feather.common.core.domain.AjaxResult;
 import io.lettuce.core.dynamic.annotation.Param;
 import com.feather.community.domain.ZhsqJmrwgh;
 import com.feather.community.service.IZhsqJmrwghService;
+
 /**
  * 综合治理
- * 
+ *
  * @author fancy
  * @date 2020-05-14
  */
@@ -67,14 +68,14 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 统计重点人员分布情况
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getZdryFb")
     @ResponseBody
     public AjaxResult getZdryFb(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
-            @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
-            @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
+                                @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
+                                @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
@@ -90,14 +91,14 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 统计重点人员年龄结构
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getZdNl")
     @ResponseBody
     public AjaxResult getZdNl(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
-            @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
-            @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
+                              @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
+                              @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
@@ -112,14 +113,14 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 统计重点人员男女比例
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getZdNnBl")
     @ResponseBody
     public AjaxResult getZdNnBl(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
-            @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
-            @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
+                                @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
+                                @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
@@ -134,14 +135,14 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 统计重点人员民族比例
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getZdMzBl")
     @ResponseBody
     public AjaxResult getZdMzBl(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
-            @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
-            @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
+                                @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
+                                @Param("sfdb") String sfdb, @Param("sfcj") String sfcj) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
@@ -156,14 +157,14 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 重点人员列表
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getZdRyList")
     @ResponseBody
     public MyTableDataInfo getZdRyList(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("sfdj") String sfdj,
-            @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
-            @Param("sfdb") String sfdb, @Param("sfcj") String sfcj, @Param("zdry") String zdry) {
+                                       @Param("sfkc") String sfkc, @Param("sfxmsf") String sfxmsf, @Param("sftyjr") String sftyjr,
+                                       @Param("sfdb") String sfdb, @Param("sfcj") String sfcj, @Param("zdry") String zdry) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
@@ -177,23 +178,39 @@ public class ZhsqZhzlController extends BaseController {
 
         startPage();
         List<Map<String, Object>> list = zhsqZhzlService.getZdRyList(maps);
-        List<Map<String, Object>> zdList= new ArrayList<Map<String, Object>>();
-        for (int i=0;i<list.size();i++){
-            Map<String, Object> zdryjm=  list.get(0);
-            List<Map<String, Object>> rwghList=  zhsqJmrwghService.findAllByJmid((String) zdryjm.get("jmid"));
-            zdryjm.put("rwgh",rwghList);
+        List<Map<String, Object>> zdList = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> zdryjm = list.get(0);
+            List<Map<String, Object>> rwghList = zhsqJmrwghService.findAllByJmid((String) zdryjm.get("jmid"));
+            zdryjm.put("rwgh", rwghList);
             zdList.add(zdryjm);
         }
         TableDataInfo tableDataInfo = getDataTable(zdList);
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
         return myTableDataInfo;
-       // return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
+        // return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
     }
+
+    /**
+     * 重点人员列表
+     *
+     * @return
+     */
+    @GetMapping("/api/getZdRyRwgh")
+    @ResponseBody
+    public MyTableDataInfo getZdRyRwgh(@Param("jmid") String jmid, Integer page, Integer size) {
+        List<Map<String, Object>> rwghList = zhsqJmrwghService.findRwghByJmid(page, size,jmid);
+        TableDataInfo tableDataInfo = getDataTable(rwghList);
+        MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
+        return myTableDataInfo;
+
+    }
+
     @ApiOperation("添加人文关怀")
-    @RequestMapping(value = "/api/addRwgh",method = RequestMethod.POST)
+    @RequestMapping(value = "/api/addRwgh", method = RequestMethod.POST)
     @ResponseBody
     @ApiImplicitParams(
-            @ApiImplicitParam(dataType = "ZhsqJmrwgh",name = "zhsqJmrwgh")
+            @ApiImplicitParam(dataType = "ZhsqJmrwgh", name = "zhsqJmrwgh")
     )
     public AjaxResult addYgrz(@RequestBody ZhsqJmrwgh zhsqJmrwgh) {
         return toAjax(zhsqJmrwghService.insertZhsqJmrwgh(zhsqJmrwgh), zhsqJmrwgh);
@@ -209,22 +226,22 @@ public class ZhsqZhzlController extends BaseController {
     @ResponseBody
     public AjaxResult getRyShInfo(@Param("jmid") String jmid) {
         Map<String, Object> maps = new HashMap<>();
-        ZhsqSh zhsqSh=new ZhsqSh();
+        ZhsqSh zhsqSh = new ZhsqSh();
         zhsqSh.setJmid(jmid);
-        List<ZhsqSh> ls=zhsqShService.selectZhsqShList(zhsqSh);
-        maps.put("flag",false);
-        if(ls!=null&&ls.size()>0){
-            maps.put("flag",true);
-            String shid=ls.get(0).getShid();
-            ZhsqShrz zhsqShrz=new ZhsqShrz();
+        List<ZhsqSh> ls = zhsqShService.selectZhsqShList(zhsqSh);
+        maps.put("flag", false);
+        if (ls != null && ls.size() > 0) {
+            maps.put("flag", true);
+            String shid = ls.get(0).getShid();
+            ZhsqShrz zhsqShrz = new ZhsqShrz();
             zhsqShrz.setShid(shid);
-            List<ZhsqShrz> shrzlist=zhsqShrzService.selectZhsqShrzList(zhsqShrz);
-            if(shrzlist!=null && shrzlist.size()>0 ){
+            List<ZhsqShrz> shrzlist = zhsqShrzService.selectZhsqShrzList(zhsqShrz);
+            if (shrzlist != null && shrzlist.size() > 0) {
                 maps.put("shxx", shrzlist.get(0));
                 //添加手环报警信息进入
-                String alarmConent=sysDictDataService.selectDictLabel("zhsq_shjg",shrzlist.get(0).getAlarmState());
-                if(alarmConent==null){
-                    alarmConent="";
+                String alarmConent = sysDictDataService.selectDictLabel("zhsq_shjg", shrzlist.get(0).getAlarmState());
+                if (alarmConent == null) {
+                    alarmConent = "";
                 }
                 shrzlist.get(0).setAlarmContent(alarmConent);
             }
@@ -234,7 +251,7 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 巡检任务统计
-     * 
+     *
      * @return
      */
     @GetMapping("/api/selectXjrwCount")
@@ -248,7 +265,7 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 首页人员巡检
-     * 
+     *
      * @return
      */
     @GetMapping("/api/selectRyxjCount")
@@ -294,13 +311,13 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 巡检任务
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getXjrw")
     @ResponseBody
     public AjaxResult getXjrw(@Param("xqid") String xqid, @Param("sqid") String sqid, @Param("xczt") String xczt,
-            @Param("xjrw") String xjrw) {
+                              @Param("xjrw") String xjrw) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
@@ -311,7 +328,7 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 重点事件
-     * 
+     *
      * @return
      */
     @GetMapping("/api/selectZdsjCount")
@@ -325,7 +342,7 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 重点事件扇形图
-     * 
+     *
      * @return
      */
     @GetMapping("/api/selectZdsjTCount")
@@ -339,13 +356,13 @@ public class ZhsqZhzlController extends BaseController {
 
     /**
      * 重点事件列表
-     * 
+     *
      * @return
      */
     @GetMapping("/api/getZdsjList")
     @ResponseBody
-    public AjaxResult getZdsjList(@Param("page") Integer page,@Param("page")  Integer size, @Param("xqid") String xqid, @Param("sqid") String sqid, @Param("czzt") String czzt,
-            @Param("sjlx") String sjlx)throws SQLException {
+    public AjaxResult getZdsjList(@Param("page") Integer page, @Param("page") Integer size, @Param("xqid") String xqid, @Param("sqid") String sqid, @Param("czzt") String czzt,
+                                  @Param("sjlx") String sjlx) throws SQLException {
         Map<String, Object> maps = new HashMap<>();
         maps.put("page", page);
         maps.put("size", size);
@@ -357,7 +374,7 @@ public class ZhsqZhzlController extends BaseController {
         System.out.printf(ycList.toString());
         List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> resultMap = new HashMap<>();
-       Integer ii= zhsqZhzlService.getZdsjCount(maps);
+        Integer ii = zhsqZhzlService.getZdsjCount(maps);
         resultMap.put("total", zhsqZhzlService.getZdsjCount(maps));
         for (int i = 0; i < ycList.size(); i++) {
             Map<String, Object> map = ycList.get(i);
@@ -366,23 +383,23 @@ public class ZhsqZhzlController extends BaseController {
                 ycxw = ((ClobProxyImpl) ycxw).getSubString(1, (int) ((ClobProxyImpl) ycxw).length());
             }
             Map<String, Object> map1 = new HashMap<>();
-            if (map.get("GJSJID")!=null){
-                ZhsqSxtrlbkgj zhsqSxtrlbkgj=  zhsqSxtrlbkgjService.selectZhsqSxtrlbkgjById((String) map.get("GJSJID"));
-                if (zhsqSxtrlbkgj!=null){
+            if (map.get("GJSJID") != null) {
+                ZhsqSxtrlbkgj zhsqSxtrlbkgj = zhsqSxtrlbkgjService.selectZhsqSxtrlbkgjById((String) map.get("GJSJID"));
+                if (zhsqSxtrlbkgj != null) {
                     map1.put("LONGITUDE", zhsqSxtrlbkgj.getLongitude());
                     map1.put("LATITUDE", zhsqSxtrlbkgj.getLatitude());
                     map1.put("SNAPTIME", zhsqSxtrlbkgj.getSnapTime());//人脸抓拍时间
                     map1.put("ALARMTIME", zhsqSxtrlbkgj.getAlarmTime());//报警时间
                     map1.put("ALARMTYPE", zhsqSxtrlbkgj.getAlarmType());//报警类型1：黑名单告警2：白名单告警（即未匹配上的陌生人告警）3：为白名单命中告警（即白名单）
-                    map1.put("SNAPFACEPICURL",zhsqSxtrlbkgj.getSnapfacePicurl());//人脸抓拍小图片url
+                    map1.put("SNAPFACEPICURL", zhsqSxtrlbkgj.getSnapfacePicurl());//人脸抓拍小图片url
                     map1.put("FACEPICURL", zhsqSxtrlbkgj.getFacePicurl());//名单库人脸url
                     map1.put("SNAPPICURL", zhsqSxtrlbkgj.getSnapPicurl());//人脸抓拍图片url
                     map1.put("FACESAMEVALUE", zhsqSxtrlbkgj.getFaceSamevalue());//人脸相似度
                 }
             }
-            if (map.get("EVENT_TYPE")!=null){
-                ZhsqYcType zhsqYcType =  zhsqYcService.selectZhsqYcTypeById((String) map.get("EVENT_TYPE"));
-                if (zhsqYcType!=null){
+            if (map.get("EVENT_TYPE") != null) {
+                ZhsqYcType zhsqYcType = zhsqYcService.selectZhsqYcTypeById((String) map.get("EVENT_TYPE"));
+                if (zhsqYcType != null) {
                     map1.put("EVENT_TYPE", zhsqYcType.getName());
                 }
             }

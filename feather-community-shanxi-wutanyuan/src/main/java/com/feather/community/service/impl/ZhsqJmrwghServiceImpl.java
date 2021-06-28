@@ -106,4 +106,9 @@ public class ZhsqJmrwghServiceImpl implements IZhsqJmrwghService
     public List<Map<String, String>> selectZhsqZdType() {
         return zhsqJmrwghMapper.selectZhsqZdType();
     }
+
+    @Override
+    public List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid) {
+        return zhsqJmrwghMapper.findRwghByJmid(page,size,jmid);
+    }
 }
