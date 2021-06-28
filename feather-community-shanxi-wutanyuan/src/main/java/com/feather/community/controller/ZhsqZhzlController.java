@@ -202,6 +202,7 @@ public class ZhsqZhzlController extends BaseController {
         List<Map<String, Object>> rwghList = zhsqJmrwghService.findRwghByJmid(page, size,jmid);
         TableDataInfo tableDataInfo = getDataTable(rwghList);
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
+        myTableDataInfo.setTotals(zhsqJmrwghService.getRwghCount(jmid));
         return myTableDataInfo;
 
     }

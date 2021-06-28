@@ -97,5 +97,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ) t
         where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
     </select>
-
+    <select id="getRwghCount" parameterType="map" resultType="Integer">
+        SELECT count(1) FROM (
+        SELECT JMID,PERSONNEL,EVENT,TIME,XM,rownum as no FROM ZHSQ_JMRWGH
+        <where>
+            <if test="jmid != null  and jmid != ''">and JMID = #{jmid}</if>
+        </where>
+    </select>
 </mapper>

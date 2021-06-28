@@ -111,4 +111,9 @@ public class ZhsqJmrwghServiceImpl implements IZhsqJmrwghService
     public List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid) {
         return zhsqJmrwghMapper.findRwghByJmid(page,size,jmid);
     }
+
+    @Override
+    public int getRwghCount(String jmid) {
+        return zhsqJmrwghMapper.getRwghCount(jmid);
+    }
 }

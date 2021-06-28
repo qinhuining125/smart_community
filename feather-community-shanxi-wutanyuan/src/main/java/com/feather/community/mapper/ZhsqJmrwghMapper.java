@@ -67,4 +67,6 @@ public interface ZhsqJmrwghMapper
     List<Map<String, String>> selectZhsqZdType();
 
     List<Map<String, Object>> findRwghByJmid(@Param("page")Integer page, @Param("size")Integer size, @Param("jmid")String jmid);
+
+    int getRwghCount(@Param("page")String jmid);
 }
