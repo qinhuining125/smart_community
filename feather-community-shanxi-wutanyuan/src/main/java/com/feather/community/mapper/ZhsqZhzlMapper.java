@@ -121,4 +121,6 @@ public interface ZhsqZhzlMapper {
      * @return
      */
     public Integer getZdsjCount(Map<String, Object> maps);
+
+    int getZdRyCount(Map<String, Object> maps);
 }

@@ -428,7 +428,7 @@ public class ZhsqZnafController extends BaseController {
      */
     @GetMapping("/api/getJgzs")
     @ResponseBody
-    public AjaxResult getJgzs(Integer page, Integer size,String sbmc) {
+    public AjaxResult getJgzs(Integer page, Integer size,String sbmc,String start, String end) {
         Map<String, Object> resultMap = new HashMap<>();
         if (page == null || size == null) {
             resultMap.put("rows", iZhsqZnafService.getJg());
@@ -448,6 +448,17 @@ public class ZhsqZnafController extends BaseController {
         }
         resultMap.put("total", iZhsqZnafService.getJgzsCount(page, size,sbmc));
         return AjaxResult.success(resultMap);
+    }
+    /**
+     * 井盖开启记录时间检索
+     *
+     * @return
+     */
+    @GetMapping("/api/getjginfo")
+    @ResponseBody
+    public AjaxResult getjginfo( String sn,String start, String end) {
+        List<Map<String, Object>> zhsqJgRZList= zhsqJgDistanceMapper.findJgDisBySSE(sn,start,end);
+        return AjaxResult.success(zhsqJgRZList);
     }
 
     /**

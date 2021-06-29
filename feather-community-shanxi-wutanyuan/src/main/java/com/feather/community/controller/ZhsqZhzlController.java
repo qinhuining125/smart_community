@@ -187,6 +187,7 @@ public class ZhsqZhzlController extends BaseController {
         }
         TableDataInfo tableDataInfo = getDataTable(zdList);
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
+        myTableDataInfo.setTotals(zhsqZhzlService.getZdRyCount(maps));
         return myTableDataInfo;
         // return AjaxResult.success(zhsqZhzlService.getZdRyList(maps));
     }
@@ -198,11 +199,11 @@ public class ZhsqZhzlController extends BaseController {
      */
     @GetMapping("/api/getZdRyRwgh")
     @ResponseBody
-    public MyTableDataInfo getZdRyRwgh(@Param("jmid") String jmid, Integer page, Integer size) {
-        List<Map<String, Object>> rwghList = zhsqJmrwghService.findRwghByJmid(page, size,jmid);
+    public MyTableDataInfo getZdRyRwgh(@Param("jmid") String jmid,String peersonnel, Integer page, Integer size) {
+        List<Map<String, Object>> rwghList = zhsqJmrwghService.findRwghByJmid(page, size,jmid,peersonnel);
         TableDataInfo tableDataInfo = getDataTable(rwghList);
         MyTableDataInfo myTableDataInfo = new MyTableDataInfo(tableDataInfo);
-        myTableDataInfo.setTotals(zhsqJmrwghService.getRwghCount(jmid));
+        myTableDataInfo.setTotals(zhsqJmrwghService.getRwghCount(jmid,peersonnel));
         return myTableDataInfo;
 
     }

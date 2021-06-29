@@ -93,6 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         (select JMID,PERSONNEL ,EVENT , TIME,XM,rownum as no FROM ZHSQ_JMRWGH
         <where>
             <if test="jmid != null  and jmid != ''">and JMID = #{jmid}</if>
+            <if test="peersonnel != null  and peersonnel != ''">and PERSONNEL = #{peersonnel}</if>
         </where>
         ) t
         where no between (#{page}-1)*#{size}+1 and #{page}*#{size}
@@ -102,6 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT JMID,PERSONNEL,EVENT,TIME,XM,rownum as no FROM ZHSQ_JMRWGH
         <where>
             <if test="jmid != null  and jmid != ''">and JMID = #{jmid}</if>
+            <if test="peersonnel != null  and peersonnel != ''">and PERSONNEL = #{peersonnel}</if>
         </where>)
     </select>
 </mapper>

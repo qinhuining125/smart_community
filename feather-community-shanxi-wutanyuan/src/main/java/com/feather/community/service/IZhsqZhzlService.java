@@ -102,4 +102,6 @@ public interface IZhsqZhzlService {
     public List<Map<String, Object>> getZdsjList(Map<String, Object> maps);
 
     public Integer getZdsjCount(Map<String, Object> maps);
+
+    int getZdRyCount(Map<String, Object> maps);
 }

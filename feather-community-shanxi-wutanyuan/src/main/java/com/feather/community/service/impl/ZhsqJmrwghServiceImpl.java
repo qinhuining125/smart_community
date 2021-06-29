@@ -108,12 +108,12 @@ public class ZhsqJmrwghServiceImpl implements IZhsqJmrwghService
     }
 
     @Override
-    public List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid) {
-        return zhsqJmrwghMapper.findRwghByJmid(page,size,jmid);
+    public List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid,String peersonnel) {
+        return zhsqJmrwghMapper.findRwghByJmid(page,size,jmid,peersonnel);
     }
 
     @Override
-    public int getRwghCount(String jmid) {
-        return zhsqJmrwghMapper.getRwghCount(jmid);
+    public int getRwghCount(String jmid,String peersonnel) {
+        return zhsqJmrwghMapper.getRwghCount(jmid,peersonnel);
     }
 }

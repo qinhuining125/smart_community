@@ -125,7 +125,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             and (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
         </where>
     </select>
+    <select id="getZdRyCount" parameterType="map" resultType="Integer">
+        SELECT count(1) FROM (
+        SELECT JMID as "jmid",XM as "xm", XB as "xb",DH as "dh",NL as "nl",JG as "jg",HJXZ as "hjxz",MZ as "mz",ZZMM　as "zzmm",XL as "xl",SFZH as "sfzh",SFFZ as "sffz",FWID as "fwid",LDID as "ldid",ZZ as "zz",SFDJ as "sfdj",SFKC as "sfkc",SFXMSF as "sfxmsf",SFTYJR as "sftyjr",SFDB as "sfdb",SFCJ as "sfcj",SFCZ as "sfcz" FROM ZHSQ_JM
+        <where>
+            <if test="xqid != null  and xqid != ''"> and XQID = #{xqid}</if>
+            <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
+            <if test="sfdj != null  and sfdj != ''"> and SFDJ = #{sfdj}</if>
+            <if test="sfkc != null  and sfkc != ''"> and SFKC = #{sfkc}</if>
+            <if test="sfxmsf != null  and sfxmsf != ''"> and SFXMSF = #{sfxmsf}</if>
+            <if test="sftyjr != null  and sftyjr != ''"> and SFTYJR = #{sftyjr}</if>
+            <if test="sfdb != null  and sfdb != ''"> and SFDB = #{sfdb}</if>
+            <if test="sfcj != null  and sfcj != ''"> and SFCJ = #{sfcj}</if>
 
+            <if test="zdry != null  and zdry != ''">
+                <bind name="_zdry" value="'%'+ zdry +'%'"/>
+                and XM like #{_zdry}
+            </if>
+            and (SFDJ = '是' OR SFKC = '是' OR SFXMSF = '是' OR SFTYJR = '是' OR SFDB = '是' OR SFCJ = '是')
+        </where>)
+    </select>
     <!--巡检任务统计-->
     <select id="selectXjrwCount" parameterType="map" resultType="map">
         SELECT

@@ -69,5 +69,7 @@ public interface ZhsqJgDistanceMapper
 
     List<Map<String, Object>> findBySn(String sn);
 
+    List<Map<String, Object>> findJgDisBySSE(String sn, String start, String end);
+
     ;
 }

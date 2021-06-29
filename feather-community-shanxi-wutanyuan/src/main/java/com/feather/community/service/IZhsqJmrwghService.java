@@ -69,7 +69,7 @@ public interface IZhsqJmrwghService
 
     List<Map<String, String>> selectZhsqZdType();
 
-    List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid);
+    List<Map<String, Object>> findRwghByJmid(Integer page, Integer size, String jmid, String peersonnel);
 
-    int getRwghCount(String jmid);
+    int getRwghCount(String jmid,String peersonnel);
 }
