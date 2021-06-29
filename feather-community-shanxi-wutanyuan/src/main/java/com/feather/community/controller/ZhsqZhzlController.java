@@ -168,19 +168,19 @@ public class ZhsqZhzlController extends BaseController {
         Map<String, Object> maps = new HashMap<>();
         maps.put("xqid", xqid);
         maps.put("sqid", sqid);
-        maps.put("sfdj", sfdj);
-        maps.put("sfkc", sfkc);
-        maps.put("sfxmsf", sfxmsf);
-        maps.put("sftyjr", sftyjr);
-        maps.put("sfdb", sfdb);
-        maps.put("sfcj", sfcj);
+        maps.put("sfdj", sfdj);//独居老人
+        maps.put("sfkc", sfkc);//是否空巢老人
+        maps.put("sfxmsf", sfxmsf);//是否刑满释放
+        maps.put("sftyjr", sftyjr);//是否刑满释放
+        maps.put("sfdb", sfdb);//是否低保
+        maps.put("sfcj", sfcj);//是否残疾人
         maps.put("zdry", zdry);
 
         startPage();
         List<Map<String, Object>> list = zhsqZhzlService.getZdRyList(maps);
         List<Map<String, Object>> zdList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < list.size(); i++) {
-            Map<String, Object> zdryjm = list.get(0);
+            Map<String, Object> zdryjm = list.get(i);
             List<Map<String, Object>> rwghList = zhsqJmrwghService.findAllByJmid((String) zdryjm.get("jmid"));
             zdryjm.put("rwgh", rwghList);
             zdList.add(zdryjm);
