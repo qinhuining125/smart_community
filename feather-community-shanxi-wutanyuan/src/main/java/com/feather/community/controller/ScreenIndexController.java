@@ -11,6 +11,7 @@ import com.feather.common.annotation.ClearPage;
 import com.feather.common.annotation.Log;
 import com.feather.common.enums.BusinessType;
 import com.feather.community.domain.*;
+import com.feather.community.mapper.ZhsqJgDistanceMapper;
 import com.feather.community.pojo.SearchEntity;
 import com.feather.community.service.*;
 import com.feather.community.util.MyTableDataInfo;
@@ -71,6 +72,9 @@ public class ScreenIndexController extends BaseController {
     private IZhsqMjService zhsqMjService;
     @Autowired
     public IZhsqZnafService iZhsqZnafService;
+
+    @Autowired
+    private ZhsqJgDistanceMapper zhsqJgDistanceMapper;
 
     @GetMapping()
     public String index() {
@@ -456,7 +460,27 @@ public class ScreenIndexController extends BaseController {
     @ClearPage
     @ResponseBody
     public AjaxResult getSbList() {
-        List<ZhsqSb> list = zhsqSbService.getSbList();
+        List<ZhsqSb> sbList = zhsqSbService.getSbList();
+        List<ZhsqSb> list=new ArrayList<ZhsqSb>();
+        for (int i=0;i<sbList.size();i++){
+            ZhsqSb sb=sbList.get(i);
+            List<Map<String, Object>> zhsqSBRZ= zhsqSbrzService.selectZhsqSbrzByIdNew((String) sb.getDeviceCode());
+            List<Map<String, Object>> zhsqSBRZList= zhsqSbrzService.selectZhsqSbrzById1List((String) sb.getDeviceCode());
+            Double lastdata=0.0;
+            List<Map<String, Object>> dayFlow= new ArrayList<Map<String, Object>>();
+            for (int j=0;j<zhsqSBRZList.size();j++){
+                Map<String, Object> sbrz=zhsqSBRZList.get(j);
+                Object total= sbrz.get("TOTAL");
+                Double current= Double.parseDouble(total.toString());
+                Double flow=current-lastdata;
+                sbrz.put("flow",flow);
+                dayFlow.add(sbrz);
+                lastdata=current;
+            }
+//            sb.setZysl((String) zhsqSBRZ.get(0).get("TOTAL"));
+            sb.setDayFlow(dayFlow);
+            list.add(sb);
+        }
         return AjaxResult.success(list);
     }
 
@@ -542,7 +566,15 @@ public class ScreenIndexController extends BaseController {
     @ResponseBody
     public AjaxResult getJgList() {
         List<ZhsqJg> list = zhsqJgService.getJgList();
-        return AjaxResult.success(list);
+        List<ZhsqJg> jglist = new ArrayList<>();
+        for (int i=0;i<list.size();i++){
+            ZhsqJg jginfo=list.get(i);
+            List<Map<String, Object>> zhsqJgDistance= zhsqJgDistanceMapper.findBySn((String) jginfo.getSn());
+            jginfo.setZhsqJgDistance(zhsqJgDistance);
+            jginfo.setCount((int)Math.ceil((double)zhsqJgDistance.size()/2));
+            jglist.add(jginfo);
+        }
+        return AjaxResult.success(jglist);
     }
 
     /**

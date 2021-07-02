@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--井盖展示-->
     <select id="findBySn" resultType="map">
-        select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') as time, JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd HH24:MI:SS') as time, JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
         <where>
             <if test="sn != null  and sn != ''">and SN = #{sn}</if>
         </where>
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <!--井盖展示加入时间检索-->
     <select id="findJgDisBySSE" resultType="map">
-        select SN as "sn", DISTANCE as "distance",   to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') as time ,JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        select SN as "sn", DISTANCE as "distance",   to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd HH24:MI:SS') as time ,JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
             <if test="arg1 != null and arg1 != ''"><!-- 开始时间检索 -->

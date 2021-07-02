@@ -81,4 +81,5 @@ public class ZhsqSb extends BaseEntity
     @Transient
     private String zysl;
 
+    private  List<Map<String, Object>> dayFlow;
 }

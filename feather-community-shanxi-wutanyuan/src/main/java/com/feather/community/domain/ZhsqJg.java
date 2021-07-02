@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import com.feather.common.annotation.Excel;
 import com.feather.common.core.domain.BaseEntity;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 井盖对象 ZHSQ_JG
  * 
@@ -68,4 +71,9 @@ public class ZhsqJg extends BaseEntity
 
     //配置结果
     private byte result;
+
+    //开关
+    private List<Map<String, Object>> zhsqJgDistance;
+    //开关次数
+    private int count;
 }
