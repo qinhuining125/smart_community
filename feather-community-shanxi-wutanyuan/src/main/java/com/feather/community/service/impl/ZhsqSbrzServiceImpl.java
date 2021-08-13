@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.feather.common.config.UidWorker;
+import com.feather.community.domain.ZhsqSb;
+import com.feather.community.mapper.ZhsqSbMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.feather.community.mapper.ZhsqSbrzMapper;
@@ -21,6 +23,8 @@ import com.feather.common.core.text.Convert;
 public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
     @Autowired
     private ZhsqSbrzMapper zhsqSbrzMapper;
+    @Autowired
+    private ZhsqSbMapper zhsqSbMapper;
     @Autowired
     private UidWorker uidWorker;
 
@@ -54,6 +58,8 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
      */
     @Override
     public int insertZhsqSbrz(ZhsqSbrz zhsqSbrz) {
+        ZhsqSb sb=zhsqSbMapper.selectZhsqSbById(zhsqSbrz.getDeviceCode());
+        sb.setSbzt("在线");
         String shrzid = "SBRZ" + uidWorker.getNextId();
         zhsqSbrz.setSbrzid(shrzid);
         Calendar cal = Calendar.getInstance();
@@ -63,6 +69,7 @@ public class ZhsqSbrzServiceImpl implements IZhsqSbrzService {
         zhsqSbrz.setYear(year);
         zhsqSbrz.setMonth(month);
         zhsqSbrz.setDay(day);
+        zhsqSbMapper.updateZhsqSb(sb);
         return zhsqSbrzMapper.insertZhsqSbrz(zhsqSbrz);
     }
 
