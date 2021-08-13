@@ -145,6 +145,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where YCID = #{ycid}
     </update>
 
+    <update id="updateZhsqYcBySbid" parameterType="ZhsqYc">
+        update ZHSQ_YC
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="noticeRead != null  and noticeRead != ''">NOTICE_READ = #{noticeRead},</if>
+        </trim>
+        where SBID = #{sbid}
+    </update>
+
     <delete id="deleteZhsqYcById" parameterType="String">
         delete from ZHSQ_YC where YCID = #{ycid}
     </delete>

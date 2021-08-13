@@ -222,5 +222,10 @@ public class ZhsqYcServiceImpl implements IZhsqYcService {
         return zhsqYcMapper.selectZhsqYcTypeById(eventType);
     }
 
+    @Override
+    public int updateZhsqYcBySbid(ZhsqYc zhsqYc) {
+        return zhsqYcMapper.updateZhsqYcBySbid(zhsqYc);
+    }
+
 
 }

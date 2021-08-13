@@ -131,6 +131,9 @@ public class ZhsqYcController extends BaseController {
     public AjaxResult updateYc(@Parameter String id) {
         ZhsqYc yc = zhsqYcService.selectZhsqYcById(id);
         yc.setNoticeRead("1");
+        if (yc.getSbid()!=null&&yc.getEventType()!=null){
+            zhsqYcService.updateZhsqYcBySbid(yc);
+        }
         return toAjax(zhsqYcService.updateZhsqYc(yc));
     }
 
