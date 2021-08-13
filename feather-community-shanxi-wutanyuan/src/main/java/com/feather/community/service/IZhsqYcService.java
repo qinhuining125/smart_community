@@ -87,4 +87,5 @@ public interface IZhsqYcService {
      */
     public ZhsqYcType selectZhsqYcTypeById(String eventType);
 
+    public int updateZhsqYcBySbid(ZhsqYc zhsqYc);
 }
