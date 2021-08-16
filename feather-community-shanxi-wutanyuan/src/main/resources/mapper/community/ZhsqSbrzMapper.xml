@@ -86,7 +86,7 @@
         WHERE
         rn = 1
         ORDER BY
-        DAY
+        CREATE_TIME
     </select>
     <!--获取水表每天1使用量-->
     <select id="selectZhsqSbrzByIdAndSEList" resultType="map">
