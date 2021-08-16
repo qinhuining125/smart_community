@@ -98,7 +98,7 @@
         SELECT
         CREATE_TIME,DAY,
         TOTAL,
-        row_number ( ) over ( partition BY DAY ORDER BY CREATE_TIME DESC ) rn
+        row_number ( ) over ( partition BY substr(CREATE_TIME,1,8)  ORDER BY CREATE_TIME DESC ) rn
         FROM
         ZHSQ_SBRZ
         <where>
@@ -114,7 +114,7 @@
         WHERE
         rn = 1
         ORDER BY
-        DAY
+        CREATE_TIME
     </select>
     <select id="selectZhsqSbrzById" parameterType="String" resultMap="ZhsqSbrzResult">
         <include refid="selectZhsqSbrzVo"/>
