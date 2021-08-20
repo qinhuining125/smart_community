@@ -12,6 +12,7 @@ import com.feather.community.domain.ZhsqYg;
 import com.feather.community.mapper.ZhsqYcMapper;
 import com.feather.community.mapper.ZhsqYgMapper;
 import com.feather.community.service.IZhsqYgService;
+import com.feather.community.util.SmsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.feather.community.mapper.ZhsqYgrzMapper;
@@ -102,6 +103,8 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
             zhsqYc.setYcnr("烟感设备发生烟感报警，请马上处理");
             int frequency=Integer.parseInt(zhsqYg.getFrequency())+1;
             zhsqYg.setFrequency(frequency+"");
+            //如果异常，发送短信给15234394500
+            SmsUtils.sendSms(zhsqYg.getSbmc(),zhsqYg.getLdid(), new String[] {"8617703545326"});
             zhsqYgMapper.updateZhsqYg(zhsqYg);
             zhsqYcMapper.insertZhsqYc(zhsqYc);
         }
