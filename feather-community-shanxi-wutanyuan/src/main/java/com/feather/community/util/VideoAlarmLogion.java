@@ -30,7 +30,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.*;
-
+/*
+* 获取摄像头服务token和心跳保持
+* */
 @Component
 public class VideoAlarmLogion {
     public static String accessToken;

@@ -104,7 +104,7 @@ public class ZhsqYgrzServiceImpl implements IZhsqYgrzService
             int frequency=Integer.parseInt(zhsqYg.getFrequency())+1;
             zhsqYg.setFrequency(frequency+"");
             //如果异常，发送短信给15234394500
-            SmsUtils.sendSms(zhsqYg.getSbmc(),zhsqYg.getLdid(), new String[] {"8617703545326"});
+            SmsUtils.sendSms(zhsqYg.getSbmc(),zhsqYg.getLdid(), new String[] {"8615234394500    "});
             zhsqYgMapper.updateZhsqYg(zhsqYg);
             zhsqYcMapper.insertZhsqYc(zhsqYc);
         }

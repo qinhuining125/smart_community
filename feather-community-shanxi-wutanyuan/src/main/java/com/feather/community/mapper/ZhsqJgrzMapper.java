@@ -1,8 +1,7 @@
 package com.feather.community.mapper;
 
-import com.feather.community.domain.ZhsqJg;
 import com.feather.community.domain.ZhsqJgDistance;
-import org.apache.ibatis.annotations.Select;
+import com.feather.community.domain.ZhsqJgrz;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,7 @@ import java.util.Map;
  * @author fancy
  * @date 2020-12-11
  */
-public interface ZhsqJgDistanceMapper
+public interface ZhsqJgrzMapper
 {
 
 
@@ -23,31 +22,31 @@ public interface ZhsqJgDistanceMapper
      * @param id 井盖开关记录ID
      * @return 井盖开关记录
      */
-    public ZhsqJgDistance selectZhsqJgDistanceById(String id);
+    public ZhsqJgrz selectZhsqJgrzById(String id);
 
     /**
      * 查询井盖开关记录列表
      *
-     * @param zhsqJgDistance 井盖开关记录
+     * @param zhsqJgrz 井盖日志记录
      * @return 井盖开关记录集合
      */
-    public List<ZhsqJgDistance> selectZhsqJgDistanceList(ZhsqJgDistance zhsqJgDistance);
+    public List<ZhsqJgrz> selectZhsqJgrzList(ZhsqJgrz zhsqJgrz);
 
     /**
      * 新增井盖开关记录
      *
-     * @param zhsqJgDistance 井盖开关记录
+     * @param zhsqJgrz 井盖开关记录
      * @return 结果
      */
-    public int insertZhsqJgDistance(ZhsqJgDistance zhsqJgDistance);
+    public int insertZhsqJgrz(ZhsqJgrz zhsqJgrz);
 
     /**
      * 修改井盖开关记录
      *
-     * @param zhsqJgDistance 井盖开关记录
+     * @param zhsqJgrz 井盖开关记录
      * @return 结果
      */
-    public int updateZhsqJgDistance(ZhsqJgDistance zhsqJgDistance);
+    public int updateZhsqJgrz(ZhsqJgrz zhsqJgrz);
 
     /**
      * 删除井盖开关记录
@@ -55,7 +54,7 @@ public interface ZhsqJgDistanceMapper
      * @param id 井盖开关记录ID
      * @return 结果
      */
-    public int deleteZhsqJgDistanceById(String id);
+    public int deleteZhsqJgrzById(String id);
 
     /**
      * 批量删除井盖开关记录
@@ -63,9 +62,9 @@ public interface ZhsqJgDistanceMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteZhsqJgDistanceByIds(String[] ids);
+    public int deleteZhsqJgrzByIds(String[] ids);
 
-    List<Map<String, Object>> selectZhsqJgDistanceNew(String sn);
+    List<Map<String, Object>> selectZhsqJgrzNew(String sn);
 
     List<Map<String, Object>> findBySn(String sn);
 

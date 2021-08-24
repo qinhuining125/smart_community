@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.feather.community.mapper.ZhsqJgDistanceMapper">
+<mapper namespace="com.feather.community.mapper.ZhsqJgrzMapper">
 
     <!--获取井盖测距最新数据-->
-    <select id="selectZhsqJgDistanceNew" resultType="map">
+    <select id="selectZhsqJgrzNew" resultType="map">
         select * from
-        (select * from ZHSQ_JG_DISTANCE
+        (select * from ZHSQ_JGRZ
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
         </where>
@@ -18,7 +18,7 @@
     <!--井盖展示-->
     <select id="findBySn" resultType="map">
         select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
-        HH24:MI:SS') as time, JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        HH24:MI:SS') as time, JGSTATE as "jgstate" from ZHSQ_JGRZ
         <where>
             <if test="sn != null  and sn != ''">and SN = #{sn}</if>
         </where>
@@ -27,7 +27,7 @@
     <!--井盖展示加入时间检索-->
     <select id="findJgDisBySSE" resultType="map">
         select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
-        HH24:MI:SS') as time ,JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        HH24:MI:SS') as time ,JGSTATE as "jgstate" from ZHSQ_JGRZ
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
             <if test="arg1 != null and arg1 != ''"><!-- 开始时间检索 -->
@@ -40,7 +40,7 @@
         ORDER BY CREATE_TIME ASC
     </select>
 
-    <resultMap type="ZhsqJgDistance" id="ZhsqJgDistanceResult">
+    <resultMap type="ZhsqJgDistance" id="ZhsqJgrzResult">
         <result property="id" column="id"/>
         <result property="sn" column="sn"/>
         <result property="distance" column="distance"/>
@@ -48,12 +48,12 @@
         <result property="jgstate" column="jgstate"/>
     </resultMap>
 
-    <!-- <sql id="selectZhsqJgDistanceVo">
-         select id,sn,distance from ZHSQ_JG_Distance
+    <!-- <sql id="selectZhsqJgrzVo">
+         select id,sn,distance from ZHSQ_JGRZ
      </sql>
  -->
-    <insert id="insertZhsqJgDistance" parameterType="ZhsqJgDistance">
-        insert into ZHSQ_JG_Distance
+    <insert id="insertZhsqJgrz" parameterType="ZhsqJgrz">
+        insert into ZHSQ_JGRZ
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null  and id != ''">id,</if>
             <if test="sn != null  and sn != ''">sn,</if>
@@ -71,12 +71,12 @@
     </insert>
 
 
-    <sql id="selectZhsqJgDistanceVo">
-        select id, sn, distance, create_time, jgstate from ZHSQ_JG_DISTANCE
+    <sql id="selectZhsqJgrzVo">
+        select id, sn, distance, create_time, jgstate from ZHSQ_JGRZ
     </sql>
 
-    <select id="selectZhsqJgDistanceList" parameterType="ZhsqJgDistance" resultMap="ZhsqJgDistanceResult">
-        <include refid="selectZhsqJgDistanceVo"/>
+    <select id="selectZhsqJgrzList" parameterType="ZhsqJgrz" resultMap="ZhsqJgrzResult">
+        <include refid="selectZhsqJgrzVo"/>
         <where>
             <if test="sn != null  and sn != ''">and sn = #{sn}</if>
             <if test="distance != null ">and distance = #{distance}</if>
@@ -85,14 +85,14 @@
         </where>
     </select>
 
-    <select id="selectZhsqJgDistanceById" parameterType="String" resultMap="ZhsqJgDistanceResult">
-        <include refid="selectZhsqJgDistanceVo"/>
+    <select id="selectZhsqJgrzById" parameterType="String" resultMap="ZhsqJgrzResult">
+        <include refid="selectZhsqJgrzVo"/>
         where id = #{id}
     </select>
 
 
-    <update id="updateZhsqJgDistance" parameterType="ZhsqJgDistance">
-        update ZHSQ_JG_DISTANCE
+    <update id="updateZhsqJgrz" parameterType="ZhsqJgrz">
+        update ZHSQ_JGRZ
         <trim prefix="SET" suffixOverrides=",">
             <if test="sn != null  and sn != ''">sn = #{sn},</if>
             <if test="distance != null ">distance = #{distance},</if>
@@ -102,12 +102,12 @@
         where id = #{id}
     </update>
 
-    <delete id="deleteZhsqJgDistanceById" parameterType="String">
-        delete from ZHSQ_JG_DISTANCE where id = #{id}
+    <delete id="deleteZhsqJgrzById" parameterType="String">
+        delete from ZHSQ_JGRZ where id = #{id}
     </delete>
 
-    <delete id="deleteZhsqJgDistanceByIds" parameterType="String">
-        delete from ZHSQ_JG_DISTANCE where id in
+    <delete id="deleteZhsqJgrzByIds" parameterType="String">
+        delete from ZHSQ_JGRZ where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

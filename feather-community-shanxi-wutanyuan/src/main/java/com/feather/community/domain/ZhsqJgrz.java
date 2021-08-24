@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZhsqJgDistance extends BaseEntity
+public class ZhsqJgrz extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 井盖测距日志ID */
-    @Excel(name = "井盖打开记录ID")
+    @Excel(name = "井盖距离日志ID")
     private String id;
     /** 井盖编号 */
     @Excel(name = "井盖编号")

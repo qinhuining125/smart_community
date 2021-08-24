@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  * Tencent Cloud Sms Sendsms
- * https://cloud.tencent.com/document/product/382/38778
+ * 腾讯云短信服务
  *
  */
 public class SmsUtils

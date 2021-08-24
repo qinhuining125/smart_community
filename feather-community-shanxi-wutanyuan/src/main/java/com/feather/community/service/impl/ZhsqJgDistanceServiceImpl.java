@@ -2,12 +2,10 @@ package com.feather.community.service.impl;
 
 import com.feather.common.config.UidWorker;
 import com.feather.common.core.text.Convert;
-import com.feather.community.domain.ZhsqJg;
-import com.feather.community.domain.ZhsqJgDistance;
-import com.feather.community.domain.ZhsqSxt;
-import com.feather.community.domain.ZhsqYc;
+import com.feather.community.domain.*;
 import com.feather.community.mapper.ZhsqJgDistanceMapper;
 import com.feather.community.mapper.ZhsqJgMapper;
+import com.feather.community.mapper.ZhsqJgrzMapper;
 import com.feather.community.mapper.ZhsqYcMapper;
 import com.feather.community.service.IZhsqJgDistanceService;
 import com.feather.community.service.IZhsqJgService;
@@ -31,6 +29,8 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
     @Autowired
     private ZhsqJgDistanceMapper zhsqJgDistanceMapper;
     @Autowired
+    private ZhsqJgrzMapper zhsqJgrzMapper;
+    @Autowired
     private ZhsqJgMapper zhsqJgMapper;
     @Autowired
     private ZhsqYcMapper zhsqYcMapper;
@@ -48,13 +48,31 @@ public class ZhsqJgDistanceServiceImpl implements IZhsqJgDistanceService
     @Transactional
     public int insertZhsqJgDistance(ZhsqJgDistance zhsqJgDistance)
     {
-        String sbid = "JGD" + uidWorker.getNextId();
-        zhsqJgDistance.setId(sbid);
         //进行查询比较
         ZhsqJg zhsqJg=zhsqJgMapper.selectZhsqJgBySn(zhsqJgDistance.getSn());
 
-        List<Map<String, Object>> lastzhsqJgDistance=zhsqJgDistanceMapper.selectZhsqJgDistanceNew();
+        List<Map<String, Object>> lastzhsqJgDistance=zhsqJgDistanceMapper.selectZhsqJgDistanceNew(zhsqJgDistance.getSn());
         int threshold=zhsqJg.getDistancethreshold();
+
+        //添加井盖日志
+        ZhsqJgrz jgrz=new ZhsqJgrz();
+        String JGRZId = "JGRZ" + uidWorker.getNextId();
+        jgrz.setId(JGRZId);
+        jgrz.setDistance(zhsqJgDistance.getDistance());
+        jgrz.setSn(zhsqJgDistance.getSn());
+        jgrz.setCreateTime(new Date());
+        if(jgrz.getDistance()>threshold){
+            jgrz.setJgstate("on");
+        }else {
+            jgrz.setJgstate("off");
+        }
+        zhsqJgrzMapper.insertZhsqJgrz(jgrz);
+        //添加井盖打开记录和异常
+        String sbDistanceId = "JGD" + uidWorker.getNextId();
+        zhsqJgDistance.setId(sbDistanceId);
+
+
+
         int result=0;
         if(zhsqJgDistance.getDistance()>threshold){
             zhsqJgDistance.setJgstate("on");
