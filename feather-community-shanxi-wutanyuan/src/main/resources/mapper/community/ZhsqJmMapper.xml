@@ -339,7 +339,7 @@
     </select>
 
     <select id="getNljgTj" parameterType="map" resultType="map">
-        SELECT nl "nl", to_char(count(*)) "sl" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 20 then 'nl10'
+        SELECT nl "nl", date_format(count(*)) "sl" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 20 then 'nl10'
         when to_number(nl) <![CDATA[ >= ]]> 20 and to_number(nl) <![CDATA[ <= ]]> 30 then 'nl20'
         when to_number(nl) > 30 and to_number(nl) <![CDATA[ <= ]]> 40 then 'nl30'
         when to_number(nl) > 40 and to_number(nl) <![CDATA[ <= ]]> 50 then 'nl40'
@@ -351,7 +351,7 @@
     <select id="getXbTj" parameterType="map" resultType="map">
         SELECT
             xb "xb",
-            to_char(
+            date_format(
             count( * )) "sl"
         FROM
             ( SELECT CASE WHEN xb = '男' THEN 'nan' ELSE 'nv' END AS xb FROM zhsq_jm )
@@ -360,7 +360,7 @@
     </select>
 
     <select id="getMzTj" parameterType="map" resultType="map">
-        SELECT to_char(count( * )) "sl", mz "mz" FROM (
+        SELECT date_format(count( * )) "sl", mz "mz" FROM (
             SELECT
                 CASE WHEN  mz = '汉族' THEN 'hanz'
                      WHEN mz = '回族' THEN 'huiz'

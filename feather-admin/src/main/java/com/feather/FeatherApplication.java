@@ -2,7 +2,9 @@ package com.feather;
 
 import java.util.Properties;
 
-import com.feather.community.util.TimerManager;
+
+import com.feather.community.controller.DeviceController;
+import com.feather.community.util.Heartbeat;
 import com.feather.community.util.VideoAlarmLogion;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,15 +21,18 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @EnableCaching(order = Ordered.HIGHEST_PRECEDENCE)
-//@EnableScheduling
+//定时任务
+@EnableScheduling
 public class FeatherApplication {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext ctx = SpringApplication.run(FeatherApplication.class, args);
 
         Properties props = System.getProperties();
         props.put("ConfigurableApplicationContext@com.feather.FeatherApplication", ctx);
-
-        VideoAlarmLogion.corn();
+        /*摄像头心跳保持和获取token*/
+//        VideoAlarmLogion.corn();
+//        Heartbeat.heartbeat();
+//        DeviceController.heartbeat();
 //        new TimerManager();
         System.out.println("\n启动成功\n\n");
     }

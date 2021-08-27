@@ -6,84 +6,84 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="sqglSbTj" resultType="map">
       SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'sxtzx' ELSE 'sxtlx' END AS sbzt FROM zhsq_sxt )
 	GROUP BY
 		sbzt
 	) UNION /*摄像头*/
 SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'sbzx' ELSE 'sblx' END AS sbzt FROM zhsq_sb )
 	GROUP BY
 		sbzt
 	) UNION /*水表*/
 SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'zjzx' ELSE 'zjlx' END AS sbzt FROM zhsq_zj )
 	GROUP BY
 	sbzt
 	) UNION /*闸机*/
 	SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'dgzx' ELSE 'dglx' END AS sbzt FROM zhsq_dg )
 	GROUP BY
 		sbzt
 	) UNION  /*车辆道杆*/
 SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'jgzx' ELSE 'jglx' END AS sbzt FROM zhsq_jg )
 	GROUP BY
 		sbzt
 	) UNION  /*井盖*/
 SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'shzx' ELSE 'shlx' END AS sbzt FROM zhsq_sh )
 	GROUP BY
 		sbzt
 	) UNION  /*老年手环*/
 SELECT
-	to_char( sbzt ) || ',' || to_char( sl ) "sl"
+	date_format( sbzt ) || ',' || date_format( sl ) "sl"
 FROM
 	(
 	SELECT
 		sbzt,
-		to_char( count( * ) ) sl
+		date_format( count( * ) ) sl
 	FROM
 		( SELECT CASE WHEN sbzt = '在线' THEN 'ygzx' ELSE 'yglx' END AS sbzt FROM zhsq_yg )
 	GROUP BY
@@ -168,7 +168,7 @@ FROM
     </select>
 
     <select id="getNljgTjByJm" parameterType="map" resultType="map">
-        SELECT nl "keys", to_char(count(*)) "sl" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 20 then '20以下'
+        SELECT nl "keys", date_format(count(*)) "sl" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 20 then '20以下'
         when to_number(nl) <![CDATA[ >= ]]> 20 and to_number(nl) <![CDATA[ <= ]]> 30 then '20-30'
         when to_number(nl) > 30 and to_number(nl) <![CDATA[ <= ]]> 40 then '31-40'
         when to_number(nl) > 40 and to_number(nl) <![CDATA[ <= ]]> 50 then '41-50'
@@ -189,7 +189,7 @@ FROM
     <select id="getXbTjByJm" parameterType="map" resultType="map">
         SELECT
             xb "keys",
-            to_char(
+            date_format(
             count( * )) "sl"
         FROM
             ( SELECT CASE WHEN xb = '男' THEN '男' ELSE '女' END AS xb FROM zhsq_jm
@@ -208,7 +208,7 @@ FROM
     </select>
 
     <select id="getMzTjByJm" parameterType="map" resultType="map">
-        SELECT to_char(count( * )) "sl", mz "keys" FROM (
+        SELECT date_format(count( * )) "sl", mz "keys" FROM (
             SELECT
                 CASE WHEN mz = '汉族' THEN '汉族'
                      WHEN mz = '回族' THEN '回族'
@@ -242,7 +242,7 @@ FROM
 
     <!--党员学历统计-->
     <select id="getDyxlfbTj" parameterType="map" resultType="map">
-        SELECT to_char(count( * )) "sl", xl "keys" FROM (
+        SELECT date_format(count( * )) "sl", xl "keys" FROM (
             SELECT
                 CASE WHEN  xl = '大专' THEN '大专'
                      WHEN xl = '本科' THEN '本科'
@@ -255,7 +255,7 @@ FROM
 
     <!--党员年龄分布统计-->
     <select id="getDynlfbTj" parameterType="map" resultType="map">
-        SELECT nl "keys", to_char(count(*)) "sl" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 20 then '20以下'
+        SELECT nl "keys", date_format(count(*)) "sl" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 20 then '20以下'
         when to_number(nl) <![CDATA[ >= ]]> 20 and to_number(nl) <![CDATA[ <= ]]> 30 then '20-30'
         when to_number(nl) > 30 and to_number(nl) <![CDATA[ <= ]]> 40 then '31-40'
         when to_number(nl) > 40 and to_number(nl) <![CDATA[ <= ]]> 50 then '41-50'
@@ -265,7 +265,7 @@ FROM
 
     <!--党员年龄分布统计-->
     <select id="getDydlfbTj" parameterType="map" resultType="map">
-        SELECT dl "keys", to_char(count(*)) "sl" FROM (SELECT case when to_number(dl) <![CDATA[ < ]]> 20 then '20以下'
+        SELECT dl "keys", date_format(count(*)) "sl" FROM (SELECT case when to_number(dl) <![CDATA[ < ]]> 20 then '20以下'
         when to_number(dl) <![CDATA[ >= ]]> 20 and to_number(dl) <![CDATA[ <= ]]> 30 then '20-30'
         when to_number(dl) > 30 and to_number(dl) <![CDATA[ <= ]]> 40 then '31-40'
         when to_number(dl) > 40 and to_number(dl) <![CDATA[ <= ]]> 50 then '41-50'
@@ -277,7 +277,7 @@ FROM
     <select id="getDyxbblTj" parameterType="map" resultType="map">
          SELECT
             xb "keys",
-            to_char(
+            date_format(
             count( * )) "sl"
         FROM
             ( SELECT CASE WHEN xb = '男' THEN '男' ELSE '女' END AS xb FROM zhsq_dy )
@@ -288,7 +288,7 @@ FROM
 
     <!--党员民族比例统计-->
     <select id="getDymzblTj" parameterType="map" resultType="map">
-        SELECT to_char(count( * )) "sl", mz "keys" FROM (
+        SELECT date_format(count( * )) "sl", mz "keys" FROM (
             SELECT
                 CASE WHEN  mz = '汉族' THEN '汉族'
                      WHEN mz = '回族' THEN '回族'
@@ -302,7 +302,7 @@ FROM
     <!--重点人员分布统计-->
     <select id="getZdryfbTj" parameterType="map" resultType="map">
         SELECT a.sl "sl", b.ldmc "keys" FROM (
-	        SELECT to_char(count( * )) sl, ldid FROM zhsq_jm
+	        SELECT date_format(count( * )) sl, ldid FROM zhsq_jm
             <where>
                 <if test="sfzh != null  and sfzh != ''"> or SFZH = #{sfzh}</if>
                 <if test="sffz != null  and sffz != ''"> or SFFZ = #{sffz}</if>

@@ -211,10 +211,10 @@
                 concat( concat( 'kz', ',' ), sl ) "sl"
         FROM
                 ( SELECT count( DISTINCT ( fwid )) sl FROM zhsq_fw WHERE fwrzqk='空置') UNION
-        SELECT to_char(lx)||','||to_char(sl) "sl" FROM (SELECT lx , to_char(count(*)) sl  FROM (SELECT case when fwlylx = '商业' then 'sy'
+        SELECT date_format(lx)||','||date_format(sl) "sl" FROM (SELECT lx , date_format(count(*)) sl  FROM (SELECT case when fwlylx = '商业' then 'sy'
                 when fwlylx = '住宅'  then 'zz'
                 else 'qt' end AS lx FROM  zhsq_fw) GROUP BY lx) UNION
-        SELECT to_char(lx)||','||to_char(sl) "sl" FROM (SELECT lx , to_char(count(*)) sl  FROM (SELECT case when cqzt = '自有' then 'zy'
+        SELECT date_format(lx)||','||date_format(sl) "sl" FROM (SELECT lx , date_format(count(*)) sl  FROM (SELECT case when cqzt = '自有' then 'zy'
                 else 'cz' end AS lx FROM  zhsq_fw) GROUP BY lx)
     </select>
 </mapper>

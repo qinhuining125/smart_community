@@ -14,13 +14,13 @@ feather:
             # 密码错误{maxRetryCount}次锁定10分钟, 小于等于0 时不检查
             maxRetryCount: 0
     # snowflake唯一ID
-    snowflake: 
+    snowflake:
         # 数据中心ID
         datacenterId: 1
         # 机器ID
         workerId: 1
     # 防止XSS攻击
-    xss: 
+    xss:
         # 过滤开关
         enabled: true
         # 排除链接（多个用逗号分隔）
@@ -34,11 +34,11 @@ feather:
         version: 1.0
         description: 山西物探院
         package: com.feather.community.controller
-        path: 
+        path:
     # websocket配置
-    websocket: 
+    websocket:
         enabled: false
-        endpoint: 
+        endpoint:
         origins: "*"
         sockJS: true
     # 文件上传配置
@@ -85,7 +85,7 @@ mybatis:
     configLocation: classpath:mybatis/mybatis-config.xml
 
 # PageHelper分页插件
-pagehelper: 
+pagehelper:
     # helperDialect: mysql
     reasonable: true
     supportMethodsArguments: true
@@ -116,7 +116,7 @@ shiro:
             - /profile/**
     cookie:
         # 设置Cookie的域名 默认空，即当前访问的域名
-        domain: 
+        domain:
         # 设置cookie的有效访问路径
         path: /
         # 设置HttpOnly属性
@@ -169,11 +169,11 @@ spring:
         host: 127.0.0.1
         port: 6379
         database: 0
-        password: 
+        password:
         # 缓存时间（秒） 172800秒=48小时
         expire: 172800
         # 客户端超时时间单位是毫秒 默认是2000
-        timeout: 
+        timeout:
         # 最大空闲数
         maxIdle: 20
         # 连接池的最大数据库连接数
@@ -198,10 +198,18 @@ spring:
         druid:
             # 默认数据源（主数据源）
             default:
-                url: jdbc:oracle:thin:@59.48.93.206:8022/orcl
-                username: wutanyuan
-                password: 123
-                validationQuery: SELECT 1 from dual
+              driver-class-name: com.mysql.cj.jdbc.Driver
+              url: jdbc:mysql://localhost:3306/wutanyuan?useSSL=false&characterEncoding=utf-8&serverTimezone=GMT
+              username: root
+              password: root
+#              validationQuery: SELECT 1 from dual
+#                url: jdbc:oracle:thin:@59.48.93.206:8022/orcl
+#                username: wutanyuan
+#                password: 123
+#                validationQuery: SELECT 1 from dual
+
+
+
             # 硬件读取数据源
             a:
                 # 从数据源开关/默认关闭
@@ -227,7 +235,7 @@ spring:
             testWhileIdle: true
             testOnBorrow: false
             testOnReturn: false
-            webStatFilter: 
+            webStatFilter:
                 enabled: true
             statViewServlet:
                 enabled: true
@@ -235,8 +243,8 @@ spring:
                 allow:
                 url-pattern: /druid/*
                 # 控制台管理用户名和密码
-                login-username: 
-                login-password: 
+                login-username:
+                login-password:
             filter:
                 stat:
                     enabled: true

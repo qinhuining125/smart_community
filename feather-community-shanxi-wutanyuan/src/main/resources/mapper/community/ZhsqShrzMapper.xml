@@ -150,7 +150,7 @@
 
     <!--查询手环轨迹-->
     <select id="getShgj" parameterType="ZhsqShrz" resultType="map">
-         select to_date(CREATE_TIME,'yyyymmddHH24:MI:SS') as "createTime",nodewd as "nodewd" ,nodejd as "nodejd" from ZHSQ_SHRZ
+         select str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS') as "createTime",nodewd as "nodewd" ,nodejd as "nodejd" from ZHSQ_SHRZ
          where create_time<![CDATA[ >= ]]>#{beginTime, jdbcType=BIGINT}
          and create_time<![CDATA[ <= ]]> #{endTime, jdbcType=BIGINT}
          and shid=#{shid}

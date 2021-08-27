@@ -215,8 +215,8 @@ public class DeviceServiceImpl implements IDeviceService {
         }
     }
 
-//    @Scheduled(cron = "0 */9 * * * ?")
-    @Scheduled(cron = "*/5 * * * * ?")
+    @Scheduled(cron = "0 */9 * * * ?")
+//    @Scheduled(cron = "*/5 * * * * ?")
     public void heartbeat() throws Exception {
         System.out.printf("水表设备离线监听");
         List<ZhsqSb> sbList = zhsqSbService.getSbList();

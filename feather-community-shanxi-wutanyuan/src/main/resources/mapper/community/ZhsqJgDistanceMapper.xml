@@ -6,19 +6,17 @@
 
     <!--获取井盖测距最新数据-->
     <select id="selectZhsqJgDistanceNew" resultType="map">
-        select * from
-        (select * from ZHSQ_JG_DISTANCE
+    select * from zhsq_jg_distance
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
         </where>
-        order by CREATE_TIME desc)
-        where rownum = 1
+        order by CREATE_TIME desc LIMIT 1
     </select>
 
     <!--井盖展示-->
     <select id="findBySn" resultType="map">
-        select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
-        HH24:MI:SS') as time, JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        select SN as "sn", DISTANCE as "distance", date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
+        HH24:MI:SS') as time, JGSTATE as "jgstate" from zhsq_jg_distance
         <where>
             <if test="sn != null  and sn != ''">and SN = #{sn}</if>
         </where>
@@ -26,8 +24,8 @@
     </select>
     <!--井盖展示加入时间检索-->
     <select id="findJgDisBySSE" resultType="map">
-        select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
-        HH24:MI:SS') as time ,JGSTATE as "jgstate" from ZHSQ_JG_DISTANCE
+        select SN as "sn", DISTANCE as "distance", date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
+        HH24:MI:SS') as time ,JGSTATE as "jgstate" from zhsq_jg_distance
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
             <if test="arg1 != null and arg1 != ''"><!-- 开始时间检索 -->
@@ -49,11 +47,11 @@
     </resultMap>
 
     <!-- <sql id="selectZhsqJgDistanceVo">
-         select id,sn,distance from ZHSQ_JG_Distance
+         select id,sn,distance from zhsq_jg_distance
      </sql>
  -->
     <insert id="insertZhsqJgDistance" parameterType="ZhsqJgDistance">
-        insert into ZHSQ_JG_Distance
+        insert into zhsq_jg_distance
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null  and id != ''">id,</if>
             <if test="sn != null  and sn != ''">sn,</if>
@@ -72,7 +70,7 @@
 
 
     <sql id="selectZhsqJgDistanceVo">
-        select id, sn, distance, create_time, jgstate from ZHSQ_JG_DISTANCE
+        select id, sn, distance, create_time, jgstate from zhsq_jg_distance
     </sql>
 
     <select id="selectZhsqJgDistanceList" parameterType="ZhsqJgDistance" resultMap="ZhsqJgDistanceResult">
@@ -92,7 +90,7 @@
 
 
     <update id="updateZhsqJgDistance" parameterType="ZhsqJgDistance">
-        update ZHSQ_JG_DISTANCE
+        update zhsq_jg_distance
         <trim prefix="SET" suffixOverrides=",">
             <if test="sn != null  and sn != ''">sn = #{sn},</if>
             <if test="distance != null ">distance = #{distance},</if>
@@ -103,11 +101,11 @@
     </update>
 
     <delete id="deleteZhsqJgDistanceById" parameterType="String">
-        delete from ZHSQ_JG_DISTANCE where id = #{id}
+        delete from zhsq_jg_distance where id = #{id}
     </delete>
 
     <delete id="deleteZhsqJgDistanceByIds" parameterType="String">
-        delete from ZHSQ_JG_DISTANCE where id in
+        delete from zhsq_jg_distance where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

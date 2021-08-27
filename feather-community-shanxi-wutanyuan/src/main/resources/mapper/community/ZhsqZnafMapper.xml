@@ -173,7 +173,7 @@
     <!--烟感展示-->
     <select id="getSplb" resultType="map">
         select t.SXTID, t.SBMC, t.X, t.Y, t.Z, t.WZ,t.WZLX,t.SBZT from
-        (select SXTID,SBMC , X,Y,Z ,WZ,WZLX,SBZT ,rownum as no FROM ZHSQ_SXT
+        (select SXTID,SBMC , X,Y,Z ,WZ,WZLX,SBZT ,@num  as no FROM ZHSQ_SXT
         <where>
             <if test="sbmc != null  and sbmc != ''">and WZLX like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -183,7 +183,7 @@
 
     <!--烟感展示总数-->
     <select id="getSplbCount" resultType="Integer">
-        select count(1) from (select SXTID,SBMC , X,Y,Z ,WZ,WZLX,SBZT ,rownum as no FROM ZHSQ_SXT
+        select count(1) from (select SXTID,SBMC , X,Y,Z ,WZ,WZLX,SBZT ,@num  as no FROM ZHSQ_SXT
         <where>
             <if test="sbmc != null  and sbmc != ''">and WZLX like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -193,7 +193,7 @@
     <!--门禁出入-->
     <select id="getMjjc" resultType="map">
         select t.SBMC, t.WZ, t.JCSJ, t.JCZT, t.ZZ,t.XM,t.URL from (SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT,
-        m.ZZ,m.XM,n.URL,rownum as no FROM (select y.SBMC, y.WZ, y.JCSJ, y.JCZT , y.XM,y.ZZ ,x.SXTID from (select c.SBMC,
+        m.ZZ,m.XM,n.URL,@num  as no FROM (select y.SBMC, y.WZ, y.JCSJ, y.JCZT , y.XM,y.ZZ ,x.SXTID from (select c.SBMC,
         c.WZ, c.JCSJ, c.JCZT , c.XM,d.ZZ FROM
         (select b.SBMC, b.WZ, a.JCSJ, a.JCZT ,a.JMID ,a.XM from ZHSQ_MJJC a LEFT JOIN ZHSQ_MJ b on a.MJID=b.MJID) c
         LEFT JOIN ZHSQ_JM d on c.JMID=d.JMID) y LEFT JOIN ZHSQ_SXT x on x.WZ=y.WZ) m LEFT JOIN ZHSQ_SXTJC n ON
@@ -207,7 +207,7 @@
 
     <!--门禁出入总数-->
     <select id="getMjjcCount" resultType="Integer">
-        select count(1) from (SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL,rownum as no FROM (select y.SBMC,
+        select count(1) from (SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL,@num  as no FROM (select y.SBMC,
         y.WZ, y.JCSJ, y.JCZT , y.XM,y.ZZ ,x.SXTID from (select c.SBMC, c.WZ, c.JCSJ, c.JCZT , c.XM,d.ZZ FROM
         (select b.SBMC, b.WZ, a.JCSJ, a.JCZT ,a.JMID ,a.XM from ZHSQ_MJJC a LEFT JOIN ZHSQ_MJ b on a.MJID=b.MJID) c
         LEFT JOIN ZHSQ_JM d on c.JMID=d.JMID) y LEFT JOIN ZHSQ_SXT x on x.WZ=y.WZ) m LEFT JOIN ZHSQ_SXTJC n ON
@@ -229,7 +229,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
     <!--道杆车辆出入-->
     <select id="getDgjc" resultType="map">
         select t.SBMC ,t.WZ, t.JCSJ,t.JCZT, t.JMID, t.CZXM ,t.CPHM,t.CLLX,t.CX, t.ZZ, t.SXTID,t.URL from (SELECT m.SBMC
-        ,m.WZ, m.JCSJ,m.JCZT, m.JMID, m.CZXM ,m.CPHM,m.CLLX,m.CX, m.ZZ, m.SXTID,n.URL, rownum as no from
+        ,m.WZ, m.JCSJ,m.JCZT, m.JMID, m.CZXM ,m.CPHM,m.CLLX,m.CX, m.ZZ, m.SXTID,n.URL, @num  as no from
         (select y.SBMC ,y.WZ, y.JCSJ,y.JCZT, y.JMID, y.CZXM ,y.CPHM,y.CLLX,y.CX, y.ZZ, x.SXTID from
         (SELECT c.SBMC ,c.WZ, c.JCSJ,c.JCZT, c.JMID, c.CZXM ,c.CPHM,c.CLLX,c.CX,d.ZZ from
         (select b.SBMC ,b.WZ, a.JCSJ,a.JCZT, a.JMID, a.CZXM ,a.CPHM,a.CLLX,a.CX
@@ -244,7 +244,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
     <!-- 道杆车辆出入总数-->
     <select id="getDgjcCount" resultType="Integer">
         select count(1) from (SELECT m.SBMC ,m.WZ, m.JCSJ,m.JCZT, m.JMID, m.CZXM ,m.CPHM,m.CLLX,m.CX, m.ZZ,
-        m.SXTID,n.URL ,rownum as no from
+        m.SXTID,n.URL ,@num  as no from
         (select y.SBMC ,y.WZ, y.JCSJ,y.JCZT, y.JMID, y.CZXM ,y.CPHM,y.CLLX,y.CX, y.ZZ, x.SXTID from
         (SELECT c.SBMC ,c.WZ, c.JCSJ,c.JCZT, c.JMID, c.CZXM ,c.CPHM,c.CLLX,c.CX,d.ZZ from
         (select b.SBMC ,b.WZ, a.JCSJ,a.JCZT, a.JMID, a.CZXM ,a.CPHM,a.CLLX,a.CX
@@ -271,7 +271,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
     <!--烟感展示-->
     <select id="getYgzs" resultType="map">
         select t.YGID as "ygid",t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt",t.FREQUENCY as "frequency" from
-        (select YGID, SBMC ,PPMC , X,Y,Z ,WZ,SBZT,FREQUENCY ,rownum as no FROM ZHSQ_YG
+        (select YGID, SBMC ,PPMC , X,Y,Z ,WZ,SBZT,FREQUENCY ,@num  as no FROM ZHSQ_YG
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -286,7 +286,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--烟感展示总数-->
     <select id="getYgzsCount" resultType="Integer">
-        select count(1) from (select YGID as ygid, SBMC as sbmc,PPMC as ppmc, X as x,Y as y,Z as z ,WZ as wz,SBZT as sbzt,rownum as no FROM ZHSQ_YG
+        select count(1) from (select YGID as ygid, SBMC as sbmc,PPMC as ppmc, X as x,Y as y,Z as z ,WZ as wz,SBZT as sbzt,@num  as no FROM ZHSQ_YG
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -296,7 +296,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
     <!--井盖展示-->
     <select id="getJgzs" resultType="map">
         select t.JGID as "jgid", t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt",t.SN as "sn" from
-        (select JGID,SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,SN,rownum as no FROM ZHSQ_JG
+        (select JGID,SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,SN,@num  as no FROM ZHSQ_JG
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -306,12 +306,12 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--井盖展示总记录-->
     <select id="getJg" resultType="map">
-   select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no  FROM ZHSQ_JG
+   select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,@num  as no  FROM ZHSQ_JG
     </select>
 
     <!--井盖展示总数-->
     <select id="getJgzsCount" resultType="Integer">
-        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_JG
+        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,@num  as no FROM ZHSQ_JG
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -323,7 +323,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
     <!--水表展示-->
     <select id="getSbzs" resultType="map">
         select t.SBMC as "sbmc", t.PPMC as "ppmc", t.X as "x", t.Y as "y", t.Z as "z", t.WZ as "wz",t.SBZT as "sbzt",t.DEVICE_CODE as "deviceCode" from
-        (select SBMC, PPMC, X, Y, Z, WZ,SBZT ,DEVICE_CODE,rownum as no FROM ZHSQ_SB
+        (select SBMC, PPMC, X, Y, Z, WZ,SBZT ,DEVICE_CODE,@num  as no FROM ZHSQ_SB
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>
@@ -339,7 +339,7 @@ SELECT m.SBMC, m.WZ, m.JCSJ, m.JCZT, m.ZZ,m.XM,n.URL  FROM (select y.SBMC, y.WZ,
 
     <!--水表展示总数-->
     <select id="getSbzsCount" resultType="Integer">
-        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,rownum as no FROM ZHSQ_SB
+        select count(1) from (select SBMC ,PPMC , X,Y,Z ,WZ ,SBZT,@num  as no FROM ZHSQ_SB
         <where>
             <if test="sbmc != null  and sbmc != ''">and SBMC like concat(concat('%',#{sbmc}),'%')</if>
         </where>

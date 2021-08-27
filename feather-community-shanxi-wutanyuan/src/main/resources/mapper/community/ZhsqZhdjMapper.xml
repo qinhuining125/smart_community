@@ -90,7 +90,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sqid != null  and sqid != ''"> and SQID = #{sqid}</if>
             <if test="zyz != null  and zyz != ''"> and SFZYZ = #{zyz}</if>
         </where>
-         GROUP BY XL ORDER BY MUN DESC) b where rownum <![CDATA[ <= ]]> 5
+         GROUP BY XL ORDER BY MUN DESC) b where
+        @num  <![CDATA[ <= ]]> 5
     </select>
 
     <!--党员年龄分布-->
@@ -110,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--党员年龄分布-->
     <select id="getDyNl" parameterType="map" resultType="map">
-        SELECT nl "name", to_char(count(*)) "value" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 30 then '30岁以下'
+        SELECT nl "name", date_format(count(*)) "value" FROM (SELECT case when to_number(nl) <![CDATA[ < ]]> 30 then '30岁以下'
         when to_number(nl) <![CDATA[ >= ]]> 30 and to_number(nl) <![CDATA[ <= ]]> 50 then '30-50岁'
         else '50岁以上' end AS nl FROM  zhsq_dy) GROUP BY nl
         <!--SELECT

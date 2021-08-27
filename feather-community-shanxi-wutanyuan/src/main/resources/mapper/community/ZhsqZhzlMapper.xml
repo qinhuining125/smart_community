@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="sfdb != null  and sfdb != ''"> and jm.SFDB = #{sfdb}</if>
         <if test="sfcj != null  and sfcj != ''"> and jm.SFCJ = #{sfcj}</if>
         )  a
-         GROUP BY LDMC ORDER BY MUN DESC ) m where rownum <![CDATA[ <= ]]> 5
+         GROUP BY LDMC ORDER BY MUN DESC ) m where @num  <![CDATA[ <= ]]> 5
     </select>
 
     <!--综合治理重点人员年龄结构统计-->
@@ -274,7 +274,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--    FJ as fj,X as x,Y as y,Z as z, XQID as xqid, SBID as sbid, SJLX as sjlx,CZSJ as czsj, NOTICE_READ as noticeRead-->
     <select id="getZdsjList" parameterType="map" resultType="map">
         SELECT T.YCID AS YCID,T.YCSJ AS YCSJ,T.YCNR AS YCNR,T.YCJB AS YCJB,T.CZZT AS CZZT,T.YCLY AS YCLY,T.SJLX AS SJLX,T.GJSJ_ID AS GJSJID,T.EVENT_TYPE AS EVENT_TYPE FROM(
-        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,GJSJ_ID,EVENT_TYPE,rownum as no FROM ZHSQ_YC
+        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,GJSJ_ID,EVENT_TYPE,@num  as no FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''">and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''">and SQID = #{sqid}</if>
@@ -289,7 +289,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getZdsjCount" parameterType="map" resultType="Integer">
         SELECT count(1) FROM (
-        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,GJSJ_ID,EVENT_TYPE,rownum as no FROM ZHSQ_YC
+        SELECT YCID,YCSJ,YCNR,YCJB,CZZT,YCLY,SJLX,GJSJ_ID,EVENT_TYPE,@num  as no FROM ZHSQ_YC
         <where>
             <if test="xqid != null  and xqid != ''">and XQID = #{xqid}</if>
             <if test="sqid != null  and sqid != ''">and SQID = #{sqid}</if>
@@ -298,7 +298,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <bind name="_sjlx" value="'%'+ sjlx +'%'"/>
                 and (SJLX like #{_sjlx} OR YCNR like #{_sjlx} OR CZZT like #{_sjlx})
             </if>
-        </where>)
+        </where>) t
 
     </select>
 

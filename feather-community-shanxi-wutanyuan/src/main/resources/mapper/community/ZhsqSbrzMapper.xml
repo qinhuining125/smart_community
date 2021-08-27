@@ -51,32 +51,28 @@
 
     <!--获取水表日志最新数据-->
     <select id="selectZhsqSbrzNew" resultType="map">
-        select * from
-            (select * from ZHSQ_SBRZ order by CREATE_TIME desc)
-        where rownum = 1
+        select * from ZHSQ_SBRZ order by CREATE_TIME desc LIMIT 1
     </select>
 
     <!--获取水表日志最新数据-->
     <select id="selectZhsqSbrzByIdNew" resultType="map">
-        select * from
-        (select * from ZHSQ_SBRZ
+        select * from ZHSQ_SBRZ
         <where>
             <if test="deviceCode != null  and deviceCode != ''">and DEVICE_CODE = #{deviceCode}</if>
         </where>
-        order by CREATE_TIME desc)
-        where rownum = 1
+        order by CREATE_TIME desc LIMIT 1
     </select>
     <!--获取水表每天1使用量-->
     <select id="selectZhsqSbrzById1List" resultType="map">
         SELECT
-        to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') as time,DAY,
+        date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') as time,DAY,
         TOTAL
         FROM
         (
         SELECT
         CREATE_TIME,DAY,
         TOTAL,
-        row_number ( ) over ( partition BY substr(CREATE_TIME,1,8)  ORDER BY CREATE_TIME DESC ) rn
+        row_number ( ) over ( partition BY substr(CREATE_TIME,1,8) ORDER BY CREATE_TIME DESC ) rn
         FROM
         ZHSQ_SBRZ
         <where>
@@ -91,14 +87,14 @@
     <!--获取水表每天1使用量-->
     <select id="selectZhsqSbrzByIdAndSEList" resultType="map">
         SELECT
-        to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') as time,DAY,
+        date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') as time,DAY,
         TOTAL
         FROM
         (
         SELECT
         CREATE_TIME,DAY,
         TOTAL,
-        row_number ( ) over ( partition BY substr(CREATE_TIME,1,8)  ORDER BY CREATE_TIME DESC ) rn
+        row_number ( ) over ( partition BY substr(CREATE_TIME,1,8) ORDER BY CREATE_TIME DESC ) rn
         FROM
         ZHSQ_SBRZ
         <where>
@@ -195,9 +191,9 @@
     <select id="get5DayData" parameterType="String" resultType="map">
         SELECT
         t1.today as today,
-        nvl( t2.total, 0 ) as total
+        IFNULL( t2.total, 0 ) as total
         FROM
-        ( SELECT to_char( SYSDATE - LEVEL + 1, 'yyyy-mm-dd' ) today FROM DUAL CONNECT BY LEVEL <![CDATA[ <= ]]> 5 ) t1
+        ( SELECT date_format( SYSDATE - LEVEL + 1, 'yyyy-mm-dd' ) today FROM DUAL CONNECT BY LEVEL <![CDATA[ <= ]]> 5 ) t1
         LEFT JOIN (
         SELECT
         sum( maxt ) AS total,
@@ -207,12 +203,12 @@
         SELECT
         DEVICE_CODE,
         max( total ) AS maxt,
-        to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') AS tf
+        date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd') AS tf
         FROM
         ZHSQ_SBRZ
         GROUP BY
         DEVICE_CODE,
-        to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')
+        date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd')
         ) m
         GROUP BY
         tf

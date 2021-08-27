@@ -6,18 +6,16 @@
 
     <!--获取井盖测距最新数据-->
     <select id="selectZhsqJgrzNew" resultType="map">
-        select * from
-        (select * from ZHSQ_JGRZ
+      select * from ZHSQ_JGRZ
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
         </where>
-        order by CREATE_TIME desc)
-        where rownum = 1
+        order by CREATE_TIME desc LIMIT 1
     </select>
 
     <!--井盖展示-->
     <select id="findBySn" resultType="map">
-        select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
+        select SN as "sn", DISTANCE as "distance", date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
         HH24:MI:SS') as time, JGSTATE as "jgstate" from ZHSQ_JGRZ
         <where>
             <if test="sn != null  and sn != ''">and SN = #{sn}</if>
@@ -26,7 +24,7 @@
     </select>
     <!--井盖展示加入时间检索-->
     <select id="findJgDisBySSE" resultType="map">
-        select SN as "sn", DISTANCE as "distance", to_char(to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
+        select SN as "sn", DISTANCE as "distance", date_format(str_to_date(CREATE_TIME,'yyyymmddHH24:MI:SS'),'yyyy-mm-dd
         HH24:MI:SS') as time ,JGSTATE as "jgstate" from ZHSQ_JGRZ
         <where>
             <if test="arg0 != null  and arg0 != ''">and SN = #{arg0}</if>
